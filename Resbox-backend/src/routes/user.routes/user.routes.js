@@ -15,10 +15,10 @@ const {
   checkToken
 } = require('../../middleware/user.middleware')
 
+ROUTER.get('/profile-user', authenticateUser, profile)
 ROUTER.post('/register-user', checkDuplicateUser, newUser)
 ROUTER.post('/login-user', checkUserExist, login)
 ROUTER.post('/recovery-password-user', checkUserExist, recoverPassword)
-ROUTER.get('/profile-user', authenticateUser, profile)
 ROUTER.put(`/new-password/:token`, checkToken, putPassword)
 ROUTER.put(
   `/update-avatar`,

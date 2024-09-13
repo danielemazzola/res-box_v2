@@ -3,12 +3,18 @@ const User = require('../../models/user.model/user.model')
 const bcrypt = require('bcrypt')
 const { deleteImg } = require('../../helpers/delete.avatar')
 const { createToken } = require('../../helpers/createToken')
+const {
+  newUserEmail,
+  recoverEmail,
+  newPasswordEmail
+} = require('./mails/send.mails')
 
 const newUser = async (req, res, next) => {
   const email = req.body.email.toLowerCase()
   try {
     const user = new User({ ...req.body, email })
     await user.save()
+    await newUserEmail(user)
     return res
       .status(201)
       .json({ message: 'Usuario registrado correctamente', user })
@@ -46,6 +52,7 @@ const recoverPassword = async (req, res, next) => {
   try {
     user.token = createToken()
     await user.save()
+    await recoverEmail(user)
     return res.status(200).json({
       message: 'Te hemos enviado un email, por favor siga las instrucciones.'
     })
@@ -61,6 +68,7 @@ const putPassword = async (req, res, next) => {
     user.password = password
     user.token = ''
     await user.save()
+    await newPasswordEmail(user)
     return res
       .status(200)
       .json({ message: 'Nueva password guardada correctamente.' })
