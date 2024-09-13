@@ -10,17 +10,8 @@ APP.use(CORS())
 connection()
 connectCloudinary()
 
-const user_routes = require('./src/routes/user.routes/user.routes')
-APP.use('/secure/api/v1/user', user_routes)
-
-const partner_routes = require('./src/routes/partner.routes/partner.routes')
-APP.use('/secure/api/v1/partner', partner_routes)
-
-const box_routes = require('./src/routes/box.routes/box.routes')
-APP.use('/secure/api/v1/box', box_routes)
-
-const operation_routes = require('./src/routes/operation.routes/operation.routes')
-APP.use('/secure/api/v1/operation', operation_routes)
+const main_routes = require('./src/routes/main.routes')
+APP.use('/secure/api/v1', main_routes)
 
 APP.get('*', (req, res, next) => {
   const error = new Error(
