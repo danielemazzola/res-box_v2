@@ -28,7 +28,7 @@ const Header = () => {
           <p>Todas las ofertas en un único lugar</p>
         </div>
         <div className='contain-btn-action fadeIn'>
-          <button className='button green'>Login</button>
+          <button className='button green'>Iniciar</button>
           <button
             ref={refPartner}
             onClick={() => scrollToRef(refPartnersSection)}
