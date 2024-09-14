@@ -17,7 +17,9 @@ const Home = () => {
     const getPartners = async (dispatch) => {
       await fetchGetPartners(dispatch)
     }
-    getPartners(dispatchPartners)
+    if (!partners.length) {
+      getPartners(dispatchPartners)
+    } else return
   }, [])
 
   return (
