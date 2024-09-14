@@ -1,0 +1,67 @@
+.contain-hero {
+  min-height: 100svh;
+  background-color: var(--rb-bg-light);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.contain-log,
+.contain-description {
+  width: 50%;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.contain-log > a > img {
+  display: flex;
+  object-fit: cover;
+  width: 450px;
+  transition: all 0.5s;
+}
+.contain-log > a > img:hover {
+  transform: scale(0.97);
+}
+.contain-title-app {
+  margin-bottom: 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.contain-description > div > p {
+  text-align: center;
+}
+.contain-btn-action {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+@media (max-width: 840px) {
+  .contain-hero {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .contain-log,
+  .contain-description {
+    width: 100%;
+    height: auto;
+  }
+}
+@media (max-width: 600px) {
+  .contain-hero {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .contain-log,
+  .contain-description {
+    width: 100%;
+    height: auto;
+  }
+  .contain-log > a > img {
+    width: 100%;
+    object-fit: contain;
+  }
+}

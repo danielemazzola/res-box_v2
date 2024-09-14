@@ -1,10 +1,10 @@
-export const initState = {
+export const initStatePartner = {
   filterState: false,
   partners: [],
   arrayFilterPartners: [],
   arrayFilterPartnersSearch: []
 }
-export const state = (state, action) => {
+export const statePartner = (state, action) => {
   switch (action.type) {
     case 'SET_PARTNERS':
       return { ...state, partners: action.payload }

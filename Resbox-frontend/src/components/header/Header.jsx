@@ -8,6 +8,7 @@ import { ScrollRefContext } from '../../context/scroll-ref/ScrollRefContext'
 const Header = () => {
   const scrollToRef = useScrollToRef()
   const {
+    refHeaderSection,
     refPartnersSection,
     refFunctionAppSection,
     refPartner,
@@ -15,30 +16,30 @@ const Header = () => {
   } = useContext(ScrollRefContext)
 
   return (
-    <div>
-      <div>
+    <div ref={refHeaderSection} className='contain-hero'>
+      <div className='contain-log fadeIn'>
         <Link to='/'>
           <img alt='logo Res-Box' src={logo} />
         </Link>
       </div>
-      <div>
-        <div>
-          <h1>res-box</h1>
+      <div className='contain-description'>
+        <div className='contain-title-app fadeIn'>
+          <h1 className='name-app'>res-box</h1>
           <p>Todas las ofertas en un único lugar</p>
         </div>
-        <div>
-          <button className=''>Login</button>
+        <div className='contain-btn-action fadeIn'>
+          <button className='button green'>Login</button>
           <button
             ref={refPartner}
             onClick={() => scrollToRef(refPartnersSection)}
-            className=''
+            className='button yellow'
           >
             Colaboradores
           </button>
           <button
             ref={refFunctionApp}
             onClick={() => scrollToRef(refFunctionAppSection)}
-            className=''
+            className='button'
           >
             ¿Cómo funciona?
           </button>

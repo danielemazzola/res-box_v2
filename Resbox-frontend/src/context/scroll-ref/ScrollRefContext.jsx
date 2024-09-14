@@ -3,6 +3,7 @@ import { createContext, useRef } from 'react'
 export const ScrollRefContext = createContext()
 
 export const ScrollRefProvider = ({ children }) => {
+  const refHeaderSection = useRef(null)
   const refPartnersSection = useRef(null)
   const refFunctionAppSection = useRef(null)
   const refPartner = useRef(null)
@@ -11,6 +12,7 @@ export const ScrollRefProvider = ({ children }) => {
   return (
     <ScrollRefContext.Provider
       value={{
+        refHeaderSection,
         refPartnersSection,
         refFunctionAppSection,
         refPartner,

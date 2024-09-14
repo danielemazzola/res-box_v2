@@ -1,0 +1,137 @@
+.container-partners {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.contain-partners-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: var(--rb-spacing-large) 0;
+}
+.contain-partners-title > h2 {
+  text-align: center;
+  color: var(--rb-text-primary);
+}
+.container-country-partners {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.container-country-partners > h3 {
+  color: var(--rb-text-primary);
+}
+.container-ul-targets {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0 40px 0;
+}
+.container-ul-targets > li {
+  color: var(--rb-text-primary);
+  margin: 5px;
+  background-color: var(--rb-bg-light);
+  color: var(--rb-textbg-secondary);
+  padding: 1px 12px;
+  border-radius: 10px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.container-ul-targets > li:hover {
+  transform: scale(0.97);
+  background-color: var(--rb-bg-secondary);
+  color: var(--rb-text-tertiary);
+}
+.container-filter-results {
+  background-color: var(--rb-bg-light);
+  width: 100%;
+  min-height: 280px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.container-filter-results > div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.contain-tilte-search-filter {
+  position: relative;
+  background-color: var(--rb-bg-cancel);
+  padding: 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.contain-tilte-search-filter > div > button {
+  border: none;
+  background-color: var(--rb-bg-light);
+  color: var(--rb-bg-secondary);
+  font-weight: 700;
+  padding: 10px;
+  border-radius: 100%;
+}
+.result-filter-partners {
+  color: var(--rb-text-primary);
+}
+.container-result-search {
+  position: relative;
+  background-color: white !important;
+  border-radius: 10px;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+}
+.contain-tilte-search-filter > div > input {
+  border: none;
+  border-bottom: 1px solid black;
+  padding: 5px 3px;
+  color: var(--rb-text-green);
+}
+.container-result-search > input:focus {
+  border: none;
+  outline: none;
+}
+.last-ten-partners-filter {
+  margin-bottom: 20px;
+}
+
+.last-ten-partners-filter > p {
+  margin: 10px;
+}
+.container-cards-partners {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+.container-cards-partners > div {
+  width: 150px;
+  height: 180px;
+}
+
+@media (max-width: 600px) {
+  .contain-tilte-search-filter {
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 10px;
+  }
+  .contain-tilte-search-filter > div > button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+}
+@media (max-width: 400px) {
+  .contain-tilte-search-filter > div > input {
+    width: 80%;
+  }
+}

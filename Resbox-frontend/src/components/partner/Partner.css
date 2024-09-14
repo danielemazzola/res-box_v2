@@ -1,0 +1,116 @@
+.partner-card {
+  margin: var(--rb-spacing-small);
+  padding: var(--rb-spacing-small);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.partner-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  gap: 10px;
+}
+
+.partner-header > img {
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.partner-header:hover img:hover {
+  transform: scale(0.97);
+}
+
+.logo-absolute {
+  position: absolute;
+  top: var(--rb-spacing-small);
+  left: var(--rb-spacing-small);
+}
+
+.logo-absolute > img {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  object-fit: cover;
+}
+
+.name-partner-span {
+  color: var(--rb-text-primary);
+  opacity: 0.5;
+  transition: opacity 0.9s;
+}
+.partner-header:hover .name-partner-span {
+  opacity: 1;
+}
+
+.filterd-text-card {
+  color: var(--rb-text-secondary) !important;
+  opacity: 1;
+  font-weight: bold;
+}
+
+.partner-avatar {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: var(--rb-spacing-small);
+  border-radius: 100%;
+}
+
+.partner-name {
+  color: var(--rb-text-primary);
+  margin: 0;
+}
+
+.modal-content {
+  background: var(--rb-text-primary);
+  border-radius: var(--rb-border-radius);
+  padding: 0 0 var(--rb-spacing-medium) 0;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transform: translateY(-30px);
+  transition: transform 0.5s ease;
+}
+
+.modal-overlay.open .modal-content {
+  transform: translateY(0);
+}
+
+.modal-banner {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.modal-details {
+  display: flex;
+  gap: 10px;
+  justify-content: start;
+  align-items: center;
+  padding: 5px 10px;
+  flex-wrap: wrap;
+}
+
+.modal-details > p {
+  background-color: var(--rb-bg-secondary);
+  color: var(--rb-text-primary);
+  padding: 0px 5px;
+  border-radius: 5px;
+}
+
+.container-map-view {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.container-map-view > div {
+  width: 80%;
+}
