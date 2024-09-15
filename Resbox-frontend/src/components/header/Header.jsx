@@ -86,12 +86,11 @@ const Header = () => {
               ¿Cómo funciona?
             </button>
             {showInstallPrompt && (
-              <button
-                ref={refFunctionApp}
-                onClick={handleInstallClick}
-                className=''
-              >
-                ¡Instalar RES-BOX!
+              <button className='install-app' onClick={handleInstallClick}>
+                <p>¡Instalar RES-BOX!</p>
+                <img src={logo} alt='logo res-box' width='65' />
+                <p className='heart waveEffect'>❤️</p>
+                <p className='work-install-app'>Descargame ¡YA!</p>
               </button>
             )}
           </div>

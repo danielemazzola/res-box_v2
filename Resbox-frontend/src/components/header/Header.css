@@ -39,6 +39,34 @@
   flex-direction: column;
   gap: 10px;
 }
+.install-app {
+  position: relative;
+  background-color: var(--rb-bg-toast);
+  color: var(--rb-text-secondary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 5px;
+  border-radius: 10px;
+}
+.heart {
+  position: absolute;
+  bottom: -8px;
+  right: 10px;
+  font-size: var(--rb-font-size-large);
+}
+.work-install-app {
+  position: absolute;
+  bottom: -40px;
+  right: -30px;
+  background-color: var(--rb-bg-cancel);
+  color: var(--rb-text-primary);
+  font-weight: bold;
+  padding: 3px;
+  border-radius: 5px;
+  font-size: var(--rb-font-size-small);
+}
 @media (max-width: 840px) {
   .contain-hero {
     flex-direction: column;
