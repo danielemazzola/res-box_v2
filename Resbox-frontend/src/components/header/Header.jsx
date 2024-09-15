@@ -34,6 +34,25 @@ const Header = () => {
     }
   }
 
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (event) => {
+      event.preventDefault()
+      setDeferredPrompt(event)
+      setTimeout(() => {
+        setShowInstallPrompt(true)
+      }, 2000)
+    }
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
+
+    return () => {
+      window.removeEventListener(
+        'beforeinstallprompt',
+        handleBeforeInstallPrompt
+      )
+    }
+  }, [])
+
   return (
     <>
       <div ref={refHeaderSection} className='contain-hero'>
