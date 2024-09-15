@@ -86,7 +86,10 @@ const Header = () => {
               ¿Cómo funciona?
             </button>
             {showInstallPrompt && (
-              <button className='install-app' onClick={handleInstallClick}>
+              <button
+                className={`install-app ${showInstallPrompt && 'fadeIn'}`}
+                onClick={handleInstallClick}
+              >
                 <p>¡Instalar RES-BOX!</p>
                 <img src={logo} alt='logo res-box' width='65' />
                 <p className='heart waveEffect'>❤️</p>
