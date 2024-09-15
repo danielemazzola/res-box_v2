@@ -1,11 +1,11 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import useScrollToRef from '../../hooks/useScrollToRef'
 import { ScrollRefContext } from '../../context/scroll-ref/ScrollRefContext'
-import logo from '/images/logo.png'
-import './Header.css'
 import Modal from '../modal/Modal'
 import Form from '../form-group/Form'
+import './Header.css'
+import logo from '/images/logo.png'
 
 const Header = () => {
   const scrollToRef = useScrollToRef()
