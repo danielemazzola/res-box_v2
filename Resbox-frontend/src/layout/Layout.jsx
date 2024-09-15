@@ -2,6 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from '../components/header/Header'
 import ToastNotification from '../components/toast-notification/ToastNotification'
+import ButtonTopScroll from '../components/button-top-scroll/ButtonTopScroll'
 
 const Layout = () => {
   return (
@@ -16,6 +17,7 @@ const Layout = () => {
       </svg>
       <main>
         <ToastNotification />
+        <ButtonTopScroll />
         <Outlet />
       </main>
     </>

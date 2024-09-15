@@ -51,9 +51,12 @@ h4 {
   font-size: var(--rb-font-size-xlarge);
 }
 
-p,
-label {
+p {
   font-size: var(--rb-font-size-medium);
+  line-height: 20px;
+}
+label {
+  font-size: 14px;
   line-height: 20px;
 }
 ul,
@@ -78,7 +81,7 @@ button {
   min-width: 170px;
   display: inline-block; /* Asegura que se comporte como un botón */
   padding: var(--rb-spacing-small) var(--rb-spacing-medium);
-  border-radius: var(--rb-border-radius);
+  border-radius: 10px;
   background-color: var(--rb-bg-secondary) !important;
   color: var(--rb-text-primary) !important;
   text-align: center;

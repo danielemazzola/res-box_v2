@@ -1,0 +1,104 @@
+.container-form-groups {
+  background-color: var(--rb-bg-light);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px 20px;
+  border-radius: 10px;
+  width: 40%;
+  justify-content: start;
+}
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.container-img-formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.contain-img-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.contain-img-title > img {
+  width: 20%;
+  object-fit: cover;
+}
+.target-description-form {
+  width: 100%;
+  margin: 10px 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: start;
+}
+.target-description-form > p {
+  background-color: var(--rb-bg-secondary);
+  color: var(--rb-bg-light);
+  padding: 1px 5px;
+  border-radius: 5px;
+  text-align: center;
+  text-transform: capitalize;
+}
+.container-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.container-form > input {
+  padding: 7px;
+  border-radius: 5px;
+  border: none;
+}
+.container-btn-forms {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.error {
+  border: 1px solid var(--rb-bg-cancel);
+}
+
+.error:focus {
+  border: 3px solid var(--rb-bg-cancel);
+}
+.container_btn_option {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.container_btn_option > button {
+  font-size: 14px;
+  background-color: var(--rb-bg-toast);
+  padding: 2px 4px;
+  border-radius: 5px;
+}
+
+@media (max-width: 630px) {
+  .container-form-groups {
+    width: 90%;
+  }
+}
+
+.waveEffect {
+  animation: waveEffect 3s linear infinite;
+}
+
+@keyframes waveEffect {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+}

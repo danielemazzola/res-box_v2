@@ -7,6 +7,7 @@ import {
   initStateToast,
   stateToast
 } from '../../reducer/toast-notification-reducer/toast.reducer'
+import { stateAuth, initStateAuth } from '../../reducer/auth/auth.reducer'
 
 export const ReducersContext = createContext()
 
@@ -16,10 +17,17 @@ export const ReducersProvider = ({ children }) => {
     initStatePartner
   )
   const [stateToasts, dispatchToast] = useReducer(stateToast, initStateToast)
-
+  const [stateIsAuth, dispatchAuth] = useReducer(stateAuth, initStateAuth)
   return (
     <ReducersContext.Provider
-      value={{ statePartners, dispatchPartners, stateToasts, dispatchToast }}
+      value={{
+        statePartners,
+        dispatchPartners,
+        stateToasts,
+        dispatchToast,
+        stateIsAuth,
+        dispatchAuth
+      }}
     >
       {children}
     </ReducersContext.Provider>
