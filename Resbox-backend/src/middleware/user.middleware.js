@@ -49,8 +49,6 @@ const checkUserExist = async (req, res, next) => {
 // Middleware para verificar que el usuario está autenticado
 const authenticateUser = async (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1]
-  console.log(token)
-
   if (!token)
     return res.status(401).json({
       message: 'Hubo un problema de autenticación, inicia sesión.'
