@@ -16,18 +16,6 @@ export const fetchAuth = async (
       body: JSON.stringify(formFields)
     })
     const data = await response.json()
-    console.log(data)
-    if (response.status !== 200) {
-      dispatchToast({
-        type: 'ADD_NOTIFICATION',
-        payload: { msg: `Error; ${data.message}`, error: false }
-      })
-    } else {
-      dispatchToast({
-        type: 'ADD_NOTIFICATION',
-        payload: { msg: `Bienvenido ${data.user.name}`, error: false }
-      })
-    }
     return { response, data }
   } catch (error) {
     dispatchToast({

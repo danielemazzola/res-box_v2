@@ -16,7 +16,8 @@ const Form = ({ handleCloseModal }) => {
     code: false
   })
   const [formFields, setFormFields] = useState({})
-  const { dispatchLoader, dispatchToast } = useContext(ReducersContext)
+  const { dispatchLoader, dispatchToast, dispatchAuth } =
+    useContext(ReducersContext)
   const {
     handleSubmit,
     reset,
@@ -53,11 +54,9 @@ const Form = ({ handleCloseModal }) => {
   useEffect(() => {
     const newFormFields = getFormFields()
     setFormFields(newFormFields)
-    reset(newFormFields)
-  }, [formType, reset, handleCloseModal])
+  }, [formType, handleCloseModal])
 
   const onSubmit = async (formFields) => {
-    console.log(formFields)
     if (formType.login) {
       const { data, response } = await fetchAuth(
         'user/login-user',
@@ -66,7 +65,22 @@ const Form = ({ handleCloseModal }) => {
         dispatchLoader,
         dispatchToast
       )
-      console.log(data, response)
+      if (response.status !== 200) {
+        dispatchToast({
+          type: 'ADD_NOTIFICATION',
+          payload: { msg: `Error; ${data.message}`, error: false }
+        })
+      } else {
+        dispatchToast({
+          type: 'ADD_NOTIFICATION',
+          payload: { msg: `Bienvenido ${data.user.name}`, error: false }
+        })
+        dispatchAuth({ type: 'SET_USER', payload: data })
+        setTimeout(() => {
+          reset()
+          handleCloseModal()
+        }, 1000)
+      }
     }
     if (formType.register) {
     }
@@ -76,8 +90,6 @@ const Form = ({ handleCloseModal }) => {
     }
     if (formType.code) {
     }
-
-    //reset()
   }
 
   const getButtonText = () => {
@@ -144,6 +156,7 @@ const Form = ({ handleCloseModal }) => {
                 recovery: false
               })
               handleCloseModal()
+              reset()
             }}
           >
             Cerrar
