@@ -16,7 +16,7 @@ const newUser = async (req, res, next) => {
     await user.save()
     await newUserEmail(user)
     return res
-      .status(201)
+      .status(200)
       .json({ message: 'Usuario registrado correctamente', user })
   } catch (error) {
     next(error)
@@ -89,7 +89,7 @@ const updateAvatar = async (req, res, next) => {
       { $set: { avatar: req.body.image } },
       { new: true }
     ).select('-password -__v -token')
-    return res.status(201).json({ message: 'Avatar actualizado.', avatar })
+    return res.status(200).json({ message: 'Avatar actualizado.', avatar })
   } catch (error) {
     next(error)
   }

@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { buttonsConfig, renderFields } from './helpers'
 import logo from '/images/logo.png'
 import './Form.css'
 import FormButton from './FormButton'
+import { fetchAuth } from '../../services/fetch-auth/fetchAuth'
+import { ReducersContext } from '../../context/reducers/ReducersContext'
 const Form = ({ handleCloseModal }) => {
   const [fadeClass, setFadeClass] = useState('')
   const [formType, setFormType] = useState({
@@ -14,6 +16,7 @@ const Form = ({ handleCloseModal }) => {
     code: false
   })
   const [formFields, setFormFields] = useState({})
+  const { dispatchLoader, dispatchToast } = useContext(ReducersContext)
   const {
     handleSubmit,
     reset,
@@ -53,8 +56,28 @@ const Form = ({ handleCloseModal }) => {
     reset(newFormFields)
   }, [formType, reset, handleCloseModal])
 
-  const onSubmit = async (values) => {
-    console.log(values)
+  const onSubmit = async (formFields) => {
+    console.log(formFields)
+    if (formType.login) {
+      const { data, response } = await fetchAuth(
+        'user/login-user',
+        formFields,
+        'POST',
+        dispatchLoader,
+        dispatchToast
+      )
+      console.log(data, response)
+    }
+    if (formType.register) {
+    }
+    if (formType.forgot) {
+    }
+    if (formType.recovery) {
+    }
+    if (formType.code) {
+    }
+
+    //reset()
   }
 
   const getButtonText = () => {
