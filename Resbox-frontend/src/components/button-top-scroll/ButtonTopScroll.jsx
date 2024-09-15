@@ -23,7 +23,7 @@ const ButtonTopScroll = () => {
   return (
     <button
       id='scrollToTopBtn'
-      className={`${showScrollToTopBtn ? 'show' : 'no-show'}`}
+      className={`${showScrollToTopBtn ? 'show-btn' : 'no-show'}`}
       onClick={() => scrollToRef(refHeaderSection)}
     >
       🙄

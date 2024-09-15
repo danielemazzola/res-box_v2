@@ -18,7 +18,7 @@
 #scrollToTopBtn:hover {
   transform: scale(1.1);
 }
-.show {
+.show-btn {
   display: block !important;
   animation: bubbleUp 0.5s forwards;
 }
