@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from '../components/header/Header'
 import ToastNotification from '../components/toast-notification/ToastNotification'
 import ButtonTopScroll from '../components/button-top-scroll/ButtonTopScroll'
+import Loader from '../components/loader/Loader'
+import { ReducersContext } from '../context/reducers/ReducersContext'
 
 const Layout = () => {
+  const {
+    stateLoader: { load }
+  } = useContext(ReducersContext)
   return (
     <>
+      {load && <Loader />}
       <Header />
       <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'>
         <path

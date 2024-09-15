@@ -6,6 +6,7 @@
   --rb-bg-card: #46050554;
   --rb-bg-card-img: #ffa034;
   --rb-bg-green: #2eaf2e;
+  --rb-bg-options: #2b9ab6;
   --rb-bg-light: #ececec;
   --rb-bg-cancel: #fa4c4c;
   --rb-bg-register: #f39120;
@@ -73,14 +74,13 @@ a {
 }
 button {
   cursor: pointer;
-  font-size: var(--rb-font-size-medium);
+  font-size: var(--rb-font-size-small);
   transition: all 0.3s;
   border: none;
 }
 .button {
-  min-width: 170px;
   display: inline-block; /* Asegura que se comporte como un botón */
-  padding: var(--rb-spacing-small) var(--rb-spacing-medium);
+  padding: 4px 10px;
   border-radius: 10px;
   background-color: var(--rb-bg-secondary) !important;
   color: var(--rb-text-primary) !important;

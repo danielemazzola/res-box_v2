@@ -11,15 +11,16 @@ const Home = () => {
     useContext(ScrollRefContext)
   const {
     statePartners: { partners },
-    dispatchPartners
+    dispatchPartners,
+    dispatchLoader
   } = useContext(ReducersContext)
 
   useEffect(() => {
-    const getPartners = async (dispatchPartners) => {
-      await fetchGetPartners(dispatchPartners)
+    const getPartners = async () => {
+      await fetchGetPartners(dispatchPartners, dispatchLoader)
     }
     if (partners.length <= 0) {
-      getPartners(dispatchPartners)
+      getPartners()
     } else return
   }, [])
 

@@ -1,4 +1,4 @@
-/* import Alert from '../../alert/Alert' */
+import Alert from '../alert/Alert'
 
 export const renderFields = (formFields, formState, register) => {
   return Object.keys(formFields).map((field) => {
@@ -6,6 +6,7 @@ export const renderFields = (formFields, formState, register) => {
     const isEmail = field === 'email'
     const isName = field === 'nombre'
     const isLastname = field === 'apellido'
+    const isCode = field === 'codigo'
 
     return (
       <div className='container-form' key={field}>
@@ -22,6 +23,8 @@ export const renderFields = (formFields, formState, register) => {
               ? 'Mendoza'
               : isEmail
               ? 'name@mail.com'
+              : isCode
+              ? '0123'
               : ''
           }
           type={isPassword ? 'password' : 'text'}
@@ -34,24 +37,27 @@ export const renderFields = (formFields, formState, register) => {
               value: true
             },
             ...(isPassword && {
-              minLength: { value: 8, message: 'Mín. 8 chars.' }
+              minLength: { value: 8, message: 'Mínimo 8 caracteres.' }
             }),
             ...(isEmail && {
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                message: 'Invalid format'
+                message: 'Formato invalido'
               }
             }),
             ...(isName && {
-              minLength: { value: 2, message: 'Mín. 2 chars.' }
+              minLength: { value: 2, message: 'Mínimo 2 caracteres.' }
             }),
             ...(isLastname && {
-              minLength: { value: 2, message: 'Mín. 2 chars.' }
+              minLength: { value: 2, message: 'Mínimo 2 caracteres.' }
+            }),
+            ...(isCode && {
+              minLength: { value: 4, message: 'Son 4 dígitos' }
             })
           })}
         />
         {formState.errors[field]?.message && (
-          <p>{formState.errors[field].message}</p>
+          <Alert>{formState.errors[field].message}</Alert>
         )}
       </div>
     )
@@ -68,7 +74,8 @@ export const buttonsConfig = {
         forgot: false,
         recovery: false,
         code: false
-      }
+      },
+      style: { color: 'white', backgroundColor: 'var(--rb-bg-options)' }
     },
     {
       label: 'Recuperar Contraseña',
@@ -78,7 +85,8 @@ export const buttonsConfig = {
         forgot: true,
         recovery: false,
         code: false
-      }
+      },
+      style: { color: 'white', backgroundColor: 'var(--rb-bg-options)' }
     }
   ],
   register: [
@@ -90,7 +98,8 @@ export const buttonsConfig = {
         forgot: false,
         recovery: false,
         code: false
-      }
+      },
+      style: { color: 'white', backgroundColor: 'var(--rb-bg-options)' }
     },
     {
       label: 'Recuperar Contraseña',
@@ -100,7 +109,8 @@ export const buttonsConfig = {
         forgot: true,
         recovery: false,
         code: false
-      }
+      },
+      style: { color: 'white', backgroundColor: 'var(--rb-bg-options)' }
     }
   ],
   forgot: [
@@ -112,7 +122,8 @@ export const buttonsConfig = {
         forgot: false,
         recovery: false,
         code: false
-      }
+      },
+      style: { color: 'white', backgroundColor: 'var(--rb-bg-options)' }
     },
     {
       label: 'Registrarme',
@@ -122,7 +133,8 @@ export const buttonsConfig = {
         forgot: false,
         recovery: false,
         code: false
-      }
+      },
+      style: { color: 'white', backgroundColor: 'var(--rb-bg-options)' }
     },
     {
       label: 'Tengo mi código',

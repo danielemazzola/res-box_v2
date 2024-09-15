@@ -43,6 +43,7 @@
   border-radius: 5px;
   text-align: center;
   text-transform: capitalize;
+  font-size: var(--rb-font-size-small);
 }
 .container-form {
   display: flex;
@@ -76,7 +77,7 @@
 }
 .container_btn_option > button {
   font-size: 14px;
-  background-color: var(--rb-bg-toast);
+  /* background-color: var(--rb-bg-toast); */
   padding: 2px 4px;
   border-radius: 5px;
 }

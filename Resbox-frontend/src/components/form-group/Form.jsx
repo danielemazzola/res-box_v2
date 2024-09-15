@@ -37,7 +37,7 @@ const Form = ({ handleCloseModal }) => {
       return { password: '' }
     }
     if (formType.code) {
-      return { code: '' }
+      return { codigo: '' }
     }
     return {}
   }

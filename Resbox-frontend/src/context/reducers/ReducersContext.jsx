@@ -7,7 +7,14 @@ import {
   initStateToast,
   stateToast
 } from '../../reducer/toast-notification-reducer/toast.reducer'
-import { stateAuth, initStateAuth } from '../../reducer/auth/auth.reducer'
+import {
+  stateAuth,
+  initStateAuth
+} from '../../reducer/auth-reducer/auth.reducer'
+import {
+  initStateLoader,
+  stateLoad
+} from '../../reducer/loader-reducer/loader.reducer'
 
 export const ReducersContext = createContext()
 
@@ -18,6 +25,7 @@ export const ReducersProvider = ({ children }) => {
   )
   const [stateToasts, dispatchToast] = useReducer(stateToast, initStateToast)
   const [stateIsAuth, dispatchAuth] = useReducer(stateAuth, initStateAuth)
+  const [stateLoader, dispatchLoader] = useReducer(stateLoad, initStateLoader)
   return (
     <ReducersContext.Provider
       value={{
@@ -26,7 +34,9 @@ export const ReducersProvider = ({ children }) => {
         stateToasts,
         dispatchToast,
         stateIsAuth,
-        dispatchAuth
+        dispatchAuth,
+        stateLoader,
+        dispatchLoader
       }}
     >
       {children}
