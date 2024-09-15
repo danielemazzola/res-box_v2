@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import useScrollToRef from '../../hooks/useScrollToRef'
 import './ButtonTopScroll.css'
 import { ScrollRefContext } from '../../context/scroll-ref/ScrollRefContext'
+import logo from '/images/logo.png'
 
 const ButtonTopScroll = () => {
   const [showScrollToTopBtn, setShowScrollToTopBtn] = useState(false)
@@ -26,7 +27,10 @@ const ButtonTopScroll = () => {
       className={`${showScrollToTopBtn ? 'show-btn' : 'no-show'}`}
       onClick={() => scrollToRef(refHeaderSection)}
     >
-      Volver arriba
+      <div className='container-btn-scroll'>
+        <img alt='icono logo resbox' src={logo} width='20' />
+        Volver arriba
+      </div>
     </button>
   )
 }

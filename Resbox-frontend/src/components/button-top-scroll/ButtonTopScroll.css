@@ -6,12 +6,20 @@
   border: none;
   outline: none;
   background-color: rgba(255, 0, 0, 0.596);
-  border-radius: 10px 0 0 10px;
   cursor: pointer;
   transition: all 0.7s;
   font-size: 16px !important;
   padding: 5px 10px;
   color: white;
+}
+.container-btn-scroll {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+.container-btn-scroll:hover {
+  transform: scale(1.1);
 }
 .show-btn,
 .no-show {
