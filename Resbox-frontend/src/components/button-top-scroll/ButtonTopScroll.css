@@ -1,29 +1,27 @@
 #scrollToTopBtn {
   position: fixed;
   bottom: 40px;
-  right: 40px;
+  right: 0px;
   z-index: 99;
   border: none;
   outline: none;
-  background-color: rgba(255, 255, 255, 0.815);
-  border-radius: 50%;
-  padding: 20px;
+  background-color: rgba(255, 0, 0, 0.596);
+  border-radius: 10px 0 0 10px;
   cursor: pointer;
   transition: all 0.7s;
-  font-size: 32px !important;
-  width: 80px;
-  height: 80px;
+  font-size: 16px !important;
+  padding: 5px 10px;
+  color: white;
 }
-
-#scrollToTopBtn:hover {
-  transform: scale(1.1);
-}
-.show-btn {
-  display: block !important;
-  animation: bubbleUp 0.5s forwards;
-}
+.show-btn,
 .no-show {
   display: block !important;
+}
+.show-btn {
+  animation: bubbleUp 0.5s forwards;
+}
+
+.no-show {
   animation: bubbleDown 0.5s forwards;
 }
 

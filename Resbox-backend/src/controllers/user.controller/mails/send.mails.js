@@ -147,7 +147,7 @@ const recoverEmail = async (user) => {
               <p>Hola <strong>${user.name}</strong>,</p>
               <p>Hemos recibido una solicitud de recuperación de contraseña.</p>
               <p>En caso de no haber sido tú, por favor, ignora este email; en caso contrario accede a este enlace:</p>
-              <p><a href="${process.env.FRONTEND_URL_IP}/get-started-user/recovery-password/${user.token}" class="button">Recuperar Contraseña</a></p>
+              <p><a href="${process.env.FRONTEND_URL}/get-started-user/recovery-password/${user.token}" class="button">Recuperar Contraseña</a></p>
               <p>Muchas gracias por estar con nosotros.</p>
               <p>Te saluda el equipo,</p>
               <p><strong>RES-BOX</strong></p>

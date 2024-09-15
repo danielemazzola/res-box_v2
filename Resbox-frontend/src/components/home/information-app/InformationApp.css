@@ -116,7 +116,10 @@
   width: 150px;
   height: 180px;
 }
-
+.paragraph-no-partners {
+  text-align: center;
+  color: var(--rb-text-primary);
+}
 @media (max-width: 600px) {
   .contain-tilte-search-filter {
     flex-direction: column;

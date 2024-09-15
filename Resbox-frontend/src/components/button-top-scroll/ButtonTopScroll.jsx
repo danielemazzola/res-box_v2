@@ -26,7 +26,7 @@ const ButtonTopScroll = () => {
       className={`${showScrollToTopBtn ? 'show-btn' : 'no-show'}`}
       onClick={() => scrollToRef(refHeaderSection)}
     >
-      🙄
+      Volver arriba
     </button>
   )
 }

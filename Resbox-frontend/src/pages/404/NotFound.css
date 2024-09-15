@@ -1,0 +1,31 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100svh;
+  justify-content: center;
+  align-items: center;
+}
+.not-found > p {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+  color: var(--rb-text-primary);
+}
+.turn {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.turn > a {
+  padding: 5px;
+  border-radius: 3px;
+  background-color: var(--ufigi-tertiary-color);
+  color: var(--ufigi-light-color);
+  transition: all 0.3s;
+}
+.turn > a:hover {
+  transform: scale(0.97);
+}

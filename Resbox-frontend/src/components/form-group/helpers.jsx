@@ -4,9 +4,8 @@ export const renderFields = (formFields, formState, register) => {
   return Object.keys(formFields).map((field) => {
     const isPassword = field === 'password'
     const isEmail = field === 'email'
-    const isName = field === 'nombre'
-    const isLastname = field === 'apellido'
-    const isCode = field === 'codigo'
+    const isName = field === 'name'
+    const isLastname = field === 'lastname'
 
     return (
       <div className='container-form' key={field}>
@@ -23,8 +22,6 @@ export const renderFields = (formFields, formState, register) => {
               ? 'Mendoza'
               : isEmail
               ? 'name@mail.com'
-              : isCode
-              ? '0123'
               : ''
           }
           type={isPassword ? 'password' : 'text'}
@@ -50,9 +47,6 @@ export const renderFields = (formFields, formState, register) => {
             }),
             ...(isLastname && {
               minLength: { value: 2, message: 'Mínimo 2 caracteres.' }
-            }),
-            ...(isCode && {
-              minLength: { value: 4, message: 'Son 4 dígitos' }
             })
           })}
         />
@@ -72,8 +66,7 @@ export const buttonsConfig = {
         login: false,
         register: true,
         forgot: false,
-        recovery: false,
-        code: false
+        recovery: false
       },
       style: { color: 'white', backgroundColor: 'var(--rb-bg-options)' }
     },
@@ -83,8 +76,7 @@ export const buttonsConfig = {
         login: false,
         register: false,
         forgot: true,
-        recovery: false,
-        code: false
+        recovery: false
       },
       style: { color: 'white', backgroundColor: 'var(--rb-bg-options)' }
     }
@@ -96,8 +88,7 @@ export const buttonsConfig = {
         login: true,
         register: false,
         forgot: false,
-        recovery: false,
-        code: false
+        recovery: false
       },
       style: { color: 'white', backgroundColor: 'var(--rb-bg-options)' }
     },
@@ -107,8 +98,7 @@ export const buttonsConfig = {
         login: false,
         register: false,
         forgot: true,
-        recovery: false,
-        code: false
+        recovery: false
       },
       style: { color: 'white', backgroundColor: 'var(--rb-bg-options)' }
     }
@@ -120,8 +110,7 @@ export const buttonsConfig = {
         login: true,
         register: false,
         forgot: false,
-        recovery: false,
-        code: false
+        recovery: false
       },
       style: { color: 'white', backgroundColor: 'var(--rb-bg-options)' }
     },
@@ -131,21 +120,17 @@ export const buttonsConfig = {
         login: false,
         register: true,
         forgot: false,
-        recovery: false,
-        code: false
+        recovery: false
       },
       style: { color: 'white', backgroundColor: 'var(--rb-bg-options)' }
-    },
-    {
-      label: 'Tengo mi código',
-      formType: {
-        login: false,
-        register: false,
-        forgot: false,
-        recovery: false,
-        code: true
-      },
-      style: { color: 'white', backgroundColor: 'var(--rb-bg-secondary)' }
     }
   ]
+}
+
+export const getButtonText = (formType) => {
+  if (formType.login) return 'Iniciar sesión'
+  if (formType.register) return 'Registrar'
+  if (formType.forgot) return 'Recuperar contraseña'
+  if (formType.recovery) return 'Nueva contraseña'
+  return ''
 }
