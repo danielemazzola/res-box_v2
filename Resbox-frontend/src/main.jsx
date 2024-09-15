@@ -5,14 +5,17 @@ import { BrowserRouter } from 'react-router-dom'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 import { ScrollRefProvider } from './context/scroll-ref/ScrollRefContext.jsx'
 import { ReducersProvider } from './context/reducers/ReducersContext.jsx'
+import { AuthProvider } from './context/auth/authContext.jsx'
 import './assets/GlobalStyle.css'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <ReducersProvider>
-        <ScrollRefProvider>
-          <App />
-        </ScrollRefProvider>
+        <AuthProvider>
+          <ScrollRefProvider>
+            <App />
+          </ScrollRefProvider>
+        </AuthProvider>
       </ReducersProvider>
     </BrowserRouter>
   </StrictMode>

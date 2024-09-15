@@ -39,6 +39,9 @@ export const fetchSubmit = async (
           payload: { msg: `${data.message}`, error: false }
         })
     dispatchAuth({ type: 'SET_USER', payload: data })
+    if (data?.token) {
+      localStorage.setItem('SECURE_CODE_RESBOX', data.token)
+    }
     setTimeout(() => {
       !formType.recover && handleCloseModal()
     }, 1000)
