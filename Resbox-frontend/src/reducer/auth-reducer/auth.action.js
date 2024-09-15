@@ -38,7 +38,7 @@ export const fetchSubmit = async (
           type: 'ADD_NOTIFICATION',
           payload: { msg: `${data.message}`, error: false }
         })
-    dispatchAuth({ type: 'SET_USER', payload: data })
+    dispatchAuth({ type: 'SET_USER', payload: data.user })
     if (data?.token) {
       localStorage.setItem('SECURE_CODE_RESBOX', data.token)
     }

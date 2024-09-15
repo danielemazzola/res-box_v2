@@ -1,7 +1,7 @@
 import Alert from '../alert/Alert'
 
 export const renderFields = (formFields, formState, register) => {
-  return Object.keys(formFields).map((field) => {
+  return Object.keys(formFields).map((field, index) => {
     const isPassword = field === 'password'
     const isEmail = field === 'email'
     const isName = field === 'name'
@@ -9,7 +9,7 @@ export const renderFields = (formFields, formState, register) => {
 
     return (
       <div className='container-form' key={field}>
-        <label htmlFor={field}>
+        <label htmlFor={`${field}-${index}`}>
           {field.charAt(0).toUpperCase() + field.slice(1)}
         </label>
         <input
@@ -28,7 +28,7 @@ export const renderFields = (formFields, formState, register) => {
           className={`${
             formState.errors[field]?.type === 'required' ? 'error' : ''
           }`}
-          id={field}
+          id={`${field}-${index}`}
           {...register(field, {
             required: {
               value: true
