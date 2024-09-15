@@ -18,6 +18,21 @@ const Header = () => {
   } = useContext(ScrollRefContext)
 
   const [openForm, setOpenForm] = useState(false)
+  const [deferredPrompt, setDeferredPrompt] = useState(null)
+
+  const handleInstallClick = () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt()
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt')
+        } else {
+          console.log('User dismissed the install prompt')
+        }
+        setDeferredPrompt(null)
+      })
+    }
+  }
 
   return (
     <>
@@ -49,6 +64,13 @@ const Header = () => {
               className='button'
             >
               ¿Cómo funciona?
+            </button>
+            <button
+              ref={refFunctionApp}
+              onClick={handleInstallClick}
+              className=''
+            >
+              ¡Instalar RES-BOX!
             </button>
           </div>
         </div>

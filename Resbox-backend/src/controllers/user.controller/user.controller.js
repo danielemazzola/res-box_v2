@@ -12,9 +12,10 @@ const {
 const newUser = async (req, res, next) => {
   const email = req.body.email.toLowerCase()
   try {
-    const user = new User({ ...req.body, email })
-    await user.save()
+    const createUser = new User({ ...req.body, email })
+    await createUser.save()
     await newUserEmail(user)
+    const user = await User.findById(createUser._id).select('-password')
     return res
       .status(200)
       .json({ message: 'Usuario registrado correctamente', user })
@@ -25,10 +26,10 @@ const newUser = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   const { password } = req.body
-  const { user } = req
   try {
-    if (bcrypt.compareSync(password, user.password)) {
-      const token = generateJWT(user._id)
+    if (bcrypt.compareSync(password, req.user.password)) {
+      const token = generateJWT(req.user._id)
+      const user = await User.findById(req.user._id).select('-password')
       return res.status(200).json({ user, token })
     } else {
       return res.status(409).json({ message: 'Contraseña incorrecta.' })
@@ -39,7 +40,7 @@ const login = async (req, res, next) => {
 }
 
 const profile = async (req, res, next) => {
-  const { user } = req
+  const user = await User.findById(req.user._id).select('-password')
 
   try {
     return res.status(200).json({ user })
