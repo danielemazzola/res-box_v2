@@ -7,7 +7,7 @@ export function register(config) {
       navigator.serviceWorker
         .register(swUrl)
         .then((registration) => {
-          console.log('Service Worker registrado con éxito:', registration)
+          //console.log('Service Worker registrado con éxito:', registration)
         })
         .catch((error) => {
           console.error('Error al registrar el Service Worker:', error)
