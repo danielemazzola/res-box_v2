@@ -1,21 +1,38 @@
 import { useContext, useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { buttonsConfig, getButtonText, renderFields } from './helpers'
-import logo from '/images/logo.png'
-import './Form.css'
 import FormButton from './FormButton'
-import { fetchAuth } from '../../services/fetch-auth/fetchAuth'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import { fetchSubmit } from '../../reducer/auth-reducer/auth.action'
-const Form = ({ handleCloseModal }) => {
+import {
+  buttonsConfig,
+  getButtonText,
+  getFormFields,
+  renderFields
+} from './helpers'
+import './Form.css'
+import logo from '/images/logo.png'
+
+const Form = ({ handleCloseModal, recovery = false }) => {
   const [fadeClass, setFadeClass] = useState('')
-  const [formType, setFormType] = useState({
-    login: true,
-    register: false,
-    forgot: false,
-    recovery: false
-  })
+  const [formType, setFormType] = useState(
+    !recovery
+      ? {
+          login: true,
+          register: false,
+          forgot: false,
+          recovery: false
+        }
+      : {
+          login: false,
+          register: false,
+          forgot: false,
+          recovery: true
+        }
+  )
   const [formFields, setFormFields] = useState({})
+  const location = useLocation()
+  const navigate = useNavigate()
   const { dispatchLoader, dispatchToast, dispatchAuth } =
     useContext(ReducersContext)
   const {
@@ -27,34 +44,21 @@ const Form = ({ handleCloseModal }) => {
     defaultValues: formFields
   })
 
-  const getFormFields = () => {
-    if (formType.login) {
-      return { email: '', password: '' }
-    }
-    if (formType.register) {
-      return { name: '', lastname: '', email: '', password: '' }
-    }
-    if (formType.forgot) {
-      return { email: '' }
-    }
-    if (formType.recovery) {
-      return { password: '' }
-    }
-    return {}
-  }
-
   useEffect(() => {
     setFadeClass('fadeIn')
     setTimeout(() => setFadeClass(''), 500)
   }, [formType])
 
   useEffect(() => {
-    const newFormFields = getFormFields()
+    const newFormFields = getFormFields(formType)
     setFormFields(newFormFields)
   }, [formType, handleCloseModal])
 
   const onSubmit = async (formFields) => {
     let token
+    if (formType.recovery) {
+      token = location.pathname.split('/')[2]
+    }
     const response = await fetchSubmit(
       formType,
       formFields,
@@ -81,6 +85,11 @@ const Form = ({ handleCloseModal }) => {
         }
       }
       reset()
+    } else if (formType.recovery) {
+      closeModal()
+      setTimeout(() => {
+        navigate('/')
+      }, 1500)
     }
   }
 
@@ -105,7 +114,7 @@ const Form = ({ handleCloseModal }) => {
               ? 'Registro'
               : formType.forgot
               ? 'Olvidó Contraseña'
-              : formType.recovery && 'Guardar contraseña'}
+              : formType.recovery && 'Nueva contraseña'}
           </p>
         </div>
       </div>

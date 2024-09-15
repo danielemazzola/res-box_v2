@@ -134,3 +134,18 @@ export const getButtonText = (formType) => {
   if (formType.recovery) return 'Nueva contraseña'
   return ''
 }
+export const getFormFields = (formType) => {
+  if (formType.login) {
+    return { email: '', password: '' }
+  }
+  if (formType.register) {
+    return { name: '', lastname: '', email: '', password: '' }
+  }
+  if (formType.forgot) {
+    return { email: '' }
+  }
+  if (formType.recovery) {
+    return { password: '' }
+  }
+  return {}
+}

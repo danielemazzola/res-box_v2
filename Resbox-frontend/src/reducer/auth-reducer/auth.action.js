@@ -40,7 +40,7 @@ export const fetchSubmit = async (
         })
     dispatchAuth({ type: 'SET_USER', payload: data })
     setTimeout(() => {
-      handleCloseModal()
+      !formType.recover && handleCloseModal()
     }, 1000)
     return true
   }
