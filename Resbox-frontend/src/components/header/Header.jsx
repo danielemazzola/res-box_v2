@@ -19,6 +19,7 @@ const Header = () => {
 
   const [openForm, setOpenForm] = useState(false)
   const [deferredPrompt, setDeferredPrompt] = useState(null)
+  const [showInstallPrompt, setShowInstallPrompt] = useState(false)
 
   const handleInstallClick = () => {
     if (deferredPrompt) {
@@ -84,13 +85,15 @@ const Header = () => {
             >
               ¿Cómo funciona?
             </button>
-            <button
-              ref={refFunctionApp}
-              onClick={handleInstallClick}
-              className=''
-            >
-              ¡Instalar RES-BOX!
-            </button>
+            {showInstallPrompt && (
+              <button
+                ref={refFunctionApp}
+                onClick={handleInstallClick}
+                className=''
+              >
+                ¡Instalar RES-BOX!
+              </button>
+            )}
           </div>
         </div>
       </div>
