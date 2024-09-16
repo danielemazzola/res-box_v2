@@ -6,8 +6,11 @@ import Modal from '../modal/Modal'
 import Form from '../form-group/Form'
 import './Header.css'
 import logo from '/images/logo.png'
+import InstallApp from '../install-app/InstallApp'
 
 const Header = () => {
+  const [openForm, setOpenForm] = useState(false)
+
   const scrollToRef = useScrollToRef()
   const {
     refHeaderSection,
@@ -16,43 +19,6 @@ const Header = () => {
     refPartner,
     refFunctionApp
   } = useContext(ScrollRefContext)
-
-  const [openForm, setOpenForm] = useState(false)
-  const [deferredPrompt, setDeferredPrompt] = useState(null)
-  const [showInstallPrompt, setShowInstallPrompt] = useState(false)
-
-  const handleInstallClick = () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt()
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the install prompt')
-        } else {
-          console.log('User dismissed the install prompt')
-        }
-        setDeferredPrompt(null)
-      })
-    }
-  }
-
-  useEffect(() => {
-    const handleBeforeInstallPrompt = (event) => {
-      event.preventDefault()
-      setDeferredPrompt(event)
-      setTimeout(() => {
-        setShowInstallPrompt(true)
-      }, 2000)
-    }
-
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
-
-    return () => {
-      window.removeEventListener(
-        'beforeinstallprompt',
-        handleBeforeInstallPrompt
-      )
-    }
-  }, [])
 
   return (
     <>
@@ -85,17 +51,7 @@ const Header = () => {
             >
               ¿Cómo funciona?
             </button>
-            {showInstallPrompt && (
-              <button
-                className={`install-app ${showInstallPrompt && 'fadeIn'}`}
-                onClick={handleInstallClick}
-              >
-                <p>¡Instalar RES-BOX!</p>
-                <img src={logo} alt='logo res-box' width='65' />
-                <p className='heart waveEffect'>❤️</p>
-                <p className='work-install-app'>Descargame ¡YA!</p>
-              </button>
-            )}
+            <InstallApp />
           </div>
         </div>
       </div>

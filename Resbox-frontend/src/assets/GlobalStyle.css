@@ -133,7 +133,21 @@ select {
   border: none;
   text-transform: uppercase;
 }
+
+.opacity-none {
+  opacity: 0;
+  animation: opacityNone 0.5s ease-in;
+}
+@keyframes opacityNone {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 @keyframes fadeInUp {
+  /*  */
   0% {
     opacity: 0;
     transform: translateY(20px);
@@ -155,6 +169,7 @@ select {
 }
 
 .fadeIn {
+  opacity: 1;
   animation: fadeInUp 0.5s ease-in;
 }
 .show {
