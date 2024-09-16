@@ -1,6 +1,7 @@
 const ROUTER = require('express').Router()
 const {
   getPartners,
+  getPartner,
   newPartnerFile,
   newPartner,
   updatAvatar,
@@ -18,6 +19,7 @@ const { isAdmin, isPartner } = require('../../middleware/protected.middleware')
 const { authenticateUser } = require('../../middleware/user.middleware')
 
 ROUTER.get('/', getPartners)
+ROUTER.get('/:id_partner', authenticateUser, getPartner)
 ROUTER.post(
   '/new-partner-file',
   authenticateUser,

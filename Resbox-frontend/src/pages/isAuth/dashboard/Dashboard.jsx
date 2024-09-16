@@ -13,7 +13,7 @@ import './Dashboard.css'
 
 const Dashboard = () => {
   const {
-    stateIsAuth: { user },
+    stateIsAuth: { user, partner },
     dispatchToast,
     dispatchLoader,
     dispatchAuth
@@ -82,15 +82,22 @@ const Dashboard = () => {
       {user.roles.includes('partner') && (
         <>
           <div
-            className='dashboard__banner-partner'
-            onClick={() => handleInfoPartner(user, token)}
+            className='dashboard__banner-partner fadeIn'
+            onClick={() =>
+              handleInfoPartner(
+                user,
+                token,
+                dispatchAuth,
+                dispatchToast,
+                dispatchLoader
+              )
+            }
           >
             <div className=''>
-              <p>Ver la info de negocio</p>
+              <p>Negocio</p>
             </div>
           </div>
-
-          {/* <PartnerCard array={user} /> */}
+          {Object.keys(partner).length > 0 && <PartnerCard array={partner} />}
         </>
       )}
     </div>

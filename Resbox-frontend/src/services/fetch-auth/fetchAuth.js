@@ -80,3 +80,19 @@ export const fetchUpdateAvatar = async (
     }, 1500)
   }
 }
+
+export const fetchPartner = async (user, token) => {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_URL_API}/partner/${user.idPartner}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    const data = await response.json()
+    return { response, data }
+  } catch (error) {}
+}

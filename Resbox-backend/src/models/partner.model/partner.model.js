@@ -26,7 +26,7 @@ const partnerSchema = mongoose.Schema(
     address: { type: String, trim: true, required: true },
     coordinate_x: { type: String, trim: true, required: true },
     coordinate_y: { type: String, trim: true, required: true },
-    users: { type: [mongoose.Schema.Types.ObjectId], ref: 'UserRestaurant' }
+    users: { type: [mongoose.Schema.Types.ObjectId], ref: 'User' }
   },
   {
     timestamps: true,

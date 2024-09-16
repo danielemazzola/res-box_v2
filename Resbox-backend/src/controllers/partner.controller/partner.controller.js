@@ -90,6 +90,27 @@ const getPartners = async (req, res, next) => {
   }
 }
 
+const getPartner = async (req, res, next) => {
+  const { id_partner } = req.params
+  try {
+    const partner = await Partner.findById(id_partner).populate({
+      path: 'users',
+      select: '_id name email'
+    })
+    if (!partner)
+      return res.status(404).json({
+        message:
+          'El usuario no tiene asignado un colaborador, por favor contacta con soporte.'
+      })
+    return res.status(200).json({
+      message: 'Partner',
+      partner
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 const updatAvatar = async (req, res, next) => {
   const { user } = req
   const { partner } = req
@@ -149,6 +170,7 @@ const updateBanner = async (req, res, next) => {
 module.exports = {
   newPartnerFile,
   getPartners,
+  getPartner,
   newPartner,
   updatAvatar,
   updateBanner

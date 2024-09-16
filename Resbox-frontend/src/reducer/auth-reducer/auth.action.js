@@ -1,5 +1,6 @@
 import {
   fetchAuth,
+  fetchPartner,
   fetchUpdateAvatar
 } from '../../services/fetch-auth/fetchAuth'
 
@@ -92,21 +93,27 @@ export const uploadImage = async (
   dispatchAuth({ type: 'SET_USER', payload: data.avatar })
 }
 
-export const handleInfoPartner = async (user, token) => {
+export const handleInfoPartner = async (
+  user,
+  token,
+  dispatchAuth,
+  dispatchToast,
+  dispatchLoader
+) => {
   try {
-    const response = await fetch(
-      `${import.meta.env.VITE_URL_API}/partner/${user.idPartner}`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    )
-    const data = await response.json()
+    dispatchLoader({ type: 'SET_LOAD_TRUE' })
+    const { response, data } = await fetchPartner(user, token)
     console.log(response)
-    console.log(data)
+    console.log(data.partner)
+    dispatchAuth({ type: 'SET_PARTNER', payload: data.partner })
   } catch (error) {
-    console.log(error)
+    dispatchToast({
+      type: 'ADD_NOTIFICATION',
+      payload: { msg: error.message, error: true }
+    })
+  } finally {
+    setTimeout(() => {
+      dispatchLoader({ type: 'SET_LOAD_FALSE' })
+    }, 1500)
   }
 }
