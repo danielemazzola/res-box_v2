@@ -1,12 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import useScrollToRef from '../../../hooks/useScrollToRef'
+import {
+  handleInfoPartner,
+  uploadImage
+} from '../../../reducer/auth-reducer/auth.action'
+import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import ProfileCard from '../../../components/profile-card/ProfileCard'
 import PartnerCard from '../../../components/partner-card/PartnerCard'
 import edit from '/images/edit.png'
 import './Dashboard.css'
-import { uploadImage } from '../../../reducer/auth-reducer/auth.action'
 
 const Dashboard = () => {
   const {
@@ -15,10 +18,10 @@ const Dashboard = () => {
     dispatchLoader,
     dispatchAuth
   } = useContext(ReducersContext)
-
-  const [selectedImage, setSelectedImage] = useState(user.avatar)
-  const useScrolltoRef = useScrollToRef()
   const { refDashboardSection, fileInputRef } = useContext(ScrollRefContext)
+  const [selectedImage, setSelectedImage] = useState(user.avatar)
+  const [token, setToken] = useState(localStorage.getItem('SECURE_CODE_RESBOX'))
+  const useScrolltoRef = useScrollToRef()
 
   useEffect(() => {
     setTimeout(() => {
@@ -78,7 +81,16 @@ const Dashboard = () => {
       <ProfileCard array={user} />
       {user.roles.includes('partner') && (
         <>
-          <PartnerCard array={user} />
+          <div
+            className='dashboard__banner-partner'
+            onClick={() => handleInfoPartner(user, token)}
+          >
+            <div className=''>
+              <p>Ver la info de negocio</p>
+            </div>
+          </div>
+
+          {/* <PartnerCard array={user} /> */}
         </>
       )}
     </div>

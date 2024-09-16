@@ -69,8 +69,43 @@
   cursor: pointer;
 }
 
+.dashboard__banner-partner {
+  border-radius: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 300px;
+  background-color: var(--rb-bg-light);
+  background-image: url('/images/restaurante.ico');
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  overflow: hidden;
+  min-height: 230px;
+  width: 30%;
+}
+.dashboard__banner-partner:hover {
+  transform: scale(0.9);
+}
+
+.dashboard__banner-partner > div {
+  background-color: rgba(0, 0, 0, 0.575);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+}
+
+.dashboard__banner-partner > div > p {
+  color: var(--rb-text-primary);
+  font-size: var(--rb-font-size-large);
+  text-align: center;
+}
+
 @media (max-width: 769px) {
-  .dashboard__cards-container {
+  .dashboard__cards-container,
+  .dashboard__banner-partner {
     width: 500px;
   }
 }

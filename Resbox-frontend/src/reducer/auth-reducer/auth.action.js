@@ -91,3 +91,22 @@ export const uploadImage = async (
   )
   dispatchAuth({ type: 'SET_USER', payload: data.avatar })
 }
+
+export const handleInfoPartner = async (user, token) => {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_URL_API}/partner/${user.idPartner}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    const data = await response.json()
+    console.log(response)
+    console.log(data)
+  } catch (error) {
+    console.log(error)
+  }
+}

@@ -9,7 +9,7 @@ const PartnerCard = ({ array }) => {
         <p>Perfil de negocio</p>
       </div>
       <ul>
-        {/* <li>
+        <li>
           <p>nombre</p>
           {array.name + ' ' + array.lastname}
         </li>
@@ -24,7 +24,7 @@ const PartnerCard = ({ array }) => {
         <li>
           <p>Cuenta creada</p>
           {getDate(array.createdAt)}
-        </li> */}
+        </li>
       </ul>
 
       <div className='partner__img-container'>
