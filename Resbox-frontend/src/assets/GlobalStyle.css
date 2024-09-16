@@ -116,13 +116,6 @@ button:hover {
   z-index: 999;
   position: relative;
 }
-hr {
-  width: 100%;
-  margin: 10px auto;
-  border: none;
-  border-top: 4px double var(--rb-bg-secondary);
-  background: transparent;
-}
 
 select {
   padding: 10px;

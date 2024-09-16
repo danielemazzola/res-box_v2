@@ -41,12 +41,42 @@ const Nav = () => {
         <div className='filter'>
           <ul>
             <li className={`img-show ${showMenu ? '' : 'fadeIn'}`}>
+              <Link to='./'>
+                <button
+                  className='z-index-1000 button'
+                  onClick={() => setShowMenu(!showMenu)}
+                >
+                  Inicio
+                </button>
+              </Link>
+            </li>
+            <li className={`img-show ${showMenu ? '' : 'fadeIn'}`}>
               <Link to='dashboard'>
                 <button
                   className='z-index-1000 button'
                   onClick={() => setShowMenu(!showMenu)}
                 >
                   Panel de control
+                </button>
+              </Link>
+            </li>
+            <li className={`img-show ${showMenu ? '' : 'fadeIn'}`}>
+              <Link to='my-boxes'>
+                <button
+                  className='z-index-1000 button'
+                  onClick={() => setShowMenu(!showMenu)}
+                >
+                  Mis Boxes
+                </button>
+              </Link>
+            </li>
+            <li className={`img-show ${showMenu ? '' : 'fadeIn'}`}>
+              <Link to='promo-box'>
+                <button
+                  className='z-index-1000 button'
+                  onClick={() => setShowMenu(!showMenu)}
+                >
+                  Promo box
                 </button>
               </Link>
             </li>

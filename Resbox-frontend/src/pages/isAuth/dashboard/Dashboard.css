@@ -1,0 +1,48 @@
+.dashboard__container {
+  width: 100%;
+  min-height: 100svh;
+  padding: 80px 20px 120px;
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard__cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  align-items: start;
+}
+
+.dashboard__card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--rb-bg-light);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.dashboard__card > div > h3 {
+  text-align: start;
+  color: var(--rb-text-secondary);
+  font-weight: 300;
+  font-size: var(--rb-font-size-medium);
+}
+.dashboard__card > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dashboard__contain-avatar {
+  border-radius: 50%;
+  background-color: red;
+  display: flex;
+  overflow: hidden;
+}
+.dashboard__card > div > div > img {
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+.dashboard__card > div > div > img:hover {
+  transform: scale(1.2);
+}
