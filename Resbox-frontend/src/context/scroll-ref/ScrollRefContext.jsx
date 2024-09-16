@@ -12,6 +12,8 @@ export const ScrollRefProvider = ({ children }) => {
   const refDashboardSection = useRef(null)
   const fileInputRef = useRef(null)
   const refPartnerInfo = useRef(null)
+  const fileBannerRef = useRef(null)
+  const fileAvatarRef = useRef(null)
 
   return (
     <ScrollRefContext.Provider
@@ -24,7 +26,9 @@ export const ScrollRefProvider = ({ children }) => {
         filterPartnersRef,
         refDashboardSection,
         fileInputRef,
-        refPartnerInfo
+        refPartnerInfo,
+        fileBannerRef,
+        fileAvatarRef
       }}
     >
       {children}

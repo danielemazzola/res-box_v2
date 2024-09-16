@@ -103,8 +103,6 @@ export const handleInfoPartner = async (
   try {
     dispatchLoader({ type: 'SET_LOAD_TRUE' })
     const { response, data } = await fetchPartner(user, token)
-    console.log(response)
-    console.log(data.partner)
     dispatchAuth({ type: 'SET_PARTNER', payload: data.partner })
   } catch (error) {
     dispatchToast({

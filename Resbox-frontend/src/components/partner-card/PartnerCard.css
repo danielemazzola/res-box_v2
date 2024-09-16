@@ -28,10 +28,16 @@
 .partner__avatar {
   position: absolute;
   margin: 10px;
+  width: 70px;
+  height: 70px;
 }
 .partner__avatar > img {
   transition: all 0.3s;
   cursor: pointer;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
 }
 .partner__avatar > img:hover {
   transform: scale(1.1);
@@ -70,15 +76,43 @@
   font-size: var(--rb-font-size-small);
   text-transform: capitalize;
 }
-.partner__img-container {
+
+.partner__modal-card {
+  background-color: white;
+  padding: 50px;
+  border-radius: 10px;
   display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
   align-items: center;
-  justify-content: end;
 }
-.partner__img-container > img {
-  width: 10%;
-  object-fit: cover;
-  padding: 0 20px 20px 0px;
+
+.partner__modal-card > img {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+
+.partner__modal-card > div {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.partner__modal-card > div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 5px;
+}
+
+.partner__modal-card > div > div > p:first-child {
+  background-color: var(--rb-bg-primary);
+  color: var(--rb-text-primary);
+  padding: 0 5px;
+  font-size: var(--rb-font-size-small);
+  border-radius: 5px;
 }
 
 @media (max-width: 815px) {

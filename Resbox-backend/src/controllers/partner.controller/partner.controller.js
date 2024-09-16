@@ -95,7 +95,7 @@ const getPartner = async (req, res, next) => {
   try {
     const partner = await Partner.findById(id_partner).populate({
       path: 'users',
-      select: '_id name email'
+      select: '_id name lastname email avatar'
     })
     if (!partner)
       return res.status(404).json({

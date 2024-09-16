@@ -1,6 +1,6 @@
 .dashboard__container {
   width: 100%;
-  padding: 80px 20px 120px;
+  padding: 80px 200px 120px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -11,6 +11,7 @@
   display: flex;
   gap: 30px;
   width: 30%;
+  transition: all 0.3s;
 }
 
 .dashboard__card {
@@ -23,6 +24,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  transition: all 0.3s;
 }
 
 .dashboard__card > div {
@@ -102,7 +104,16 @@
   color: var(--rb-text-primary);
   font-size: var(--rb-font-size-xlarge);
 }
-
+@media (max-width: 1456px) {
+  .dashboard__container {
+    padding: 80px 50px 120px;
+  }
+}
+@media (max-width: 832px) {
+  .dashboard__container {
+    padding: 80px 20px 120px;
+  }
+}
 @media (max-width: 815px) {
   .dashboard__banner-partner {
     width: 730px;

@@ -8,27 +8,23 @@ const ProfileCard = ({ array }) => {
       <div className='profile__title'>
         <p>Información de perfil</p>
       </div>
-      <ul>
-        <li>
+      <div className='profile__contain-information'>
+        <div>
           <p>nombre</p>
-          {array.name + ' ' + array.lastname}
-        </li>
-        <li>
+          <p>{array.name + ' ' + array.lastname}</p>
+        </div>
+        <div>
           <p>email</p>
-          {array.email}
-        </li>
-        <li>
+          <p>{array.email}</p>
+        </div>
+        <div>
           <p>Roles</p>
-          {array.roles.map((el) => el).join(', ')}
-        </li>
-        <li>
+          <p>{array.roles.map((el) => el).join(', ')}</p>
+        </div>
+        <div>
           <p>Cuenta creada</p>
-          {getDate(array.createdAt)}
-        </li>
-      </ul>
-
-      <div className='profile__img-container'>
-        <img src={logo} alt='Logo Res-Box' className='waveEffect' />
+          <p>{getDate(array.createdAt)}</p>
+        </div>
       </div>
     </div>
   )
