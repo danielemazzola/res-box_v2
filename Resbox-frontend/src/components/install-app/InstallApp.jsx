@@ -40,15 +40,19 @@ const InstallApp = () => {
   }
 
   return (
-    <button
-      className={`install-app ${showInstallPrompt ? 'fadeIn' : 'opacity-none'}`}
-      onClick={handleInstallClick}
-    >
-      <p>¡Instalar RES-BOX!</p>
-      <img src={logo} alt='logo res-box' width='65' />
-      <p className='heart waveEffect'>❤️</p>
-      <p className='work-install-app'>Descargame ¡YA!</p>
-    </button>
+    <>
+      {showInstallPrompt && (
+        <button
+          className={`install-app ${showInstallPrompt && 'fadeIn'}`}
+          onClick={handleInstallClick}
+        >
+          <p>¡Instalar RES-BOX!</p>
+          <img src={logo} alt='logo res-box' width='65' />
+          <p className='heart waveEffect'>❤️</p>
+          <p className='work-install-app'>Descargame ¡YA!</p>
+        </button>
+      )}
+    </>
   )
 }
 

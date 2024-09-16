@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }) => {
             type: 'ADD_NOTIFICATION',
             payload: { msg: `Error: ${data.message}`, error: true }
           })
+          localStorage.removeItem('SECURE_CODE_RESBOX')
         } else {
           dispatchAuth({ type: 'SET_USER', payload: data.user })
         }
