@@ -1,4 +1,4 @@
-.profile__container {
+.partner__container {
   border-radius: 10px;
   padding: 20px;
   background-color: var(--rb-bg-light);
@@ -6,11 +6,11 @@
   flex-direction: column;
   gap: 20px;
 }
-.profile__title {
+.partner__title {
   display: flex;
   justify-content: center;
 }
-.profile__container > div > p {
+.partner__container > div > p {
   background-color: var(--rb-bg-secondary);
   padding: 2px;
   border-radius: 5px;
@@ -18,32 +18,32 @@
   color: var(--rb-text-primary);
   display: flex;
 }
-.profile__container > ul {
+.partner__container > ul {
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: start;
   gap: 10px;
 }
-.profile__container > ul > li {
+.partner__container > ul > li {
   display: flex;
   flex-direction: column;
   align-items: start;
 }
-.profile__container > ul > li > p {
+.partner__container > ul > li > p {
   background-color: var(--rb-bg-primary);
   padding: 0 2px;
   border-radius: 5px;
   color: var(--rb-text-primary);
   font-size: var(--rb-font-size-small);
 }
-.profile__img-container {
+.partner__img-container {
   display: flex;
   align-items: center;
   justify-content: end;
   gap: 5px;
 }
-.profile__img-container > img {
+.partner__img-container > img {
   width: 10%;
   object-fit: cover;
 }

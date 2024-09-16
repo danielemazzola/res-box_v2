@@ -1,17 +1,17 @@
 import logo from '/images/logo.png'
-import './ProfileCard.css'
 import { getDate } from '../../helpers/date'
+import './PartnerCard.css'
 
-const ProfileCard = ({ array }) => {
+const PartnerCard = ({ array }) => {
   console.log(array)
 
   return (
-    <div className='profile__container fadeIn'>
-      <div className='profile__title'>
-        <p>Información de perfil</p>
+    <div className='partner__container fadeIn'>
+      <div className='partner__title'>
+        <p>Perfil de negocio</p>
       </div>
       <ul>
-        <li>
+        {/* <li>
           <p>nombre</p>
           {array.name + ' ' + array.lastname}
         </li>
@@ -26,14 +26,14 @@ const ProfileCard = ({ array }) => {
         <li>
           <p>Cuenta creada</p>
           {getDate(array.createdAt)}
-        </li>
+        </li> */}
       </ul>
 
-      <div className='profile__img-container'>
+      <div className='partner__img-container'>
         <img src={logo} alt='Logo Res-Box' className='waveEffect' />
       </div>
     </div>
   )
 }
 
-export default ProfileCard
+export default PartnerCard

@@ -1,6 +1,5 @@
 .dashboard__container {
   width: 100%;
-  min-height: 100svh;
   padding: 80px 20px 120px;
   display: flex;
   flex-wrap: wrap;
@@ -12,40 +11,66 @@
   display: flex;
   justify-content: center;
   gap: 30px;
+  width: 30%;
 }
 
 .dashboard__card {
-  padding: 10px;
   border-radius: 10px;
-  width: 300px;
+  background-image: url('/images/logo.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 300px;
   background-color: var(--rb-bg-light);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.dashboard__card > div {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.658);
+  padding: 20px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 20px;
+  width: 100%;
 }
 
 .dashboard__card > div > h3 {
   text-align: start;
-  color: var(--rb-text-secondary);
-  font-weight: 300;
-  font-size: var(--rb-font-size-medium);
+  color: var(--rb-text-primary);
+  font-weight: 600;
+  font-size: var(--rb-font-size-large);
 }
-.dashboard__card > div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+
 .dashboard__contain-avatar {
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   background-color: red;
   display: flex;
   overflow: hidden;
 }
 .dashboard__card > div > div > img {
-  border-radius: 50%;
   transition: all 0.3s;
+  object-fit: cover;
 }
+
 .dashboard__card > div > div > img:hover {
   transform: scale(1.2);
+}
+
+.dashboard__edit-avatar {
+  position: absolute;
+  width: 50px;
+  cursor: pointer;
+}
+
+@media (max-width: 769px) {
+  .dashboard__cards-container {
+    width: 500px;
+  }
 }

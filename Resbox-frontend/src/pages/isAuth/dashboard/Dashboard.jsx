@@ -3,6 +3,8 @@ import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import useScrollToRef from '../../../hooks/useScrollToRef'
 import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import ProfileCard from '../../../components/profile-card/ProfileCard'
+import PartnerCard from '../../../components/partner-card/PartnerCard'
+import edit from '/images/edit.png'
 import './Dashboard.css'
 
 const Dashboard = () => {
@@ -60,16 +62,25 @@ const Dashboard = () => {
               <img
                 alt={user.name}
                 src={selectedImage}
-                width='50'
+                width='150'
+                height='150'
+              />
+              <img
+                alt='edit'
+                src={edit}
+                className='dashboard__edit-avatar'
                 onClick={handleImageClick}
-                style={{ cursor: 'pointer' }}
               />
             </div>
           </div>
         </div>
       </div>
       <ProfileCard array={user} />
-      <ProfileCard array={user} />
+      {user.roles.includes('partner') && (
+        <>
+          <PartnerCard array={user} />
+        </>
+      )}
     </div>
   )
 }
