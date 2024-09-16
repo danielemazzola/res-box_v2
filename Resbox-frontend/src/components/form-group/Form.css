@@ -70,8 +70,9 @@
 }
 .container_btn_option {
   display: flex;
-  justify-content: start;
-  align-items: start;
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
   gap: 5px;
   flex-wrap: wrap;
 }

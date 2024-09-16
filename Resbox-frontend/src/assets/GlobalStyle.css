@@ -80,7 +80,7 @@ button {
 }
 .button {
   display: inline-block; /* Asegura que se comporte como un botón */
-  padding: 4px 10px;
+  padding: 6px 10px;
   border-radius: 10px;
   background-color: var(--rb-bg-secondary) !important;
   color: var(--rb-text-primary) !important;
