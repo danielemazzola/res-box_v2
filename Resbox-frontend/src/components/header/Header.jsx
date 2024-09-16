@@ -7,6 +7,8 @@ import Form from '../form-group/Form'
 import './Header.css'
 import logo from '/images/logo.png'
 import InstallApp from '../install-app/InstallApp'
+import { ReducersContext } from '../../context/reducers/ReducersContext'
+import Nav from '../nav-bar/Nav'
 
 const Header = () => {
   const [openForm, setOpenForm] = useState(false)
@@ -20,40 +22,58 @@ const Header = () => {
     refFunctionApp
   } = useContext(ScrollRefContext)
 
+  const {
+    stateIsAuth: { user, isAuth }
+  } = useContext(ReducersContext)
+
   return (
     <>
-      <div ref={refHeaderSection} className='contain-hero'>
-        <div className='contain-log fadeIn'>
+      <div
+        ref={refHeaderSection}
+        className={`${isAuth ? 'contain-hero-auth' : 'contain-hero'}`}
+      >
+        <div
+          className={`${
+            isAuth ? 'contain-log-auth waveEffect' : 'contain-log fadeIn'
+          } `}
+        >
           <Link to='/'>
             <img alt='logo Res-Box' src={logo} />
           </Link>
         </div>
-        <div className='contain-description'>
-          <div className='contain-title-app fadeIn'>
-            <h1 className='name-app'>res-box</h1>
-            <p>Todas las ofertas en un único lugar</p>
+        {!isAuth ? (
+          <div className='contain-description'>
+            <div className='contain-title-app fadeIn'>
+              <h1 className='name-app'>res-box</h1>
+              <p>Todas las ofertas en un único lugar</p>
+            </div>
+            <div className='contain-btn-action fadeIn'>
+              <button
+                className='button green'
+                onClick={() => setOpenForm(true)}
+              >
+                Iniciar
+              </button>
+              <button
+                ref={refPartner}
+                onClick={() => scrollToRef(refPartnersSection)}
+                className='button yellow'
+              >
+                Colaboradores
+              </button>
+              <button
+                ref={refFunctionApp}
+                onClick={() => scrollToRef(refFunctionAppSection)}
+                className='button'
+              >
+                ¿Cómo funciona?
+              </button>
+              <InstallApp />
+            </div>
           </div>
-          <div className='contain-btn-action fadeIn'>
-            <button className='button green' onClick={() => setOpenForm(true)}>
-              Iniciar
-            </button>
-            <button
-              ref={refPartner}
-              onClick={() => scrollToRef(refPartnersSection)}
-              className='button yellow'
-            >
-              Colaboradores
-            </button>
-            <button
-              ref={refFunctionApp}
-              onClick={() => scrollToRef(refFunctionAppSection)}
-              className='button'
-            >
-              ¿Cómo funciona?
-            </button>
-            <InstallApp />
-          </div>
-        </div>
+        ) : (
+          <Nav />
+        )}
       </div>
       <Modal isModalOpen={openForm} handleCloseModal={() => setOpenForm(false)}>
         <Form handleCloseModal={() => setOpenForm(false)} />

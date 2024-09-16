@@ -1,0 +1,105 @@
+.container-nav-header {
+  display: flex;
+}
+.btn-menu {
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  transition: all 0.3s;
+}
+.bg-white-menu {
+  background-color: transparent;
+  transition: all 0.3s;
+}
+.contain-nav-bar {
+  z-index: 100;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  display: flex;
+  transition: all 0.5s ease-in-out;
+}
+.contain-nav-bar > div {
+  background-color: rgba(36, 33, 26, 0.904);
+  width: 100%;
+  height: 100svh;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 50px;
+  align-items: center;
+}
+.contain-nav-bar > div > ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding: 10px;
+  gap: 20px;
+  width: 200px;
+  height: 300px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+.contain-nav-bar > div > ul > li,
+.contain-nav-bar > div > ul > li > button {
+  width: 100%;
+}
+.contain-nav-bar > div > ul > li > a > button,
+.contain-nav-bar > div > ul > li > button {
+  background-color: var(--rb-bg-light) !important;
+  color: var(--rb-text-secondary) !important;
+  width: 100%;
+}
+.show-open-menu {
+  transform: translateX(100%);
+}
+.show-close-menu {
+  transform: translateX(0px);
+}
+.contain-background-img-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+  width: 100%;
+}
+.contain-background-img-nav > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.contain-background-img-nav > div > p {
+  color: var(--rb-text-primary);
+  font-size: 12px;
+}
+.contain-background-img-nav > div > img {
+  width: 40px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.contain-background-img-nav > img:hover {
+  transform: scale(1.1);
+}
+.btn-close-sesion {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+.container-options-menu {
+  display: flex;
+  flex-direction: row !important;
+  gap: 7px;
+}
+.link-social-media {
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.link-social-media:hover {
+  transform: scale(0.9);
+}

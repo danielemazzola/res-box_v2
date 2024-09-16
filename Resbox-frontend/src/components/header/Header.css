@@ -1,9 +1,15 @@
-.contain-hero {
-  min-height: 100svh;
+.contain-hero,
+.contain-hero-auth {
   background-color: var(--rb-bg-light);
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+.contain-hero-auth {
+  justify-content: space-between;
+  transition: all 0.5s;
+  align-items: center;
+  padding: 0 20px;
 }
 .contain-log,
 .contain-description {
@@ -23,6 +29,10 @@
 }
 .contain-log > a > img:hover {
   transform: scale(0.97);
+}
+.contain-log-auth > a > img {
+  width: 130px;
+  transition: all 0.5s;
 }
 .contain-title-app {
   margin-bottom: 50px;

@@ -3,6 +3,8 @@ import Layout from './layout/Layout'
 import Home from './pages/Home/Home'
 import NotFound from './pages/404/NotFound'
 import RecoveryPassword from './pages/Recovery-password/RecoveryPassword'
+import Dashboard from './pages/isAuth/Dashboard'
+import ProtectedRoute from './components/protected-route/ProtectedRoute'
 
 const App = () => {
   return (
@@ -12,6 +14,14 @@ const App = () => {
         <Route
           path={`/recovery-password/:token`}
           element={<RecoveryPassword />}
+        />
+        <Route
+          path={`/dashboard`}
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
         />
         <Route path='*' element={<NotFound />} />
       </Route>

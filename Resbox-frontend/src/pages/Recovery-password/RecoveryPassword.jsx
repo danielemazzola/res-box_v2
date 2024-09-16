@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Modal from '../../components/modal/Modal'
 import Form from '../../components/form-group/Form'
-import './RecoveryPassword.css'
 
 const RecoveryPassword = () => {
   const [openFormRecovery, setOpenFormRecovery] = useState(true)

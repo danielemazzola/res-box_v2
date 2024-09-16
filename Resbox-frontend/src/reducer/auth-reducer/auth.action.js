@@ -39,6 +39,7 @@ export const fetchSubmit = async (
           payload: { msg: `${data.message}`, error: false }
         })
     dispatchAuth({ type: 'SET_USER', payload: data.user })
+    dispatchAuth({ type: 'SET_AUTH_TRUE' })
     if (data?.token) {
       localStorage.setItem('SECURE_CODE_RESBOX', data.token)
     }
@@ -47,4 +48,25 @@ export const fetchSubmit = async (
     }, 1000)
     return true
   }
+}
+
+export const handleCloseSesion = (
+  dispatchLoader,
+  dispatchToast,
+  dispatchAuth,
+  navigate,
+  user
+) => {
+  dispatchLoader({ type: 'SET_LOAD_TRUE' })
+  localStorage.removeItem('SECURE_CODE_RESBOX')
+  dispatchToast({
+    type: 'ADD_NOTIFICATION',
+    payload: { msg: `Gracias por visitarnos❤️ ${user.name}`, error: false }
+  })
+  setTimeout(() => {
+    dispatchAuth({ type: 'SET_AUTH_FALSE' })
+    dispatchAuth({ type: 'SET_USER', payload: {} })
+    navigate('/')
+  }, 1500)
+  dispatchLoader({ type: 'SET_LOAD_FALSE' })
 }
