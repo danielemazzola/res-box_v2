@@ -66,9 +66,10 @@ const Dashboard = () => {
               />
             </div>
           </div>
-          <ProfileCard array={user} />
         </div>
       </div>
+      <ProfileCard array={user} />
+      <ProfileCard array={user} />
     </div>
   )
 }

@@ -3,23 +3,26 @@
   min-height: 100svh;
   padding: 80px 20px 120px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 20px;
 }
 
 .dashboard__cards-container {
   display: flex;
   justify-content: center;
   gap: 30px;
-  align-items: start;
 }
 
 .dashboard__card {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  background-color: var(--rb-bg-light);
   padding: 10px;
   border-radius: 10px;
+  width: 300px;
+  background-color: var(--rb-bg-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
 }
 
 .dashboard__card > div > h3 {
