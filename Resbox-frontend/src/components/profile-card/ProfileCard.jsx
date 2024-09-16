@@ -3,8 +3,6 @@ import './ProfileCard.css'
 import { getDate } from '../../helpers/date'
 
 const ProfileCard = ({ array }) => {
-  console.log(array)
-
   return (
     <div className='profile__container fadeIn'>
       <div className='profile__title'>

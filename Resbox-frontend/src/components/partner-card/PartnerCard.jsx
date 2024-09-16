@@ -3,8 +3,6 @@ import { getDate } from '../../helpers/date'
 import './PartnerCard.css'
 
 const PartnerCard = ({ array }) => {
-  console.log(array)
-
   return (
     <div className='partner__container fadeIn'>
       <div className='partner__title'>

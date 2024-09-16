@@ -6,10 +6,14 @@ import ProfileCard from '../../../components/profile-card/ProfileCard'
 import PartnerCard from '../../../components/partner-card/PartnerCard'
 import edit from '/images/edit.png'
 import './Dashboard.css'
+import { uploadImage } from '../../../reducer/auth-reducer/auth.action'
 
 const Dashboard = () => {
   const {
-    stateIsAuth: { user }
+    stateIsAuth: { user },
+    dispatchToast,
+    dispatchLoader,
+    dispatchAuth
   } = useContext(ReducersContext)
 
   const [selectedImage, setSelectedImage] = useState(user.avatar)
@@ -34,12 +38,8 @@ const Dashboard = () => {
     if (file) {
       const imageUrl = URL.createObjectURL(file)
       setSelectedImage(imageUrl)
-      await uploadImage(file)
+      await uploadImage(file, dispatchLoader, dispatchToast, dispatchAuth)
     }
-  }
-
-  const uploadImage = async (file) => {
-    console.log('Subiendo imagen:', file)
   }
 
   return (

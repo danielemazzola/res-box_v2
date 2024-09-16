@@ -1,4 +1,7 @@
-import { fetchAuth } from '../../services/fetch-auth/fetchAuth'
+import {
+  fetchAuth,
+  fetchUpdateAvatar
+} from '../../services/fetch-auth/fetchAuth'
 
 export const fetchSubmit = async (
   formType,
@@ -69,4 +72,22 @@ export const handleCloseSesion = (
     navigate('/')
   }, 1500)
   dispatchLoader({ type: 'SET_LOAD_FALSE' })
+}
+
+export const uploadImage = async (
+  file,
+  dispatchLoader,
+  dispatchToast,
+  dispatchAuth
+) => {
+  const formData = new FormData()
+  formData.append('avatar', file)
+  const token = localStorage.getItem('SECURE_CODE_RESBOX')
+  const { data } = await fetchUpdateAvatar(
+    formData,
+    token,
+    dispatchLoader,
+    dispatchToast
+  )
+  dispatchAuth({ type: 'SET_USER', payload: data.avatar })
 }
