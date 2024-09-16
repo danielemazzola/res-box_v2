@@ -8,47 +8,47 @@ const PartnerCard = ({ array }) => {
 
   return (
     <div className='partner__container fadeIn'>
+      <div className='partner__banner'>
+        <img src={array.banner} alt={array.name} />
+      </div>
+      <div className='partner__avatar'>
+        <img src={array.avatar} alt={array.name} width='70' />
+      </div>
       <div className='partner__title'>
         <p>Perfil de negocio</p>
       </div>
-      <div className='partner__banner'>
-        <img src={array.banner} alt={array.name} width='250' />
-      </div>
-      <div className='partner__avatar'>
-        <img src={array.avatar} alt={array.name} width='50' />
-      </div>
-      <ul>
-        <li>
+      <div className='partner__contain-information'>
+        <div>
           <p>nombre</p>
-          {array.name}
-        </li>
-        <li>
-          <p>email</p>
-          {array.email}
-        </li>
-        <li>
+          <p>{array.name}</p>
+        </div>
+        <div>
           <p>CIF</p>
-          {array.cif}
-        </li>
-        <li>
-          <p>de</p>
-          {array.owner_name + ' ' + array.owner_lastname}
-        </li>
-        <li>
+          <p>{array.cif}</p>
+        </div>
+        <div>
+          <p>email</p>
+          <p>{array.email}</p>
+        </div>
+        <div>
+          <p>propietari@</p>
+          <p>{array.owner_name + ' ' + array.owner_lastname}</p>
+        </div>
+        <div>
           <p>Dirección</p>
-          {array.country + ', ' + array.address}
-        </li>
-        <li>
+          <p>{array.country + ', ' + array.address}</p>
+        </div>
+        <div>
           <p>Usuarios vinculados</p>
           {array.users?.map((user, index) => (
             <button key={index}>{user.name}</button>
           ))}
-        </li>
-        <li>
+        </div>
+        <div>
           <p>Cuenta creada</p>
-          {getDate(array.createdAt)}
-        </li>
-      </ul>
+          <p>{getDate(array.createdAt)}</p>
+        </div>
+      </div>
       <Modal></Modal>
       {/**isModalOpen={} handleCloseModal={} */}
 

@@ -9,6 +9,7 @@ import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import ProfileCard from '../../../components/profile-card/ProfileCard'
 import PartnerCard from '../../../components/partner-card/PartnerCard'
 import edit from '/images/edit.png'
+import restaurante from '/images/restaurante.ico'
 import './Dashboard.css'
 
 const Dashboard = () => {
@@ -18,7 +19,8 @@ const Dashboard = () => {
     dispatchLoader,
     dispatchAuth
   } = useContext(ReducersContext)
-  const { refDashboardSection, fileInputRef } = useContext(ScrollRefContext)
+  const { refDashboardSection, fileInputRef, refPartnerInfo } =
+    useContext(ScrollRefContext)
   const [selectedImage, setSelectedImage] = useState(user.avatar)
   const [token, setToken] = useState(localStorage.getItem('SECURE_CODE_RESBOX'))
   const useScrolltoRef = useScrollToRef()
@@ -42,6 +44,23 @@ const Dashboard = () => {
       const imageUrl = URL.createObjectURL(file)
       setSelectedImage(imageUrl)
       await uploadImage(file, dispatchLoader, dispatchToast, dispatchAuth)
+    }
+  }
+
+  const handlePartner = async () => {
+    if (Object.keys(partner).length <= 0) {
+      await handleInfoPartner(
+        user,
+        token,
+        dispatchAuth,
+        dispatchToast,
+        dispatchLoader
+      )
+      setTimeout(() => {
+        useScrolltoRef(refPartnerInfo)
+      }, 1000)
+    } else {
+      useScrolltoRef(refPartnerInfo)
     }
   }
 
@@ -81,23 +100,20 @@ const Dashboard = () => {
       <ProfileCard array={user} />
       {user.roles.includes('partner') && (
         <>
-          <div
+          <button
             className='dashboard__banner-partner fadeIn'
-            onClick={() =>
-              handleInfoPartner(
-                user,
-                token,
-                dispatchAuth,
-                dispatchToast,
-                dispatchLoader
-              )
-            }
+            onClick={handlePartner}
           >
-            <div className=''>
+            <img src={restaurante} />
+            <div>
               <p>Negocio</p>
             </div>
-          </div>
-          {Object.keys(partner).length > 0 && <PartnerCard array={partner} />}
+          </button>
+          {Object.keys(partner).length > 0 && (
+            <div ref={refPartnerInfo}>
+              <PartnerCard array={partner} />
+            </div>
+          )}
         </>
       )}
     </div>
