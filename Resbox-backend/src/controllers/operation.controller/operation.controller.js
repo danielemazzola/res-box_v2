@@ -49,8 +49,6 @@ const updateOperation = async (req, res, next) => {
   const { operation } = req
   const { partner } = req
   const { status } = req.body
-  console.log(partner)
-
   try {
     let updatedOperation
     let updatePurchased
