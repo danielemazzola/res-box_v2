@@ -146,7 +146,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 5px;
+}
+.boxcard__contain-img-title > h1{
+  text-align: center;
 }
 .boxcard__contain-img-title > img {
   width: 20%;
