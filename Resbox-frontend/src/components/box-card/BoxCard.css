@@ -27,7 +27,7 @@
   text-align: center;
   color: var(--rb-text-primary);
   display: flex;
-  font-size: var(--rb-font-size-large);
+  font-size: var(--rb-font-size-small);
 }
 
 .boxcard__contain-information {
@@ -53,7 +53,7 @@
   text-transform: capitalize;
   text-align: center;
 }
-.boxcard__contain-information > div > p:last-child {
+.boxcar__bg-white {
   background-color: var(--rb-bg-light);
   padding: 0 5px;
   border-radius: 5px;
@@ -69,11 +69,11 @@
   align-items: end;
 }
 .boxcard__description-active {
-  background-color: var(--rb-bg-options);
+  background-color: var(--rb-bg-toast);
   padding: 8px 10px;
   border-radius: 5px;
   text-align: center;
-  color: var(--rb-text-primary);
+  color: var(--rb-text-secondary);
   display: flex;
   font-size: var(--rb-font-size-medium);
 }
@@ -88,9 +88,103 @@
   flex-wrap: wrap;
   gap: 10px;
   background-color: rgba(255, 255, 255, 0.623);
-  padding:10px;
+  padding: 10px;
   border-radius: 10px;
 }
 .boxcard__container-btn > div > button {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.534);
+}
+
+.boxcard__container-form {
+  padding: 20px;
+}
+.boxcard__contain-form {
+  background-color: var(--rb-bg-light);
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.boxcard__contain > div {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.boxcard__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.boxcard__target-description-form {
+  width: 100%;
+  margin: 10px 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: start;
+}
+.boxcard__target-description-form > p {
+  background-color: var(--rb-bg-secondary);
+  color: var(--rb-bg-light);
+  padding: 1px 5px;
+  border-radius: 5px;
+  text-align: center;
+  text-transform: capitalize;
+}
+.boxcard__container-img-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.boxcard__contain-img-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.boxcard__contain-img-title > img {
+  width: 20%;
+  object-fit: cover;
+}
+.boxcard__center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.boxcard__form > div {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.boxcard__form > div > input {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+}
+.boxcard__secureTokenRedeem-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.boxcard__secureTokenRedeem {
+  text-align: center;
+  font-size: var(--rb-font-size-xlarge);
+  font-weight: bold;
+  background-color: var(--rb-bg-options);
+  color: var(--rb-bg-light);
+  padding: 10px 10px 10px 30px;
+  letter-spacing: 20px;
+  display: inline-block;
+  border-radius: 10px;
 }

@@ -107,10 +107,11 @@ export const handleCloseSesion = (
     type: 'ADD_NOTIFICATION',
     payload: { msg: `Gracias por visitarnos❤️ ${user.name}`, error: false }
   })
+  dispatchAuth({ type: 'SET_USER', payload: {} })
+  dispatchAuth({ type: 'SET_PARTNER', payload: {} })
+  dispatchAuth({ type: 'SET_AUTH_FALSE' })
+  navigate('/')
   setTimeout(() => {
-    dispatchAuth({ type: 'SET_AUTH_FALSE' })
-    dispatchAuth({ type: 'SET_USER', payload: {} })
-    navigate('/')
     dispatchLoader({ type: 'SET_LOAD_FALSE' })
   }, 1500)
 }
