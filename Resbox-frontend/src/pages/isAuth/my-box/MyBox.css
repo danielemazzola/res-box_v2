@@ -1,6 +1,6 @@
 .mybox__container {
   width: 100%;
-  padding: 80px 50px 120px;
+  padding: 80px 200px 120px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -51,6 +51,7 @@
   color: var(--rb-text-primary);
   font-weight: 300;
   font-size: var(--rb-font-size-large);
+  text-align: center;
 
 }
 .mybox__paragraph-rotate{
@@ -61,7 +62,7 @@
 }
 
 
-/* @media (max-width: 1456px) {
+@media (max-width: 1456px) {
   .mybox__container {
     padding: 80px 50px 120px;
   }
@@ -72,9 +73,8 @@
   }
 }
 
-@media (max-width: 769px) {
+/* @media (max-width: 769px) {
   .mybox__cards-container {
     width: 500px;
   }
-}
- */
+} */

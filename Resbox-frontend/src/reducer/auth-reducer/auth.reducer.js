@@ -1,7 +1,7 @@
 export const initStateAuth = {
   user: {},
   partner: {},
-  isAuth: false
+  isAuth: false,
 }
 
 export const stateAuth = (state, action) => {

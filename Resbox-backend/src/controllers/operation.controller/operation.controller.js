@@ -49,6 +49,8 @@ const updateOperation = async (req, res, next) => {
   const { operation } = req
   const { partner } = req
   const { status } = req.body
+  console.log(partner)
+
   try {
     let updatedOperation
     let updatePurchased
@@ -70,6 +72,7 @@ const updateOperation = async (req, res, next) => {
         return res.status(409).json({
           message: `Algo a salido mal. Por favor contacta con nuestro soporte con el codigo de cange: ${operation.secure_token}`
         })
+      updatePurchased.id_partner_consumed.push(partner._id)
       await user.save()
       return res.status(201).json({
         message:
@@ -90,6 +93,7 @@ const updateOperation = async (req, res, next) => {
         return res.status(409).json({
           message: `Algo a salido mal. Por favor contacta con nuestro soporte con el codigo de cange: ${operation.secure_token}`
         })
+
       updatePurchased.remainingItems += updatedOperation.consumed
       await user.save()
 

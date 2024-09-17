@@ -29,7 +29,7 @@ const login = async (req, res, next) => {
   try {
     if (bcrypt.compareSync(password, req.user.password)) {
       const token = generateJWT(req.user._id)
-      const user = await User.findById(req.user._id).select('-password')
+      const user = await getUserWithPopulates(req.user._id)
       return res.status(200).json({ user, token })
     } else {
       return res.status(409).json({ message: 'Contraseña incorrecta.' })
@@ -40,8 +40,7 @@ const login = async (req, res, next) => {
 }
 
 const profile = async (req, res, next) => {
-  const user = await User.findById(req.user._id).select('-password')
-
+  const user = await getUserWithPopulates(req.user._id)
   try {
     return res.status(200).json({ user })
   } catch (error) {
@@ -95,6 +94,19 @@ const updateAvatar = async (req, res, next) => {
   } catch (error) {
     next(error)
   }
+}
+
+const getUserWithPopulates = async (userId) => {
+  return await User.findById(userId)
+    .select('-password')
+    .populate({
+      path: 'purchasedBoxes.box',
+      select: 'name_box description items_included bonus_items price status'
+    })
+    .populate({
+      path: 'purchasedBoxes.id_partner_consumed',
+      select: 'name avatar phone'
+    })
 }
 
 module.exports = {

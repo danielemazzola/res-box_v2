@@ -54,27 +54,6 @@ export const fetchSubmit = async (
   }
 }
 
-export const handleCloseSesion = (
-  dispatchLoader,
-  dispatchToast,
-  dispatchAuth,
-  navigate,
-  user
-) => {
-  dispatchLoader({ type: 'SET_LOAD_TRUE' })
-  localStorage.removeItem('SECURE_CODE_RESBOX')
-  dispatchToast({
-    type: 'ADD_NOTIFICATION',
-    payload: { msg: `Gracias por visitarnos❤️ ${user.name}`, error: false }
-  })
-  setTimeout(() => {
-    dispatchAuth({ type: 'SET_AUTH_FALSE' })
-    dispatchAuth({ type: 'SET_USER', payload: {} })
-    navigate('/')
-  }, 1500)
-  dispatchLoader({ type: 'SET_LOAD_FALSE' })
-}
-
 export const uploadImage = async (
   formData,
   url,
@@ -113,4 +92,25 @@ export const handleInfoPartner = async (
       dispatchLoader({ type: 'SET_LOAD_FALSE' })
     }, 1500)
   }
+}
+
+export const handleCloseSesion = (
+  dispatchLoader,
+  dispatchToast,
+  dispatchAuth,
+  navigate,
+  user
+) => {
+  dispatchLoader({ type: 'SET_LOAD_TRUE' })
+  localStorage.removeItem('SECURE_CODE_RESBOX')
+  dispatchToast({
+    type: 'ADD_NOTIFICATION',
+    payload: { msg: `Gracias por visitarnos❤️ ${user.name}`, error: false }
+  })
+  setTimeout(() => {
+    dispatchAuth({ type: 'SET_AUTH_FALSE' })
+    dispatchAuth({ type: 'SET_USER', payload: {} })
+    navigate('/')
+    dispatchLoader({ type: 'SET_LOAD_FALSE' })
+  }, 1500)
 }
