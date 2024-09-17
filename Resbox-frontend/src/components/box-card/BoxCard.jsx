@@ -127,14 +127,14 @@ const BoxCard = ({ box }) => {
                           alt='Logo Res-Box'
                           className='waveEffect'
                         />
-                        <h1>{box.box.name}</h1>
+                        <h1>{box.box.name_box}</h1>
                       </div>
                       <div className='boxcard__target-description-form boxcard__center'>
                         <p>Canjear</p>
                         <p>{quantityRedeem}</p>
                       </div>
                     </div>
-                    <p>Restantes: {box.remainingItems} (unid.)</p>
+                    <p>Restantes: {remainingItems} (unid.)</p>
                     {secureTokenRedeem !== 0 ? (
                       <div className='boxcard__secureTokenRedeem-container'>
                         <p>Muestra este codigo en tu negocio favorito</p>
