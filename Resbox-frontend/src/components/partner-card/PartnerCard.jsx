@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { AuthContext } from '../../context/auth/AuthContext'
+import { AuthContext } from '../../context/auth/qweAuthContext'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import { ScrollRefContext } from '../../context/scroll-ref/ScrollRefContext'
 import Modal from '../modal/Modal'
