@@ -2,10 +2,10 @@ import { useContext, useState } from 'react'
 import { AuthContext } from '../../context/auth/AuthContext'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import { ScrollRefContext } from '../../context/scroll-ref/ScrollRefContext'
+import { uploadImage } from '../../reducer/auth-reducer/auth.action'
 import Modal from '../modal/Modal'
 import { getDate } from '../../helpers/date'
 import './PartnerCard.css'
-import { uploadImage } from '../../reducer/auth-reducer/auth.action'
 
 const PartnerCard = ({ array }) => {
   const [userModal, setUserModal] = useState({})
@@ -23,18 +23,12 @@ const PartnerCard = ({ array }) => {
 
   const handleChangeImage = ({ banner = false, avatar = false }) => {
     if (banner) {
-      if (fileBannerRef.current) {
-        fileBannerRef.current.click()
-      } else {
-        return
-      }
+      if (fileBannerRef.current) fileBannerRef.current.click()
+      else return
     }
     if (avatar) {
-      if (fileAvatarRef.current) {
-        fileAvatarRef.current.click()
-      } else {
-        return
-      }
+      if (fileAvatarRef.current) fileAvatarRef.current.click()
+      else return
     }
   }
 
@@ -65,38 +59,6 @@ const PartnerCard = ({ array }) => {
         payload: avatar ? data.avatar : data.banner
       })
     }
-
-    /*   const handleImageChangeBanner = async (event) => {
-    const file = event.target.files[0]
-    if (file) {
-      const imageUrl = URL.createObjectURL(file)
-      const formData = new FormData()
-      formData.append('banner', file)
-      setSelectedImageBanner(imageUrl)
-      const { data } = await uploadImage(
-        formData,
-        urlImageChange.partner_banner,
-        dispatchLoader,
-        dispatchToast
-      )
-      dispatchAuth({ type: 'SET_PARTNER', payload: data.banner })
-    }
-  } */
-    /*   const handleImageChangeAvatar = async (event) => {
-    const file = event.target.files[0]
-    if (file) {
-      const imageUrl = URL.createObjectURL(file)
-      const formData = new FormData()
-      formData.append('avatar', file)
-      setSelectedImageAvatar(imageUrl)
-      const { data } = await uploadImage(
-        formData,
-        urlImageChange.partner_avatar,
-        dispatchLoader,
-        dispatchToast
-      )
-      dispatchAuth({ type: 'SET_PARTNER', payload: data.avatar })
-    }*/
   }
 
   return (
