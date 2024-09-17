@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { AuthContext } from '../../context/auth/qweAuthContext'
+import { AuthContext } from '../../context/auth/AuthContext'
 import menu from '/images/special_menu.png'
 import logo from '/images/logo.png'
 import linkedin from '/images/linkedin.png'

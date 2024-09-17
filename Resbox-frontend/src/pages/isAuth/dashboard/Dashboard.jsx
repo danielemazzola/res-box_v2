@@ -4,7 +4,7 @@ import {
   handleInfoPartner,
   uploadImage
 } from '../../../reducer/auth-reducer/auth.action'
-import { AuthContext } from '../../../context/auth/qweAuthContext'
+import { AuthContext } from '../../../context/auth/AuthContext'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import ProfileCard from '../../../components/profile-card/ProfileCard'
