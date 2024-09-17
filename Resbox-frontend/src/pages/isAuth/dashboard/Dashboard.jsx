@@ -4,13 +4,14 @@ import {
   handleInfoPartner,
   uploadImage
 } from '../../../reducer/auth-reducer/auth.action'
+import { AuthContext } from '../../../context/auth/AuthContext'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import ProfileCard from '../../../components/profile-card/ProfileCard'
 import PartnerCard from '../../../components/partner-card/PartnerCard'
+import './Dashboard.css'
 import edit from '/images/edit.png'
 import restaurante from '/images/restaurante.ico'
-import './Dashboard.css'
 
 const Dashboard = () => {
   const {
@@ -19,6 +20,7 @@ const Dashboard = () => {
     dispatchLoader,
     dispatchAuth
   } = useContext(ReducersContext)
+  const { urlImageChange } = useContext(AuthContext)
   const { refDashboardSection, fileInputRef, refPartnerInfo } =
     useContext(ScrollRefContext)
   const [selectedImage, setSelectedImage] = useState(user.avatar)
@@ -42,8 +44,16 @@ const Dashboard = () => {
     const file = event.target.files[0]
     if (file) {
       const imageUrl = URL.createObjectURL(file)
+      const formData = new FormData()
+      formData.append('avatar', file)
       setSelectedImage(imageUrl)
-      await uploadImage(file, dispatchLoader, dispatchToast, dispatchAuth)
+      const { data } = await uploadImage(
+        formData,
+        urlImageChange.user_avatar,
+        dispatchLoader,
+        dispatchToast
+      )
+      dispatchAuth({ type: 'SET_USER', payload: data.avatar })
     }
   }
 

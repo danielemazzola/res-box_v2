@@ -76,21 +76,20 @@ export const handleCloseSesion = (
 }
 
 export const uploadImage = async (
-  file,
+  formData,
+  url,
   dispatchLoader,
-  dispatchToast,
-  dispatchAuth
+  dispatchToast
 ) => {
-  const formData = new FormData()
-  formData.append('avatar', file)
   const token = localStorage.getItem('SECURE_CODE_RESBOX')
   const { data } = await fetchUpdateAvatar(
     formData,
+    url,
     token,
     dispatchLoader,
     dispatchToast
   )
-  dispatchAuth({ type: 'SET_USER', payload: data.avatar })
+  return { data }
 }
 
 export const handleInfoPartner = async (

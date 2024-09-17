@@ -40,22 +40,21 @@ export const fetchAuth = async (
 
 export const fetchUpdateAvatar = async (
   formData,
+  url,
   token,
   dispatchLoader,
   dispatchToast
 ) => {
+  const urlApi = `${import.meta.env.VITE_URL_API}/${url}`
   try {
     dispatchLoader({ type: 'SET_LOAD_TRUE' })
-    const response = await fetch(
-      `${import.meta.env.VITE_URL_API}/user/update-avatar`,
-      {
-        method: 'PUT',
-        headers: {
-          Authorization: `Bearer ${token}`
-        },
-        body: formData
-      }
-    )
+    const response = await fetch(urlApi, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      body: formData
+    })
     const data = await response.json()
     if (response.status !== 200) {
       dispatchToast({

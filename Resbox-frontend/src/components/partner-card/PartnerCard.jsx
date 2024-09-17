@@ -1,9 +1,11 @@
-import logo from '/images/logo.png'
+import { useContext, useState } from 'react'
+import { AuthContext } from '../../context/auth/AuthContext'
+import { ReducersContext } from '../../context/reducers/ReducersContext'
+import { ScrollRefContext } from '../../context/scroll-ref/ScrollRefContext'
+import Modal from '../modal/Modal'
 import { getDate } from '../../helpers/date'
 import './PartnerCard.css'
-import Modal from '../modal/Modal'
-import { useContext, useState } from 'react'
-import { ScrollRefContext } from '../../context/scroll-ref/ScrollRefContext'
+import { uploadImage } from '../../reducer/auth-reducer/auth.action'
 
 const PartnerCard = ({ array }) => {
   const [userModal, setUserModal] = useState({})
@@ -11,43 +13,90 @@ const PartnerCard = ({ array }) => {
   const [selectedImageBanner, setSelectedImageBanner] = useState(array.banner)
   const [selectedImageAvatar, setSelectedImageAvatar] = useState(array.avatar)
   const { fileBannerRef, fileAvatarRef } = useContext(ScrollRefContext)
+  const { urlImageChange } = useContext(AuthContext)
+  const { dispatchLoader, dispatchToast, dispatchAuth } =
+    useContext(ReducersContext)
   const handleUser = (user) => {
     setUserModal(user)
     setToogleModal(true)
   }
 
-  const handleImageClickBanner = () => {
-    if (fileBannerRef.current) {
-      fileBannerRef.current.click()
-    } else {
-      return
+  const handleChangeImage = ({ banner = false, avatar = false }) => {
+    if (banner) {
+      if (fileBannerRef.current) {
+        fileBannerRef.current.click()
+      } else {
+        return
+      }
+    }
+    if (avatar) {
+      if (fileAvatarRef.current) {
+        fileAvatarRef.current.click()
+      } else {
+        return
+      }
     }
   }
 
-  const handleImageChangeBanner = async (event) => {
+  const handleImageChangeInput = async (
+    event,
+    { banner = false, avatar = false }
+  ) => {
     const file = event.target.files[0]
     if (file) {
       const imageUrl = URL.createObjectURL(file)
+      const formData = new FormData()
+      if (banner) {
+        formData.append('banner', file)
+        setSelectedImageBanner(imageUrl)
+      }
+      if (avatar) {
+        formData.append('avatar', file)
+        setSelectedImageAvatar(imageUrl)
+      }
+      const { data } = await uploadImage(
+        formData,
+        avatar ? urlImageChange.partner_avatar : urlImageChange.partner_banner,
+        dispatchLoader,
+        dispatchToast
+      )
+      dispatchAuth({
+        type: 'SET_PARTNER',
+        payload: avatar ? data.avatar : data.banner
+      })
+    }
+
+    /*   const handleImageChangeBanner = async (event) => {
+    const file = event.target.files[0]
+    if (file) {
+      const imageUrl = URL.createObjectURL(file)
+      const formData = new FormData()
+      formData.append('banner', file)
       setSelectedImageBanner(imageUrl)
-      //await uploadImage(file, dispatchLoader, dispatchToast, dispatchAuth)
+      const { data } = await uploadImage(
+        formData,
+        urlImageChange.partner_banner,
+        dispatchLoader,
+        dispatchToast
+      )
+      dispatchAuth({ type: 'SET_PARTNER', payload: data.banner })
     }
-  }
-
-  const handleImageClickAvatar = () => {
-    if (fileAvatarRef.current) {
-      fileAvatarRef.current.click()
-    } else {
-      return
-    }
-  }
-
-  const handleImageChangeAvatar = async (event) => {
+  } */
+    /*   const handleImageChangeAvatar = async (event) => {
     const file = event.target.files[0]
     if (file) {
       const imageUrl = URL.createObjectURL(file)
+      const formData = new FormData()
+      formData.append('avatar', file)
       setSelectedImageAvatar(imageUrl)
-      //await uploadImage(file, dispatchLoader, dispatchToast, dispatchAuth)
-    }
+      const { data } = await uploadImage(
+        formData,
+        urlImageChange.partner_avatar,
+        dispatchLoader,
+        dispatchToast
+      )
+      dispatchAuth({ type: 'SET_PARTNER', payload: data.avatar })
+    }*/
   }
 
   return (
@@ -60,31 +109,33 @@ const PartnerCard = ({ array }) => {
             type='file'
             accept='.png, .jpeg, .jpg, .gif'
             style={{ display: 'none' }}
-            onChange={handleImageChangeBanner}
+            onChange={(event) =>
+              handleImageChangeInput(event, { banner: true })
+            }
           />
-        </form>
-        <img
-          src={selectedImageBanner}
-          alt={array.name}
-          onClick={handleImageClickBanner}
-        />
-      </div>
-      <div className='partner__avatar'>
-        <form>
           <input
             id='changeImage'
             ref={fileAvatarRef}
             type='file'
             accept='.png, .jpeg, .jpg, .gif'
             style={{ display: 'none' }}
-            onChange={handleImageChangeAvatar}
+            onChange={(event) =>
+              handleImageChangeInput(event, { avatar: true })
+            }
           />
         </form>
+        <img
+          src={selectedImageBanner}
+          alt={array.name}
+          onClick={() => handleChangeImage({ banner: true })}
+        />
+      </div>
+      <div className='partner__avatar'>
         <img
           src={selectedImageAvatar}
           alt={array.name}
           width='70'
-          onClick={handleImageClickAvatar}
+          onClick={() => handleChangeImage({ avatar: true })}
         />
       </div>
       <div className='partner__title'>

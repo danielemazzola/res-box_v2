@@ -1,21 +1,22 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 import { ScrollRefProvider } from './context/scroll-ref/ScrollRefContext.jsx'
 import { ReducersProvider } from './context/reducers/ReducersContext.jsx'
-import { AuthProvider } from './context/auth/authContext.jsx'
+import { AuthProvider } from './context/auth/AuthContext.jsx'
+import App from './App.jsx'
 import './assets/GlobalStyle.css'
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <ReducersProvider>
-        <AuthProvider>
-          <ScrollRefProvider>
+        <ScrollRefProvider>
+          <AuthProvider>
             <App />
-          </ScrollRefProvider>
-        </AuthProvider>
+          </AuthProvider>
+        </ScrollRefProvider>
       </ReducersProvider>
     </BrowserRouter>
   </StrictMode>

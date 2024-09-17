@@ -132,7 +132,7 @@ const updatAvatar = async (req, res, next) => {
         { $set: { avatar: req.body.image } },
         { new: true }
       )
-      return res.status(201).json({ message: 'Avatar actualizado.', avatar })
+      return res.status(200).json({ message: 'Avatar actualizado.', avatar })
     }
   } catch (error) {
     next(error)
@@ -160,7 +160,7 @@ const updateBanner = async (req, res, next) => {
         { $set: { banner: req.body.image } },
         { new: true }
       )
-      return res.status(201).json({ message: 'Banner actualizado.', banner })
+      return res.status(200).json({ message: 'Banner actualizado.', banner })
     }
   } catch (error) {
     next(error)

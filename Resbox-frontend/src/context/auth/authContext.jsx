@@ -1,10 +1,16 @@
-import { createContext, useEffect, useContext } from 'react'
+import { createContext, useEffect, useContext, useState } from 'react'
 import { fetchAuth } from '../../services/fetch-auth/fetchAuth'
 import { ReducersContext } from '../reducers/ReducersContext'
 
 export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
+  const [urlImageChange, setUrlImageChange] = useState({
+    user_avatar: 'user/update-avatar',
+    partner_avatar: 'partner/update-avatar',
+    partner_banner: 'partner/update-banner'
+  })
+
   const { dispatchAuth, dispatchLoader, dispatchToast } =
     useContext(ReducersContext)
   useEffect(() => {
@@ -38,5 +44,9 @@ export const AuthProvider = ({ children }) => {
     isAuth()
   }, [])
 
-  return <AuthContext.Provider value={{}}>{children}</AuthContext.Provider>
+  return (
+    <AuthContext.Provider value={{ urlImageChange }}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
