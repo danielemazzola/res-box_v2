@@ -1,28 +1,16 @@
 import { getDate } from '../../helpers/date'
 import './BoxCard.css'
+import { getRandomBackgroundColor } from './helpers'
 
 const BoxCard = ({ box }) => {
   console.log(box)
-  const getRandomBackgroundColor = () => {
-    const colors = [
-      'var(--rb-bg-secondary)',
-      'var(--rb-bg-tertiary)',
-      'var(--rb-bg-card-img)',
-      'var(--rb-bg-green)',
-      'var(--rb-bg-options)',
-      'var(--rb-bg-light)'
-    ];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    
-    return randomColor;
-  };
-
-
   return (
-    <div className='boxcard__container fadeIn' style={{backgroundColor: getRandomBackgroundColor()}}>
+    <div
+      className='boxcard__container fadeIn'
+      style={{ backgroundColor: getRandomBackgroundColor() }}
+    >
       <div className='boxcard__title'>
         <p className='boxcard__description'>Box: {box.box.name_box}</p>
-        
       </div>
       <div className='boxcard__contain-information'>
         <div>
@@ -37,12 +25,30 @@ const BoxCard = ({ box }) => {
           <p>Precio:</p>
           <p>{box.box.price}€</p>
         </div>
+        {box.id_partner_consumed.length > 0 && (
+          <div>
+            <p>Usado en:</p>
+            {box.id_partner_consumed?.map((partner, index) => (
+              <p>{partner.name}</p>
+            ))}
+          </div>
+        )}
         <div>
           <p>Fecha adquirido:</p>
           <p>{getDate(box.box.createdAt)}</p>
         </div>
       </div>
-        <p className='boxcard__description-date'>Última vez usado: {getDate(box.box.updatedAt)}</p>
+      <div className='boxcard__title-active'>
+        <p className='boxcard__description-active'>
+          Actvos: {box.remainingItems}
+        </p>
+      </div>
+      <div className='boxcard__container-btn'>
+        <div>
+          <button className='button green'>Canjear</button>
+          <button className='button yellow'>Añadir más</button>
+        </div>
+      </div>
     </div>
   )
 }

@@ -94,6 +94,9 @@ button:hover {
 .yellow {
   background-color: var(--rb-bg-register) !important;
 }
+.green {
+  background-color: var(--rb-bg-green) !important;
+}
 .name-app {
   font-size: var(--rb-font-size-name-app);
   font-weight: bolder;
@@ -109,9 +112,7 @@ button:hover {
 .more-info:hover {
   transform: scale(0.97);
 }
-.green {
-  background-color: var(--rb-bg-green) !important;
-}
+
 .z-index-1000 {
   z-index: 999;
   position: relative;
