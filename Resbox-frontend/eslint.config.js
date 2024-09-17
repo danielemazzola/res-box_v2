@@ -29,7 +29,9 @@ export default [
         'warn',
         { allowConstantExport: false }
       ],
-      'react/prop-types': 'off'
+      'react/prop-types': 'off',
+      'react/jsx-one-expression-per-line': 'off',
+      'max-len': ['off']
     }
   }
 ]

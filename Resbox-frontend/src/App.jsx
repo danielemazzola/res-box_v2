@@ -5,41 +5,18 @@ import NotFound from './pages/404/NotFound'
 import RecoveryPassword from './pages/Recovery-password/RecoveryPassword'
 import Dashboard from './pages/isAuth/dashboard/Dashboard'
 import ProtectedRoute from './components/protected-route/ProtectedRoute'
-import MyBoxs from './pages/isAuth/my-box/MyBoxs'
+import MyBox from './pages/isAuth/my-box/MyBox'
+import PromoBox from './pages/isAuth/promo-box/PromoBox'
 
 const App = () => {
   return (
     <Routes>
       <Route path='/' element={<Layout />}>
         <Route index element={<Home />} />
-        <Route
-          path={`/recovery-password/:token`}
-          element={<RecoveryPassword />}
-        />
-        <Route
-          path={`/dashboard`}
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path={`/my-boxes`}
-          element={
-            <ProtectedRoute>
-              <MyBoxs />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path={`/promo-box`}
-          element={
-            <ProtectedRoute>
-              <MyBoxs />
-            </ProtectedRoute>
-          }
-        />
+        <Route path={`/recovery-password/:token`} element={<RecoveryPassword />}/>
+        <Route path={`/dashboard`} element={<ProtectedRoute><Dashboard /></ProtectedRoute>}/>
+        <Route path={`/my-boxes`} element={<ProtectedRoute><MyBox /></ProtectedRoute> }/>
+        <Route path={`/promo-box`} element={<ProtectedRoute><PromoBox /></ProtectedRoute>}/>
         <Route path='*' element={<NotFound />} />
       </Route>
     </Routes>

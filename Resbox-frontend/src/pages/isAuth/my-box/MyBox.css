@@ -1,0 +1,80 @@
+.mybox__container {
+  width: 100%;
+  padding: 80px 50px 120px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+
+}
+
+.mybox__cards-container {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  transition: all 0.3s;
+}
+
+.mybox__card {
+  border-radius: 10px;
+  background-image: url('/images/caja.webp');
+  background-position:50% 50%;
+  background-repeat: no-repeat;
+  background-size: 230px;
+  background-color: var(--rb-bg-light);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height:250px;
+  transition: all 0.3s;
+}
+
+.mybox__card > div {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.658);
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.mybox__card > div > h3 {
+  color: var(--rb-text-primary);
+  font-weight: 600;
+  font-size: var(--rb-font-size-large);
+}
+.mybox__card > div > p{
+  color: var(--rb-text-primary);
+  font-weight: 300;
+  font-size: var(--rb-font-size-large);
+
+}
+.mybox__paragraph-rotate{
+  transform: rotate(6deg);
+  background-color: var(--rb-bg-secondary);
+  padding:3px;
+  border-radius: 10px;
+}
+
+
+/* @media (max-width: 1456px) {
+  .mybox__container {
+    padding: 80px 50px 120px;
+  }
+}
+@media (max-width: 832px) {
+  .mybox__container {
+    padding: 80px 20px 120px;
+  }
+}
+
+@media (max-width: 769px) {
+  .mybox__cards-container {
+    width: 500px;
+  }
+}
+ */
