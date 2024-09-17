@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 import { ScrollRefProvider } from './context/scroll-ref/ScrollRefContext.jsx'
 import { ReducersProvider } from './context/reducers/ReducersContext.jsx'
-import { AuthProvider } from './context/auth/asdasdAuthContext.jsx'
+import { AuthProvider } from './context/auth/AuthContext.jsx'
 import App from './App.jsx'
 import './assets/GlobalStyle.css'
 
