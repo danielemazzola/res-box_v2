@@ -1,26 +1,43 @@
-.profile__container {
+.boxcard__container {
+  width: 100%;
+  min-height: 220px;
+  padding: 20px;
+  background-image: url('/images/caja.webp');
+  background-position:95% 50%;
+  background-repeat: no-repeat;
+  background-size: 200px;
   border-radius: 10px;
-  background-color: var(--rb-bg-light);
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  width: 495px;
-  transition: all 0.3s;
-  padding: 20px;
-}
-.profile__title {
-  display: flex;
+  align-items: start;
   justify-content: center;
+  gap: 20px;
+  transition: all 0.3s;
 }
-.profile__container > div > p {
+.boxcard__title {
+  display: flex;
+  justify-content: start;
+  gap: 10px;
+  align-items: end;
+}
+.boxcard__description {
   background-color: var(--rb-bg-secondary);
-  padding: 2px 5px;
+  padding: 8px 10px;
   border-radius: 5px;
   text-align: center;
   color: var(--rb-text-primary);
   display: flex;
+  font-size: var(--rb-font-size-large);
 }
-.profile__contain-information {
+.boxcard__description-date{
+  font-size: var(--rb-font-size-small);
+  background-color: var(--rb-bg-light);
+  padding: 2px;
+  border-radius: 5px;
+  text-align: center;
+
+}
+.boxcard__contain-information {
   display: flex;
   justify-content: start;
   align-items: start;
@@ -28,35 +45,27 @@
   gap: 20px;
   padding: 20px;
 }
-.profile__contain-information > div {
+.boxcard__contain-information > div {
   display: flex;
   align-items: start;
   flex-wrap: wrap;
   gap: 5px;
 }
-.profile__contain-information > div > p:first-child {
+.boxcard__contain-information > div > p:first-child {
   background-color: var(--rb-bg-primary);
   padding: 0 5px;
   border-radius: 5px;
   color: var(--rb-text-primary);
   font-size: var(--rb-font-size-small);
   text-transform: capitalize;
+  text-align: center;
 }
-
-@media (max-width: 815px) {
-  .profile__container {
-    width: 62%;
-  }
-}
-
-@media (max-width: 769px) {
-  .profile__container {
-    width: 500px;
-  }
-}
-
-@media (max-width: 530px) {
-  .profile__container {
-    width: 100% !important;
-  }
+.boxcard__contain-information > div > p:last-child {
+  background-color: var(--rb-bg-light);
+  padding: 0 5px;
+  border-radius: 5px;
+  color: var(--rb-text-secondary);
+  font-size: var(--rb-font-size-small);
+  text-transform: capitalize;
+  text-align: center;
 }

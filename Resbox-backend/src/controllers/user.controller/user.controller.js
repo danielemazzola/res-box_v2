@@ -101,7 +101,7 @@ const getUserWithPopulates = async (userId) => {
     .select('-password')
     .populate({
       path: 'purchasedBoxes.box',
-      select: 'name_box description items_included bonus_items price status'
+      select: 'name_box description items_included bonus_items price status createdAt updatedAt'
     })
     .populate({
       path: 'purchasedBoxes.id_partner_consumed',

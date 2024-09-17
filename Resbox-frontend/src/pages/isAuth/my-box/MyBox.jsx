@@ -6,17 +6,22 @@ import BoxCard from '../../../components/box-card/BoxCard'
 import './MyBox.css'
 
 const MyBox = () => {
-  const {refBoxesSection}=useContext(ScrollRefContext)
+  const { refBoxesSection } = useContext(ScrollRefContext)
   const useScrolltoRef = useScrollToRef()
-  const {stateIsAuth:{user}} = useContext(ReducersContext)
-console.log(user);
+  const {
+    stateIsAuth: { user }
+  } = useContext(ReducersContext)
+  const { purchasedBoxes } = user
+  
 
-  useEffect(()=>{
+  useEffect(() => {
     setTimeout(() => {
       useScrolltoRef(refBoxesSection)
     }, 1000)
-  },[])
-  return <div ref={refBoxesSection} className='mybox__container'>
+  }, [])
+
+  return (
+    <div ref={refBoxesSection} className='mybox__container'>
       <div className='mybox__cards-container fadeIn'>
         <div className='mybox__card'>
           <div>
@@ -26,8 +31,17 @@ console.log(user);
           </div>
         </div>
       </div>
-      <BoxCard array={user} />
+      {purchasedBoxes.length > 0 ? (
+        <>
+          {purchasedBoxes?.map((box, index) => (
+            <BoxCard key={index} box={box} />
+          ))}
+        </>
+      ) : (
+        <p>No tienes boxes</p>
+      )}
     </div>
+  )
 }
 
 export default MyBox

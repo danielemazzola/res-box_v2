@@ -1,31 +1,48 @@
-import logo from '/images/logo.png'
-import './BoxCard.css'
 import { getDate } from '../../helpers/date'
+import './BoxCard.css'
 
-const BoxCard = ({ array }) => {
+const BoxCard = ({ box }) => {
+  console.log(box)
+  const getRandomBackgroundColor = () => {
+    const colors = [
+      'var(--rb-bg-secondary)',
+      'var(--rb-bg-tertiary)',
+      'var(--rb-bg-card-img)',
+      'var(--rb-bg-green)',
+      'var(--rb-bg-options)',
+      'var(--rb-bg-light)'
+    ];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    
+    return randomColor;
+  };
+
+
   return (
-    <div className='profile__container fadeIn'>
-      <div className='profile__title'>
-        <p>Información de perfil</p>
+    <div className='boxcard__container fadeIn' style={{backgroundColor: getRandomBackgroundColor()}}>
+      <div className='boxcard__title'>
+        <p className='boxcard__description'>Box: {box.box.name_box}</p>
+        
       </div>
-      <div className='profile__contain-information'>
+      <div className='boxcard__contain-information'>
         <div>
-          <p>nombre</p>
-          <p>{array.name + ' ' + array.lastname}</p>
+          <p>Incluye:</p>
+          <p>{box.box.items_included}</p>
         </div>
         <div>
-          <p>email</p>
-          <p>{array.email}</p>
+          <p>Extra:</p>
+          <p>{box.box.bonus_items}</p>
         </div>
         <div>
-          <p>Roles</p>
-          <p>{array.roles.map((el) => el).join(', ')}</p>
+          <p>Precio:</p>
+          <p>{box.box.price}€</p>
         </div>
         <div>
-          <p>Cuenta creada</p>
-          <p>{getDate(array.createdAt)}</p>
+          <p>Fecha adquirido:</p>
+          <p>{getDate(box.box.createdAt)}</p>
         </div>
       </div>
+        <p className='boxcard__description-date'>Última vez usado: {getDate(box.box.updatedAt)}</p>
     </div>
   )
 }
