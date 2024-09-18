@@ -15,6 +15,10 @@ import {
   initStateLoader,
   stateLoad
 } from '../../reducer/loader-reducer/loader.reducer'
+import {
+  initStatePromoBox,
+  statePromoBox
+} from '../../reducer/promo-box/promobox.reducer'
 
 export const ReducersContext = createContext()
 
@@ -26,6 +30,11 @@ export const ReducersProvider = ({ children }) => {
   const [stateToasts, dispatchToast] = useReducer(stateToast, initStateToast)
   const [stateIsAuth, dispatchAuth] = useReducer(stateAuth, initStateAuth)
   const [stateLoader, dispatchLoader] = useReducer(stateLoad, initStateLoader)
+  const [statePromoBoxes, dispatchPromoBoxes] = useReducer(
+    statePromoBox,
+    initStatePromoBox
+  )
+
   return (
     <ReducersContext.Provider
       value={{
@@ -36,7 +45,9 @@ export const ReducersProvider = ({ children }) => {
         stateIsAuth,
         dispatchAuth,
         stateLoader,
-        dispatchLoader
+        dispatchLoader,
+        statePromoBoxes,
+        dispatchPromoBoxes
       }}
     >
       {children}

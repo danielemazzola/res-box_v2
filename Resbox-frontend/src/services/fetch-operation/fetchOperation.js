@@ -3,7 +3,7 @@ export const fetchNewOperation = async (
   url,
   idbox,
   method,
-  quantityRedeem,
+  quantityRedeem = 0,
   dispatchLoader,
   dispatchToast
 ) => {
@@ -27,10 +27,6 @@ export const fetchNewOperation = async (
         payload: { msg: `Error: ${data.message}`, error: true }
       })
     } else {
-      dispatchToast({
-        type: 'ADD_NOTIFICATION',
-        payload: { msg: 'Canje exitoso!', error: false }
-      })
       return { data }
     }
   } catch (error) {

@@ -9,7 +9,8 @@ export const AuthProvider = ({ children }) => {
     user_avatar: 'user/update-avatar',
     partner_avatar: 'partner/update-avatar',
     partner_banner: 'partner/update-banner',
-    user_operation: 'operation/new-operation'
+    user_operation: 'operation/new-operation',
+    user_add_more: 'box/buy-box'
   })
 
   const { dispatchAuth, dispatchLoader, dispatchToast } =

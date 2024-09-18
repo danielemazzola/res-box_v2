@@ -26,7 +26,6 @@ const getUserDetails = async (userId) => {
     })
     .populate({
       path: 'purchasedBoxes.id_partner_consumed',
-      select: 'name'
     })
 }
 

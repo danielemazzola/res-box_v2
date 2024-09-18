@@ -9,8 +9,11 @@ import ModalRedeem from './ModalRedeem'
 import { getDate } from '../../helpers/date'
 import useFilterPartner from '../../hooks/useFilterPartner'
 import Modal from '../modal/Modal'
+import ModalInfoPartner from './ModalInfoPartner'
 
 const BoxCard = ({ box }) => {
+  console.log(box);
+  
   const [stateBoxCard, setStateBoxCard] = useState({
     quantityRedeem: 1,
     modalState: false,
@@ -32,7 +35,6 @@ const BoxCard = ({ box }) => {
   const handleSubmit = async (e, box) => {
     e.preventDefault()
     const token = localStorage.getItem('SECURE_CODE_RESBOX')
-    dispatchLoader({ type: 'SET_LOAD_TRUE' })
     const { data } = await fetchNewOperation(
       token,
       API_URL.user_operation,
@@ -42,6 +44,10 @@ const BoxCard = ({ box }) => {
       dispatchLoader,
       dispatchToast
     )
+    dispatchToast({
+      type: 'ADD_NOTIFICATION',
+      payload: { msg: 'Canje exitoso!', error: false }
+    })
     setStateBoxCard((prevState) => ({
       ...prevState,
       secureTokenRedeem: data.token
@@ -56,40 +62,25 @@ const BoxCard = ({ box }) => {
 
   const handleAddMoreBox = async (idBox) => {
     const token = localStorage.getItem('SECURE_CODE_RESBOX')
-    try {
-      dispatchLoader({ type: 'SET_LOAD_TRUE' })
-      const response = await fetch(
-        `${import.meta.env.VITE_URL_API}/box/buy-box/${idBox}`,
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        }
-      )
-      const data = await response.json()
-      if (response.status !== 201) {
-        dispatchToast({
-          type: 'ADD_NOTIFICATION',
-          payload: { msg: `Error: ${data.message}`, error: true }
-        })
-      } else {
-        dispatchToast({
-          type: 'ADD_NOTIFICATION',
-          payload: { msg: `${data.message}`, error: false }
-        })
-        dispatchAuth({ type: 'SET_USER', payload: data.updatedUser })
-      }
-    } catch (error) {
-    } finally {
-      dispatchLoader({ type: 'SET_LOAD_FALSE' })
-      confetti({
-        particleCount: 250,
-        spread: 170,
-        origin: { y: 1.3 }
-      })
-    }
+    const { data } = await fetchNewOperation(
+      token,
+      API_URL.user_add_more,
+      idBox,
+      'POST',
+      0,
+      dispatchLoader,
+      dispatchToast
+    )
+    dispatchToast({
+      type: 'ADD_NOTIFICATION',
+      payload: { msg: `${data.message}`, error: false }
+    })
+    dispatchAuth({ type: 'SET_USER', payload: data.updatedUser })
+    confetti({
+      particleCount: 250,
+      spread: 170,
+      origin: { y: 1.3 }
+    })
   }
   const handlePartner = (partner, box) => {
     dispatchPartners({
@@ -183,32 +174,10 @@ const BoxCard = ({ box }) => {
           </div>
         </div>
       </div>
-      <Modal
-        isModalOpen={stateBoxCard.modalStatePartner}
-        handleCloseModal={handleCloseModalInfoPartner}
-      >
-        <div className='modal-content'>
-          <img
-            className='modal-banner'
-            src={stateBoxCard.infoPartner.banner}
-            alt={`${stateBoxCard.infoPartner.name} banner`}
-          />
-          <div className='logo-absolute'>
-            <img
-              className='partner-avatar'
-              src={stateBoxCard.infoPartner.avatar}
-              alt={`${stateBoxCard.infoPartner.name} logo`}
-              loading='lazy'
-            />
-          </div>
-          <div className='modal-details'>
-            <p>{stateBoxCard.infoPartner.name}</p>
-            <p>{stateBoxCard.infoPartner.phone}</p>
-            <p>{stateBoxCard.infoPartner.address}</p>
-            <p>{stateBoxCard.infoPartner.country}</p>
-          </div>
-        </div>
-      </Modal>
+      <ModalInfoPartner
+        stateBoxCard={stateBoxCard}
+        handleCloseModalInfoPartner={handleCloseModalInfoPartner}
+      />
       <ModalRedeem
         box={box}
         remainingItems={box.remainingItems}
