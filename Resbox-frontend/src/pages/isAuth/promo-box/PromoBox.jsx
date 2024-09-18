@@ -1,18 +1,15 @@
-import { useContext, useEffect, useMemo } from 'react'
+import { useContext, useEffect } from 'react'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import useScrollToRef from '../../../hooks/useScrollToRef'
 import './PromoBox.css'
 import { ReducersContext } from '../../../context/reducers/ReducersContext'
-import BoxCard from '../../../components/box-card/BoxCard'
-import { getRandomBackgroundColor } from '../../../components/box-card/helpers'
+import PromoBoxCard from '../../../components/promo-box-card/PromoBoxCard'
 
 const PromoBox = () => {
-  const backgroundColor = useMemo(() => getRandomBackgroundColor(), [])
   const { refBoxesSection } = useContext(ScrollRefContext)
   const {
     statePromoBoxes: { boxes },
     dispatchPromoBoxes,
-    dispatchToast,
     dispatchLoader
   } = useContext(ReducersContext)
   const useScrolltoRef = useScrollToRef()
@@ -38,33 +35,19 @@ const PromoBox = () => {
     getAllPromoBox()
   }, [])
 
-  //console.log(boxes);
-  
   return (
     <div ref={refBoxesSection} className='promobox__container'>
       <div className='promobox__cards-container fadeIn'>
         <div className='promobox__card'>
           <div>
-            <h3>PROMO - BOX</h3>
-            <p className='promobox__paragraph-rotate'>En un solo lugar</p>
+            <h3>PROMO BOX</h3>
           </div>
         </div>
       </div>
       {boxes.length > 0 ? (
         <>
           {boxes?.map((box, index) => (
-            <div key={index} className='promobox__contain-card-box' style={{ backgroundColor }}>
-            <div>
-              <h1>{box.name_box}</h1>
-              <p>{box.description}</p>
-              <p>Incluye: {box.items_included}</p>
-              <p>Extra: {box.bonus_items}</p>
-              <p>Precio: {box.price}€</p>
-              <p>Comprado: {box.items_acquired_by.length}</p>
-              <p>{box.status.includes('active') ? 'Estado: Activo': 'Estado: Inactivo'}</p>
-
-            </div>
-            </div>
+            <PromoBoxCard key={index} box={box} />
           ))}
         </>
       ) : (

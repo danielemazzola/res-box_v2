@@ -12,15 +12,17 @@
   gap: 30px;
   width: 100%;
   transition: all 0.3s;
+  background-image: url('/images/taza-cafe.webp');
+  background-color: rgb(209, 209, 209);
+  background-position: 120% 90%;
+  background-repeat: no-repeat;
+  background-size: 350px;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .promobox__card {
   border-radius: 10px;
-  background-image: url('/images/taza-cafe.webp');
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: rgb(124, 124, 124);
   display: flex;
   justify-content: center;
   width: 100%;
@@ -29,25 +31,21 @@
 }
 
 .promobox__card > div {
-  background-color: rgba(0, 0, 0, 0.61);
-  width: 100%;
-  height: 100%;
   position: relative;
-  padding: 20px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px;
-  width: 100%;
   overflow: hidden;
+  width: 100%;
 }
 
 .promobox__card > div > h3 {
-  color: var(--rb-text-primary);
+  color: var(--rb-text-secondary);
   font-weight: 600;
-  font-size: var(--rb-font-size-xlarge);
+  font-size: calc(5vw + 5vh);
   padding: 5px 8px;
   text-align: center;
 }
@@ -62,34 +60,20 @@
   font-weight: 300;
 }
 
-.promobox__contain-card-box{
-  background-color: rgba(255, 238, 202, 0.836);
-  min-width:300px;
-  padding:20px;
-  border-radius: 10px;
-  background-image: url('/images/taza-cafe.webp');
-  background-position: 99% 50%;
-  background-repeat: no-repeat;
-  background-size: contain;
-
-  display: flex;
-  flex-wrap: wrap;
-  flex:1 1;
-}
-
 @media (max-width: 1456px) {
   .promobox__container {
     padding: 80px 50px 120px;
   }
 }
+
 @media (max-width: 832px) {
   .promobox__container {
     padding: 80px 20px 120px;
   }
 }
 
-@media (max-width: 350px) {
-  .promobox__card > div > h3 {
-    font-size: var(--rb-font-size-large);
+@media (max-width: 480px) {
+  .promobox__contain-card-box {
+    min-width: 208px;
   }
 }

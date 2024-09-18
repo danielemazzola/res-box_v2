@@ -1,19 +1,16 @@
 import { useContext, useEffect, useMemo, useState } from 'react'
 import confetti from 'canvas-confetti'
-import { ReducersContext } from '../../context/reducers/ReducersContext'
-import { containInformation, getRandomBackgroundColor } from './helpers'
-import { fetchNewOperation } from '../../services/fetch-operation/fetchOperation'
-import './BoxCard.css'
-import { AuthContext } from '../../context/auth/AuthContext'
-import ModalRedeem from './ModalRedeem'
-import { getDate } from '../../helpers/date'
 import useFilterPartner from '../../hooks/useFilterPartner'
-import Modal from '../modal/Modal'
+import { ReducersContext } from '../../context/reducers/ReducersContext'
+import { AuthContext } from '../../context/auth/AuthContext'
+import { fetchNewOperation } from '../../services/fetch-operation/fetchOperation'
+import ModalRedeem from './ModalRedeem'
+import { containInformation, getRandomBackgroundColor } from './helpers'
+import { getDate } from '../../helpers/date'
 import ModalInfoPartner from './ModalInfoPartner'
+import './BoxCard.css'
 
 const BoxCard = ({ box }) => {
-  console.log(box);
-  
   const [stateBoxCard, setStateBoxCard] = useState({
     quantityRedeem: 1,
     modalState: false,
