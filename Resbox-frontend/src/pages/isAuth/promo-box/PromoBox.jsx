@@ -17,35 +17,11 @@ const PromoBox = () => {
           <div>
             <h3>❤️PROMO BOX❤️</h3>
             <div className='mybox__contain-avatar'>
-              <img
-                alt=''
-                src=''
-                width='150'
-                height='150'
-              />
+              
             </div>
           </div>
         </div>
       </div>
-      {/* <ProfileCard array={user} />
-      {user.roles.includes('partner') && (
-        <>
-          <button
-            className='mybox__banner-partner fadeIn'
-            onClick={handlePartner}
-          >
-            <img src={restaurante} />
-            <div>
-              <p>Negocio</p>
-            </div>
-          </button>
-          {Object.keys(partner).length > 0 && (
-            <div ref={refPartnerInfo}>
-              <PartnerCard array={partner} />
-            </div>
-          )}
-        </>
-      )} */}
     </div>
   )
 }

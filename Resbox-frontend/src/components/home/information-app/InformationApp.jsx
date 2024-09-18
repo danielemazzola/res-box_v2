@@ -10,7 +10,7 @@ import {
 } from '../../../reducer/partner-reducer/partner.action'
 import logo from '/images/logo.png'
 import Partner from '../../partner/Partner'
-import useFilterRestaurant from '../../../hooks/useFilterRestaurant'
+import useFilterPartner from '../../../hooks/useFilterPartner'
 
 const InformationApp = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -82,7 +82,7 @@ const InformationApp = () => {
                       setSearchTerm,
                       searchTerm,
                       dispatchPartners,
-                      useFilterRestaurant,
+                      useFilterPartner,
                       arrayFilterPartners
                     )
                   }

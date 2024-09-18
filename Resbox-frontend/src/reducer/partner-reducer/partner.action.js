@@ -30,7 +30,7 @@ export const handleSearchPartner = (
   setSearchTerm,
   searchTerm,
   dispatchPartners,
-  useFilterRestaurant,
+  useFilterPartner,
   arrayFilterPartners
 ) => {
   const term = e.target.value
@@ -40,7 +40,7 @@ export const handleSearchPartner = (
   } else {
     dispatchPartners({
       type: 'SET_FILTER_SEARCH',
-      payload: useFilterRestaurant(searchTerm, arrayFilterPartners)
+      payload: useFilterPartner(searchTerm, arrayFilterPartners)
     })
   }
 }

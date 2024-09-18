@@ -1,4 +1,4 @@
-const useFilterRestaurant = (searchTerm, arrayPartners) => {
+const useFilterPartner = (searchTerm, arrayPartners) => {
   const filteredResults = arrayPartners.filter((element) => {
     let addressMatch
     const nameMatch = element.name
@@ -12,4 +12,4 @@ const useFilterRestaurant = (searchTerm, arrayPartners) => {
   return filteredResults
 }
 
-export default useFilterRestaurant
+export default useFilterPartner

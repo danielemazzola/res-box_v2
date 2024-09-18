@@ -30,10 +30,10 @@ export const containInformation = (boxes) => {
   return [
     { text: 'Incluye', value: box.items_included },
     { text: 'Extra', value: box.bonus_items },
-    { text: 'Precio', value: box.price },
+    { text: 'Precio', value: `${box.price}€` },
     {
       text: 'p/u',
-      value: (box.price / (box.items_included + box.bonus_items)).toFixed(2)
+      value: `${(box.price / (box.items_included + box.bonus_items)).toFixed(2)}€`
     },
     ...(id_partner_consumed.length > 0
       ? [

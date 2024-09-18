@@ -7,7 +7,7 @@ import './BoxCard.css'
 import { AuthContext } from '../../context/auth/AuthContext'
 import ModalRedeem from './ModalRedeem'
 import { getDate } from '../../helpers/date'
-import useFilterRestaurant from '../../hooks/useFilterRestaurant'
+import useFilterPartner from '../../hooks/useFilterPartner'
 import Modal from '../modal/Modal'
 
 const BoxCard = ({ box }) => {
@@ -94,7 +94,7 @@ const BoxCard = ({ box }) => {
   const handlePartner = (partner, box) => {
     dispatchPartners({
       type: 'SET_FILTER_SEARCH',
-      payload: useFilterRestaurant(partner, box.id_partner_consumed)
+      payload: useFilterPartner(partner, box.id_partner_consumed)
     })
     setStateBoxCard((prevState) => ({
       ...prevState,
