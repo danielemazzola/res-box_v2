@@ -34,7 +34,7 @@
   background-position: 50% 10%;
   background-repeat: no-repeat;
   background-size: 180px;
-  background-blend-mode:multiply;
+  background-blend-mode: multiply;
   text-align: center;
   display: flex;
 }
@@ -77,8 +77,8 @@
   background-color: rgba(0, 0, 0, 0.712);
   border-radius: 0 0 10px 10px;
   position: absolute;
-  top:0;
-  right:20px;
+  top: 0;
+  right: 20px;
   transition: all 0.3s;
 }
 .boxcard__description-active {
@@ -89,22 +89,21 @@
   font-weight: bold;
   display: flex;
   flex-direction: column;
-  gap:5px;
-  padding:6px
+  gap: 5px;
+  padding: 6px;
 }
-.boxcard__description-active > span{
+.boxcard__description-active > span {
   font-size: 35px;
-
 }
-.boxcard__date-active{
+.boxcard__date-active {
   background-color: var(--rb-bg-light);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   padding: 0 5px;
-  border-radius: 5px;;
+  border-radius: 5px;
 }
-.boxcard__date{
+.boxcard__date {
   font-size: 14px;
   font-weight: 600;
 }
@@ -173,7 +172,7 @@
   flex-wrap: wrap;
   gap: 5px;
 }
-.boxcard__contain-img-title > h1{
+.boxcard__contain-img-title > h1 {
   text-align: center;
   text-transform: uppercase;
   font-size: var(--rb-font-size-medium);
@@ -197,26 +196,31 @@
 .boxcard__form > div {
   display: flex;
   gap: 10px;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.boxcard__form > div > div{
+.boxcard__form > div > div {
   display: flex;
   flex-wrap: wrap;
-  gap:10px;
+  gap: 10px;
   justify-content: center;
   align-items: center;
 }
 .boxcard__form > div > input {
-  width:50px;
-  height:50px;
+  width: 50px;
+  height: 50px;
   text-align: center;
   border-radius: 50%;
   border: none;
-  background-color: var(--rb-bg-options);
+  background-color: var(--rb-bg-tertiary);
   color: var(--rb-text-primary);
   font-size: var(--rb-font-size-xlarge);
+}
+.boxcard__btn-select-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
 }
 .boxcard__secureTokenRedeem-container {
   display: flex;
@@ -242,7 +246,7 @@
   border-radius: 10px;
 }
 
-@media (max-width:520px) {
+@media (max-width: 520px) {
   .boxcard__title-active {
     background-color: rgba(0, 0, 0, 0.712);
     border-radius: 0 10px 10px 0px;

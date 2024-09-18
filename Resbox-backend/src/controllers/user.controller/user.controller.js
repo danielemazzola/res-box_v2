@@ -105,7 +105,6 @@ const getUserWithPopulates = async (userId) => {
     })
     .populate({
       path: 'purchasedBoxes.id_partner_consumed',
-      select: 'name avatar phone'
     })
 }
 

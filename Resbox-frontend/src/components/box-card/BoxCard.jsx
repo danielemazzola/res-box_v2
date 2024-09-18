@@ -7,15 +7,24 @@ import './BoxCard.css'
 import { AuthContext } from '../../context/auth/AuthContext'
 import ModalRedeem from './ModalRedeem'
 import { getDate } from '../../helpers/date'
+import useFilterRestaurant from '../../hooks/useFilterRestaurant'
+import Modal from '../modal/Modal'
 
 const BoxCard = ({ box }) => {
   const [stateBoxCard, setStateBoxCard] = useState({
     quantityRedeem: 1,
     modalState: false,
-    secureTokenRedeem: 0
+    secureTokenRedeem: 0,
+    modalStatePartner: false,
+    infoPartner: {}
   })
-  const { dispatchAuth, dispatchLoader, dispatchToast } =
-    useContext(ReducersContext)
+  const {
+    dispatchAuth,
+    dispatchLoader,
+    dispatchToast,
+    dispatchPartners,
+    statePartners: { arrayFilterPartnersSearch }
+  } = useContext(ReducersContext)
   const { API_URL } = useContext(AuthContext)
   const backgroundColor = useMemo(() => getRandomBackgroundColor(), [])
   const newArrayInfoBox = containInformation(box)
@@ -82,6 +91,33 @@ const BoxCard = ({ box }) => {
       })
     }
   }
+  const handlePartner = (partner, box) => {
+    dispatchPartners({
+      type: 'SET_FILTER_SEARCH',
+      payload: useFilterRestaurant(partner, box.id_partner_consumed)
+    })
+    setStateBoxCard((prevState) => ({
+      ...prevState,
+      modalStatePartner: true
+    }))
+  }
+
+  useEffect(() => {
+    if (arrayFilterPartnersSearch.length > 0) {
+      setStateBoxCard((prevState) => ({
+        ...prevState,
+        infoPartner: arrayFilterPartnersSearch[0]
+      }))
+    }
+  }, [arrayFilterPartnersSearch])
+
+  const handleCloseModalInfoPartner = () => {
+    setStateBoxCard((prevState) => ({
+      ...prevState,
+      modalStatePartner: false,
+      infoPartner: {}
+    }))
+  }
 
   return (
     <>
@@ -100,7 +136,11 @@ const BoxCard = ({ box }) => {
                   ?.map((partner) => partner.name)
                   .filter((value, index, self) => self.indexOf(value) === index)
                   .map((partner, index) => (
-                    <p key={index} className='boxcar__bg-white'>
+                    <p
+                      key={index}
+                      className='boxcar__bg-white'
+                      onClick={() => handlePartner(partner, box)}
+                    >
                       {partner}
                     </p>
                   ))
@@ -143,7 +183,32 @@ const BoxCard = ({ box }) => {
           </div>
         </div>
       </div>
-
+      <Modal
+        isModalOpen={stateBoxCard.modalStatePartner}
+        handleCloseModal={handleCloseModalInfoPartner}
+      >
+        <div className='modal-content'>
+          <img
+            className='modal-banner'
+            src={stateBoxCard.infoPartner.banner}
+            alt={`${stateBoxCard.infoPartner.name} banner`}
+          />
+          <div className='logo-absolute'>
+            <img
+              className='partner-avatar'
+              src={stateBoxCard.infoPartner.avatar}
+              alt={`${stateBoxCard.infoPartner.name} logo`}
+              loading='lazy'
+            />
+          </div>
+          <div className='modal-details'>
+            <p>{stateBoxCard.infoPartner.name}</p>
+            <p>{stateBoxCard.infoPartner.phone}</p>
+            <p>{stateBoxCard.infoPartner.address}</p>
+            <p>{stateBoxCard.infoPartner.country}</p>
+          </div>
+        </div>
+      </Modal>
       <ModalRedeem
         box={box}
         remainingItems={box.remainingItems}

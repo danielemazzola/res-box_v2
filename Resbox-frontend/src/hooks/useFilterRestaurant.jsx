@@ -1,9 +1,10 @@
 const useFilterRestaurant = (searchTerm, arrayPartners) => {
   const filteredResults = arrayPartners.filter((element) => {
+    let addressMatch
     const nameMatch = element.name
       .toLowerCase()
       .includes(searchTerm.toLowerCase())
-    const addressMatch = element.address
+    addressMatch = element.address
       .toLowerCase()
       .includes(searchTerm.toLowerCase())
     return nameMatch || addressMatch

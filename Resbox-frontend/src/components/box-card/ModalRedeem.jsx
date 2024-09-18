@@ -55,6 +55,19 @@ const ModalRedeem = ({
                 onSubmit={(e) => handleSubmit(e, box)}
               >
                 <div>
+                  <button
+                    type='button'
+                    className='boxcard__btn-select-quantity'
+                    onClick={() => {
+                      if (stateBoxCard.quantityRedeem === 1) return
+                      setStateBoxCard((prevState) => ({
+                        ...prevState,
+                        quantityRedeem: quantityRedeem - 1
+                      }))
+                    }}
+                  >
+                    {'<'}
+                  </button>
                   <input
                     disabled
                     name='quantity'
@@ -76,48 +89,33 @@ const ModalRedeem = ({
                       }
                     }}
                   />
-                  <label>Max. 9.</label>
+                  <button
+                    type='button'
+                    className='boxcard__btn-select-quantity'
+                    onClick={() => {
+                      if (stateBoxCard.quantityRedeem === 9) return
+                      setStateBoxCard((prevState) => ({
+                        ...prevState,
+                        quantityRedeem: quantityRedeem + 1
+                      }))
+                    }}
+                  >
+                    {'>'}
+                  </button>
+                </div>
+                <span>Minimo 1, Máximo 9.</span>
                   <div>
+                    <button type='submit' className='button green'>
+                      Canjear
+                    </button>
                     <button
                       type='button'
                       className='button'
-                      onClick={() => {
-                        if (stateBoxCard.quantityRedeem === 1) return
-                        setStateBoxCard((prevState) => ({
-                          ...prevState,
-                          quantityRedeem: quantityRedeem - 1
-                        }))
-                      }}
+                      onClick={handleCloseModal}
                     >
-                      -
-                    </button>
-                    <button
-                      type='button'
-                      className='button green'
-                      onClick={() => {
-                        if (stateBoxCard.quantityRedeem === 9) return
-                        setStateBoxCard((prevState) => ({
-                          ...prevState,
-                          quantityRedeem: quantityRedeem + 1
-                        }))
-                      }}
-                    >
-                      +
+                      Cerrar
                     </button>
                   </div>
-                <div>
-                  <button type='submit' className='button green'>
-                    Canjear
-                  </button>
-                  <button
-                    type='button'
-                    className='button'
-                    onClick={handleCloseModal}
-                  >
-                    Cerrar
-                  </button>
-                </div>
-                </div>
               </form>
             )}
           </div>
