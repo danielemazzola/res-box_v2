@@ -8,7 +8,8 @@ export const AuthProvider = ({ children }) => {
   const [urlImageChange, setUrlImageChange] = useState({
     user_avatar: 'user/update-avatar',
     partner_avatar: 'partner/update-avatar',
-    partner_banner: 'partner/update-banner'
+    partner_banner: 'partner/update-banner',
+    user_operation: 'operation/new-operation'
   })
 
   const { dispatchAuth, dispatchLoader, dispatchToast } =

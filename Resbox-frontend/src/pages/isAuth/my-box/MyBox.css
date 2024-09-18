@@ -18,10 +18,10 @@
 .mybox__card {
   border-radius: 10px;
   background-image: url('/images/caja.webp');
-  background-position:50% 50%;
+  background-position:50% 10%;
   background-repeat: no-repeat;
-  background-size: 230px;
-  background-color: var(--rb-bg-light);
+  background-size: cover;
+  background-color: rgb(124, 124, 124);
   display: flex;
   justify-content: center;
   width: 100%;
@@ -31,7 +31,6 @@
 
 .mybox__card > div {
   position: relative;
-  background-color: rgba(0, 0, 0, 0.658);
   padding: 20px;
   border-radius: 5px;
   display: flex;
@@ -40,25 +39,39 @@
   align-items: center;
   gap: 20px;
   width: 100%;
+  overflow: hidden;
 }
 
 .mybox__card > div > h3 {
   color: var(--rb-text-primary);
   font-weight: 600;
   font-size: var(--rb-font-size-large);
+  background-color: rgba(0, 0, 0, 0.719);
+  padding:5px 8px;
+  border-radius: 10px;
+  text-align: center;
 }
 .mybox__card > div > p{
-  color: var(--rb-text-primary);
-  font-weight: 300;
-  font-size: var(--rb-font-size-large);
   text-align: center;
-
+  
 }
 .mybox__paragraph-rotate{
   transform: rotate(6deg);
+  color: var(--rb-text-primary);
   background-color: var(--rb-bg-secondary);
   padding:3px;
   border-radius: 10px;
+  font-size: var(--rb-font-size-large);
+  font-weight: 300;
+}
+.mybox__user_name{
+  position: absolute;
+  color:var(--rb-text-secondary);
+  left:0px;
+  bottom: 20px;
+  background-color: white;
+  padding: 5px 15px 5px 15px;
+  border-radius: 0px 5px 5px 0;
 }
 
 

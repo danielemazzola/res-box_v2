@@ -27,7 +27,7 @@ const MyBox = () => {
           <div>
             <h3>MIS BOXES❤️</h3>
             <p className='mybox__paragraph-rotate'>En un solo lugar</p>
-            <p>¡{user.name}!</p>
+            <p className='mybox__user_name'>¡{user.name}!</p>
           </div>
         </div>
       </div>
