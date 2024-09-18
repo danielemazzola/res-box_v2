@@ -5,8 +5,10 @@ import ToastNotification from '../components/toast-notification/ToastNotificatio
 import ButtonTopScroll from '../components/button-top-scroll/ButtonTopScroll'
 import Loader from '../components/loader/Loader'
 import { ReducersContext } from '../context/reducers/ReducersContext'
+import { canvas_index } from '../helpers/canvas'
 
 const Layout = () => {
+  canvas_index()
   const {
     stateLoader: { load }
   } = useContext(ReducersContext)

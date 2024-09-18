@@ -1,27 +1,22 @@
-import { Fragment, useContext, useMemo, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import confetti from 'canvas-confetti'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
-import Modal from '../modal/Modal'
-import {
-  containInformation,
-  getRandomBackgroundColor,
-  handleCloseModal
-} from './helpers'
-import { getDate } from '../../helpers/date'
+import { containInformation, getRandomBackgroundColor } from './helpers'
 import { fetchNewOperation } from '../../services/fetch-operation/fetchOperation'
 import './BoxCard.css'
-import logo from '/images/logo.png'
 import { AuthContext } from '../../context/auth/AuthContext'
 import ModalRedeem from './ModalRedeem'
+import { getDate } from '../../helpers/date'
 
 const BoxCard = ({ box }) => {
-  const [modalState, setModalState] = useState(false)
-  const [quantityRedeem, setQuantityRedeem] = useState(1)
-  const [secureTokenRedeem, setSecureTokenRedeem] = useState(0)
-  const [remainingItems, setRemainingItems] = useState(box.remainingItems)
+  const [stateBoxCard, setStateBoxCard] = useState({
+    quantityRedeem: 1,
+    modalState: false,
+    secureTokenRedeem: 0
+  })
   const { dispatchAuth, dispatchLoader, dispatchToast } =
     useContext(ReducersContext)
-  const { urlImageChange } = useContext(AuthContext)
+  const { API_URL } = useContext(AuthContext)
   const backgroundColor = useMemo(() => getRandomBackgroundColor(), [])
   const newArrayInfoBox = containInformation(box)
 
@@ -31,26 +26,23 @@ const BoxCard = ({ box }) => {
     dispatchLoader({ type: 'SET_LOAD_TRUE' })
     const { data } = await fetchNewOperation(
       token,
-      urlImageChange.user_operation,
+      API_URL.user_operation,
       box.box._id,
       'POST',
-      quantityRedeem,
+      stateBoxCard.quantityRedeem,
       dispatchLoader,
       dispatchToast
     )
-    setSecureTokenRedeem(data.token)
-    setRemainingItems((prev) => prev - quantityRedeem)
+    setStateBoxCard((prevState) => ({
+      ...prevState,
+      secureTokenRedeem: data.token
+    }))
+    box.remainingItems = box.remainingItems - stateBoxCard.quantityRedeem
     confetti({
       particleCount: 250,
       spread: 170,
       origin: { y: 1.3 }
     })
-  }
-
-  const canvas = document.querySelector('canvas')
-  if (canvas) {
-    canvas.style.zIndex = '9999'
-    canvas.style.position = 'fixed'
   }
 
   const handleAddMoreBox = async (idBox) => {
@@ -79,11 +71,6 @@ const BoxCard = ({ box }) => {
           payload: { msg: `${data.message}`, error: false }
         })
         dispatchAuth({ type: 'SET_USER', payload: data.updatedUser })
-        const newValue = data.updatedUser.purchasedBoxes?.filter(
-          (box) => box.box._id === idBox
-        )
-        console.log(newValue)
-        setRemainingItems(newValue[0].remainingItems)
       }
     } catch (error) {
     } finally {
@@ -123,16 +110,26 @@ const BoxCard = ({ box }) => {
         </div>
         <div className='boxcard__title-active'>
           <p className='boxcard__description-active'>
-            Actvos: {remainingItems}
+            Actvos <span>{box.remainingItems}</span>
+          </p>
+        </div>
+        <div className='boxcard__date-active'>
+          <p className='boxcard__date'>
+            Fecha de compra: {getDate(box.createdAt)}
           </p>
         </div>
         <div className='boxcard__container-btn'>
           <div>
-            {remainingItems > 0 && (
+            {box.remainingItems > 0 && (
               <button
                 className='button'
                 style={{ backgroundColor: 'var(--rb-bg-options)!important' }}
-                onClick={() => setModalState(true)}
+                onClick={() =>
+                  setStateBoxCard((prevState) => ({
+                    ...prevState,
+                    modalState: true
+                  }))
+                }
               >
                 Canjear
               </button>
@@ -148,15 +145,11 @@ const BoxCard = ({ box }) => {
       </div>
 
       <ModalRedeem
-        modalOpen={modalState}
         box={box}
-        remainingItems={remainingItems}
-        quantityRedeem={quantityRedeem}
-        setModalState={setModalState}
-        setQuantityRedeem={setQuantityRedeem}
-        secureTokenRedeem={secureTokenRedeem}
-        setSecureTokenRedeem={setSecureTokenRedeem}
+        remainingItems={box.remainingItems}
         handleSubmit={handleSubmit}
+        stateBoxCard={stateBoxCard}
+        setStateBoxCard={setStateBoxCard}
       />
     </>
   )

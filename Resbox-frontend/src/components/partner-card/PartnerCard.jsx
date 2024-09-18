@@ -13,7 +13,7 @@ const PartnerCard = ({ array }) => {
   const [selectedImageBanner, setSelectedImageBanner] = useState(array.banner)
   const [selectedImageAvatar, setSelectedImageAvatar] = useState(array.avatar)
   const { fileBannerRef, fileAvatarRef } = useContext(ScrollRefContext)
-  const { urlImageChange } = useContext(AuthContext)
+  const { API_URL } = useContext(AuthContext)
   const { dispatchLoader, dispatchToast, dispatchAuth } =
     useContext(ReducersContext)
   const handleUser = (user) => {
@@ -50,7 +50,7 @@ const PartnerCard = ({ array }) => {
       }
       const { data } = await uploadImage(
         formData,
-        avatar ? urlImageChange.partner_avatar : urlImageChange.partner_banner,
+        avatar ? API_URL.partner_avatar : API_URL.partner_banner,
         dispatchLoader,
         dispatchToast
       )

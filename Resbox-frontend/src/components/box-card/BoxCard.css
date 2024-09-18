@@ -13,6 +13,7 @@
   justify-content: center;
   gap: 20px;
   transition: all 0.3s;
+  position: relative;
 }
 .boxcard__title {
   display: flex;
@@ -73,17 +74,39 @@
 .boxcard__title-active {
   display: flex;
   justify-content: start;
-  gap: 10px;
-  align-items: end;
+  background-color: rgba(0, 0, 0, 0.712);
+  border-radius: 0 0 10px 10px;
+  position: absolute;
+  top:0;
+  right:20px;
+  transition: all 0.3s;
 }
 .boxcard__description-active {
-  background-color: var(--rb-bg-toast);
-  padding: 8px 10px;
-  border-radius: 5px;
   text-align: center;
-  color: var(--rb-text-secondary);
-  display: flex;
+  color: var(--rb-text-primary);
   font-size: var(--rb-font-size-medium);
+  text-transform: uppercase;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  gap:5px;
+  padding:6px
+}
+.boxcard__description-active > span{
+  font-size: 35px;
+
+}
+.boxcard__date-active{
+  background-color: var(--rb-bg-light);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 5px;
+  border-radius: 5px;;
+}
+.boxcard__date{
+  font-size: 14px;
+  font-weight: 600;
 }
 .boxcard__container-btn {
   width: 100%;
@@ -121,13 +144,7 @@
   gap: 20px;
   flex-wrap: wrap;
 }
-.boxcard__form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-}
+
 .boxcard__target-description-form {
   width: 100%;
   display: flex;
@@ -170,18 +187,36 @@
   align-items: center;
   justify-content: center;
 }
-.boxcard__form > div {
+.boxcard__form {
   display: flex;
+  flex-direction: column;
   gap: 10px;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
+.boxcard__form > div {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.boxcard__form > div > div{
+  display: flex;
+  flex-wrap: wrap;
+  gap:10px;
+  justify-content: center;
+  align-items: center;
+}
 .boxcard__form > div > input {
-  padding: 5px 10px;
-  border-radius: 5px;
-  border: none;
+  width:50px;
+  height:50px;
   text-align: center;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--rb-bg-options);
+  color: var(--rb-text-primary);
+  font-size: var(--rb-font-size-xlarge);
 }
 .boxcard__secureTokenRedeem-container {
   display: flex;
@@ -205,4 +240,12 @@
   letter-spacing: 20px;
   display: inline-block;
   border-radius: 10px;
+}
+
+@media (max-width:520px) {
+  .boxcard__title-active {
+    background-color: rgba(0, 0, 0, 0.712);
+    border-radius: 0 10px 10px 0px;
+    position: relative;
+  }
 }

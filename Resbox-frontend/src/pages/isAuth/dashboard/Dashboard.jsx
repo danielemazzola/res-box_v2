@@ -20,7 +20,7 @@ const Dashboard = () => {
     dispatchLoader,
     dispatchAuth
   } = useContext(ReducersContext)
-  const { urlImageChange } = useContext(AuthContext)
+  const { API_URL } = useContext(AuthContext)
   const { refDashboardSection, fileInputRef, refPartnerInfo } =
     useContext(ScrollRefContext)
   const [selectedImage, setSelectedImage] = useState(user.avatar)
@@ -49,7 +49,7 @@ const Dashboard = () => {
       setSelectedImage(imageUrl)
       const { data } = await uploadImage(
         formData,
-        urlImageChange.user_avatar,
+        API_URL.user_avatar,
         dispatchLoader,
         dispatchToast
       )

@@ -1,45 +1,46 @@
-import { getDate } from "../../helpers/date";
-
 export const getRandomBackgroundColor = () => {
   const colors = [
     'var(--br-bg-boxes-1)',
     'var(--br-bg-boxes-2)',
     'var(--br-bg-boxes-3)',
     'var(--br-bg-boxes-4)',
-    'var(--br-bg-boxes-5)',
-  ];
-  const randomColor = colors[Math.floor(Math.random() * colors.length)];
-  
-  return randomColor;
-};
+    'var(--br-bg-boxes-5)'
+  ]
+  const randomColor = colors[Math.floor(Math.random() * colors.length)]
 
-export const handleCloseModal = (setModalState, setQuantityRedeem, setSecureTokenRedeem ) => {
-  setModalState(false)
+  return randomColor
+}
+
+export const handleCloseModal = (setStateBoxCard) => {
+  setStateBoxCard((prevState) => ({
+    ...prevState,
+    modalState: false
+  }))
   setTimeout(() => {
-    setQuantityRedeem(1)
-    setSecureTokenRedeem(0)
+    setStateBoxCard((prevState) => ({
+      ...prevState,
+      quantityRedemm: 1,
+      secureTokenRedeem: 0
+    }))
   }, 500)
 }
 
-export const containInformation = (box) => {
-  return  [
-    { text: 'Incluye', value: box.box.items_included },
-    { text: 'Extra', value: box.box.bonus_items },
-    { text: 'Precio', value: box.box.price },
+export const containInformation = (boxes) => {
+  const { box, id_partner_consumed } = boxes
+  return [
+    { text: 'Incluye', value: box.items_included },
+    { text: 'Extra', value: box.bonus_items },
+    { text: 'Precio', value: box.price },
     {
       text: 'p/u',
-      value: (
-        box.box.price /
-        (box.box.items_included + box.box.bonus_items)
-      ).toFixed(2)
+      value: (box.price / (box.items_included + box.bonus_items)).toFixed(2)
     },
-    ...(box.id_partner_consumed.length > 0
+    ...(id_partner_consumed.length > 0
       ? [
           {
             text: 'Usado en'
           }
         ]
-      : []),
-    { text: 'Fecha adquirido', value: getDate(box.box.createdAt) }
+      : [])
   ]
 }

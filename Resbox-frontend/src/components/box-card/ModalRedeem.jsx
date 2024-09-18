@@ -4,27 +4,30 @@ import { handleCloseModal } from './helpers'
 import logo from '/images/logo.png'
 
 const ModalRedeem = ({
-  modalOpen,
   box,
   remainingItems,
-  quantityRedeem,
-  setModalState,
-  setQuantityRedeem,
-  secureTokenRedeem,
-  setSecureTokenRedeem,
-  handleSubmit
+  handleSubmit,
+  stateBoxCard,
+  setStateBoxCard
 }) => {
+  const { quantityRedeem } = stateBoxCard
+  const handleCloseModal = () => {
+    setStateBoxCard((prevState) => ({
+      ...prevState,
+      modalState: false
+    }))
+    setTimeout(() => {
+      setStateBoxCard((prevState) => ({
+        ...prevState,
+        secureTokenRedeem: 0
+      }))
+    }, 500)
+  }
   return (
     <>
       <Modal
-        isModalOpen={modalOpen}
-        handleCloseModal={() =>
-          handleCloseModal(
-            setModalState,
-            setQuantityRedeem,
-            setSecureTokenRedeem
-          )
-        }
+        isModalOpen={stateBoxCard.modalState}
+        handleCloseModal={handleCloseModal}
       >
         <div className='boxcard__container-form'>
           <div className='boxcard__contain-form'>
@@ -35,15 +38,15 @@ const ModalRedeem = ({
               </div>
               <div className='boxcard__target-description-form boxcard__center'>
                 <p>Canjear</p>
-                <p>{quantityRedeem}</p>
+                <p>{stateBoxCard?.quantityRedeem}</p>
               </div>
             </div>
             <p>Restantes: {remainingItems} (unid.)</p>
-            {secureTokenRedeem !== 0 ? (
+            {stateBoxCard.secureTokenRedeem !== 0 ? (
               <div className='boxcard__secureTokenRedeem-container'>
                 <p>"Muestra este código en tu establecimiento favorito"</p>
                 <p className='boxcard__secureTokenRedeem'>
-                  {secureTokenRedeem}
+                  {stateBoxCard.secureTokenRedeem}
                 </p>
               </div>
             ) : (
@@ -52,26 +55,56 @@ const ModalRedeem = ({
                 onSubmit={(e) => handleSubmit(e, box)}
               >
                 <div>
-                  <label>Cantidad a canjear (max:10)</label>
                   <input
-                    type='number'
+                    disabled
                     name='quantity'
                     min={1}
                     max={9}
-                    value={quantityRedeem}
+                    value={stateBoxCard.quantityRedeem || 1}
                     onChange={(e) => {
                       const value = parseInt(e.target.value, 10)
                       if (value > box.remainingItems) {
                         return alert(
-                          'No puedes agregar más unidades de las que puedes cangear.'
+                          'No puedes agregar más unidades de las que puedes canjear.'
                         )
                       }
                       if (value >= 1 && value <= 9) {
-                        setQuantityRedeem(value)
+                        setStateBoxCard((prevState) => ({
+                          ...prevState,
+                          quantityRedeem: value
+                        }))
                       }
                     }}
                   />
-                </div>
+                  <label>Max. 9.</label>
+                  <div>
+                    <button
+                      type='button'
+                      className='button'
+                      onClick={() => {
+                        if (stateBoxCard.quantityRedeem === 1) return
+                        setStateBoxCard((prevState) => ({
+                          ...prevState,
+                          quantityRedeem: quantityRedeem - 1
+                        }))
+                      }}
+                    >
+                      -
+                    </button>
+                    <button
+                      type='button'
+                      className='button green'
+                      onClick={() => {
+                        if (stateBoxCard.quantityRedeem === 9) return
+                        setStateBoxCard((prevState) => ({
+                          ...prevState,
+                          quantityRedeem: quantityRedeem + 1
+                        }))
+                      }}
+                    >
+                      +
+                    </button>
+                  </div>
                 <div>
                   <button type='submit' className='button green'>
                     Canjear
@@ -79,10 +112,11 @@ const ModalRedeem = ({
                   <button
                     type='button'
                     className='button'
-                    onClick={() => setModalState(false)}
+                    onClick={handleCloseModal}
                   >
                     Cerrar
                   </button>
+                </div>
                 </div>
               </form>
             )}

@@ -5,7 +5,7 @@ import { ReducersContext } from '../reducers/ReducersContext'
 export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-  const [urlImageChange, setUrlImageChange] = useState({
+  const [API_URL, setUrlImageChange] = useState({
     user_avatar: 'user/update-avatar',
     partner_avatar: 'partner/update-avatar',
     partner_banner: 'partner/update-banner',
@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ urlImageChange }}>
+    <AuthContext.Provider value={{ API_URL }}>
       {children}
     </AuthContext.Provider>
   )
