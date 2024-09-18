@@ -46,12 +46,15 @@ const PromoBox = () => {
       </div>
       {boxes.length > 0 ? (
         <>
-          {boxes?.map((box, index) => (
+          {boxes?.filter(box => box.status.includes('active')).map((box, index) => (
+            <PromoBoxCard key={index} box={box} />
+          ))}
+          {boxes?.filter(box => box.status.includes('inactive')).map((box, index) => (
             <PromoBoxCard key={index} box={box} />
           ))}
         </>
       ) : (
-        <p>No tienes boxes</p>
+        <p>Aún no exísten BOX</p>
       )}
     </div>
   )

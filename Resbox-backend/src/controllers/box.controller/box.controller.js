@@ -25,7 +25,7 @@ const newBox = async (req, res, next) => {
 
 const getBoxes = async (req, res, next) => {
   try {
-    const boxes = await Box.find().where('status').equals('active')
+    const boxes = await Box.find()
     return res.status(200).json({
       message: `${boxes.length === 0 ? 'No hay boxes disponibles.' : `Boxes`}`,
       boxes

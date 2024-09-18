@@ -80,8 +80,7 @@
   cursor: pointer;
   transition: all 0.5s;
   overflow: hidden;
-  min-height: 230px;
-  width: 30%;
+  width: 33%;
 }
 
 .dashboard__banner-partner > div {
@@ -104,6 +103,13 @@
   color: var(--rb-text-primary);
   font-size: var(--rb-font-size-xlarge);
 }
+
+.dashboard__img-redeem{
+  width: 1800px;
+  height:300px;
+  object-fit: cover;
+}
+
 @media (max-width: 1456px) {
   .dashboard__container {
     padding: 80px 50px 120px;

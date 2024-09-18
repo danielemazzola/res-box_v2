@@ -11,6 +11,7 @@ import ProfileCard from '../../../components/profile-card/ProfileCard'
 import PartnerCard from '../../../components/partner-card/PartnerCard'
 import './Dashboard.css'
 import edit from '/images/edit.png'
+import redeemCode from '/images/redeemCode.webp'
 import restaurante from '/images/restaurante.ico'
 
 const Dashboard = () => {
@@ -74,6 +75,10 @@ const Dashboard = () => {
     }
   }
 
+  const handleRedeemCode = () => {
+    console.log('hola')
+  }
+
   return (
     <div ref={refDashboardSection} className='dashboard__container'>
       <div className='dashboard__cards-container fadeIn'>
@@ -110,6 +115,15 @@ const Dashboard = () => {
       <ProfileCard array={user} />
       {user.roles.includes('partner') && (
         <>
+          <button
+            className='dashboard__banner-partner fadeIn'
+            onClick={handleRedeemCode}
+          >
+            <img src={redeemCode} className='dashboard__img-redeem' />
+            <div>
+              <p>Canjear Código</p>
+            </div>
+          </button>
           <button
             className='dashboard__banner-partner fadeIn'
             onClick={handlePartner}

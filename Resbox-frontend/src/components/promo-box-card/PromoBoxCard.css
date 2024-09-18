@@ -1,5 +1,5 @@
 .promobox__contain-card-box {
-  min-width: 450px;
+  min-width: 400px;
   border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -29,10 +29,10 @@
   gap: 30px;
 }
 
-.promobox__contain_title{
+.promobox__contain_title {
   display: flex;
   flex-direction: column;
-  gap:5px
+  gap: 5px;
 }
 
 .promobox__contain_title > h2 {
@@ -42,32 +42,60 @@
   margin-bottom: 10px;
   color: var(--rb-text-tertiary);
   padding: 2px 10px;
-  border-radius: 5px;
   display: flex;
   align-self: start;
 }
-.promobox__contain_title > p{
-  color: var( --rb-text-secundary);
+.promobox__contain_title > p {
+  color: var(--rb-text-secundary);
   background-color: var(--rb-bg-light);
-  border-radius: 5px;
   padding: 0 3px;
   align-self: flex-start;
 }
-.promobox__information{
+.promobox__information {
   display: flex;
   flex-wrap: wrap;
-  gap:20px;
+  gap: 20px;
 }
 
 .promobox__information > p {
-  margin: 5px 0;
-  color: #ffffff; /* Color más suave */
-}
-
-.promobox__details p strong {
-  color: var(--rb-text-primary);
-  background-color: var(--rb-bg-secondary);
+  color: var(--rb-text-tertiary);
+  background-color: var(--rb-bg-tertiary);
   border-radius: 5px;
   padding: 0 3px;
-  font-size: var(--rb-font-size-small);
+  font-size: var(--rb-font-size-medium);
+}
+
+.promobox__container-btn {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+.promobox__container-btn > button {
+  border: none;
+  padding: 5px 8px;
+  color: var(--rb-text-primary);
+  font-size: var(--rb-font-size-large);
+}
+
+.active {
+  background-color: var(--rb-bg-green);
+}
+
+.disabled {
+  background-color: var(--rb-bg-green);
+  cursor: not-allowed;
+}
+button:disabled {
+  opacity: 0.4;
+}
+
+@media (max-width: 500px) {
+  .promobox__contain-card-box {
+    min-width: 250px;
+  }
+}
+@media (max-width: 300px) {
+  .promobox__contain-card-box {
+    min-width: 150px;
+  }
 }
