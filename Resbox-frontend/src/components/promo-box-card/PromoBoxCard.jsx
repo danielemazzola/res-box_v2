@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react'
+import { useContext, useEffect, useMemo } from 'react'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import { randomImage } from './helpers'
 import './PromoBoxCard.css'

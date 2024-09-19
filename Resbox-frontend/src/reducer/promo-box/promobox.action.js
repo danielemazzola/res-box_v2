@@ -1,11 +1,13 @@
 import confetti from 'canvas-confetti'
 import {fetchNewOperation}  from '../../services/fetch-operation/fetchOperation'
+
+
 export const handleBuyBox = async (
   API_URL,
   buyBox,
   dispatchLoader,
   dispatchAuth,
-  dispatchToast
+  dispatchToast,
 ) => {
   const token = localStorage.getItem('SECURE_CODE_RESBOX')
   try {
@@ -23,6 +25,7 @@ export const handleBuyBox = async (
       type: 'ADD_NOTIFICATION',
       payload: { msg: data.message, error: false }
     })
+    buyBox.items_acquired_by.push(data.updatedUser._id)
     confetti({
       particleCount: 250,
       spread: 170,

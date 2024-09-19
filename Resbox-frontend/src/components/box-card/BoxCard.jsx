@@ -164,7 +164,7 @@ const BoxCard = ({ box }) => {
             )}
             
             <button
-            disabled={!box.box.status.includes('active')}
+            disabled={!box?.box.status.includes('active')}
               className={`button yellow ${
               box.box.status.includes('active') ? 'active' : 'disabled'
             }`}

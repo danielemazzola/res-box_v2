@@ -91,7 +91,16 @@ const updateAvatar = async (req, res, next) => {
       user._id,
       { $set: { avatar: req.body.image } },
       { new: true }
-    ).select('-password -__v -token')
+    )
+      .select('-password -__v -token')
+      .populate({
+        path: 'purchasedBoxes.box',
+        select:
+          'name_box description items_included bonus_items price status createdAt updatedAt'
+      })
+      .populate({
+        path: 'purchasedBoxes.id_partner_consumed'
+      })
     return res.status(200).json({ message: 'Avatar actualizado.', avatar })
   } catch (error) {
     next(error)

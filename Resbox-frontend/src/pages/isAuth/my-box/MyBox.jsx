@@ -21,7 +21,7 @@ const MyBox = () => {
   }, [])
 
   return (
-    <div ref={refBoxesSection} className='mybox__container fadeIn'>
+    <div ref={purchasedBoxes.length > 0 ? refBoxesSection : null} className='mybox__container fadeIn'>
       <div className='mybox__cards-container '>
         <div className='mybox__card'>
           <div>
@@ -39,9 +39,10 @@ const MyBox = () => {
         </>
       ) : (
         <>
-          <p className='mybox__no-box'>
-            No tienes boxes, pero mira nuestras promos:⤵️
+          <p className='mybox__no-box' ref={!purchasedBoxes.length > 0 ? refBoxesSection : null}>
+            ¿Aún sin tu BOX?
           </p>
+          
           <PromoBox />
         </>
       )}

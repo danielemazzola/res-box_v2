@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     partner_banner: 'partner/update-banner',
     user_operation: 'operation/new-operation',
     user_add_more: 'box/buy-box',
-    my_operations:'operation'
+    my_operations: 'operation'
   })
 
   const { dispatchAuth, dispatchLoader, dispatchToast } =
@@ -48,8 +48,6 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ API_URL }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ API_URL }}>{children}</AuthContext.Provider>
   )
 }
