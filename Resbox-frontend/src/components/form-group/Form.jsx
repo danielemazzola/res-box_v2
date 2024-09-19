@@ -69,6 +69,11 @@ const Form = ({ handleCloseModal, recovery = false }) => {
       token
     )
     if (response) {
+      if(formType.login){
+        setTimeout(() => {
+          navigate('./dashboard')
+        }, 1500);
+      }
       if (formType.register) {
         const loginFormType = { login: true, register: false }
         const loginResponse = await fetchSubmit(
