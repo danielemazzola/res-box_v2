@@ -176,11 +176,10 @@ const Dashboard = () => {
             >
               <div className='operation__operations-title'>
                 <p>Mis operaciones</p>
-                <p>Descubre las 5 últimas operaciones satisfactorias.</p>
+                <p>Descubre las 5 últimas operaciones realizadas.</p>
               </div>
               <div className='operation__operations-card'>
                 {operations
-                  .filter((operation) => operation.status.includes('completed'))
                   .map((operation, index) => (
                     <OperationCard key={index} operation={operation} />
                   ))
