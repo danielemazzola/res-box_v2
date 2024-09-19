@@ -80,7 +80,7 @@
   cursor: pointer;
   transition: all 0.5s;
   overflow: hidden;
-  width: 33%;
+  padding:30px 50px
 }
 
 .dashboard__banner-partner > div {
@@ -101,13 +101,14 @@
 
 .dashboard__banner-partner > div > p {
   color: var(--rb-text-primary);
-  font-size: var(--rb-font-size-xlarge);
+  font-size: var(--rb-font-size-large);
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .dashboard__img-redeem{
-  width: 1800px;
-  height:300px;
   object-fit: cover;
+  width:100px
 }
 
 @media (max-width: 1456px) {

@@ -26,7 +26,6 @@
   align-items: start;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 20px;
 }
 .profile__contain-information > div {
   display: flex;

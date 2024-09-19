@@ -86,6 +86,7 @@ button {
   font-size: var(--rb-font-size-small);
   transition: all 0.3s;
   border: none;
+  border-radius: 5px;
 }
 .button {
   display: inline-block; /* Asegura que se comporte como un botón */

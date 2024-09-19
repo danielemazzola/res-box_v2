@@ -17,10 +17,10 @@
 .mybox__card {
   border-radius: 10px;
   background-image: url('/images/caja.webp');
-  background-position: 50% 10%;
+  background-position: 50% 93%;
   background-repeat: no-repeat;
-  background-size: cover;
-  background-color: rgb(124, 124, 124);
+  background-size: 380px;
+  background-color: rgb(209, 209, 209);
   display: flex;
   justify-content: center;
   width: 100%;

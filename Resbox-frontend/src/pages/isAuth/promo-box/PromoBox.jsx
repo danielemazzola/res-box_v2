@@ -32,11 +32,12 @@ const PromoBox = () => {
         }, 1500)
       }
     }
-    getAllPromoBox()
+    if (boxes.length > 0) return
+    else getAllPromoBox()
   }, [])
 
   return (
-    <div ref={refBoxesSection} className='promobox__container'>
+    <div ref={refBoxesSection} className='promobox__container fadeIn'>
       <div className='promobox__cards-container fadeIn'>
         <div className='promobox__card'>
           <div>
@@ -46,12 +47,16 @@ const PromoBox = () => {
       </div>
       {boxes.length > 0 ? (
         <>
-          {boxes?.filter(box => box.status.includes('active')).map((box, index) => (
-            <PromoBoxCard key={index} box={box} />
-          ))}
-          {boxes?.filter(box => box.status.includes('inactive')).map((box, index) => (
-            <PromoBoxCard key={index} box={box} />
-          ))}
+          {boxes
+            ?.filter((box) => box.status.includes('active'))
+            .map((box, index) => (
+              <PromoBoxCard key={index} box={box} />
+            ))}
+          {boxes
+            ?.filter((box) => box.status.includes('inactive'))
+            .map((box, index) => (
+              <PromoBoxCard key={index} box={box} />
+            ))}
         </>
       ) : (
         <p>Aún no exísten BOX</p>

@@ -26,7 +26,7 @@ const BoxCard = ({ box }) => {
     statePartners: { arrayFilterPartnersSearch }
   } = useContext(ReducersContext)
   const { API_URL } = useContext(AuthContext)
-  const backgroundColor = useMemo(() => getRandomBackgroundColor(), [])
+  const backgroundColor = useMemo(() => getRandomBackgroundColor(), [box])
   const newArrayInfoBox = containInformation(box)
 
   const handleSubmit = async (e, box) => {
@@ -109,7 +109,7 @@ const BoxCard = ({ box }) => {
 
   return (
     <>
-      <div className='boxcard__container fadeIn' style={{ backgroundColor }}>
+      <div className='boxcard__container fadeIn' style={{ backgroundColor:'var(--rb-bg-tertiary)' }}>
         <div className='boxcard__title'>
           <p className='boxcard__description'>{box.box.name_box}</p>
         </div>

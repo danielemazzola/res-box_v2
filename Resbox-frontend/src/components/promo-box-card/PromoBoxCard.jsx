@@ -1,11 +1,11 @@
+import { useContext, useMemo } from 'react'
 import confetti from 'canvas-confetti'
+import { ReducersContext } from '../../context/reducers/ReducersContext'
 import { randomImage } from './helpers'
 import './PromoBoxCard.css'
-import { useContext } from 'react'
-import { ReducersContext } from '../../context/reducers/ReducersContext'
 
 const PromoBoxCard = ({ box }) => {
-  const image = randomImage()
+  const image = useMemo(() => randomImage(), [])
   const { dispatchToast, dispatchAuth, dispatchLoader } =
     useContext(ReducersContext)
 
@@ -24,8 +24,6 @@ const PromoBoxCard = ({ box }) => {
         }
       )
       const data = await response.json()
-      console.log(response)
-      console.log(data)
       if (response.status !== 201) {
       } else {
         confetti({
@@ -50,7 +48,7 @@ const PromoBoxCard = ({ box }) => {
   }
 
   return (
-    <div className='promobox__contain-card-box'>
+    <div className='promobox__contain-card-box fadeIn'>
       <img
         src={`/images/coffe/${image}.webp`}
         className='promobox__images-banner'

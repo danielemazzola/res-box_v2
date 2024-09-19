@@ -11,7 +11,7 @@ import ProfileCard from '../../../components/profile-card/ProfileCard'
 import PartnerCard from '../../../components/partner-card/PartnerCard'
 import './Dashboard.css'
 import edit from '/images/edit.png'
-import redeemCode from '/images/redeemCode.webp'
+import redeemCode from '/images/redeemCode.png'
 import restaurante from '/images/restaurante.ico'
 
 const Dashboard = () => {

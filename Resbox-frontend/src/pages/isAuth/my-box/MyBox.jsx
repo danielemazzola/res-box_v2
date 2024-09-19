@@ -21,8 +21,8 @@ const MyBox = () => {
   }, [])
 
   return (
-    <div ref={refBoxesSection} className='mybox__container'>
-      <div className='mybox__cards-container fadeIn'>
+    <div ref={refBoxesSection} className='mybox__container fadeIn'>
+      <div className='mybox__cards-container '>
         <div className='mybox__card'>
           <div>
             <h3>MIS BOXES❤️</h3>
