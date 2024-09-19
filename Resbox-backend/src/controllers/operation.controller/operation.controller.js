@@ -72,10 +72,17 @@ const updateOperation = async (req, res, next) => {
         })
       updatePurchased.id_partner_consumed.push(partner._id)
       await user.save()
+      const putOperation = await Operation.findById(operation._id).populate({
+        path: 'id_box',
+        select: 'name_box'
+      }).populate({
+        path: 'id_user',
+        select: 'name lastname'
+      })
       return res.status(201).json({
         message:
           'Operación finalizada con éxito. Gracias por confiar en Res-Box',
-        updatedOperation
+          putOperation
       })
     } else if (status.includes('cancelled')) {
       updatedOperation = await Operation.findByIdAndUpdate(
@@ -108,7 +115,8 @@ const updateOperation = async (req, res, next) => {
 }
 
 const getOperationBuyPartner = async (req, res, next) => {
-  const user = req
+  const {user} = req
+  
   try {
     const operations = await Operation.find()
       .where('id_partner')
