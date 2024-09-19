@@ -16,8 +16,13 @@ import edit from '/images/edit.png'
 import redeemCode from '/images/redeemCode.png'
 import restaurante from '/images/restaurante.ico'
 import operationsImg from '/images/operations.png'
+import Modal from '../../../components/modal/Modal'
+import confetti from 'canvas-confetti'
 
 const Dashboard = () => {
+  const [modalRedeem, setModalRedeem] = useState(false)
+  const [code, setCode] = useState(0)
+  const [stateOperation, setStateOperation] = useState(0)
   const {
     stateIsAuth: { user, partner },
     dispatchToast,
@@ -81,7 +86,56 @@ const Dashboard = () => {
   }
 
   const handleRedeemCode = () => {
-    console.log('hola')
+    setModalRedeem(true)
+  }
+  const handleSubmitRedeem = async (e) => {
+    e.preventDefault()
+    const token = localStorage.getItem('SECURE_CODE_RESBOX')
+    try {
+      dispatchLoader({ type: 'SET_LOAD_TRUE' })
+      if (code.length !== 4) {
+        return alert('El codigo debe ser de 4 dígitos.')
+      }
+      const response = await fetch(
+        `${import.meta.env.VITE_URL_API}/operation/update-operation/${code}`,
+        {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ status: stateOperation })
+        }
+      )
+      const data = await response.json()
+      if (response.status !== 201) {
+        dispatchToast({
+          type: 'ADD_NOTIFICATION',
+          payload: { msg: data.message, error: true }
+        })
+      } else {
+        console.log(data)
+        dispatchPartners({type:'SET_OPERATIONS', payload:[...operations, data.putOperation]})
+        dispatchToast({
+          type: 'ADD_NOTIFICATION',
+          payload: { msg: data.message, error: false }
+        })
+        confetti({
+          particleCount: 250,
+          spread: 170,
+          origin: { y: 1.3 }
+        })
+        setTimeout(() => {
+          setModalRedeem(false)
+          setCode(0)
+        }, 1000)
+      }
+    } catch (error) {
+    } finally {
+      setTimeout(() => {
+        dispatchLoader({ type: 'SET_LOAD_FALSE' })
+      }, 1500)
+    }
   }
   const handleOperations = async () => {
     const token = localStorage.getItem('SECURE_CODE_RESBOX')
@@ -180,16 +234,46 @@ const Dashboard = () => {
               </div>
               <div className='operation__operations-card'>
                 {operations
+                  .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+                  .slice(0, 5)
                   .map((operation, index) => (
                     <OperationCard key={index} operation={operation} />
-                  ))
-                  .reverse()
-                  .slice(0, 5)}
+                  ))}
               </div>
             </div>
           )}
         </>
       )}
+      <Modal
+        isModalOpen={modalRedeem}
+        handleCloseModal={() => setModalRedeem(!modalRedeem)}
+      >
+        <div className='dashboard__container-modal'>
+          <div>
+            <h2>Introduce el codigo</h2>
+            <p>El código facilitado por tu cliente es único.</p>
+          </div>
+          <form onSubmit={handleSubmitRedeem}>
+            <label>Codigo</label>
+            <input
+              name='code'
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+            />
+            <select
+              value={stateOperation}
+              onChange={(e) => setStateOperation(e.target.value)}
+            >
+              <option>Selecciona un estado</option>
+              <option value='completed'>Completado</option>
+              <option value='cancelled'>Cancelado</option>
+            </select>
+            <button type='submit' className='button green'>
+              Canjear
+            </button>
+          </form>
+        </div>
+      </Modal>
     </div>
   )
 }

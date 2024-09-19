@@ -7,10 +7,14 @@ const OperationCard = ({ operation }) => {
   return (
     <div className='operation__contain-card'>
       <div>
-        <p>Fecha operación:</p>
+        <p>Fecha creación:</p>
         <p className='operation__get-result'>
           {getDate(operation.transaction_date)}
         </p>
+      </div>
+      <div>
+        <p>Fecha actualización:</p>
+        <p className='operation__get-result'>{getDate(operation.updatedAt)}</p>
       </div>
       <div>
         <p>Box:</p>
