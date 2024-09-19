@@ -68,4 +68,8 @@
   .operation__container-operations, .operation__contain-card {
     width: 100%;
   }
+  .operation__contain-card{
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }

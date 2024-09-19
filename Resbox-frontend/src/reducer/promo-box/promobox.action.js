@@ -1,15 +1,14 @@
 import confetti from 'canvas-confetti'
-import {fetchNewOperation}  from '../../services/fetch-operation/fetchOperation'
-
+import { fetchNewOperation } from '../../services/fetch-operation/fetchOperation'
 
 export const handleBuyBox = async (
+  token,
   API_URL,
   buyBox,
   dispatchLoader,
   dispatchAuth,
-  dispatchToast,
+  dispatchToast
 ) => {
-  const token = localStorage.getItem('SECURE_CODE_RESBOX')
   try {
     const { data } = await fetchNewOperation(
       token,

@@ -25,13 +25,12 @@ const BoxCard = ({ box }) => {
     dispatchPartners,
     statePartners: { arrayFilterPartnersSearch }
   } = useContext(ReducersContext)
-  const { API_URL } = useContext(AuthContext)
+  const { API_URL,token } = useContext(AuthContext)
   const backgroundColor = useMemo(() => getRandomBackgroundColor(), [box])
   const newArrayInfoBox = containInformation(box)
 
   const handleSubmit = async (e, box) => {
     e.preventDefault()
-    const token = localStorage.getItem('SECURE_CODE_RESBOX')
     const { data } = await fetchNewOperation(
       token,
       API_URL.user_operation,
@@ -58,7 +57,6 @@ const BoxCard = ({ box }) => {
   }
 
   const handleAddMoreBox = async (idBox) => {
-    const token = localStorage.getItem('SECURE_CODE_RESBOX')
     const { data } = await fetchNewOperation(
       token,
       API_URL.user_add_more,

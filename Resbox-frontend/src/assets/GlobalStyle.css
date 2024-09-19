@@ -88,6 +88,7 @@ button {
   transition: all 0.3s;
   border: none;
   border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.384);
 }
 .button {
   display: inline-block; /* Asegura que se comporte como un botón */
@@ -129,13 +130,24 @@ button:hover {
   position: relative;
 }
 
+input:focus {
+  outline: none; /* Para eliminar el borde azul predeterminado */
+  border-color: var(--rb-bg-cancel); /* Color del borde en focus */
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.103); /* Sombra opcional para el focus */
+}
+select:focus {
+  outline: none; /* Para eliminar el borde azul predeterminado */
+  border-color: var(--rb-bg-cancel); /* Color del borde en focus */
+  box-shadow: 0 0 5px var(--rb-bg-cancel); /* Sombra opcional para el focus */
+}
 select {
   padding: 10px;
   text-align: center;
-  background-color: var(--rb-bg-secondary);
-  color: var(--rb-text-primary);
-  border: none;
-  text-transform: uppercase;
+  background-color: var(--rb-bg-light);
+  color: var(--rb-text-secondary);
+  border-radius: 10px;
+  background-color: rgba(221, 221, 221, 0.281);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.534);
 }
 
 .opacity-none {

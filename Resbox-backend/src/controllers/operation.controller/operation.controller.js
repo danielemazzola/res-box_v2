@@ -88,7 +88,7 @@ const updateOperation = async (req, res, next) => {
       updatedOperation = await Operation.findByIdAndUpdate(
         operation._id,
         {
-          id_restaurant: partner._id,
+          id_partner: partner._id,
           secure_token: '',
           status: 'cancelled'
         },
@@ -101,10 +101,17 @@ const updateOperation = async (req, res, next) => {
 
       updatePurchased.remainingItems += updatedOperation.consumed
       await user.save()
+      const putOperation = await Operation.findById(operation._id).populate({
+        path: 'id_box',
+        select: 'name_box'
+      }).populate({
+        path: 'id_user',
+        select: 'name lastname'
+      })
 
       return res
         .status(201)
-        .json({ message: 'Operación cancelada.', updatedOperation })
+        .json({ message: 'Operación cancelada.', putOperation })
     } else if (!status.includes('cancelled', 'finish'))
       return res
         .status(409)

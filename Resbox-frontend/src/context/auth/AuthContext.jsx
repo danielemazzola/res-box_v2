@@ -13,12 +13,17 @@ export const AuthProvider = ({ children }) => {
     user_add_more: 'box/buy-box',
     my_operations: 'operation'
   })
+  const [modalRedeem, setModalRedeem] = useState(false)
+  const [getOperation, setGetOperation] = useState(false)
+  const [token, setToken] = useState(localStorage.getItem('SECURE_CODE_RESBOX'))
 
-  const { dispatchAuth, dispatchLoader, dispatchToast } =
-    useContext(ReducersContext)
+  const {
+    dispatchAuth,
+    dispatchLoader,
+    dispatchToast
+  } = useContext(ReducersContext)
   useEffect(() => {
     const isAuth = async () => {
-      const token = localStorage.getItem('SECURE_CODE_RESBOX')
       if (token) {
         const { response, data } = await fetchAuth(
           'user/profile-user',
@@ -39,15 +44,24 @@ export const AuthProvider = ({ children }) => {
           dispatchAuth({ type: 'SET_USER', payload: data.user })
           dispatchAuth({ type: 'SET_AUTH_TRUE' })
         }
-      } else {
-        // REVISAR LUEGO SI DEBO REDIRIGIR AL HOME
-        return
       }
     }
     isAuth()
   }, [])
 
   return (
-    <AuthContext.Provider value={{ API_URL }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider
+      value={{
+        API_URL,
+        modalRedeem,
+        setModalRedeem,
+        getOperation,
+        setGetOperation,
+        token
+        
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
   )
 }

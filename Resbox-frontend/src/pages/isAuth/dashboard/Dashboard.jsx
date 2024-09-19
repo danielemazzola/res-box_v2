@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import useScrollToRef from '../../../hooks/useScrollToRef'
 import {
   handleInfoPartner,
@@ -20,9 +21,6 @@ import Modal from '../../../components/modal/Modal'
 import confetti from 'canvas-confetti'
 
 const Dashboard = () => {
-  const [modalRedeem, setModalRedeem] = useState(false)
-  const [code, setCode] = useState(0)
-  const [stateOperation, setStateOperation] = useState(0)
   const {
     stateIsAuth: { user, partner },
     dispatchToast,
@@ -31,12 +29,24 @@ const Dashboard = () => {
     statePartners: { operations },
     dispatchPartners
   } = useContext(ReducersContext)
-  const { API_URL } = useContext(AuthContext)
+  const {
+    API_URL,
+    modalRedeem,
+    setModalRedeem,
+    getOperation,
+    setGetOperation,
+    token
+  } = useContext(AuthContext)
   const { refDashboardSection, fileInputRef, refPartnerInfo, refOperations } =
     useContext(ScrollRefContext)
   const [selectedImage, setSelectedImage] = useState(user.avatar)
-  const [token, setToken] = useState(localStorage.getItem('SECURE_CODE_RESBOX'))
   const useScrolltoRef = useScrollToRef()
+  const { register, handleSubmit, formState, reset } = useForm({
+    defaultValues: {
+      code: '',
+      status: ''
+    }
+  })
 
   useEffect(() => {
     setTimeout(() => {
@@ -59,6 +69,7 @@ const Dashboard = () => {
       formData.append('avatar', file)
       setSelectedImage(imageUrl)
       const { data } = await uploadImage(
+        token,
         formData,
         API_URL.user_avatar,
         dispatchLoader,
@@ -88,23 +99,20 @@ const Dashboard = () => {
   const handleRedeemCode = () => {
     setModalRedeem(true)
   }
-  const handleSubmitRedeem = async (e) => {
-    e.preventDefault()
-    const token = localStorage.getItem('SECURE_CODE_RESBOX')
+  const onSubmit = async (props) => {
     try {
       dispatchLoader({ type: 'SET_LOAD_TRUE' })
-      if (code.length !== 4) {
-        return alert('El codigo debe ser de 4 dígitos.')
-      }
       const response = await fetch(
-        `${import.meta.env.VITE_URL_API}/operation/update-operation/${code}`,
+        `${import.meta.env.VITE_URL_API}/operation/update-operation/${
+          props.code
+        }`,
         {
           method: 'PUT',
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ status: stateOperation })
+          body: JSON.stringify({ status: props.status })
         }
       )
       const data = await response.json()
@@ -113,9 +121,24 @@ const Dashboard = () => {
           type: 'ADD_NOTIFICATION',
           payload: { msg: data.message, error: true }
         })
+      } else if (data.updatedOperation) {
+        dispatchToast({
+          type: 'ADD_NOTIFICATION',
+          payload: { msg: data.message, error: false }
+        })
+        dispatchPartners({
+          type: 'SET_OPERATIONS',
+          payload: [...operations, data.putOperation]
+        })
+        setTimeout(() => {
+          setModalRedeem(false)
+          reset()
+        }, 1000)
       } else {
-        console.log(data)
-        dispatchPartners({type:'SET_OPERATIONS', payload:[...operations, data.putOperation]})
+        dispatchPartners({
+          type: 'SET_OPERATIONS',
+          payload: [...operations, data.putOperation]
+        })
         dispatchToast({
           type: 'ADD_NOTIFICATION',
           payload: { msg: data.message, error: false }
@@ -127,19 +150,21 @@ const Dashboard = () => {
         })
         setTimeout(() => {
           setModalRedeem(false)
-          setCode(0)
+          reset()
         }, 1000)
       }
     } catch (error) {
+      console.log(error)
     } finally {
       setTimeout(() => {
         dispatchLoader({ type: 'SET_LOAD_FALSE' })
       }, 1500)
     }
   }
+
   const handleOperations = async () => {
-    const token = localStorage.getItem('SECURE_CODE_RESBOX')
     if (Object.keys(operations).length <= 0) {
+      setGetOperation(true)
       await getOperationsByPartner(
         token,
         API_URL.my_operations,
@@ -223,7 +248,7 @@ const Dashboard = () => {
               <PartnerCard array={partner} />
             </div>
           )}
-          {Object.keys(operations).length > 0 && (
+          {getOperation && (
             <div
               ref={refOperations}
               className='operation__container-operations fadeIn'
@@ -253,21 +278,40 @@ const Dashboard = () => {
             <h2>Introduce el codigo</h2>
             <p>El código facilitado por tu cliente es único.</p>
           </div>
-          <form onSubmit={handleSubmitRedeem}>
-            <label>Codigo</label>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <label htmlFor='code'>Codigo</label>
             <input
-              name='code'
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
+              className={`${
+                formState.errors.code?.type === 'required' ? 'error' : ''
+              }`}
+              id='code'
+              {...register('code', {
+                required: {
+                  value: true
+                },
+                minLength: {
+                  value: 4,
+                  message: 'Min 4 chars'
+                }
+              })}
+              placeholder='1234'
             />
+
             <select
-              value={stateOperation}
-              onChange={(e) => setStateOperation(e.target.value)}
+              className={`${
+                formState.errors.status?.type === 'required' ? 'error' : ''
+              }`}
+              id='status'
+              {...register('status', {
+                required: {
+                  value: true
+                }
+              })}
             >
-              <option>Selecciona un estado</option>
               <option value='completed'>Completado</option>
               <option value='cancelled'>Cancelado</option>
             </select>
+
             <button type='submit' className='button green'>
               Canjear
             </button>

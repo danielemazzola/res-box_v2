@@ -55,12 +55,12 @@ export const fetchSubmit = async (
 }
 
 export const uploadImage = async (
+  token,
   formData,
   url,
   dispatchLoader,
   dispatchToast
 ) => {
-  const token = localStorage.getItem('SECURE_CODE_RESBOX')
   const { data } = await fetchUpdateAvatar(
     formData,
     url,

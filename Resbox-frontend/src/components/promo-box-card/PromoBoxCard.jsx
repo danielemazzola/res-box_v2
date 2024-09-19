@@ -9,7 +9,7 @@ const PromoBoxCard = ({ box }) => {
   const image = useMemo(() => randomImage(), [])
   const { dispatchToast, dispatchAuth, dispatchLoader } =
     useContext(ReducersContext)
-  const { API_URL } = useContext(AuthContext)
+  const { API_URL, token } = useContext(AuthContext)
 
   return (
     <div className='promobox__contain-card-box fadeIn'>
@@ -48,6 +48,7 @@ const PromoBoxCard = ({ box }) => {
             }`}
             onClick={() =>
               handleBuyBox(
+                token,
                 API_URL,
                 box,
                 dispatchLoader,
