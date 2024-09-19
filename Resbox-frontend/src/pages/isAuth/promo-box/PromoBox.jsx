@@ -38,7 +38,7 @@ const PromoBox = () => {
 
   return (
     <div ref={refBoxesSection} className='promobox__container fadeIn'>
-      <div className='promobox__cards-container fadeIn'>
+      <div className='promobox__cards-container'>
         <div className='promobox__card'>
           <div>
             <h3>PROMO BOX</h3>

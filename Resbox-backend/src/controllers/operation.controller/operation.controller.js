@@ -107,7 +107,31 @@ const updateOperation = async (req, res, next) => {
   }
 }
 
+const getOperationBuyPartner = async (req, res, next) => {
+  const user = req
+  try {
+    const operations = await Operation.find()
+      .where('id_partner')
+      .equals(user.idPartner)
+    if (operations.length < 0) {
+      return res
+        .status(409)
+        .json({ message: 'No has realizado operaciones de canje.' })
+    } else {
+      return res
+        .status(200)
+        .json({
+          message: 'Operaciones cargadas de forma correcta.',
+          operations
+        })
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   newOperation,
-  updateOperation
+  updateOperation,
+  getOperationBuyPartner
 }

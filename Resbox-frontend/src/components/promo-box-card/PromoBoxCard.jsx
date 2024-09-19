@@ -1,51 +1,15 @@
 import { useContext, useMemo } from 'react'
-import confetti from 'canvas-confetti'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import { randomImage } from './helpers'
 import './PromoBoxCard.css'
+import { AuthContext } from '../../context/auth/AuthContext'
+import { handleBuyBox } from '../../reducer/promo-box/promobox.action'
 
 const PromoBoxCard = ({ box }) => {
   const image = useMemo(() => randomImage(), [])
   const { dispatchToast, dispatchAuth, dispatchLoader } =
     useContext(ReducersContext)
-
-  const handleBuyBox = async (buyBox) => {
-    const token = localStorage.getItem('SECURE_CODE_RESBOX')
-    try {
-      dispatchLoader({ type: 'SET_LOAD_TRUE' })
-      const response = await fetch(
-        `${import.meta.env.VITE_URL_API}/box/buy-box/${buyBox._id}`,
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        }
-      )
-      const data = await response.json()
-      if (response.status !== 201) {
-      } else {
-        confetti({
-          particleCount: 250,
-          spread: 170,
-          origin: { y: 1.3 }
-        })
-        dispatchAuth({ type: 'SET_USER', payload: data.updatedUser })
-        dispatchToast({
-          type: 'ADD_NOTIFICATION',
-          payload: { msg: data.message, error: false }
-        })
-      }
-    } catch (error) {
-      dispatchToast({
-        type: 'ADD_NOTIFICATION',
-        payload: { msg: error.message, error: true }
-      })
-    } finally {
-      dispatchLoader({ type: 'SET_LOAD_FALSE' })
-    }
-  }
+  const { API_URL } = useContext(AuthContext)
 
   return (
     <div className='promobox__contain-card-box fadeIn'>
@@ -82,7 +46,15 @@ const PromoBoxCard = ({ box }) => {
             className={`${
               box.status.includes('active') ? 'active' : 'disabled'
             }`}
-            onClick={() => handleBuyBox(box)}
+            onClick={() =>
+              handleBuyBox(
+                API_URL,
+                box,
+                dispatchLoader,
+                dispatchAuth,
+                dispatchToast
+              )
+            }
           >
             Comprar
           </button>

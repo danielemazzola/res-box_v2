@@ -109,7 +109,7 @@ const BoxCard = ({ box }) => {
 
   return (
     <>
-      <div className='boxcard__container fadeIn' style={{ backgroundColor:'var(--rb-bg-tertiary)' }}>
+      <div className='boxcard__container fadeIn' style={{ backgroundColor }}>
         <div className='boxcard__title'>
           <p className='boxcard__description'>{box.box.name_box}</p>
         </div>
@@ -162,8 +162,12 @@ const BoxCard = ({ box }) => {
                 Canjear
               </button>
             )}
+            
             <button
-              className='button yellow'
+            disabled={!box.box.status.includes('active')}
+              className={`button yellow ${
+              box.box.status.includes('active') ? 'active' : 'disabled'
+            }`}
               onClick={() => handleAddMoreBox(box.box._id)}
             >
               Añadir más

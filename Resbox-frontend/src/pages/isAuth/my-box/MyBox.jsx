@@ -4,6 +4,7 @@ import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import BoxCard from '../../../components/box-card/BoxCard'
 import './MyBox.css'
+import PromoBox from '../promo-box/PromoBox'
 
 const MyBox = () => {
   const { refBoxesSection } = useContext(ScrollRefContext)
@@ -12,7 +13,6 @@ const MyBox = () => {
     stateIsAuth: { user }
   } = useContext(ReducersContext)
   const { purchasedBoxes } = user
-  
 
   useEffect(() => {
     setTimeout(() => {
@@ -35,10 +35,15 @@ const MyBox = () => {
         <>
           {purchasedBoxes?.map((box, index) => (
             <BoxCard key={index} box={box} />
-          ))}
+          )).reverse()}
         </>
       ) : (
-        <p>No tienes boxes</p>
+        <>
+          <p className='mybox__no-box'>
+            No tienes boxes, pero mira nuestras promos:⤵️
+          </p>
+          <PromoBox />
+        </>
       )}
     </div>
   )

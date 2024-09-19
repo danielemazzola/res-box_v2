@@ -43,7 +43,7 @@ const ModalRedeem = ({
             </div>
             <p>Restantes: {remainingItems} (unid.)</p>
             {stateBoxCard.secureTokenRedeem !== 0 ? (
-              <div className='boxcard__secureTokenRedeem-container'>
+              <div className={`boxcard__secureTokenRedeem-container fadeIn`}>
                 <p>"Muestra este código en tu establecimiento favorito"</p>
                 <p className='boxcard__secureTokenRedeem'>
                   {stateBoxCard.secureTokenRedeem}
@@ -104,18 +104,11 @@ const ModalRedeem = ({
                   </button>
                 </div>
                 <span>Minimo 1, Máximo 9.</span>
-                  <div>
-                    <button type='submit' className='button green'>
-                      Canjear
-                    </button>
-                    <button
-                      type='button'
-                      className='button'
-                      onClick={handleCloseModal}
-                    >
-                      Cerrar
-                    </button>
-                  </div>
+                <div>
+                  <button type='submit' className='button green'>
+                    Canjear
+                  </button>
+                </div>
               </form>
             )}
           </div>

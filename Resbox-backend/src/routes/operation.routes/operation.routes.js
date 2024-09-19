@@ -1,7 +1,8 @@
 const ROUTER = require('express').Router()
 const {
   newOperation,
-  updateOperation
+  updateOperation,
+  getOperationBuyPartner
 } = require('../../controllers/operation.controller/operation.controller')
 const {
   existOperationToken
@@ -17,5 +18,6 @@ ROUTER.put(
   isPartner,
   updateOperation
 )
+ROUTER.get('/my-operations', authenticateUser, isPartner, getOperationBuyPartner)
 
 module.exports = ROUTER

@@ -13,6 +13,7 @@ import './Dashboard.css'
 import edit from '/images/edit.png'
 import redeemCode from '/images/redeemCode.png'
 import restaurante from '/images/restaurante.ico'
+import operations from '/images/operations.png'
 
 const Dashboard = () => {
   const {
@@ -78,6 +79,9 @@ const Dashboard = () => {
   const handleRedeemCode = () => {
     console.log('hola')
   }
+  const handleOperations = () => {
+    console.log('hola')
+  }
 
   return (
     <div ref={refDashboardSection} className='dashboard__container'>
@@ -115,6 +119,15 @@ const Dashboard = () => {
       <ProfileCard array={user} />
       {user.roles.includes('partner') && (
         <>
+          <button
+            className='dashboard__banner-partner fadeIn'
+            onClick={handleOperations}
+          >
+            <img src={operations} width='150' />
+            <div>
+              <p>Operaciones</p>
+            </div>
+          </button>
           <button
             className='dashboard__banner-partner fadeIn'
             onClick={handleRedeemCode}
