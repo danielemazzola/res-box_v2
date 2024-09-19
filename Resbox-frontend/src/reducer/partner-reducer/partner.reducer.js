@@ -2,7 +2,8 @@ export const initStatePartner = {
   filterState: false,
   partners: [],
   arrayFilterPartners: [],
-  arrayFilterPartnersSearch: []
+  arrayFilterPartnersSearch: [],
+  operations:[]
 }
 export const statePartner = (state, action) => {
   switch (action.type) {
@@ -16,6 +17,8 @@ export const statePartner = (state, action) => {
       return { ...state, arrayFilterPartners: action.payload }
     case 'SET_FILTER_SEARCH':
       return { ...state, arrayFilterPartnersSearch: action.payload }
+    case 'SET_OPERATIONS':
+      return { ...state, operations:action.payload}
 
     default:
       return state

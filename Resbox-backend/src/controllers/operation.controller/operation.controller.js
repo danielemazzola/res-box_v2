@@ -112,7 +112,13 @@ const getOperationBuyPartner = async (req, res, next) => {
   try {
     const operations = await Operation.find()
       .where('id_partner')
-      .equals(user.idPartner)
+      .equals(user.idPartner).populate({
+        path: 'id_box',
+        select: 'name_box'
+      }).populate({
+        path: 'id_user',
+        select: 'name lastname'
+      })
     if (operations.length < 0) {
       return res
         .status(409)

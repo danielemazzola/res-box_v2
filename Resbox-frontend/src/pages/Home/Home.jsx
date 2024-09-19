@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { ScrollRefContext } from '../../context/scroll-ref/ScrollRefContext'
 import HowItWorks from '../../components/home/how-it-works/HowItWorks'
-import { fetchGetPartners } from '../../services/fetch-partner/getPartners'
+import { fetchGetPartners } from '../../services/fetch-partner/fetchPartners'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import InformationApp from '../../components/home/information-app/InformationApp'
 import './Home.css'

@@ -1,3 +1,5 @@
+import { fetchGetOperations } from '../../services/fetch-partner/fetchPartners'
+
 export const getFilterPartners = (
   country,
   partners,
@@ -53,4 +55,44 @@ export const handleCloseFilter = (
   dispatchPartners({ type: 'SET_FILTER_STATE_FALSE' })
   dispatchPartners({ type: 'SET_FILTER_PARTNERS', payload: [] })
   scrollToRef(refPartnersSection)
+}
+
+export const getOperationsByPartner = async (
+  token,
+  url,
+  dispatchToast,
+  dispatchLoader,
+  dispatchPartners
+) => {
+  try {
+    dispatchLoader({ type: 'SET_LOAD_TRUE' })
+    const { response, data } = await fetchGetOperations(
+      token,
+      url,
+      dispatchToast
+    )
+    console.log(response)
+    console.log(data)
+    
+    if(response.status !== 200){
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: { msg: data.message, error: true }
+      })
+    }else{
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: { msg: data.message, error: false }
+      })
+      dispatchPartners({type:'SET_OPERATIONS', payload:data.operations})
+    }
+    
+  } catch (error) {
+    dispatchToast({
+      type: 'ADD_NOTIFICATION',
+      payload: { msg: error.message, error: true }
+    })
+  } finally {
+    dispatchLoader({ type: 'SET_LOAD_FALSE' })
+  }
 }

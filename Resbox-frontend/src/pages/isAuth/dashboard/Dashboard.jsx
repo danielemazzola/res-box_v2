@@ -13,17 +13,21 @@ import './Dashboard.css'
 import edit from '/images/edit.png'
 import redeemCode from '/images/redeemCode.png'
 import restaurante from '/images/restaurante.ico'
-import operations from '/images/operations.png'
+import operationsImg from '/images/operations.png'
+import { getOperationsByPartner } from '../../../reducer/partner-reducer/partner.action'
+import { getDate } from '../../../helpers/date'
 
 const Dashboard = () => {
   const {
     stateIsAuth: { user, partner },
     dispatchToast,
     dispatchLoader,
-    dispatchAuth
+    dispatchAuth,
+    statePartners: { operations },
+    dispatchPartners
   } = useContext(ReducersContext)
   const { API_URL } = useContext(AuthContext)
-  const { refDashboardSection, fileInputRef, refPartnerInfo } =
+  const { refDashboardSection, fileInputRef, refPartnerInfo, refOperations } =
     useContext(ScrollRefContext)
   const [selectedImage, setSelectedImage] = useState(user.avatar)
   const [token, setToken] = useState(localStorage.getItem('SECURE_CODE_RESBOX'))
@@ -79,8 +83,22 @@ const Dashboard = () => {
   const handleRedeemCode = () => {
     console.log('hola')
   }
-  const handleOperations = () => {
-    console.log('hola')
+  const handleOperations = async () => {
+    const token = localStorage.getItem('SECURE_CODE_RESBOX')
+    if (Object.keys(operations).length <= 0) {
+      await getOperationsByPartner(
+        token,
+        API_URL.my_operations,
+        dispatchToast,
+        dispatchLoader,
+        dispatchPartners
+      )
+      setTimeout(() => {
+        useScrolltoRef(refOperations)
+      }, 1000)
+    } else {
+      useScrolltoRef(refOperations)
+    }
   }
 
   return (
@@ -123,7 +141,7 @@ const Dashboard = () => {
             className='dashboard__banner-partner fadeIn'
             onClick={handleOperations}
           >
-            <img src={operations} width='150' />
+            <img src={operationsImg} width='150' />
             <div>
               <p>Operaciones</p>
             </div>
@@ -149,6 +167,62 @@ const Dashboard = () => {
           {Object.keys(partner).length > 0 && (
             <div ref={refPartnerInfo}>
               <PartnerCard array={partner} />
+            </div>
+          )}
+          {Object.keys(operations).length > 0 && (
+            <div
+              ref={refOperations}
+              className='dashboard__container-operations fadeIn'
+            >
+              <div className='dashboard__operations-title'>
+                <h2>Mis operaciones</h2>
+                <p>Descubre todas las operaciones finalizadas.</p>
+              </div>
+              <div className='dashboard__operations-card'>
+                {operations
+                  .filter((operation) => operation.status.includes('completed'))
+                  .map((operation, index) => (
+                    <div key={index}>
+                      <p>
+                        Fecha operación:{' '}
+                        <span>{getDate(operation.transaction_date)}</span>
+                      </p>
+                      <p>
+                        Box: <span>{operation.id_box.name_box}</span>
+                      </p>
+                      <p>
+                        Usuario:{' '}
+                        <span>
+                          {operation.id_user.name +
+                            ' ' +
+                            operation.id_user.lastname}
+                        </span>
+                      </p>
+                      <p>
+                        Cantidad: <span>{operation.consumed}</span>
+                      </p>
+                      <p>
+                        Resultado: <span>{operation.status}</span>
+                      </p>
+                    </div>
+                  ))}
+                {operations
+                  .filter((operation) => operation.status.includes('cancelled'))
+                  .map((operation, index) => (
+                    <div key={index}>
+                      <p>Fecha operación: {getDate(operation.createdAt)}</p>
+                      <p>Box: {operation.id_box.name_box}</p>
+                      <p>
+                        Usuario:{' '}
+                        {operation.id_user.name +
+                          ' ' +
+                          operation.id_user.lastname}
+                      </p>
+                      <p>Cantidad: {operation.consumed}</p>
+                      <p>Resultado: {operation.status}</p>
+                    </div>
+                  ))}
+              </div>
             </div>
           )}
         </>

@@ -10,6 +10,7 @@ const {
 const { isPartner } = require('../../middleware/protected.middleware')
 const { authenticateUser } = require('../../middleware/user.middleware')
 
+ROUTER.get('/', authenticateUser, isPartner, getOperationBuyPartner)
 ROUTER.post('/new-operation/:id_box', authenticateUser, newOperation)
 ROUTER.put(
   '/update-operation/:secure_token',
@@ -18,6 +19,5 @@ ROUTER.put(
   isPartner,
   updateOperation
 )
-ROUTER.get('/my-operations', authenticateUser, isPartner, getOperationBuyPartner)
 
 module.exports = ROUTER
