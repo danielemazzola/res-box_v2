@@ -71,22 +71,18 @@ export const getOperationsByPartner = async (
       url,
       dispatchToast
     )
-    console.log(response)
-    console.log(data)
-    
-    if(response.status !== 200){
+    if (response.status !== 200) {
       dispatchToast({
         type: 'ADD_NOTIFICATION',
         payload: { msg: data.message, error: true }
       })
-    }else{
+    } else {
       dispatchToast({
         type: 'ADD_NOTIFICATION',
         payload: { msg: data.message, error: false }
       })
-      dispatchPartners({type:'SET_OPERATIONS', payload:data.operations})
+      dispatchPartners({ type: 'SET_OPERATIONS', payload: data.operations })
     }
-    
   } catch (error) {
     dispatchToast({
       type: 'ADD_NOTIFICATION',

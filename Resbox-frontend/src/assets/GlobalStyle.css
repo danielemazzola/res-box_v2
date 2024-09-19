@@ -51,7 +51,8 @@ h1 {
   font-size: var(--rb-font-size-xlarge);
   line-height: 30px;
 }
-h1,h2{
+h1,
+h2 {
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.404);
 }
 

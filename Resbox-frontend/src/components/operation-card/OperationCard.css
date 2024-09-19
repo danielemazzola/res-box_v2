@@ -1,0 +1,58 @@
+.operation__container-operations {
+  background-color: var(--rb-bg-light);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  transition: all 0.3s;
+  gap: 20px;
+  width: 100%;
+}
+.operation__operations-title {
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.operation__operations-title > h3 {
+  background-color: var(--rb-bg-secondary);
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: var(--rb-text-primary);
+}
+.operation__operations-title > p {
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: var(--rb-text-secondary);
+}
+.operation__operations-card {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.operation__operations-card > div {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid black;
+}
+.operation__operations-card > div,
+.operation__operations-card > div > div {
+  display: flex;
+  flex-wrap: wrap;
+}
+.operation__operations-card > div > div > p {
+  font-size: var(--rb-font-size-small);
+}
+.operation__get-result {
+  background-color: var(--rb-bg-options);
+  color: var(--rb-text-primary);
+  padding: 0 5px;
+  border-radius: 5px;
+}

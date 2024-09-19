@@ -4,18 +4,18 @@ import {
   handleInfoPartner,
   uploadImage
 } from '../../../reducer/auth-reducer/auth.action'
+import { getOperationsByPartner } from '../../../reducer/partner-reducer/partner.action'
 import { AuthContext } from '../../../context/auth/AuthContext'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import ProfileCard from '../../../components/profile-card/ProfileCard'
 import PartnerCard from '../../../components/partner-card/PartnerCard'
+import OperationCard from '../../../components/operation-card/OperationCard'
 import './Dashboard.css'
 import edit from '/images/edit.png'
 import redeemCode from '/images/redeemCode.png'
 import restaurante from '/images/restaurante.ico'
 import operationsImg from '/images/operations.png'
-import { getOperationsByPartner } from '../../../reducer/partner-reducer/partner.action'
-import { getDate } from '../../../helpers/date'
 
 const Dashboard = () => {
   const {
@@ -170,60 +170,7 @@ const Dashboard = () => {
             </div>
           )}
           {Object.keys(operations).length > 0 && (
-            <div
-              ref={refOperations}
-              className='dashboard__container-operations fadeIn'
-            >
-              <div className='dashboard__operations-title'>
-                <h2>Mis operaciones</h2>
-                <p>Descubre todas las operaciones finalizadas.</p>
-              </div>
-              <div className='dashboard__operations-card'>
-                {operations
-                  .filter((operation) => operation.status.includes('completed'))
-                  .map((operation, index) => (
-                    <div key={index}>
-                      <p>
-                        Fecha operación:{' '}
-                        <span>{getDate(operation.transaction_date)}</span>
-                      </p>
-                      <p>
-                        Box: <span>{operation.id_box.name_box}</span>
-                      </p>
-                      <p>
-                        Usuario:{' '}
-                        <span>
-                          {operation.id_user.name +
-                            ' ' +
-                            operation.id_user.lastname}
-                        </span>
-                      </p>
-                      <p>
-                        Cantidad: <span>{operation.consumed}</span>
-                      </p>
-                      <p>
-                        Resultado: <span>{operation.status}</span>
-                      </p>
-                    </div>
-                  ))}
-                {operations
-                  .filter((operation) => operation.status.includes('cancelled'))
-                  .map((operation, index) => (
-                    <div key={index}>
-                      <p>Fecha operación: {getDate(operation.createdAt)}</p>
-                      <p>Box: {operation.id_box.name_box}</p>
-                      <p>
-                        Usuario:{' '}
-                        {operation.id_user.name +
-                          ' ' +
-                          operation.id_user.lastname}
-                      </p>
-                      <p>Cantidad: {operation.consumed}</p>
-                      <p>Resultado: {operation.status}</p>
-                    </div>
-                  ))}
-              </div>
-            </div>
+            <OperationCard operations={operations} />
           )}
         </>
       )}
