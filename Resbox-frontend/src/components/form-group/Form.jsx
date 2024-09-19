@@ -80,6 +80,7 @@ const Form = ({ handleCloseModal, recovery = false }) => {
           dispatchAuth,
           token
         )
+        
         if (loginResponse) {
           reset()
         }

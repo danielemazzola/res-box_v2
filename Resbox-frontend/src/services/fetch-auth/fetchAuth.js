@@ -1,10 +1,10 @@
 export const fetchAuth = async (
   urlApi,
   formFields = {},
-  method = 'GET', // Valor por defecto para method
+  method = 'GET',
   dispatchLoader,
   dispatchToast,
-  token = null // Token opcional
+  token = null
 ) => {
   let url = `${import.meta.env.VITE_URL_API}/${urlApi}`
 

@@ -14,8 +14,10 @@ const newUser = async (req, res, next) => {
   try {
     const createUser = new User({ ...req.body, email })
     await createUser.save()
-    await newUserEmail(user)
-    const user = await User.findById(createUser._id).select('-password')
+    await newUserEmail(createUser)
+    const user = await User.findById({ _id: createUser._id }).select(
+      '-password'
+    )
     return res
       .status(200)
       .json({ message: 'Usuario registrado correctamente', user })
@@ -101,10 +103,11 @@ const getUserWithPopulates = async (userId) => {
     .select('-password')
     .populate({
       path: 'purchasedBoxes.box',
-      select: 'name_box description items_included bonus_items price status createdAt updatedAt'
+      select:
+        'name_box description items_included bonus_items price status createdAt updatedAt'
     })
     .populate({
-      path: 'purchasedBoxes.id_partner_consumed',
+      path: 'purchasedBoxes.id_partner_consumed'
     })
 }
 
