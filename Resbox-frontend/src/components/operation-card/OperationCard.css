@@ -1,12 +1,11 @@
 .operation__container-operations {
   background-color: var(--rb-bg-light);
-  padding: 20px;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
   transition: all 0.3s;
   gap: 20px;
-  width: 100%;
+  padding: 20px;
 }
 .operation__operations-title {
   border-radius: 10px;
@@ -16,7 +15,7 @@
   flex-direction: column;
   gap: 10px;
 }
-.operation__operations-title > h3 {
+.operation__operations-title > p:first-child {
   background-color: var(--rb-bg-secondary);
   padding: 2px 5px;
   border-radius: 5px;
@@ -32,22 +31,24 @@
   gap: 20px;
   flex-wrap: wrap;
   justify-content: center;
+  transition: all 0.3s;
 }
-.operation__operations-card > div {
+.operation__contain-card {
   background-color: white;
   padding: 20px;
   border-radius: 5px;
-  gap: 20px;
   display: flex;
-  flex-wrap: wrap;
-  border: 1px solid black;
+  flex-direction: column;
+  gap: 10px;
+  align-items: start;
 }
-.operation__operations-card > div,
-.operation__operations-card > div > div {
+.operation__contain-card > div {
   display: flex;
+  align-items: start;
+  justify-content: center;
   flex-wrap: wrap;
 }
-.operation__operations-card > div > div > p {
+.operation__contain-card > div > p {
   font-size: var(--rb-font-size-small);
 }
 .operation__get-result {
@@ -55,4 +56,16 @@
   color: var(--rb-text-primary);
   padding: 0 5px;
   border-radius: 5px;
+}
+
+@media (max-width: 815px) {
+  .operation__container-operations {
+    width: 730px;
+  }
+}
+
+@media (max-width: 769px) {
+  .operation__container-operations, .operation__contain-card {
+    width: 100%;
+  }
 }

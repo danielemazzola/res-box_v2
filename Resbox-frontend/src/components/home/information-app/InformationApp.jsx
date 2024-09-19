@@ -116,7 +116,7 @@ const InformationApp = () => {
               </div>
             </div>
             <div className='last-ten-partners-filter'>
-              <p>Últimos 10 Partners en: {arrayFilterPartners[0].country}:</p>
+              <p>Últimos 10 Partners en {arrayFilterPartners[0].country}:</p>
               <div className={`container-cards-partners`}>
                 {arrayFilterPartners?.map((partner) => (
                   <div key={partner._id}>
@@ -125,7 +125,8 @@ const InformationApp = () => {
                       arrayFilterPartners={arrayFilterPartners}
                     />
                   </div>
-                ))}
+                )).reverse()
+                .slice(0, 10)}
               </div>
             </div>
           </div>

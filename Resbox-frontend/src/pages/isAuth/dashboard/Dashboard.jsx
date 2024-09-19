@@ -170,7 +170,24 @@ const Dashboard = () => {
             </div>
           )}
           {Object.keys(operations).length > 0 && (
-            <OperationCard operations={operations} />
+            <div
+              ref={refOperations}
+              className='operation__container-operations fadeIn'
+            >
+              <div className='operation__operations-title'>
+                <p>Mis operaciones</p>
+                <p>Descubre las 5 últimas operaciones satisfactorias.</p>
+              </div>
+              <div className='operation__operations-card'>
+                {operations
+                  .filter((operation) => operation.status.includes('completed'))
+                  .map((operation, index) => (
+                    <OperationCard key={index} operation={operation} />
+                  ))
+                  .reverse()
+                  .slice(0, 5)}
+              </div>
+            </div>
           )}
         </>
       )}
