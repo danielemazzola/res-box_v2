@@ -13,7 +13,7 @@ const PartnerCard = ({ array }) => {
   const [selectedImageBanner, setSelectedImageBanner] = useState(array.banner)
   const [selectedImageAvatar, setSelectedImageAvatar] = useState(array.avatar)
   const { fileBannerRef, fileAvatarRef } = useContext(ScrollRefContext)
-  const { API_URL } = useContext(AuthContext)
+  const { API_URL, token } = useContext(AuthContext)
   const { dispatchLoader, dispatchToast, dispatchAuth } =
     useContext(ReducersContext)
   const handleUser = (user) => {
@@ -21,9 +21,7 @@ const PartnerCard = ({ array }) => {
     setToogleModal(true)
   }
 
-  const handleChangeImage = ({ banner = false, avatar = false }) => {
-    console.log('handleChangeImage');
-    
+  const handleChangeImage = ({ banner = false, avatar = false }) => {    
     if (banner) {
       if (fileBannerRef.current) fileBannerRef.current.click()
       else return
@@ -56,6 +54,7 @@ const PartnerCard = ({ array }) => {
         setSelectedImageAvatar(imageUrl)
       }
       const { data } = await uploadImage(
+        token,
         formData,
         avatar ? API_URL.partner_avatar : API_URL.partner_banner,
         dispatchLoader,
