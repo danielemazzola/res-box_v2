@@ -10,12 +10,15 @@ const PromoBox = () => {
   const {
     statePromoBoxes: { boxes },
     dispatchPromoBoxes,
-    dispatchLoader
+    dispatchLoader,
+    stateIsAuth: { user }
   } = useContext(ReducersContext)
   const useScrolltoRef = useScrollToRef()
   useEffect(() => {
     setTimeout(() => {
-      //useScrolltoRef(refBoxesSection)
+      if (Object.keys(user).length > 0) {
+        useScrolltoRef(refBoxesSection)
+      }
     }, 1000)
   }, [])
   useEffect(() => {
