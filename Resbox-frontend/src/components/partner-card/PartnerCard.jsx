@@ -37,6 +37,13 @@ const PartnerCard = ({ array }) => {
     { banner = false, avatar = false }
   ) => {
     const file = event.target.files[0]
+    const maxSize = 5 * 1024 * 1024;
+    if(file.size > max){
+      if (file.size > maxSize) {
+        alert('El archivo es demasiado grande. El tamaño máximo es 2MB.');
+        return;
+      }
+    }
     if (file) {
       const imageUrl = URL.createObjectURL(file)
       const formData = new FormData()
