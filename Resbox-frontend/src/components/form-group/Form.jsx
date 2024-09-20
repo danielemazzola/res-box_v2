@@ -12,6 +12,7 @@ import {
 } from './helpers'
 import './Form.css'
 import logo from '/images/logo.png'
+import { AuthContext } from '../../context/auth/AuthContext'
 
 const Form = ({ handleCloseModal, recovery = false }) => {
   const [fadeClass, setFadeClass] = useState('')
@@ -35,6 +36,7 @@ const Form = ({ handleCloseModal, recovery = false }) => {
   const navigate = useNavigate()
   const { dispatchLoader, dispatchToast, dispatchAuth } =
     useContext(ReducersContext)
+    const {setToken} = useContext(AuthContext)
   const {
     handleSubmit,
     reset,
@@ -66,7 +68,8 @@ const Form = ({ handleCloseModal, recovery = false }) => {
       dispatchLoader,
       dispatchToast,
       dispatchAuth,
-      token
+      token,
+      setToken
     )
     if (response) {
       if (formType.register) {
@@ -78,7 +81,8 @@ const Form = ({ handleCloseModal, recovery = false }) => {
           dispatchLoader,
           dispatchToast,
           dispatchAuth,
-          token
+          token,
+          setToken
         )
         
         if (loginResponse) {

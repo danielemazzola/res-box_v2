@@ -5,9 +5,10 @@ import { fetchGetPartners } from '../../services/fetch-partner/fetchPartners'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import InformationApp from '../../components/home/information-app/InformationApp'
 import './Home.css'
+import PromoBox from '../isAuth/promo-box/PromoBox'
 
 const Home = () => {
-  const { refPartnersSection, filterPartnersRef, refFunctionAppSection } =
+  const { refPartnersSection, filterPartnersRef, refFunctionAppSection, refBoxesSection } =
     useContext(ScrollRefContext)
   const {
     statePartners: { partners },
@@ -39,6 +40,9 @@ const Home = () => {
       </svg>
       <section ref={refFunctionAppSection} className='contain-function'>
         <HowItWorks />
+      </section>
+      <section ref={refBoxesSection} className='contain-function'>
+        <PromoBox />
       </section>
     </>
   )

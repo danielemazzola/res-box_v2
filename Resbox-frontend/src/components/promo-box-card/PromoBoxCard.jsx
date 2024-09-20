@@ -7,8 +7,12 @@ import { handleBuyBox } from '../../reducer/promo-box/promobox.action'
 
 const PromoBoxCard = ({ box }) => {
   const image = useMemo(() => randomImage(), [])
-  const { dispatchToast, dispatchAuth, dispatchLoader } =
-    useContext(ReducersContext)
+  const {
+    dispatchToast,
+    dispatchAuth,
+    dispatchLoader,
+    stateIsAuth: { user }
+  } = useContext(ReducersContext)
   const { API_URL, token } = useContext(AuthContext)
 
   return (
@@ -40,26 +44,28 @@ const PromoBoxCard = ({ box }) => {
             {box.status.includes('active') ? 'Activo' : 'Inactivo'}
           </p>
         </div>
-        <div className='promobox__container-btn'>
-          <button
-            disabled={!box.status.includes('active')}
-            className={`${
-              box.status.includes('active') ? 'active' : 'disabled'
-            }`}
-            onClick={() =>
-              handleBuyBox(
-                token,
-                API_URL,
-                box,
-                dispatchLoader,
-                dispatchAuth,
-                dispatchToast
-              )
-            }
-          >
-            Comprar
-          </button>
-        </div>
+        {Object.keys(user).length > 0 && (
+          <div className='promobox__container-btn'>
+            <button
+              disabled={!box.status.includes('active')}
+              className={`${
+                box.status.includes('active') ? 'active' : 'disabled'
+              }`}
+              onClick={() =>
+                handleBuyBox(
+                  token,
+                  API_URL,
+                  box,
+                  dispatchLoader,
+                  dispatchAuth,
+                  dispatchToast
+                )
+              }
+            >
+              Comprar
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )

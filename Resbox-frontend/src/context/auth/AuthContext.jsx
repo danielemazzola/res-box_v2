@@ -57,8 +57,8 @@ export const AuthProvider = ({ children }) => {
         setModalRedeem,
         getOperation,
         setGetOperation,
-        token
-        
+        token,
+        setToken,
       }}
     >
       {children}

@@ -11,7 +11,8 @@ export const fetchSubmit = async (
   dispatchLoader,
   dispatchToast,
   dispatchAuth,
-  token
+  token,
+  setToken
 ) => {
   let url
   if (formType.login) url = 'user/login-user'
@@ -46,6 +47,7 @@ export const fetchSubmit = async (
     dispatchAuth({ type: 'SET_AUTH_TRUE' })
     if (data?.token) {
       localStorage.setItem('SECURE_CODE_RESBOX', data.token)
+      setToken(localStorage.getItem('SECURE_CODE_RESBOX'))
     }
     setTimeout(() => {
       !formType.recover && handleCloseModal()

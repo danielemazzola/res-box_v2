@@ -19,6 +19,7 @@ export const handleBuyBox = async (
       dispatchLoader,
       dispatchToast
     )
+    
     dispatchAuth({ type: 'SET_USER', payload: data.updatedUser })
     dispatchToast({
       type: 'ADD_NOTIFICATION',

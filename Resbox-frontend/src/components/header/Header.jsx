@@ -19,7 +19,9 @@ const Header = () => {
     refPartnersSection,
     refFunctionAppSection,
     refPartner,
-    refFunctionApp
+    refFunctionApp,
+    refBoxes,
+    refBoxesSection
   } = useContext(ScrollRefContext)
 
   const {
@@ -67,6 +69,13 @@ const Header = () => {
                 className='button'
               >
                 ¿Cómo funciona?
+              </button>
+              <button
+                ref={refBoxes}
+                onClick={() => scrollToRef(refBoxesSection)}
+                className='button green'
+              >
+                PROMO - BOX
               </button>
               <InstallApp />
             </div>

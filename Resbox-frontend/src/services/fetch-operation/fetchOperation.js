@@ -7,6 +7,14 @@ export const fetchNewOperation = async (
   dispatchLoader,
   dispatchToast
 ) => {
+  console.log({token,
+    url,
+    idbox,
+    method,
+    quantityRedeem,
+    dispatchLoader,
+    dispatchToast});
+  
   try {
     dispatchLoader({ type: 'SET_LOAD_TRUE' })
     const response = await fetch(
