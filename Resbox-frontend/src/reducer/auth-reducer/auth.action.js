@@ -63,14 +63,20 @@ export const uploadImage = async (
   dispatchLoader,
   dispatchToast
 ) => {
-  const { data } = await fetchUpdateAvatar(
-    formData,
-    url,
-    token,
-    dispatchLoader,
-    dispatchToast
-  )
-  return { data }
+  try {
+    const { data } = await fetchUpdateAvatar(
+      formData,
+      url,
+      token,
+      dispatchLoader,
+      dispatchToast
+    )
+    return { data }
+    
+  } catch (error) {
+    console.log(error.message);
+    
+  }
 }
 
 export const handleInfoPartner = async (

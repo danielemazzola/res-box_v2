@@ -22,6 +22,8 @@ const PartnerCard = ({ array }) => {
   }
 
   const handleChangeImage = ({ banner = false, avatar = false }) => {
+    console.log('handleChangeImage');
+    
     if (banner) {
       if (fileBannerRef.current) fileBannerRef.current.click()
       else return
@@ -37,14 +39,10 @@ const PartnerCard = ({ array }) => {
     { banner = false, avatar = false }
   ) => {
     const file = event.target.files[0]
-    const maxSize = 5 * 1024 * 1024;
-    console.log(file);
-    
-    if(file.size > max){
-      if (file.size > maxSize) {
-        alert('El archivo es demasiado grande. El tamaño máximo es 5MB.');
-        return;
-      }
+    const maxSize = 5 * 1024 * 1024
+    if (file.size > maxSize) {
+      alert('El archivo es demasiado grande. El tamaño máximo es 5MB.')
+      return
     }
     if (file) {
       const imageUrl = URL.createObjectURL(file)
