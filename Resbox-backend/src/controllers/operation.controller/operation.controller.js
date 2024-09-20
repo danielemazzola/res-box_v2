@@ -23,7 +23,7 @@ const newOperation = async (req, res, next) => {
     }
     if (consumed > userBox.remainingItems) {
       return res.status(400).json({
-        message: `La cantidad a cangear es superior a los disponibles.`
+        message: `La cantidad a canjear es superior a los disponibles.`
       })
     }
     const token = createTokenOperation()
@@ -68,7 +68,7 @@ const updateOperation = async (req, res, next) => {
       )
       if (!updatedOperation)
         return res.status(409).json({
-          message: `Algo a salido mal. Por favor contacta con nuestro soporte con el codigo de cange: ${operation.secure_token}`
+          message: `Algo a salido mal. Por favor contacta con nuestro soporte con el codigo de canje: ${operation.secure_token}`
         })
       updatePurchased.id_partner_consumed.push(partner._id)
       await user.save()
@@ -96,7 +96,7 @@ const updateOperation = async (req, res, next) => {
       )
       if (!updatedOperation)
         return res.status(409).json({
-          message: `Algo a salido mal. Por favor contacta con nuestro soporte con el codigo de cange: ${operation.secure_token}`
+          message: `Algo a salido mal. Por favor contacta con nuestro soporte con el codigo de canje: ${operation.secure_token}`
         })
 
       updatePurchased.remainingItems += updatedOperation.consumed
