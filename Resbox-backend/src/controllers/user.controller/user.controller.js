@@ -116,7 +116,11 @@ const getUserWithPopulates = async (userId) => {
         'name_box description items_included bonus_items price status createdAt updatedAt'
     })
     .populate({
-      path: 'purchasedBoxes.id_partner_consumed'
+      path: 'purchasedBoxes.id_partner_consumed',
+      populate: {
+        path: 'users',
+        select: 'name avatar'
+      }
     })
 }
 

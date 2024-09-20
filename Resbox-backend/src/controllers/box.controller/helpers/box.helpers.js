@@ -19,13 +19,18 @@ const updateBoxItemsAcquired = async (boxId, userId) => {
 
 const getUserDetails = async (userId) => {
   return User.findById(userId)
-    .select('-token -password -__v')
+    .select('-password')
     .populate({
       path: 'purchasedBoxes.box',
-      select: 'name_box description items_included bonus_items price status'
+      select:
+        'name_box description items_included bonus_items price status createdAt updatedAt'
     })
     .populate({
       path: 'purchasedBoxes.id_partner_consumed',
+      populate: {
+        path: 'users',
+        select: 'name avatar'
+      }
     })
 }
 

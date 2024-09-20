@@ -62,7 +62,7 @@
   text-transform: capitalize;
   text-align: center;
 }
-.boxcar__bg-white {
+.boxcard__bg-white {
   background-color: var(--rb-bg-light);
   padding: 0 5px;
   border-radius: 5px;
@@ -221,8 +221,8 @@
   justify-content: center;
   font-size: var(--rb-font-size-large);
   background-color: rgba(255, 255, 255, 0);
-  width:40px;
-  height:40px;
+  width: 40px;
+  height: 40px;
 }
 .boxcard__secureTokenRedeem-container {
   display: flex;
@@ -246,6 +246,32 @@
   letter-spacing: 20px;
   display: inline-block;
   border-radius: 10px;
+}
+
+.modal-details-users {
+  display: flex;
+  position: relative;
+  padding: 10px;
+}
+
+.info-avatar-partner {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  margin-left: -25px;
+  z-index: calc(100 - var(--index));
+  transition: transform 0.3s ease;
+}
+
+.info-avatar-partner:hover {
+  transform: scale(1.2);
+  z-index: 150;
+}
+
+.modal-details-users img:first-child {
+  margin-left: 0;
 }
 
 @media (max-width: 520px) {

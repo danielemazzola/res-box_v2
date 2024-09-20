@@ -12,12 +12,13 @@ const Home = () => {
   const {
     statePartners: { partners },
     dispatchPartners,
-    dispatchLoader
+    dispatchLoader,
+    dispatchToast
   } = useContext(ReducersContext)
 
   useEffect(() => {
     const getPartners = async () => {
-      await fetchGetPartners(dispatchPartners, dispatchLoader)
+      await fetchGetPartners(dispatchPartners, dispatchLoader, dispatchToast)
     }
     if (partners.length <= 0) {
       getPartners()

@@ -25,7 +25,7 @@ const BoxCard = ({ box }) => {
     dispatchPartners,
     statePartners: { arrayFilterPartnersSearch }
   } = useContext(ReducersContext)
-  const { API_URL,token } = useContext(AuthContext)
+  const { API_URL, token } = useContext(AuthContext)
   const backgroundColor = useMemo(() => getRandomBackgroundColor(), [box])
   const newArrayInfoBox = containInformation(box)
 
@@ -116,7 +116,7 @@ const BoxCard = ({ box }) => {
             <div key={index}>
               <p>{info.text}:</p>
               {!info.text.includes('Usado en') ? (
-                <p className='boxcar__bg-white'>{info.value}</p>
+                <p className='boxcard__bg-white'>{info.value}</p>
               ) : (
                 box.id_partner_consumed
                   ?.map((partner) => partner.name)
@@ -124,7 +124,8 @@ const BoxCard = ({ box }) => {
                   .map((partner, index) => (
                     <p
                       key={index}
-                      className='boxcar__bg-white'
+                      className='boxcard__bg-white'
+                      style={{cursor:'pointer'}}
                       onClick={() => handlePartner(partner, box)}
                     >
                       {partner}
@@ -160,12 +161,12 @@ const BoxCard = ({ box }) => {
                 Canjear
               </button>
             )}
-            
+
             <button
-            disabled={!box?.box.status.includes('active')}
+              disabled={!box?.box.status.includes('active')}
               className={`button yellow ${
-              box.box.status.includes('active') ? 'active' : 'disabled'
-            }`}
+                box.box.status.includes('active') ? 'active' : 'disabled'
+              }`}
               onClick={() => handleAddMoreBox(box.box._id)}
             >
               Añadir más

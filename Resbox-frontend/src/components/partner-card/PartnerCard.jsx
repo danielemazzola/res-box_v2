@@ -127,7 +127,11 @@ const PartnerCard = ({ array }) => {
         <div>
           <p>Usuarios vinculados</p>
           {array.users?.map((user, index) => (
-            <button key={index} onClick={() => handleUser(user)}>
+            <button
+              className='partner__contain-btn-users waveEffect'
+              key={index}
+              onClick={() => handleUser(user)}
+            >
               {user.name}
             </button>
           ))}
@@ -157,6 +161,14 @@ const PartnerCard = ({ array }) => {
               <p>E-mail</p>
               <p>{userModal.email}</p>
             </div>
+          </div>
+          <div className='partner__contain-roles'>
+            <p>
+              Roles:{' '}
+              {userModal.roles?.map((role, index) => (
+                <span key={index}>{role}</span>
+              ))}
+            </p>
           </div>
         </div>
       </Modal>

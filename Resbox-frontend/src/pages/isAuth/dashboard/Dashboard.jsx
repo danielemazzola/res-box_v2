@@ -41,12 +41,6 @@ const Dashboard = () => {
     useContext(ScrollRefContext)
   const [selectedImage, setSelectedImage] = useState(user.avatar)
   const useScrolltoRef = useScrollToRef()
-  const { register, handleSubmit, formState, reset } = useForm({
-    defaultValues: {
-      code: '',
-      status: ''
-    }
-  })
 
   useEffect(() => {
     setTimeout(() => {
@@ -99,7 +93,16 @@ const Dashboard = () => {
   const handleRedeemCode = () => {
     setModalRedeem(true)
   }
+
+  const [status, setStatus] = useState('')
+  const { register, handleSubmit, formState, reset } = useForm({
+    defaultValues: {
+      code: '',
+      status: ''
+    }
+  })
   const onSubmit = async (props) => {
+    props.status = status
     try {
       dispatchLoader({ type: 'SET_LOAD_TRUE' })
       const response = await fetch(
@@ -112,7 +115,7 @@ const Dashboard = () => {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ status: props.status })
+          body: JSON.stringify({ status: status })
         }
       )
       const data = await response.json()
@@ -154,9 +157,14 @@ const Dashboard = () => {
         }, 1000)
       }
     } catch (error) {
-      console.log(error)
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: { msg: error.message, error: false }
+      })
     } finally {
+      handleOperations()
       setTimeout(() => {
+        useScrolltoRef(refOperations)
         dispatchLoader({ type: 'SET_LOAD_FALSE' })
       }, 1500)
     }
@@ -276,7 +284,7 @@ const Dashboard = () => {
         <div className='dashboard__container-modal'>
           <div>
             <h2>Introduce el codigo</h2>
-            <p>El código facilitado por tu cliente es único.</p>
+            <p>El código de 4 dígitos facilitado por tu cliente es único.</p>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <label htmlFor='code'>Codigo</label>
@@ -288,32 +296,24 @@ const Dashboard = () => {
               {...register('code', {
                 required: {
                   value: true
-                },
-                minLength: {
-                  value: 4,
-                  message: 'Min 4 chars'
                 }
               })}
               placeholder='1234'
             />
-
-            <select
-              className={`${
-                formState.errors.status?.type === 'required' ? 'error' : ''
-              }`}
-              id='status'
-              {...register('status', {
-                required: {
-                  value: true
-                }
-              })}
+            <button
+              type='submit'
+              className='button'
+              onClick={() => setStatus('cancelled')} // Establecer el estado como "cancelled"
             >
-              <option value='completed'>Completado</option>
-              <option value='cancelled'>Cancelado</option>
-            </select>
+              Anular
+            </button>
 
-            <button type='submit' className='button green'>
-              Canjear
+            <button
+              type='submit'
+              className='button green'
+              onClick={() => setStatus('completed')} // Establecer el estado como "completed"
+            >
+              Confirmar
             </button>
           </form>
         </div>
