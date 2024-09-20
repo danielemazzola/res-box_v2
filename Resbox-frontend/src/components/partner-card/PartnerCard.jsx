@@ -40,7 +40,7 @@ const PartnerCard = ({ array }) => {
     const maxSize = 5 * 1024 * 1024;
     if(file.size > max){
       if (file.size > maxSize) {
-        alert('El archivo es demasiado grande. El tamaño máximo es 2MB.');
+        alert('El archivo es demasiado grande. El tamaño máximo es 5MB.');
         return;
       }
     }
