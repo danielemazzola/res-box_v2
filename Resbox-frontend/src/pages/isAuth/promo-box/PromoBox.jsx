@@ -15,7 +15,7 @@ const PromoBox = () => {
   const useScrolltoRef = useScrollToRef()
   useEffect(() => {
     setTimeout(() => {
-      useScrolltoRef(refBoxesSection)
+      //useScrolltoRef(refBoxesSection)
     }, 1000)
   }, [])
   useEffect(() => {
