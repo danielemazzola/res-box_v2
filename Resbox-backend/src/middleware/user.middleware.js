@@ -65,7 +65,7 @@ const authenticateUser = async (req, res, next) => {
       next()
     }
   } catch (error) {
-    next(new Error('Sesión expirada, inicia sesión nuevamente.'))
+    next(new Error('La sesión anterior ha finalizado.'))
   }
 }
 
