@@ -156,7 +156,10 @@
   font-size: 30px;
   border-radius: 10px;;
 }
-
+.dashboard__container-modal > form > div {
+  display: flex;
+  gap:10px;
+}
 @media (max-width: 1456px) {
   .dashboard__container {
     padding: 80px 50px 120px;

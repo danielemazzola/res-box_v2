@@ -143,10 +143,6 @@ const Dashboard = () => {
           reset()
         }, 1000)
       } else {
-        dispatchPartners({
-          type: 'SET_OPERATIONS',
-          payload: [...operations, data.putOperation]
-        })
         dispatchToast({
           type: 'ADD_NOTIFICATION',
           payload: { msg: data.message, error: false }
@@ -160,6 +156,12 @@ const Dashboard = () => {
           setModalRedeem(false)
           reset()
         }, 1000)
+      }
+      if (!data.putOperation.status.includes('cancelled')) {
+        dispatchPartners({
+          type: 'SET_OPERATIONS',
+          payload: [...operations, data.putOperation]
+        })
       }
     } catch (error) {
       dispatchToast({
@@ -305,21 +307,23 @@ const Dashboard = () => {
               })}
               placeholder='1234'
             />
-            <button
-              type='submit'
-              className='button'
-              onClick={() => setStatus('cancelled')} // Establecer el estado como "cancelled"
-            >
-              Anular
-            </button>
+            <div>
+              <button
+                type='submit'
+                className='button'
+                onClick={() => setStatus('cancelled')} // Establecer el estado como "cancelled"
+              >
+                Anular
+              </button>
 
-            <button
-              type='submit'
-              className='button green'
-              onClick={() => setStatus('completed')} // Establecer el estado como "completed"
-            >
-              Confirmar
-            </button>
+              <button
+                type='submit'
+                className='button green'
+                onClick={() => setStatus('completed')} // Establecer el estado como "completed"
+              >
+                Confirmar
+              </button>
+            </div>
           </form>
         </div>
       </Modal>
