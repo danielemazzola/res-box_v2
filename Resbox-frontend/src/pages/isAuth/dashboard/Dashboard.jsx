@@ -127,42 +127,36 @@ const Dashboard = () => {
         }
       )
       const data = await response.json()
+      console.log(response)
+      console.log(data)
+
       if (response.status !== 201) {
         dispatchToast({
           type: 'ADD_NOTIFICATION',
           payload: { msg: data.message, error: true }
         })
-      } else if (data.updatedOperation) {
+      } else if (data.putOperation) {
         dispatchToast({
           type: 'ADD_NOTIFICATION',
           payload: { msg: data.message, error: false }
         })
-        dispatchPartners({
-          type: 'SET_OPERATIONS',
-          payload: [...operations, data.putOperation]
-        })
+        if (operations.length > 0) {
+          dispatchPartners({
+            type: 'SET_OPERATIONS',
+            payload: [...operations, data.putOperation]
+          })
+        }
+        if (data.putOperation.status.includes('completed')) {
+          confetti({
+            particleCount: 250,
+            spread: 170,
+            origin: { y: 1.3 }
+          })
+        }
         setTimeout(() => {
-          setModalRedeem(false)
-          reset()
-        }, 1000)
-      } else {
-        dispatchPartners({
-          type: 'SET_OPERATIONS',
-          payload: [...operations, data.putOperation]
-        })
-        dispatchToast({
-          type: 'ADD_NOTIFICATION',
-          payload: { msg: data.message, error: false }
-        })
-        confetti({
-          particleCount: 250,
-          spread: 170,
-          origin: { y: 1.3 }
-        })
-        setTimeout(() => {
-          setModalRedeem(false)
-          reset()
-        }, 1000)
+          handleRedeemCode()
+        }, 1500)
+        reset()
       }
     } catch (error) {
       dispatchToast({
@@ -170,9 +164,7 @@ const Dashboard = () => {
         payload: { msg: error.message, error: false }
       })
     } finally {
-      handleOperations()
       setTimeout(() => {
-        useScrolltoRef(refOperations)
         dispatchLoader({ type: 'SET_LOAD_FALSE' })
       }, 1500)
     }

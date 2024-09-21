@@ -23,6 +23,8 @@ const BoxCard = ({ box }) => {
     dispatchLoader,
     dispatchToast,
     dispatchPartners,
+    statePromoBoxes: { boxes },
+    dispatchPromoBoxes,
     statePartners: { arrayFilterPartnersSearch }
   } = useContext(ReducersContext)
   const { API_URL, token } = useContext(AuthContext)
@@ -66,6 +68,20 @@ const BoxCard = ({ box }) => {
       dispatchLoader,
       dispatchToast
     )
+
+    if (boxes.length > 0) {
+      boxes.find(box => {
+        if (box._id === idBox) {
+          dispatchPromoBoxes({
+            type: 'SET_BOXES',
+            payload: {
+              ...box,
+              items_acquired_by: [...box.items_acquired_by, data.updatedUser]
+            }
+          });
+        }
+      });
+    }
     dispatchToast({
       type: 'ADD_NOTIFICATION',
       payload: { msg: `${data.message}`, error: false }
@@ -125,7 +141,7 @@ const BoxCard = ({ box }) => {
                     <p
                       key={index}
                       className='boxcard__bg-white'
-                      style={{cursor:'pointer'}}
+                      style={{ cursor: 'pointer' }}
                       onClick={() => handlePartner(partner, box)}
                     >
                       {partner}

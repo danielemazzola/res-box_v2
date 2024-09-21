@@ -25,7 +25,7 @@ export const handleBuyBox = async (
       type: 'ADD_NOTIFICATION',
       payload: { msg: data.message, error: false }
     })
-    buyBox.items_acquired_by.push(data.updatedUser._id)
+    buyBox.items_acquired_by.push(data.updatedUser)
     confetti({
       particleCount: 250,
       spread: 170,

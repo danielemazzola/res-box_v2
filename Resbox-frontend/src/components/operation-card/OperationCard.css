@@ -45,11 +45,11 @@
 .operation__contain-card > div {
   display: flex;
   align-items: start;
-  justify-content: center;
   flex-wrap: wrap;
+  gap:5px;
 }
 .operation__contain-card > div > p {
-  font-size: var(--rb-font-size-small);
+  font-size: 14px;;
 }
 .operation__get-result {
   background-color: var(--rb-bg-options);

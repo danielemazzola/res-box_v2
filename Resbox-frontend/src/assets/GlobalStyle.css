@@ -109,6 +109,9 @@ button:hover {
 .green {
   background-color: var(--rb-bg-green) !important;
 }
+.cancelled{
+  background-color: var(--rb-bg-cancel);
+}
 .name-app {
   font-size: var(--rb-font-size-name-app);
   font-weight: bolder;
