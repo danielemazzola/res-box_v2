@@ -21,6 +21,11 @@ import Modal from '../../../components/modal/Modal'
 import confetti from 'canvas-confetti'
 
 const Dashboard = () => {
+  const [stateModal, setStateModal] = useState({
+    infoPartner: false,
+    infoOperations: false,
+    redeem: false
+  })
   const {
     stateIsAuth: { user, partner },
     dispatchToast,
@@ -29,14 +34,7 @@ const Dashboard = () => {
     statePartners: { operations },
     dispatchPartners
   } = useContext(ReducersContext)
-  const {
-    API_URL,
-    modalRedeem,
-    setModalRedeem,
-    getOperation,
-    setGetOperation,
-    token
-  } = useContext(AuthContext)
+  const { API_URL, token } = useContext(AuthContext)
   const { refDashboardSection, fileInputRef, refPartnerInfo, refOperations } =
     useContext(ScrollRefContext)
   const [selectedImage, setSelectedImage] = useState(user.avatar)
@@ -87,16 +85,21 @@ const Dashboard = () => {
         dispatchToast,
         dispatchLoader
       )
-      setTimeout(() => {
-        useScrolltoRef(refPartnerInfo)
-      }, 1000)
-    } else {
-      useScrolltoRef(refPartnerInfo)
     }
+    setTimeout(() => {
+      useScrolltoRef(refPartnerInfo)
+    }, 500)
+    setStateModal((prev) => ({
+      ...prev,
+      infoPartner: !stateModal.infoPartner
+    }))
   }
 
   const handleRedeemCode = () => {
-    setModalRedeem(true)
+    setStateModal((prev) => ({
+      ...prev,
+      redeem: !stateModal.redeem
+    }))
   }
 
   const [status, setStatus] = useState('')
@@ -143,6 +146,10 @@ const Dashboard = () => {
           reset()
         }, 1000)
       } else {
+        dispatchPartners({
+          type: 'SET_OPERATIONS',
+          payload: [...operations, data.putOperation]
+        })
         dispatchToast({
           type: 'ADD_NOTIFICATION',
           payload: { msg: data.message, error: false }
@@ -156,12 +163,6 @@ const Dashboard = () => {
           setModalRedeem(false)
           reset()
         }, 1000)
-      }
-      if (!data.putOperation.status.includes('cancelled')) {
-        dispatchPartners({
-          type: 'SET_OPERATIONS',
-          payload: [...operations, data.putOperation]
-        })
       }
     } catch (error) {
       dispatchToast({
@@ -179,7 +180,6 @@ const Dashboard = () => {
 
   const handleOperations = async () => {
     if (Object.keys(operations).length <= 0) {
-      setGetOperation(true)
       await getOperationsByPartner(
         token,
         API_URL.my_operations,
@@ -187,12 +187,14 @@ const Dashboard = () => {
         dispatchLoader,
         dispatchPartners
       )
-      setTimeout(() => {
-        useScrolltoRef(refOperations)
-      }, 1000)
-    } else {
-      useScrolltoRef(refOperations)
     }
+    setTimeout(() => {
+      useScrolltoRef(refOperations)
+    }, 500)
+    setStateModal((prev) => ({
+      ...prev,
+      infoOperations: !stateModal.infoOperations
+    }))
   }
 
   return (
@@ -258,12 +260,12 @@ const Dashboard = () => {
               <p>Negocio</p>
             </div>
           </button>
-          {Object.keys(partner).length > 0 && (
+          {stateModal.infoPartner && (
             <div ref={refPartnerInfo}>
               <PartnerCard array={partner} />
             </div>
           )}
-          {getOperation && (
+          {stateModal.infoOperations && (
             <div
               ref={refOperations}
               className='operation__container-operations fadeIn'
@@ -285,8 +287,8 @@ const Dashboard = () => {
         </>
       )}
       <Modal
-        isModalOpen={modalRedeem}
-        handleCloseModal={() => setModalRedeem(!modalRedeem)}
+        isModalOpen={stateModal.redeem}
+        handleCloseModal={handleRedeemCode}
       >
         <div className='dashboard__container-modal'>
           <div>

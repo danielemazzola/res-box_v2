@@ -127,12 +127,12 @@ const updatAvatar = async (req, res, next) => {
         await deleteImg(partner.avatar)
         req.body.image = req.file.path
       }
-      const avatar = await Partner.findByIdAndUpdate(
+      const updatePartner = await Partner.findByIdAndUpdate(
         partner._id,
         { $set: { avatar: req.body.image } },
         { new: true }
       )
-      return res.status(200).json({ message: 'Avatar actualizado.', avatar })
+      return res.status(200).json({ message: 'Avatar actualizado.', updatePartner })
     }
   } catch (error) {
     next(error)
@@ -155,12 +155,12 @@ const updateBanner = async (req, res, next) => {
         await deleteImg(partner.banner)
         req.body.image = req.file.path
       }
-      const banner = await Partner.findByIdAndUpdate(
+      const updatePartner = await Partner.findByIdAndUpdate(
         partner._id,
         { $set: { banner: req.body.image } },
         { new: true }
       )
-      return res.status(200).json({ message: 'Banner actualizado.', banner })
+      return res.status(200).json({ message: 'Banner actualizado.', updatePartner })
     }
   } catch (error) {
     next(error)

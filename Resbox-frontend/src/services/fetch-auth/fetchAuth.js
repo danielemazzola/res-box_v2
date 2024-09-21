@@ -38,7 +38,7 @@ export const fetchAuth = async (
   }
 }
 
-export const fetchUpdateAvatar = async (
+export const fetchUpdateImgPartner = async (
   formData,
   url,
   token,

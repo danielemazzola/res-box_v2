@@ -14,14 +14,19 @@ const PartnerCard = ({ array }) => {
   const [selectedImageAvatar, setSelectedImageAvatar] = useState(array.avatar)
   const { fileBannerRef, fileAvatarRef } = useContext(ScrollRefContext)
   const { API_URL, token } = useContext(AuthContext)
-  const { dispatchLoader, dispatchToast, dispatchAuth } =
-    useContext(ReducersContext)
+  const {
+    dispatchLoader,
+    dispatchToast,
+    dispatchAuth,
+    dispatchPartners,
+    statePartners: { partners }
+  } = useContext(ReducersContext)
   const handleUser = (user) => {
     setUserModal(user)
     setToogleModal(true)
   }
 
-  const handleChangeImage = ({ banner = false, avatar = false }) => {    
+  const handleChangeImage = ({ banner = false, avatar = false }) => {
     if (banner) {
       if (fileBannerRef.current) fileBannerRef.current.click()
       else return
@@ -42,8 +47,6 @@ const PartnerCard = ({ array }) => {
       alert('El archivo es demasiado grande. El tamaño máximo es 5MB.')
       return
     }
-    console.log(file);
-    
     if (file) {
       const imageUrl = URL.createObjectURL(file)
       const formData = new FormData()
@@ -62,9 +65,24 @@ const PartnerCard = ({ array }) => {
         dispatchLoader,
         dispatchToast
       )
+      if (partners.length > 0) {
+        const updatePartner = partners.map((partner) => {
+          if (partner._id === data.updatePartner._id) {
+            return {
+              ...partner,
+              ...data.updatePartner
+            }
+          }
+          return partner
+        })
+        dispatchPartners({
+          type: 'SET_PARTNERS',
+          payload: updatePartner
+        })
+      }
       dispatchAuth({
         type: 'SET_PARTNER',
-        payload: avatar ? data.avatar : data.banner
+        payload: data.updatePartner
       })
     }
   }

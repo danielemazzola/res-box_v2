@@ -1,7 +1,7 @@
 import {
   fetchAuth,
   fetchPartner,
-  fetchUpdateAvatar
+  fetchUpdateImgPartner
 } from '../../services/fetch-auth/fetchAuth'
 
 export const fetchSubmit = async (
@@ -64,7 +64,7 @@ export const uploadImage = async (
   dispatchToast
 ) => {
   try {
-    const { data } = await fetchUpdateAvatar(
+    const { data } = await fetchUpdateImgPartner(
       formData,
       url,
       token,
@@ -72,10 +72,8 @@ export const uploadImage = async (
       dispatchToast
     )
     return { data }
-    
   } catch (error) {
-    console.log(error.message);
-    
+    console.log(error.message)
   }
 }
 
