@@ -42,6 +42,8 @@ const PartnerCard = ({ array }) => {
       alert('El archivo es demasiado grande. El tamaño máximo es 5MB.')
       return
     }
+    console.log(file);
+    
     if (file) {
       const imageUrl = URL.createObjectURL(file)
       const formData = new FormData()
