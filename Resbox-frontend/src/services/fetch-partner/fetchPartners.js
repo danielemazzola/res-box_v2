@@ -1,25 +1,13 @@
-export const fetchGetPartners = async (
-  dispatchPartners,
-  dispatchLoader,
-  dispatchToast
-) => {
+export const fetchGetPartners = async () => {
   try {
-    dispatchLoader({ type: 'SET_LOAD_TRUE' })
     const response = await fetch(`${import.meta.env.VITE_URL_API}/partner`)
     const data = await response.json()
-    dispatchPartners({ type: 'SET_PARTNERS', payload: data.partners })
+    return { data }
   } catch (error) {
-    dispatchToast({
-      type: 'ADD_NOTIFICATION',
-      payload: { msg: error.message, error: true }
-    })
-  } finally {
-    setTimeout(() => {
-      dispatchLoader({ type: 'SET_LOAD_FALSE' })
-    }, 1500)
+    console.log(error.message)
   }
 }
-export const fetchGetOperations = async (token, url, dispatchToast) => {
+export const fetchGetOperations = async (token, url) => {
   try {
     const response = await fetch(`${import.meta.env.VITE_URL_API}/${url}`, {
       method: 'GET',
@@ -30,9 +18,6 @@ export const fetchGetOperations = async (token, url, dispatchToast) => {
     const data = await response.json()
     return { response, data }
   } catch (error) {
-    dispatchToast({
-      type: 'ADD_NOTIFICATION',
-      payload: { msg: error.message, error: true }
-    })
+    console.log(error.message)
   }
 }

@@ -1,15 +1,18 @@
 import React, { useContext, useEffect } from 'react'
 import { ScrollRefContext } from '../../context/scroll-ref/ScrollRefContext'
-import HowItWorks from '../../components/home/how-it-works/HowItWorks'
-import { fetchGetPartners } from '../../services/fetch-partner/fetchPartners'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
+import HowItWorks from '../../components/home/how-it-works/HowItWorks'
 import InformationApp from '../../components/home/information-app/InformationApp'
-import './Home.css'
 import PromoBox from '../isAuth/promo-box/PromoBox'
+import { fetchGetPartners } from '../../services/fetch-partner/fetchPartners'
+import './Home.css'
 
 const Home = () => {
-  const { refPartnersSection, filterPartnersRef, refFunctionAppSection, refBoxesSection } =
-    useContext(ScrollRefContext)
+  const {
+    refPartnersSection,
+    refFunctionAppSection,
+    refBoxesSection
+  } = useContext(ScrollRefContext)
   const {
     statePartners: { partners },
     dispatchPartners,
@@ -19,7 +22,18 @@ const Home = () => {
 
   useEffect(() => {
     const getPartners = async () => {
-      await fetchGetPartners(dispatchPartners, dispatchLoader, dispatchToast)
+      try {
+        dispatchLoader({ type: 'SET_LOAD_TRUE' })
+        const { data } = await fetchGetPartners()
+        dispatchPartners({ type: 'SET_PARTNERS', payload: data.partners })
+      } catch (error) {
+        dispatchToast({
+          type: 'ADD_NOTIFICATION',
+          payload: { msg: error.message, error: true }
+        })
+      } finally {
+        dispatchLoader({ type: 'SET_LOAD_FALSE' })
+      }
     }
     if (partners.length <= 0) {
       getPartners()
@@ -48,7 +62,10 @@ const Home = () => {
           d='M0,160L48,160C96,160,192,160,288,144C384,128,480,96,576,101.3C672,107,768,149,864,160C960,171,1056,149,1152,149.3C1248,149,1344,171,1392,181.3L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'
         ></path>
       </svg>
-      <section ref={refBoxesSection} className='contain-function home__promo-box-section'>
+      <section
+        ref={refBoxesSection}
+        className='contain-function home__promo-box-section'
+      >
         <PromoBox />
       </section>
     </>

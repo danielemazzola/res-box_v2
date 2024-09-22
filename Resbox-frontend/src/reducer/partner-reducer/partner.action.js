@@ -27,6 +27,7 @@ const handleFilterCountry = (country, partners) => {
   )
   return getFilterPartnersCountry
 }
+
 export const handleSearchPartner = (
   e,
   setSearchTerm,
@@ -66,11 +67,7 @@ export const getOperationsByPartner = async (
 ) => {
   try {
     dispatchLoader({ type: 'SET_LOAD_TRUE' })
-    const { response, data } = await fetchGetOperations(
-      token,
-      url,
-      dispatchToast
-    )
+    const { response, data } = await fetchGetOperations(token, url)
     if (response.status !== 200) {
       dispatchToast({
         type: 'ADD_NOTIFICATION',

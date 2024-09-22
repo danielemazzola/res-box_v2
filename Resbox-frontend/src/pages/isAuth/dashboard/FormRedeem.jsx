@@ -1,21 +1,19 @@
 import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ReducersContext } from '../../../context/reducers/ReducersContext'
-import confetti from 'canvas-confetti'
 import { AuthContext } from '../../../context/auth/AuthContext'
-import { handleRedeemCode } from './helper'
 import { updateOperation } from '../../../reducer/promo-box/promobox.action'
+import Alert from '../../../components/alert/Alert'
 
 const FormRedeem = () => {
   const [status, setStatus] = useState('')
 
-  const { register, handleSubmit, formState, reset } = useForm({
+  const { register, handleSubmit, formState:{errors}, reset, watch } = useForm({
     defaultValues: {
       code: '',
       status: ''
     }
   })
-
   const {
     dispatchLoader,
     dispatchToast,
@@ -25,6 +23,7 @@ const FormRedeem = () => {
 
   const { API_URL, token, setStateModal, stateModal } = useContext(AuthContext)
 
+  const codeValue = watch('code', '')
   const handleSendInfoRedeem = async (props) => {
     props.status = status
     try {
@@ -64,29 +63,44 @@ const FormRedeem = () => {
         <label htmlFor='code'>Codigo</label>
         <input
           className={`${
-            formState.errors.code?.type === 'required' ? 'error' : ''
+            errors.code?.type === 'required' ? 'error' : ''
           }`}
           id='code'
           {...register('code', {
             required: {
-              value: true
+              value: true,
+              message: 'El código es obligatorio'
+            },
+            minLength: {
+              value: 4,
+              message: 'Debe tener exactamente 4 dígitos'
+            },
+            maxLength: {
+              value: 4,
+              message: 'Debe tener exactamente 4 dígitos'
             }
           })}
           placeholder='1234'
+          maxLength={4}
         />
+        {errors.code?.message && (
+          <Alert>{errors.code.message}</Alert>
+        )}
         <div>
           <button
+            disabled={codeValue.length !== 4}
             type='submit'
             className='button'
-            onClick={() => setStatus('cancelled')} // Establecer el estado como "cancelled"
+            onClick={() => setStatus('cancelled')}
           >
             Anular
           </button>
 
           <button
+            disabled={codeValue.length !== 4}
             type='submit'
             className='button green'
-            onClick={() => setStatus('completed')} // Establecer el estado como "completed"
+            onClick={() => setStatus('completed')}
           >
             Confirmar
           </button>
