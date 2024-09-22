@@ -36,7 +36,7 @@ const Form = ({ handleCloseModal, recovery = false }) => {
   const navigate = useNavigate()
   const { dispatchLoader, dispatchToast, dispatchAuth } =
     useContext(ReducersContext)
-    const {setToken} = useContext(AuthContext)
+  const { setToken } = useContext(AuthContext)
   const {
     handleSubmit,
     reset,
@@ -72,9 +72,10 @@ const Form = ({ handleCloseModal, recovery = false }) => {
       setToken
     )
     if (response) {
+      let loginResponse
       if (formType.register) {
         const loginFormType = { login: true, register: false }
-        const loginResponse = await fetchSubmit(
+        loginResponse = await fetchSubmit(
           loginFormType,
           formFields,
           handleCloseModal,
@@ -84,10 +85,10 @@ const Form = ({ handleCloseModal, recovery = false }) => {
           token,
           setToken
         )
-        
-        if (loginResponse) {
-          reset()
-        }
+      }
+      if (formType.login || loginResponse) {
+        navigate('./dashboard')
+        reset()
       }
       reset()
     } else if (formType.recovery) {

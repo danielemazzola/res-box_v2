@@ -3,9 +3,9 @@
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  transition: all 0.3s;
+  transition: all 0.5s;
   gap: 20px;
-  padding: 20px;
+  padding: 30px 50px;
 }
 .operation__operations-title {
   border-radius: 10px;
@@ -66,7 +66,7 @@
 
 @media (max-width: 769px) {
   .operation__container-operations, .operation__contain-card {
-    width: 100%;
+    width: 500px;
   }
   .operation__contain-card{
     flex-direction: row;

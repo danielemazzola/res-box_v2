@@ -179,6 +179,6 @@
 @media (max-width: 769px) {
   .dashboard__cards-container,
   .dashboard__banner-partner {
-    width: 500px;
+    max-width: 500px;
   }
 }

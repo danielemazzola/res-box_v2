@@ -16,6 +16,7 @@ const Nav = () => {
     dispatchLoader,
     dispatchToast,
     dispatchAuth,
+    dispatchPartners,
     stateIsAuth: { user }
   } = useContext(ReducersContext)
 
@@ -89,6 +90,7 @@ const Nav = () => {
                     dispatchLoader,
                     dispatchToast,
                     dispatchAuth,
+                    dispatchPartners,
                     navigate,
                     user
                   )

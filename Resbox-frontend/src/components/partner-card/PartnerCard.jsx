@@ -6,12 +6,11 @@ import { uploadImage } from '../../reducer/auth-reducer/auth.action'
 import Modal from '../modal/Modal'
 import { getDate } from '../../helpers/date'
 import './PartnerCard.css'
+import { sizeImg } from '../../helpers/sizeImg'
 
 const PartnerCard = ({ array }) => {
   const [userModal, setUserModal] = useState({})
   const [toogleModal, setToogleModal] = useState(false)
-  const [selectedImageBanner, setSelectedImageBanner] = useState(array.banner)
-  const [selectedImageAvatar, setSelectedImageAvatar] = useState(array.avatar)
   const { fileBannerRef, fileAvatarRef } = useContext(ScrollRefContext)
   const { API_URL, token } = useContext(AuthContext)
   const {
@@ -42,49 +41,52 @@ const PartnerCard = ({ array }) => {
     { banner = false, avatar = false }
   ) => {
     const file = event.target.files[0]
-    const maxSize = 5 * 1024 * 1024
-    if (file.size > maxSize) {
-      alert('El archivo es demasiado grande. El tamaño máximo es 5MB.')
+    const size = sizeImg(file)
+    if (file && !size) {
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: {
+          msg: 'El archivo es demasiado grande. El tamaño máximo es 5MB',
+          error: true
+        }
+      })
       return
     }
-    if (file) {
-      const imageUrl = URL.createObjectURL(file)
-      const formData = new FormData()
-      if (banner) {
-        formData.append('banner', file)
-        setSelectedImageBanner(imageUrl)
-      }
-      if (avatar) {
-        formData.append('avatar', file)
-        setSelectedImageAvatar(imageUrl)
-      }
-      const { data } = await uploadImage(
-        token,
-        formData,
-        avatar ? API_URL.partner_avatar : API_URL.partner_banner,
-        dispatchLoader,
-        dispatchToast
-      )
-      if (partners.length > 0) {
-        const updatePartner = partners.map((partner) => {
-          if (partner._id === data.updatePartner._id) {
-            return {
-              ...partner,
-              ...data.updatePartner
-            }
+
+    const imageUrl = URL.createObjectURL(file)
+    const formData = new FormData()
+    if (banner) {
+      formData.append('banner', file)
+    }
+    if (avatar) {
+      formData.append('avatar', file)
+    }
+    const { data } = await uploadImage(
+      token,
+      formData,
+      avatar ? API_URL.partner_avatar : API_URL.partner_banner,
+      dispatchLoader,
+      dispatchToast
+    )
+    if (partners.length > 0) {
+      const updatePartner = partners.map((partner) => {
+        if (partner._id === data.updatePartner._id) {
+          return {
+            ...partner,
+            ...data.updatePartner
           }
-          return partner
-        })
-        dispatchPartners({
-          type: 'SET_PARTNERS',
-          payload: updatePartner
-        })
-      }
-      dispatchAuth({
-        type: 'SET_PARTNER',
-        payload: data.updatePartner
+        }
+        return partner
+      })
+      dispatchPartners({
+        type: 'SET_PARTNERS',
+        payload: updatePartner
       })
     }
+    dispatchAuth({
+      type: 'SET_PARTNER',
+      payload: data.updatePartner
+    })
   }
 
   return (
@@ -92,7 +94,6 @@ const PartnerCard = ({ array }) => {
       <div className='partner__banner'>
         <form>
           <input
-            id='changeImage'
             ref={fileBannerRef}
             type='file'
             accept='.png, .jpeg, .jpg, .gif'
@@ -102,7 +103,6 @@ const PartnerCard = ({ array }) => {
             }
           />
           <input
-            id='changeImage'
             ref={fileAvatarRef}
             type='file'
             accept='.png, .jpeg, .jpg, .gif'
@@ -113,14 +113,14 @@ const PartnerCard = ({ array }) => {
           />
         </form>
         <img
-          src={selectedImageBanner}
+          src={array.banner}
           alt={array.name}
           onClick={() => handleChangeImage({ banner: true })}
         />
       </div>
       <div className='partner__avatar'>
         <img
-          src={selectedImageAvatar}
+          src={array.avatar}
           alt={array.name}
           width='70'
           onClick={() => handleChangeImage({ avatar: true })}

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import confetti from 'canvas-confetti'
 import { useForm } from 'react-hook-form'
 import useScrollToRef from '../../../hooks/useScrollToRef'
 import {
@@ -12,13 +13,14 @@ import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import ProfileCard from '../../../components/profile-card/ProfileCard'
 import PartnerCard from '../../../components/partner-card/PartnerCard'
 import OperationCard from '../../../components/operation-card/OperationCard'
+import Modal from '../../../components/modal/Modal'
 import './Dashboard.css'
-import edit from '/images/edit.png'
 import redeemCode from '/images/redeemCode.png'
 import restaurante from '/images/restaurante.ico'
 import operationsImg from '/images/operations.png'
-import Modal from '../../../components/modal/Modal'
-import confetti from 'canvas-confetti'
+import edit from '/images/edit.png'
+import { sizeImg } from '../../../helpers/sizeImg'
+import { handleImageClick } from './helper'
 
 const Dashboard = () => {
   const [stateModal, setStateModal] = useState({
@@ -26,6 +28,7 @@ const Dashboard = () => {
     infoOperations: false,
     redeem: false
   })
+
   const {
     stateIsAuth: { user, partner },
     dispatchToast,
@@ -34,10 +37,12 @@ const Dashboard = () => {
     statePartners: { operations },
     dispatchPartners
   } = useContext(ReducersContext)
+
   const { API_URL, token } = useContext(AuthContext)
+
   const { refDashboardSection, fileInputRef, refPartnerInfo, refOperations } =
     useContext(ScrollRefContext)
-  const [selectedImage, setSelectedImage] = useState(user.avatar)
+
   const useScrolltoRef = useScrollToRef()
 
   useEffect(() => {
@@ -46,45 +51,40 @@ const Dashboard = () => {
     }, 1000)
   }, [])
 
-  const handleImageClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click()
-    } else {
-      return
-    }
-  }
   const handleImageChange = async (event) => {
     const file = event.target.files[0]
-    const maxSize = 5 * 1024 * 1024
-    if (file.size > maxSize) {
-      alert('El archivo es demasiado grande. El tamaño máximo es 5MB.')
+    const size = sizeImg(file)
+    if (file && !size) {
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: {
+          msg: 'El archivo es demasiado grande. El tamaño máximo es 5MB',
+          error: true
+        }
+      })
       return
     }
-    if (file) {
-      const imageUrl = URL.createObjectURL(file)
-      const formData = new FormData()
-      formData.append('avatar', file)
-      setSelectedImage(imageUrl)
-      const { data } = await uploadImage(
-        token,
-        formData,
-        API_URL.user_avatar,
-        dispatchLoader,
-        dispatchToast
-      )
-      dispatchAuth({ type: 'SET_USER', payload: data.avatar })
-    }
+    const formData = new FormData()
+    formData.append('avatar', file)
+    const { data } = await uploadImage(
+      token,
+      formData,
+      API_URL.user_avatar,
+      dispatchLoader,
+      dispatchToast
+    )
+    dispatchAuth({ type: 'SET_USER', payload: data.avatar })
   }
 
   const handlePartner = async () => {
     if (Object.keys(partner).length <= 0) {
-      await handleInfoPartner(
+      const { data } = await handleInfoPartner(
         user,
         token,
-        dispatchAuth,
         dispatchToast,
         dispatchLoader
       )
+      dispatchAuth({ type: 'SET_PARTNER', payload: data.partner })
     }
     setTimeout(() => {
       useScrolltoRef(refPartnerInfo)
@@ -127,9 +127,6 @@ const Dashboard = () => {
         }
       )
       const data = await response.json()
-      console.log(response)
-      console.log(data)
-
       if (response.status !== 201) {
         dispatchToast({
           type: 'ADD_NOTIFICATION',
@@ -197,7 +194,6 @@ const Dashboard = () => {
             <h3>Hola👋🏼 ¡{user.name}!</h3>
             <form>
               <input
-                id='changeImage'
                 ref={fileInputRef}
                 type='file'
                 accept='.png, .jpeg, .jpg, .gif'
@@ -206,17 +202,12 @@ const Dashboard = () => {
               />
             </form>
             <div className='dashboard__contain-avatar'>
-              <img
-                alt={user.name}
-                src={selectedImage}
-                width='150'
-                height='150'
-              />
+              <img alt={user.name} src={user.avatar} width='150' height='150' />
               <img
                 alt='edit'
                 src={edit}
                 className='dashboard__edit-avatar'
-                onClick={handleImageClick}
+                onClick={() => handleImageClick(fileInputRef)}
               />
             </div>
           </div>

@@ -1,7 +1,7 @@
 import {
   fetchAuth,
   fetchPartner,
-  fetchUpdateImgPartner
+  fetchUpdateImg
 } from '../../services/fetch-auth/fetchAuth'
 
 export const fetchSubmit = async (
@@ -20,39 +20,50 @@ export const fetchSubmit = async (
   if (formType.forgot) url = 'user/recovery-password-user'
   if (formType.recovery) url = `user/new-password/${token}`
 
-  const { data, response } = await fetchAuth(
-    url,
-    formFields,
-    formType.recovery ? 'PUT' : 'POST',
-    dispatchLoader,
-    dispatchToast
-  )
-  if (response.status !== 200) {
+  try {
+    dispatchLoader({ type: 'SET_LOAD_TRUE' })
+    const { data, response } = await fetchAuth(
+      url,
+      formFields,
+      formType.recovery ? 'PUT' : 'POST',
+      token
+    )
+    if (response.status !== 200) {
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: { msg: `Error: ${data.message}`, error: true }
+      })
+      return false
+    } else {
+      formType.login
+        ? dispatchToast({
+            type: 'ADD_NOTIFICATION',
+            payload: { msg: `Bienvenido ${data.user.name}`, error: false }
+          })
+        : dispatchToast({
+            type: 'ADD_NOTIFICATION',
+            payload: { msg: `${data.message}`, error: false }
+          })
+      dispatchAuth({ type: 'SET_USER', payload: data.user })
+      dispatchAuth({ type: 'SET_AUTH_TRUE' })
+      if (data?.token) {
+        localStorage.setItem('SECURE_CODE_RESBOX', data.token)
+        setToken(localStorage.getItem('SECURE_CODE_RESBOX'))
+      }
+      setTimeout(() => {
+        !formType.recover && handleCloseModal()
+      }, 1000)
+      return true
+    }
+  } catch (error) {
     dispatchToast({
       type: 'ADD_NOTIFICATION',
-      payload: { msg: `Error: ${data.message}`, error: true }
+      payload: { msg: error.message, error: true }
     })
-    return false
-  } else {
-    formType.login
-      ? dispatchToast({
-          type: 'ADD_NOTIFICATION',
-          payload: { msg: `Bienvenido ${data.user.name}`, error: false }
-        })
-      : dispatchToast({
-          type: 'ADD_NOTIFICATION',
-          payload: { msg: `${data.message}`, error: false }
-        })
-    dispatchAuth({ type: 'SET_USER', payload: data.user })
-    dispatchAuth({ type: 'SET_AUTH_TRUE' })
-    if (data?.token) {
-      localStorage.setItem('SECURE_CODE_RESBOX', data.token)
-      setToken(localStorage.getItem('SECURE_CODE_RESBOX'))
-    }
+  } finally {
     setTimeout(() => {
-      !formType.recover && handleCloseModal()
-    }, 1000)
-    return true
+      dispatchLoader({ type: 'SET_LOAD_FALSE' })
+    }, 1500)
   }
 }
 
@@ -64,30 +75,49 @@ export const uploadImage = async (
   dispatchToast
 ) => {
   try {
-    const { data } = await fetchUpdateImgPartner(
-      formData,
-      url,
-      token,
-      dispatchLoader,
-      dispatchToast
-    )
+    dispatchLoader({ type: 'SET_LOAD_TRUE' })
+    const { response, data } = await fetchUpdateImg(formData, url, token)
+    if (response.status !== 200) {
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: { msg: 'Error al subir la imagen', error: true }
+      })
+      return
+    }
+    dispatchToast({
+      type: 'ADD_NOTIFICATION',
+      payload: { msg: data.message, error: false }
+    })
     return { data }
   } catch (error) {
-    console.log(error.message)
+    dispatchToast({
+      type: 'ADD_NOTIFICATION',
+      payload: { msg: error.message, error: true }
+    })
+  } finally {
+    setTimeout(() => {
+      dispatchLoader({ type: 'SET_LOAD_FALSE' })
+    }, 1500)
   }
 }
 
 export const handleInfoPartner = async (
   user,
   token,
-  dispatchAuth,
   dispatchToast,
   dispatchLoader
 ) => {
   try {
     dispatchLoader({ type: 'SET_LOAD_TRUE' })
     const { response, data } = await fetchPartner(user, token)
-    dispatchAuth({ type: 'SET_PARTNER', payload: data.partner })
+    if (response.status !== 200) {
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: { msg: data.message, error: true }
+      })
+    } else {
+      return { data }
+    }
   } catch (error) {
     dispatchToast({
       type: 'ADD_NOTIFICATION',
@@ -104,6 +134,7 @@ export const handleCloseSesion = (
   dispatchLoader,
   dispatchToast,
   dispatchAuth,
+  dispatchPartners,
   navigate,
   user
 ) => {
@@ -116,6 +147,7 @@ export const handleCloseSesion = (
   dispatchAuth({ type: 'SET_USER', payload: {} })
   dispatchAuth({ type: 'SET_PARTNER', payload: {} })
   dispatchAuth({ type: 'SET_AUTH_FALSE' })
+  dispatchPartners({ type: 'SET_OPERATIONS', payload: [] })
   navigate('/')
   setTimeout(() => {
     dispatchLoader({ type: 'SET_LOAD_FALSE' })

@@ -9,8 +9,9 @@
   cursor: pointer;
   transition: all 0.7s;
   font-size: 16px !important;
-  padding: 5px 10px;
+  padding: 10px;
   color: white;
+  border-radius: 10px 0 0 10px;
 }
 .container-btn-scroll {
   display: flex;

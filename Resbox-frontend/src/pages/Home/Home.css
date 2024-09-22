@@ -16,3 +16,7 @@
 .contain-function > div > h2 {
   text-align: center;
 }
+
+.home__promo-box-section{
+  background-color: var(--rb-bg-primary);
+}

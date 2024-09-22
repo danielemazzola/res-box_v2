@@ -2,14 +2,11 @@ export const fetchAuth = async (
   urlApi,
   formFields = {},
   method = 'GET',
-  dispatchLoader,
-  dispatchToast,
   token = null
 ) => {
   let url = `${import.meta.env.VITE_URL_API}/${urlApi}`
 
   try {
-    dispatchLoader({ type: 'SET_LOAD_TRUE' })
     const headers = {
       'Content-Type': 'application/json'
     }
@@ -26,28 +23,14 @@ export const fetchAuth = async (
     const response = await fetch(url, options)
     const data = await response.json()
     return { response, data }
-  } catch (error) {
-    dispatchToast({
-      type: 'ADD_NOTIFICATION',
-      payload: { msg: error.message, error: true }
-    })
-  } finally {
-    setTimeout(() => {
-      dispatchLoader({ type: 'SET_LOAD_FALSE' })
-    }, 1500)
+  } catch {
+    console.log(error.message)
   }
 }
 
-export const fetchUpdateImgPartner = async (
-  formData,
-  url,
-  token,
-  dispatchLoader,
-  dispatchToast
-) => {
+export const fetchUpdateImg = async (formData, url, token) => {
   const urlApi = `${import.meta.env.VITE_URL_API}/${url}`
   try {
-    dispatchLoader({ type: 'SET_LOAD_TRUE' })
     const response = await fetch(urlApi, {
       method: 'PUT',
       headers: {
@@ -56,27 +39,10 @@ export const fetchUpdateImgPartner = async (
       body: formData
     })
     const data = await response.json()
-    if (response.status !== 200) {
-      dispatchToast({
-        type: 'ADD_NOTIFICATION',
-        payload: { msg: 'Error al subir la imagen', error: true }
-      })
-      return
-    }
-    dispatchToast({
-      type: 'ADD_NOTIFICATION',
-      payload: { msg: data.message, error: false }
-    })
-    return { data }
+
+    return { response, data }
   } catch (error) {
-    dispatchToast({
-      type: 'ADD_NOTIFICATION',
-      payload: { msg: error.message, error: true }
-    })
-  } finally {
-    setTimeout(() => {
-      dispatchLoader({ type: 'SET_LOAD_FALSE' })
-    }, 1500)
+    console.log(error.message)
   }
 }
 
@@ -93,5 +59,7 @@ export const fetchPartner = async (user, token) => {
     )
     const data = await response.json()
     return { response, data }
-  } catch (error) {}
+  } catch (error) {
+    console.log(error.message)
+  }
 }

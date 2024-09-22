@@ -1,11 +1,13 @@
 import { useContext, useEffect } from 'react'
-import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import useScrollToRef from '../../../hooks/useScrollToRef'
-import './PromoBox.css'
+import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import PromoBoxCard from '../../../components/promo-box-card/PromoBoxCard'
+import './PromoBox.css'
+import { useLocation } from 'react-router-dom'
 
 const PromoBox = () => {
+  const location = useLocation()
   const { refBoxesSection } = useContext(ScrollRefContext)
   const {
     statePromoBoxes: { boxes },
@@ -15,11 +17,13 @@ const PromoBox = () => {
   } = useContext(ReducersContext)
   const useScrolltoRef = useScrollToRef()
   useEffect(() => {
-    setTimeout(() => {
-      if (Object.keys(user).length > 0) {
-        useScrolltoRef(refBoxesSection)
-      }
-    }, 1000)
+    if (location.pathname === '/promo-box') {
+      setTimeout(() => {
+        if (Object.keys(user).length > 0) {
+          useScrolltoRef(refBoxesSection)
+        }
+      }, 1000)
+    }
   }, [])
   useEffect(() => {
     const getAllPromoBox = async () => {

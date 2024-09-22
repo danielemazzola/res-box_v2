@@ -24,8 +24,6 @@ export const AuthProvider = ({ children }) => {
           'user/profile-user',
           {},
           'GET',
-          dispatchLoader,
-          dispatchToast,
           token
         )
         if (response.status !== 200) {

@@ -81,7 +81,9 @@ const Header = () => {
             </div>
           </div>
         ) : (
-          <Nav />
+          <>
+            <Nav />
+          </>
         )}
       </div>
       <Modal isModalOpen={openForm} handleCloseModal={() => setOpenForm(false)}>

@@ -6,8 +6,11 @@ import './HowItWorks.css'
 const HowItWorks = () => {
   return (
     <div className='container-how-work'>
-      <div className='contain-log-work'>
-        <div className='contain-log-img-work show'>
+      <div className='contain-how-work-title show'>
+          <h2 className=''>¿Cómo funciona?</h2>
+        </div>
+      <div className='contain-box-work'>
+        <div className='contain-box-img-work show'>
           <img alt='image coffe banner' src={coffe} />
         </div>
         <div className='contain-description-work'>
@@ -20,8 +23,8 @@ const HowItWorks = () => {
           <div></div>
         </div>
       </div>
-      <div className='contain-log-work'>
-        <div className='contain-log-img-work show'>
+      <div className='contain-box-work'>
+        <div className='contain-box-img-work show'>
           <img alt='image coffe banner' src={box} />
         </div>
         <div className='contain-description-work'>
@@ -33,8 +36,8 @@ const HowItWorks = () => {
           </div>
         </div>
       </div>
-      <div className='contain-log-work'>
-        <div className='contain-log-img-work show'>
+      <div className='contain-box-work'>
+        <div className='contain-box-img-work show'>
           <img alt='image coffe banner' src={tazaCafe} />
         </div>
         <div className='contain-description-work'>
@@ -42,7 +45,6 @@ const HowItWorks = () => {
             <h2 className='show'>Disfrutar</h2>
             <p className='show'>Disfruta de tu producto❤️</p>
           </div>
-          <div></div>
         </div>
       </div>
     </div>
