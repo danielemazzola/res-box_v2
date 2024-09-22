@@ -23,7 +23,7 @@ export const fetchAuth = async (
     const response = await fetch(url, options)
     const data = await response.json()
     return { response, data }
-  } catch {
+  } catch (error) {
     console.log(error.message)
   }
 }

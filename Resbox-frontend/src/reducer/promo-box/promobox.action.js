@@ -14,6 +14,7 @@ export const handleRedeem = async (
   dispatchToast
 ) => {
   try {
+    dispatchLoader({ type: 'SET_LOAD_TRUE' })
     const { response, data } = await fetchOperation(
       token,
       url,
