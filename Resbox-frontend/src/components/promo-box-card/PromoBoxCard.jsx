@@ -4,6 +4,7 @@ import { randomImage } from './helpers'
 import './PromoBoxCard.css'
 import { AuthContext } from '../../context/auth/AuthContext'
 import { handleBuyBox } from '../../reducer/promo-box/promobox.action'
+import confetti from 'canvas-confetti'
 
 const PromoBoxCard = ({ box }) => {
   const image = useMemo(() => randomImage(), [])
@@ -11,9 +12,33 @@ const PromoBoxCard = ({ box }) => {
     dispatchToast,
     dispatchAuth,
     dispatchLoader,
+    dispatchPromoBoxes,
     stateIsAuth: { user }
   } = useContext(ReducersContext)
   const { API_URL, token } = useContext(AuthContext)
+
+  const handleBuyBoxes = async () => {
+    const { response, data } = await handleBuyBox(
+      token,
+      API_URL.user_add_more,
+      box._id,
+      'POST',
+      dispatchLoader,
+      dispatchToast
+    )
+    console.log(data)
+    dispatchAuth({ type: 'SET_USER', payload: data.updatedUser })
+    dispatchToast({
+      type: 'ADD_NOTIFICATION',
+      payload: { msg: data.message, error: false }
+    })
+    box.items_acquired_by.push(data.updatedUser)
+    confetti({
+      particleCount: 250,
+      spread: 170,
+      origin: { y: 1.3 }
+    })
+  }
 
   return (
     <div className='promobox__contain-card-box fadeIn'>
@@ -51,16 +76,7 @@ const PromoBoxCard = ({ box }) => {
               className={`${
                 box.status.includes('active') ? 'active' : 'disabled'
               }`}
-              onClick={() =>
-                handleBuyBox(
-                  token,
-                  API_URL,
-                  box,
-                  dispatchLoader,
-                  dispatchAuth,
-                  dispatchToast
-                )
-              }
+              onClick={handleBuyBoxes}
             >
               Comprar
             </button>

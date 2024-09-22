@@ -58,15 +58,21 @@
   border-radius: 5px;
 }
 
+@media (max-width: 1520px){
+  .operation__container-operations {
+    max-width: 850px;
+  }
+}
+
 @media (max-width: 815px) {
   .operation__container-operations {
-    width: 730px;
+    max-width: 730px;
   }
 }
 
 @media (max-width: 769px) {
   .operation__container-operations, .operation__contain-card {
-    width: 500px;
+    max-width: 500px;
   }
   .operation__contain-card{
     flex-direction: row;

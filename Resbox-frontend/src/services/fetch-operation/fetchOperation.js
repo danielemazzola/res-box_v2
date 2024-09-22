@@ -1,40 +1,33 @@
-export const fetchNewOperation = async (
+export const fetchOperation = async (
   token,
-  url,
-  idbox,
+  urlApi,
+  box,
   method,
   quantityRedeem = 0,
-  dispatchLoader,
-  dispatchToast
-) => {  
+  status = ''
+) => {
+  let url = `${import.meta.env.VITE_URL_API}/${urlApi}/${box}`
   try {
-    dispatchLoader({ type: 'SET_LOAD_TRUE' })
-    const response = await fetch(
-      `${import.meta.env.VITE_URL_API}/${url}/${idbox}`,
-      {
-        method: method,
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ consumed: quantityRedeem })
-      }
-    )
-    const data = await response.json()
-    if (response.status !== 201) {
-      dispatchToast({
-        type: 'ADD_NOTIFICATION',
-        payload: { msg: `Error: ${data.message}`, error: true }
-      })
-    } else {
-      return { data }
+    const headers = {
+      'Content-Type': 'application/json'
     }
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`
+    }
+    const options = {
+      method,
+      headers
+    }
+    if (quantityRedeem !== 0) {
+      options.body = JSON.stringify({ consumed: quantityRedeem })
+    }
+    if (status !== '') {
+      options.body = JSON.stringify({ status: status })
+    }
+    const response = await fetch(url, options)
+    const data = await response.json()
+    return { response, data }
   } catch (error) {
-    dispatchToast({
-      type: 'ADD_NOTIFICATION',
-      payload: { msg: `Error: ${error.message}`, error: true }
-    })
-  } finally {
-    dispatchLoader({ type: 'SET_LOAD_FALSE' })
+    console.log(error.message)
   }
 }

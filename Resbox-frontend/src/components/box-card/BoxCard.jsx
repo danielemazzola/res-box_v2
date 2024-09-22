@@ -3,12 +3,13 @@ import confetti from 'canvas-confetti'
 import useFilterPartner from '../../hooks/useFilterPartner'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import { AuthContext } from '../../context/auth/AuthContext'
-import { fetchNewOperation } from '../../services/fetch-operation/fetchOperation'
+import { fetchOperation } from '../../services/fetch-operation/fetchOperation'
 import ModalRedeem from './ModalRedeem'
 import { containInformation, getRandomBackgroundColor } from './helpers'
 import { getDate } from '../../helpers/date'
 import ModalInfoPartner from './ModalInfoPartner'
 import './BoxCard.css'
+import { handleBuyBox } from '../../reducer/promo-box/promobox.action'
 
 const BoxCard = ({ box }) => {
   const [stateBoxCard, setStateBoxCard] = useState({
@@ -31,46 +32,17 @@ const BoxCard = ({ box }) => {
   const backgroundColor = useMemo(() => getRandomBackgroundColor(), [box])
   const newArrayInfoBox = containInformation(box)
 
-  const handleSubmit = async (e, box) => {
-    e.preventDefault()
-    const { data } = await fetchNewOperation(
-      token,
-      API_URL.user_operation,
-      box.box._id,
-      'POST',
-      stateBoxCard.quantityRedeem,
-      dispatchLoader,
-      dispatchToast
-    )
-    dispatchToast({
-      type: 'ADD_NOTIFICATION',
-      payload: { msg: 'Canje exitoso!', error: false }
-    })
-    setStateBoxCard((prevState) => ({
-      ...prevState,
-      secureTokenRedeem: data.token
-    }))
-    box.remainingItems = box.remainingItems - stateBoxCard.quantityRedeem
-    confetti({
-      particleCount: 250,
-      spread: 170,
-      origin: { y: 1.3 }
-    })
-  }
-
   const handleAddMoreBox = async (idBox) => {
-    const { data } = await fetchNewOperation(
+    const { response, data } = await handleBuyBox(
       token,
       API_URL.user_add_more,
       idBox,
       'POST',
-      0,
       dispatchLoader,
       dispatchToast
     )
-
     if (boxes.length > 0) {
-      boxes.find(box => {
+      boxes.find((box) => {
         if (box._id === idBox) {
           dispatchPromoBoxes({
             type: 'SET_BOXES',
@@ -78,9 +50,9 @@ const BoxCard = ({ box }) => {
               ...box,
               items_acquired_by: [...box.items_acquired_by, data.updatedUser]
             }
-          });
+          })
         }
-      });
+      })
     }
     dispatchToast({
       type: 'ADD_NOTIFICATION',
@@ -197,7 +169,6 @@ const BoxCard = ({ box }) => {
       <ModalRedeem
         box={box}
         remainingItems={box.remainingItems}
-        handleSubmit={handleSubmit}
         stateBoxCard={stateBoxCard}
         setStateBoxCard={setStateBoxCard}
       />

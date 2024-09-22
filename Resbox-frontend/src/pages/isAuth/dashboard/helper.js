@@ -5,3 +5,9 @@ export const handleImageClick = (fileInputRef) => {
     return
   }
 }
+export const handleRedeemCode = (setStateModal, stateModal) => {
+  setStateModal((prev) => ({
+    ...prev,
+    redeem: !stateModal.redeem
+  }))
+}

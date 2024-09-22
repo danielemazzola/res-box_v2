@@ -1,16 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Modal from '../modal/Modal'
 import { handleCloseModal } from './helpers'
 import logo from '/images/logo.png'
+import { fetchOperation } from '../../services/fetch-operation/fetchOperation'
+import { AuthContext } from '../../context/auth/AuthContext'
+import { ReducersContext } from '../../context/reducers/ReducersContext'
+import { handleRedeem } from '../../reducer/promo-box/promobox.action'
 
 const ModalRedeem = ({
   box,
   remainingItems,
-  handleSubmit,
   stateBoxCard,
   setStateBoxCard
 }) => {
   const { quantityRedeem } = stateBoxCard
+  const { API_URL, token } = useContext(AuthContext)
+  const { dispatchToast, dispatchLoader } = useContext(ReducersContext)
   const handleCloseModal = () => {
     setStateBoxCard((prevState) => ({
       ...prevState,
@@ -23,6 +28,22 @@ const ModalRedeem = ({
       }))
     }, 500)
   }
+
+  const handleSubmit = async (e, box) => {
+    e.preventDefault()
+    await handleRedeem(
+      token,
+      API_URL.user_operation,
+      box.box._id,
+      'POST',
+      stateBoxCard,
+      setStateBoxCard,
+      box,
+      dispatchLoader,
+      dispatchToast
+    )
+  }
+
   return (
     <>
       <Modal
