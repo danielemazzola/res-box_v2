@@ -42,16 +42,18 @@ const BoxCard = ({ box }) => {
       dispatchToast
     )
     if (boxes.length > 0) {
-      boxes.find((box) => {
-        if (box._id === idBox) {
-          dispatchPromoBoxes({
-            type: 'SET_BOXES',
-            payload: {
-              ...box,
-              items_acquired_by: [...box.items_acquired_by, data.updatedUser]
-            }
-          })
+      const updatedBoxes = boxes.map((box) => {
+        if (box._id.toString() === idBox.toString()) {
+          return {
+            ...box,
+            items_acquired_by: [...box.items_acquired_by, data.updatedUser]
+          }
         }
+        return box
+      })
+      dispatchPromoBoxes({
+        type: 'SET_BOXES',
+        payload: updatedBoxes
       })
     }
     dispatchToast({
