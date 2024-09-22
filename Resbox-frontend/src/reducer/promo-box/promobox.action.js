@@ -29,7 +29,6 @@ export const handleRedeem = async (
         payload: { msg: `Error: ${data.message}`, error: true }
       })
     } else {
-      console.log(data)
       dispatchToast({
         type: 'ADD_NOTIFICATION',
         payload: { msg: 'Canje exitoso', error: false }
