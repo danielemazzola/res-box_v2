@@ -31,7 +31,7 @@ const Dashboard = () => {
     setStateModal
   } = useContext(AuthContext)
 
-  const { refDashboardSection, fileInputRef, refPartnerInfo, refOperations } =
+  const { refDashboardSection, fileInputRef, refOperations } =
     useContext(ScrollRefContext)
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const Dashboard = () => {
   }, [])
 
   return (
-    <div ref={refDashboardSection} className='dashboard__container'>
+    <section ref={refDashboardSection} className='dashboard__container'>
       <div className='dashboard__cards-container fadeIn'>
         <div className='dashboard__card'>
           <div>
@@ -98,9 +98,7 @@ const Dashboard = () => {
             </div>
           </button>
           {stateModal.infoPartner && (
-            <div ref={refPartnerInfo}>
-              <PartnerCard array={partner} />
-            </div>
+            <PartnerCard array={partner} />
           )}
           {stateModal.infoOperations && (
             <div
@@ -129,7 +127,7 @@ const Dashboard = () => {
       >
         <FormRedeem />
       </Modal>
-    </div>
+    </section>
   )
 }
 

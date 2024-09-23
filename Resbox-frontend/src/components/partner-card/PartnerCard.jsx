@@ -11,7 +11,7 @@ import { sizeImg } from '../../helpers/sizeImg'
 const PartnerCard = ({ array }) => {
   const [userModal, setUserModal] = useState({})
   const [toogleModal, setToogleModal] = useState(false)
-  const { fileBannerRef, fileAvatarRef } = useContext(ScrollRefContext)
+  const { fileBannerRef, fileAvatarRef, refPartnerInfo } = useContext(ScrollRefContext)
   const { API_URL, token } = useContext(AuthContext)
   const {
     dispatchLoader,
@@ -90,7 +90,7 @@ const PartnerCard = ({ array }) => {
   }
 
   return (
-    <div className='partner__container fadeIn'>
+    <div ref={refPartnerInfo} className='partner__container fadeIn'>
       <div className='partner__banner'>
         <form>
           <input

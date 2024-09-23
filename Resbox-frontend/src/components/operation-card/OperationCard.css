@@ -5,7 +5,8 @@
   border-radius: 10px;
   transition: all 0.5s;
   gap: 20px;
-  padding: 30px 50px;
+  padding: 20px;
+  flex:auto;
 }
 .operation__operations-title {
   border-radius: 10px;
@@ -38,9 +39,10 @@
   padding: 20px;
   border-radius: 5px;
   display: flex;
-  flex-direction: column;
   gap: 10px;
   align-items: start;
+  flex: 1;
+  flex-wrap: wrap;
 }
 .operation__contain-card > div {
   display: flex;
@@ -58,24 +60,3 @@
   border-radius: 5px;
 }
 
-@media (max-width: 1520px){
-  .operation__container-operations {
-    max-width: 850px;
-  }
-}
-
-@media (max-width: 815px) {
-  .operation__container-operations {
-    max-width: 730px;
-  }
-}
-
-@media (max-width: 769px) {
-  .operation__container-operations, .operation__contain-card {
-    max-width: 500px;
-  }
-  .operation__contain-card{
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-}
