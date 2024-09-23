@@ -44,7 +44,7 @@ const PromoBox = () => {
   }, [])
 
   return (
-    <div ref={refBoxesSection} className='promobox__container fadeIn'>
+    <section ref={refBoxesSection} className='promobox__container fadeIn'>
       <div className='promobox__cards-container'>
         <div className='promobox__card'>
           <div>
@@ -68,7 +68,7 @@ const PromoBox = () => {
       ) : (
         <p>Aún no exísten BOX</p>
       )}
-    </div>
+    </section>
   )
 }
 

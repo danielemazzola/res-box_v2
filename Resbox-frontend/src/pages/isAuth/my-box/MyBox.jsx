@@ -21,7 +21,7 @@ const MyBox = () => {
   }, [])
 
   return (
-    <div ref={purchasedBoxes.length > 0 ? refBoxesSection : null} className='mybox__container fadeIn'>
+    <section ref={purchasedBoxes.length > 0 ? refBoxesSection : null} className='mybox__container fadeIn'>
       <div className='mybox__cards-container '>
         <div className='mybox__card'>
           <div>
@@ -46,7 +46,7 @@ const MyBox = () => {
           <PromoBox />
         </>
       )}
-    </div>
+    </section>
   )
 }
 

@@ -91,7 +91,7 @@ button {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.384);
 }
 .button {
-  display: inline-block; /* Asegura que se comporte como un botón */
+  display: inline-block;
   padding: 6px 10px;
   background-color: var(--rb-bg-secondary) !important;
   color: var(--rb-text-primary) !important;
@@ -109,7 +109,7 @@ button:hover {
 .green {
   background-color: var(--rb-bg-green) !important;
 }
-.cancelled{
+.cancelled {
   background-color: var(--rb-bg-cancel);
 }
 .name-app {
@@ -134,14 +134,14 @@ button:hover {
 }
 
 input:focus {
-  outline: none; /* Para eliminar el borde azul predeterminado */
-  border-color: var(--rb-bg-cancel); /* Color del borde en focus */
-  box-shadow: 0 0 5px rgba(255, 0, 0, 0.103); /* Sombra opcional para el focus */
+  outline: none;
+  border-color: var(--rb-bg-cancel);
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.103);
 }
 select:focus {
-  outline: none; /* Para eliminar el borde azul predeterminado */
-  border-color: var(--rb-bg-cancel); /* Color del borde en focus */
-  box-shadow: 0 0 5px var(--rb-bg-cancel); /* Sombra opcional para el focus */
+  outline: none;
+  border-color: var(--rb-bg-cancel);
+  box-shadow: 0 0 5px var(--rb-bg-cancel);
 }
 select {
   padding: 10px;
@@ -166,7 +166,6 @@ select {
   }
 }
 @keyframes fadeInUp {
-  /*  */
   0% {
     opacity: 0;
     transform: translateY(20px);
@@ -228,7 +227,6 @@ select {
   }
 }
 
-/*SCROLL-BAR*/
 ::-webkit-scrollbar {
   width: 5px;
   background-color: transparent;

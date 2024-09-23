@@ -78,7 +78,6 @@
 }
 .container_btn_option > button {
   font-size: 14px;
-  /* background-color: var(--rb-bg-toast); */
   padding: 2px 4px;
   border-radius: 5px;
 }

@@ -11,7 +11,8 @@ import { sizeImg } from '../../helpers/sizeImg'
 const PartnerCard = ({ array }) => {
   const [userModal, setUserModal] = useState({})
   const [toogleModal, setToogleModal] = useState(false)
-  const { fileBannerRef, fileAvatarRef, refPartnerInfo } = useContext(ScrollRefContext)
+  const { fileBannerRef, fileAvatarRef, refPartnerInfo } =
+    useContext(ScrollRefContext)
   const { API_URL, token } = useContext(AuthContext)
   const {
     dispatchLoader,
@@ -177,7 +178,9 @@ const PartnerCard = ({ array }) => {
         }}
       >
         <div className='partner__modal-card'>
-          <img src={userModal.avatar} alt={userModal.name} />
+          <div>
+            <img src={userModal.avatar} alt={userModal.name} />
+          </div>
           <div>
             <div>
               <p>Nombre</p>

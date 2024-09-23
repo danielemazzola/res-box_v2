@@ -11,7 +11,7 @@
   display: flex;
   gap: 30px;
   transition: all 0.3s;
-  flex:1;
+  flex: 1;
 }
 
 .dashboard__card {
@@ -80,7 +80,7 @@
   transition: all 0.5s;
   overflow: hidden;
   padding: 30px 50px;
-  flex:1;
+  flex: 1;
   min-width: 130px;
 }
 
@@ -170,19 +170,4 @@
   .dashboard__container {
     padding: 80px 20px 120px;
   }
- /*  .dashboard__banner-partner {
-    width: 48%;
-  } */
-}
-@media (max-width: 815px) {
-  /* .dashboard__banner-partner {
-    width: 730px;
-  } */
-}
-
-@media (max-width: 769px) {
- /*  .dashboard__cards-container,
-  .dashboard__banner-partner {
-    width: 500px;
-  } */
 }
