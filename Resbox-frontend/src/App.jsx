@@ -7,6 +7,8 @@ import Dashboard from './pages/isAuth/dashboard/Dashboard'
 import ProtectedRoute from './components/protected-route/ProtectedRoute'
 import MyBox from './pages/isAuth/my-box/MyBox'
 import PromoBox from './pages/isAuth/promo-box/PromoBox'
+import Partner from './pages/isAuth/partner/Partner'
+
 
 const App = () => {
   return (
@@ -17,6 +19,7 @@ const App = () => {
         <Route path={`/dashboard`} element={<ProtectedRoute><Dashboard /></ProtectedRoute>}/>
         <Route path={`/my-boxes`} element={<ProtectedRoute><MyBox /></ProtectedRoute> }/>
         <Route path={`/promo-box`} element={<ProtectedRoute><PromoBox /></ProtectedRoute>}/>
+        <Route path={`/partner`} element={<ProtectedRoute><Partner /></ProtectedRoute>}/>
         <Route path='*' element={<NotFound />} />
       </Route>
     </Routes>

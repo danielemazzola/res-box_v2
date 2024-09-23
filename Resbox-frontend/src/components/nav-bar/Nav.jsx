@@ -8,6 +8,7 @@ import './Nav.css'
 import { handleCloseSesion } from '../../reducer/auth-reducer/auth.action'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import { Link, useNavigate } from 'react-router-dom'
+import { arrayNavOptions } from './helpers'
 
 const Nav = () => {
   const [showMenu, setShowMenu] = useState(false)
@@ -41,46 +42,18 @@ const Nav = () => {
       >
         <div className='filter'>
           <ul>
-            <li className={`img-show ${showMenu ? '' : 'fadeIn'}`}>
-              <Link to='./'>
-                <button
-                  className='z-index-1000 button'
-                  onClick={() => setShowMenu(!showMenu)}
-                >
-                  Inicio
-                </button>
-              </Link>
-            </li>
-            <li className={`img-show ${showMenu ? '' : 'fadeIn'}`}>
-              <Link to='dashboard'>
-                <button
-                  className='z-index-1000 button'
-                  onClick={() => setShowMenu(!showMenu)}
-                >
-                  Panel de control
-                </button>
-              </Link>
-            </li>
-            <li className={`img-show ${showMenu ? '' : 'fadeIn'}`}>
-              <Link to='my-boxes'>
-                <button
-                  className='z-index-1000 button'
-                  onClick={() => setShowMenu(!showMenu)}
-                >
-                  Mis Boxes
-                </button>
-              </Link>
-            </li>
-            <li className={`img-show ${showMenu ? '' : 'fadeIn'}`}>
-              <Link to='promo-box'>
-                <button
-                  className='z-index-1000 button'
-                  onClick={() => setShowMenu(!showMenu)}
-                >
-                  Promo box
-                </button>
-              </Link>
-            </li>
+            {arrayNavOptions?.map((val, index) => (
+              <li className={`img-show ${showMenu ? '' : 'fadeIn'}`}>
+                <Link to={val.route}>
+                  <button
+                    className='z-index-1000 button'
+                    onClick={() => setShowMenu(!showMenu)}
+                  >
+                    {val.title}
+                  </button>
+                </Link>
+              </li>
+            ))}
             <li className={`img-show ${showMenu ? '' : 'fadeIn'}`}>
               <button
                 className='z-index-1000 button'

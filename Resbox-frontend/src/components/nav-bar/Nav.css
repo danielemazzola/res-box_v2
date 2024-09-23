@@ -39,8 +39,7 @@
   justify-content: start;
   padding: 10px;
   gap: 20px;
-  width: 200px;
-  height: 300px;
+  height: 350px;
   overflow-y: scroll;
   scroll-behavior: smooth;
 }
