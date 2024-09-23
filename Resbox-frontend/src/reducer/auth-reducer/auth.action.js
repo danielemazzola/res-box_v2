@@ -34,27 +34,28 @@ export const fetchSubmit = async (
         payload: { msg: `Error: ${data.message}`, error: true }
       })
       return false
-    } else {
-      formType.login
-        ? dispatchToast({
-            type: 'ADD_NOTIFICATION',
-            payload: { msg: `Bienvenido ${data.user.name}`, error: false }
-          })
-        : dispatchToast({
-            type: 'ADD_NOTIFICATION',
-            payload: { msg: `${data.message}`, error: false }
-          })
+    }
+    if (formType.login) {
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: { msg: `Bienvenido ${data.user.name}`, error: false }
+      })
       dispatchAuth({ type: 'SET_USER', payload: data.user })
       dispatchAuth({ type: 'SET_AUTH_TRUE' })
-      if (data?.token) {
-        localStorage.setItem('SECURE_CODE_RESBOX', data.token)
-        setToken(localStorage.getItem('SECURE_CODE_RESBOX'))
-      }
-      setTimeout(() => {
-        !formType.recover && handleCloseModal()
-      }, 1000)
-      return true
+    } else {
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: { msg: `${data.message}`, error: false }
+      })
     }
+    if (data?.token) {
+      localStorage.setItem('SECURE_CODE_RESBOX', data.token)
+      setToken(localStorage.getItem('SECURE_CODE_RESBOX'))
+    }
+    setTimeout(() => {
+      !formType.recover && handleCloseModal()
+    }, 1000)
+    return true
   } catch (error) {
     dispatchToast({
       type: 'ADD_NOTIFICATION',
