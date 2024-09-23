@@ -15,8 +15,8 @@ export const arrayNavOptions = [
     route:'promo-box',
     title:'Promo - Box'
   },
-  {
+  /* {
     route:'partner',
     title:'Quiero ser Partner'
-  }
+  } */
 ]
