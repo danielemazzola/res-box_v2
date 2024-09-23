@@ -43,7 +43,7 @@ const Nav = () => {
         <div className='filter'>
           <ul>
             {arrayNavOptions?.map((val, index) => (
-              <li className={`img-show ${showMenu ? '' : 'fadeIn'}`}>
+              <li key={index} className={`img-show ${showMenu ? '' : 'fadeIn'}`}>
                 <Link to={val.route}>
                   <button
                     className='z-index-1000 button'
