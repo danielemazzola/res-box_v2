@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
     user_add_more: 'box/buy-box',
     user_operation: 'operation/new-operation',
     my_operations: 'operation',
-    operation_update:'operation/update-operation'
+    operation_update: 'operation/update-operation'
   })
   const [stateModal, setStateModal] = useState({
     infoPartner: false,
@@ -39,25 +39,38 @@ export const AuthProvider = ({ children }) => {
     stateIsAuth: { user, partner }
   } = useContext(ReducersContext)
   const { refPartnerInfo, refOperations } = useContext(ScrollRefContext)
+
   useEffect(() => {
     const isAuth = async () => {
       if (token) {
-        const { response, data } = await fetchAuth(
-          'user/profile-user',
-          {},
-          'GET',
-          token
-        )
-        if (response.status !== 200) {
+        try {
+          dispatchLoader({ type: 'SET_LOAD_TRUE' })
+          const { response, data } = await fetchAuth(
+            'user/profile-user',
+            {},
+            'GET',
+            token
+          )
+          if (response.status !== 200) {
+            dispatchToast({
+              type: 'ADD_NOTIFICATION',
+              payload: { msg: `Error: ${data.message}`, error: true }
+            })
+            localStorage.removeItem('SECURE_CODE_RESBOX')
+            dispatchAuth({ type: 'SET_AUTH_FALSE' })
+          } else {
+            dispatchAuth({ type: 'SET_USER', payload: data.user })
+            dispatchAuth({ type: 'SET_AUTH_TRUE' })
+          }
+        } catch (error) {
           dispatchToast({
             type: 'ADD_NOTIFICATION',
-            payload: { msg: `Error: ${data.message}`, error: true }
+            payload: { msg: `Error: ${error.message}`, error: true }
           })
-          localStorage.removeItem('SECURE_CODE_RESBOX')
-          dispatchAuth({ type: 'SET_AUTH_FALSE' })
-        } else {
-          dispatchAuth({ type: 'SET_USER', payload: data.user })
-          dispatchAuth({ type: 'SET_AUTH_TRUE' })
+        } finally {
+          setTimeout(() => {
+            dispatchLoader({ type: 'SET_LOAD_FALSE' })
+          }, 1000)
         }
       }
     }
