@@ -38,7 +38,7 @@ const Dashboard = () => {
     setTimeout(() => {
       useScrolltoRef(refDashboardSection)
     }, 1000)
-  }, [])  
+  }, [])
 
   return (
     <section ref={refDashboardSection} className='dashboard__container'>
@@ -70,7 +70,7 @@ const Dashboard = () => {
       <ProfileCard array={user} />
       {user.roles.includes('partner') && (
         <>
-          {user.idPartner.confirmed && (
+          {partner.confirmed && (
             <>
               <button
                 className='dashboard__banner-partner fadeIn'
