@@ -101,6 +101,22 @@ export const AuthProvider = ({ children }) => {
       dispatchToast
     )
     dispatchAuth({ type: 'SET_USER', payload: data.avatar })
+    const updatedUsers = partner.users?.map((user) => {
+      if (user._id === data.avatar._id) {
+        return {
+          ...user,
+          avatar: data.avatar.avatar
+        }
+      }
+      return user
+    })
+    dispatchAuth({
+      type: 'SET_PARTNER',
+      payload: {
+        ...partner,
+        users: updatedUsers
+      }
+    })
   }
 
   const handlePartner = async () => {

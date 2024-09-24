@@ -48,6 +48,7 @@ const Partner = () => {
 
   const onSubmit = async (formFields) => {
     await newPartner(
+      setOpenModal,
       dispatchLoader,
       dispatchToast,
       dispatchAuth,

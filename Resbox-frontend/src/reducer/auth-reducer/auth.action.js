@@ -133,6 +133,7 @@ export const handleInfoPartner = async (
 }
 
 export const newPartner = async (
+  setOpenModal,
   dispatchLoader,
   dispatchToast,
   dispatchAuth,
@@ -165,7 +166,12 @@ export const newPartner = async (
       dispatchAuth({ type: 'SET_USER', payload: data.user })
       dispatchAuth({ type: 'SET_PARTNER', payload: data.partner })
       reset()
-      navigate('../dashboard')
+      setTimeout(() => {
+        setOpenModal(false)
+      }, 500);
+      setTimeout(() => {
+        navigate('../dashboard')
+      }, 1000)
     }
   } catch (error) {
     dispatchToast({
@@ -176,7 +182,9 @@ export const newPartner = async (
       }
     })
   } finally {
-    dispatchLoader({ type: 'SET_LOAD_FALSE' })
+    setTimeout(() => {
+      dispatchLoader({ type: 'SET_LOAD_FALSE' })
+    }, 1500)
   }
 }
 
