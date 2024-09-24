@@ -122,6 +122,7 @@ const getUserWithPopulates = async (userId) => {
         select: 'name avatar'
       }
     })
+    .populate('idPartner')
 }
 
 module.exports = {
