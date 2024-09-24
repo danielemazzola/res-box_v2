@@ -17,6 +17,7 @@ export const ScrollRefProvider = ({ children }) => {
   const refBoxesSection = useRef(null)
   const refBoxes = useRef(null)
   const refOperations = useRef(null)
+  const refNewPartner = useRef(null)
   
   
   return (
@@ -35,7 +36,8 @@ export const ScrollRefProvider = ({ children }) => {
         fileAvatarRef,
         refBoxesSection,
         refBoxes,
-        refOperations
+        refOperations,
+        refNewPartner
       }}
     >
       {children}

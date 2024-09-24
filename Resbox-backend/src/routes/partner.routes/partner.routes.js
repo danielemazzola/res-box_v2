@@ -28,7 +28,7 @@ ROUTER.post(
   existFile,
   newPartnerFile
 )
-ROUTER.post('/new-partner', authenticateUser, isAdmin, newPartner)
+ROUTER.post('/new-partner', authenticateUser, /* isAdmin, */ newPartner)
 ROUTER.put(
   '/update-avatar',
   authenticateUser,

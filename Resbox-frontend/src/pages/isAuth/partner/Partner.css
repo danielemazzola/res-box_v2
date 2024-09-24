@@ -1,0 +1,69 @@
+.partner__container-information {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  min-height: 90svh;
+}
+.partner__content {
+  color: var(--rb-text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.partner__content > h2 {
+  text-align: center;
+}
+.partner__content > p > span {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--rb-text-primary);
+}
+.partner__container-information > div > button {
+  font-size: 30px;
+}
+.partner__form {
+  margin: 20px;
+  background-color: var(--rb-bg-light);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 650px;
+  max-height: 70svh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  align-items: start;
+}
+.partner__form > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+.partner__form > div > div {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
+.partner__form > div > div > label {
+  background-color: var(--rb-bg-options);
+  color: var(--rb-text-primary);
+  padding: 0 3px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+.partner__form > div > div > input {
+  padding: 7px;
+  border-radius: 5px;
+  border: none;
+}
+@media (max-width: 441px) {
+  .partner__form > div > div {
+    width: 100%;
+  }
+}
