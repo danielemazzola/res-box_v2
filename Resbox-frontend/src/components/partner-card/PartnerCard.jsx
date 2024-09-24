@@ -70,7 +70,7 @@ const PartnerCard = () => {
     )
     if (partners.length > 0) {
       const updatePartner = partners.map((partner) => {
-        if (partner._id === data.updatePartner._id) {
+        if (partner._id === data.getPartner._id) {
           return {
             ...partner,
             ...data.getPartner
