@@ -194,7 +194,8 @@ export const handleCloseSesion = (
   dispatchAuth,
   dispatchPartners,
   navigate,
-  user
+  user,
+  setStateModal
 ) => {
   dispatchLoader({ type: 'SET_LOAD_TRUE' })
   localStorage.removeItem('SECURE_CODE_RESBOX')
@@ -206,6 +207,11 @@ export const handleCloseSesion = (
   dispatchAuth({ type: 'SET_PARTNER', payload: {} })
   dispatchAuth({ type: 'SET_AUTH_FALSE' })
   dispatchPartners({ type: 'SET_OPERATIONS', payload: [] })
+  setStateModal({
+    infoPartner: false,
+    infoOperations: false,
+    redeem: false
+  })
   navigate('/')
   setTimeout(() => {
     dispatchLoader({ type: 'SET_LOAD_FALSE' })

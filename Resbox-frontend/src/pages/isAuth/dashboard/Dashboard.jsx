@@ -23,6 +23,8 @@ const Dashboard = () => {
     statePartners: { operations }
   } = useContext(ReducersContext)
 
+  console.log(user);
+  
   const {
     handleImageChange,
     handlePartner,
