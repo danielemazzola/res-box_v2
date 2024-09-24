@@ -119,7 +119,7 @@ export const AuthProvider = ({ children }) => {
     })
   }
 
-  const handlePartner = async () => {    
+  const handlePartner = async () => {
     if (Object.keys(partner).length <= 0) {
       const { data } = await handleInfoPartner(
         user,
@@ -139,7 +139,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   const handleOperations = async () => {
-    if (operations.length <= 0) {
+    if (operations.length <= 0 && !stateModal.infoOperations) {
       await getOperationsByPartner(
         token,
         API_URL.my_operations,

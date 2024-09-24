@@ -32,6 +32,7 @@ const getUserDetails = async (userId) => {
         select: 'name avatar'
       }
     })
+    .populate('idPartner')
 }
 
 const addUserBox = async (userId, boxId, usageLimit) => {

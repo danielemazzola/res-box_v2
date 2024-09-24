@@ -6,6 +6,7 @@
   justify-content: center;
   height: 100%;
   width: 100%;
+  border-radius: 10px;
 }
 
 .partner-header {
@@ -29,6 +30,10 @@
   position: absolute;
   top: var(--rb-spacing-small);
   left: var(--rb-spacing-small);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .logo-absolute > img {
@@ -36,8 +41,11 @@
   height: 60px;
   display: flex;
   object-fit: cover;
+  transition: all 0.5s;
 }
-
+.logo-absolute > img:hover {
+  transform: scale(1.1);
+}
 .name-partner-span {
   color: var(--rb-text-primary);
   opacity: 0.5;
@@ -68,7 +76,7 @@
 
 .modal-content {
   background: var(--rb-text-primary);
-  border-radius: var(--rb-border-radius);
+  border-radius: 10px;
   padding: 0 0 var(--rb-spacing-medium) 0;
   max-width: 500px;
   width: 90%;
@@ -83,10 +91,19 @@
   transform: translateY(0);
 }
 
-.modal-banner {
+.modal-content-banner {
   width: 100%;
   height: 200px;
+  overflow: hidden;
+}
+.modal-content-banner > img {
+  width: 100%;
+  height: 200px;
+  transition: all 0.5s;
   object-fit: cover;
+}
+.modal-content-banner > img:hover {
+  transform: scale(1.1);
 }
 
 .modal-details {
@@ -99,7 +116,7 @@
 }
 
 .modal-details > p {
-  background-color: var(--rb-bg-secondary);
+  background-color: var(--rb-bg-primary);
   color: var(--rb-text-primary);
   padding: 0px 5px;
   border-radius: 5px;

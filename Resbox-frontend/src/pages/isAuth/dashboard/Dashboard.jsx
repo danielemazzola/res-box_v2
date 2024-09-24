@@ -110,7 +110,11 @@ const Dashboard = () => {
             >
               <div className='operation__operations-title'>
                 <p>Mis operaciones</p>
-                <p>Descubre las 5 últimas operaciones realizadas.</p>
+                {operations.length > 0 ? (
+                  <p>Descubre las 5 últimas operaciones realizadas.</p>
+                ) : (
+                  <p>Aún no hay operaciones para mostrar</p>
+                )}
               </div>
               <div className='operation__operations-card'>
                 {operations

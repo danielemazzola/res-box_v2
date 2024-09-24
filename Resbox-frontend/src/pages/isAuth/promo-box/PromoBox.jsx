@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import useScrollToRef from '../../../hooks/useScrollToRef'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import { ReducersContext } from '../../../context/reducers/ReducersContext'
@@ -7,6 +7,7 @@ import './PromoBox.css'
 import { useLocation } from 'react-router-dom'
 
 const PromoBox = () => {
+  const [message, setMessage] = useState('')
   const location = useLocation()
   const { refBoxesSection } = useContext(ScrollRefContext)
   const {
@@ -31,6 +32,8 @@ const PromoBox = () => {
         dispatchLoader({ type: 'SET_LOAD_TRUE' })
         const response = await fetch(`${import.meta.env.VITE_URL_API}/box`)
         const data = await response.json()
+        setMessage(data.message)
+
         dispatchPromoBoxes({ type: 'SET_BOXES', payload: data.boxes })
       } catch (error) {
       } finally {
@@ -66,7 +69,7 @@ const PromoBox = () => {
             ))}
         </>
       ) : (
-        <p>Aún no exísten BOX</p>
+        <p className='show'>{message}</p>
       )}
     </section>
   )

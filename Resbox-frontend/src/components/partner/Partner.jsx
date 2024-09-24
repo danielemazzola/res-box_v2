@@ -41,11 +41,12 @@ const Partner = ({ partner, arrayFilterPartners }) => {
         handleCloseModal={() => setIsModalOpen(false)}
       >
         <div className='modal-content'>
-          <img
-            className='modal-banner'
-            src={partner.banner}
-            alt={`${partner.name} banner`}
-          />
+          <div className='modal-content-banner'>
+            <img
+              src={partner.banner}
+              alt={`${partner.name} banner`}
+            />
+          </div>
           <div className='logo-absolute'>
             <img
               className='partner-avatar'
@@ -56,7 +57,7 @@ const Partner = ({ partner, arrayFilterPartners }) => {
           </div>
           <div className='modal-details'>
             <p>{partner.name}</p>
-            <p>{partner.phone}</p>
+            <p>Tlf: {partner.phone}</p>
             <p>{partner.address}</p>
             <p>{partner.city}</p>
           </div>

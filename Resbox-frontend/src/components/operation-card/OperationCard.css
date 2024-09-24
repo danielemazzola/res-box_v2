@@ -43,6 +43,7 @@
   align-items: start;
   flex: 1;
   flex-wrap: wrap;
+  min-width: 200px;
 }
 .operation__contain-card > div {
   display: flex;

@@ -57,6 +57,14 @@ const Header = () => {
                 Iniciar
               </button>
               <button
+                ref={refBoxes}
+                onClick={() => scrollToRef(refBoxesSection)}
+                className='button'
+                style={{ backgroundColor: 'var(--rb-bg-options) !important' }}
+              >
+                PROMO - BOX
+              </button>
+              <button
                 ref={refPartner}
                 onClick={() => scrollToRef(refPartnersSection)}
                 className='button yellow'
@@ -70,13 +78,7 @@ const Header = () => {
               >
                 ¿Cómo funciona?
               </button>
-              <button
-                ref={refBoxes}
-                onClick={() => scrollToRef(refBoxesSection)}
-                className='button green'
-              >
-                PROMO - BOX
-              </button>
+
               <InstallApp />
             </div>
           </div>

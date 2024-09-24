@@ -61,6 +61,10 @@ const PromoBoxCard = ({ box }) => {
             <strong>Precio:</strong> {box.price}€
           </p>
           <p>
+            <strong>P/U:</strong>{' '}
+            {box.price / (box.items_included + box.bonus_items)}€
+          </p>
+          <p>
             <strong>Vendidos:</strong> {box.items_acquired_by.length}
           </p>
           <p>

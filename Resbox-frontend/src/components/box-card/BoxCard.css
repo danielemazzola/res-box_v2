@@ -263,6 +263,7 @@
   margin-left: -25px;
   z-index: calc(100 - var(--index));
   transition: transform 0.3s ease;
+  object-fit: cover;
 }
 
 .info-avatar-partner:hover {
