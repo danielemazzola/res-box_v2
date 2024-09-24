@@ -43,19 +43,13 @@ const Partner = () => {
 
   const onSubmit = async (formFields) => {
     console.log(formFields)
-    const response = await fetch(
-      `${import.meta.env.VITE_URL_API}/${API_URL.new_partner}`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formFields)
-      }
-    )
-    const data = await response.json()
-    console.log(data)
+    const response = await fetch(`${import.meta.env.VITE_URL_API}/${API_URL.new_partner}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      body: formData
+    })
   }
 
   return (

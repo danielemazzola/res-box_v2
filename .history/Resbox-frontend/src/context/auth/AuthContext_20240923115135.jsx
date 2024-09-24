@@ -20,8 +20,7 @@ export const AuthProvider = ({ children }) => {
     user_add_more: 'box/buy-box',
     user_operation: 'operation/new-operation',
     my_operations: 'operation',
-    operation_update: 'operation/update-operation',
-    new_partner: 'partner/new-partner'
+    operation_update: 'operation/update-operation'
   })
   const [stateModal, setStateModal] = useState({
     infoPartner: false,

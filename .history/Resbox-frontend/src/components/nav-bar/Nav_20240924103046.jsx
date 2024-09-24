@@ -8,7 +8,7 @@ import './Nav.css'
 import { handleCloseSesion } from '../../reducer/auth-reducer/auth.action'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import { Link, useNavigate } from 'react-router-dom'
-import { NavOptions } from './helpers'
+import { arrayNavOptions } from './helpers'
 
 const Nav = () => {
   const [showMenu, setShowMenu] = useState(false)
@@ -42,7 +42,37 @@ const Nav = () => {
       >
         <div className='filter'>
           <ul>
-            <NavOptions setShowMenu={setShowMenu} showMenu={showMenu} />
+            {/* {arrayNavOptions?.map((val, index) => (
+              <li key={index} className={`img-show ${showMenu ? '' : 'fadeIn'}`}>
+                <Link to={val.route}>
+                  <button
+                    className='z-index-1000 button'
+                    onClick={() => setShowMenu(!showMenu)}
+                  >
+                    {val.title}
+                  </button>
+                </Link>
+              </li>
+            ))} */}
+            {arrayNavOptions?.map((val, index) => {
+              if (val.route !== 'partner') {
+                if (!user.roles.includes('partner')) {
+                  ;<li
+                    key={index}
+                    className={`img-show ${showMenu ? '' : 'fadeIn'}`}
+                  >
+                    <Link to={val.route}>
+                      <button
+                        className='z-index-1000 button'
+                        onClick={() => setShowMenu(!showMenu)}
+                      >
+                        {val.title}
+                      </button>
+                    </Link>
+                  </li>
+                }
+              }
+            })}
             <li className={`img-show ${showMenu ? '' : 'fadeIn'}`}>
               <button
                 className='z-index-1000 button'

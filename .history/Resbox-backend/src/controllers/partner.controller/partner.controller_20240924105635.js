@@ -56,8 +56,6 @@ const newPartnerFile = async (req, res, next) => {
 }
 
 const newPartner = async (req, res, next) => {
-  console.log(req.body);
-  
   const email = req.body.email.toLowerCase()
   try {
     const exist = await Partner.findOne({ email })

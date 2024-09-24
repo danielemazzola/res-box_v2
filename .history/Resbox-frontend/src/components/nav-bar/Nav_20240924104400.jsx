@@ -42,7 +42,7 @@ const Nav = () => {
       >
         <div className='filter'>
           <ul>
-            <NavOptions setShowMenu={setShowMenu} showMenu={showMenu} />
+          <NavOptions setShowMenu={setShowMenu} showMenu={showMenu}  />
             <li className={`img-show ${showMenu ? '' : 'fadeIn'}`}>
               <button
                 className='z-index-1000 button'

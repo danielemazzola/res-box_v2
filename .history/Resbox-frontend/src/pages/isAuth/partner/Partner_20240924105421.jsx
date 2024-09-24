@@ -48,14 +48,14 @@ const Partner = () => {
       {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(formFields)
       }
     )
     const data = await response.json()
-    console.log(data)
+    console.log(data);
+    
   }
 
   return (
