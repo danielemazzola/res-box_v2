@@ -5,14 +5,13 @@ import Modal from '../../../components/modal/Modal'
 import { useForm } from 'react-hook-form'
 import { arrayFormPartner } from './helpers'
 import './Partner.css'
+import logo from '/images/logo.png'
 import Alert from '../../../components/alert/Alert'
-import { AuthContext } from '../../../context/auth/AuthContext'
 
 const Partner = () => {
   const [openModal, setOpenModal] = useState(false)
 
   const { refNewPartner } = useContext(ScrollRefContext)
-  const { API_URL, token } = useContext(AuthContext)
   const useScrolltoref = useScrollToRef()
 
   useEffect(() => {
@@ -41,23 +40,8 @@ const Partner = () => {
     }
   })
 
-  const onSubmit = async (formFields) => {
+  const onSubmit = (formFields) => {
     console.log(formFields)
-    const response = await fetch(
-      `${import.meta.env.VITE_URL_API}/${API_URL.new_partner}`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formFields)
-      }
-    )
-    const data = await response.json()
-    if(response.status !== 201){}
-    console.log(response)
-    console.log(data)
   }
 
   return (

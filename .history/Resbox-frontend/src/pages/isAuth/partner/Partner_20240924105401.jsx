@@ -48,16 +48,11 @@ const Partner = () => {
       {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(formFields)
       }
     )
-    const data = await response.json()
-    if(response.status !== 201){}
-    console.log(response)
-    console.log(data)
   }
 
   return (
