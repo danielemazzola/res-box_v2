@@ -8,11 +8,13 @@ const ModalInfoPartner = ({ stateBoxCard, handleCloseModalInfoPartner }) => {
       handleCloseModal={handleCloseModalInfoPartner}
     >
       <div className='modal-content'>
+      <div className='modal-content-banner'>
         <img
-          className='modal-banner'
           src={stateBoxCard.infoPartner.banner}
           alt={`${stateBoxCard.infoPartner.name} banner`}
         />
+        
+      </div>
         <div className='logo-absolute'>
           <img
             className='partner-avatar'
