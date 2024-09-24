@@ -68,6 +68,15 @@ const Dashboard = () => {
         </div>
       </div>
       <ProfileCard array={user} />
+      <button
+            className='dashboard__banner-partner fadeIn'
+            onClick={() => handlePartner(setStateModal, stateModal)}
+          >
+            <img src={restaurante} />
+            <div>
+              <p>Negocio</p>
+            </div>
+          </button>
       {user.roles.includes('partner') && (
         <>
           {partner.confirmed && (
@@ -92,15 +101,7 @@ const Dashboard = () => {
               </button>
             </>
           )}
-          <button
-            className='dashboard__banner-partner fadeIn'
-            onClick={() => handlePartner(setStateModal, stateModal)}
-          >
-            <img src={restaurante} />
-            <div>
-              <p>Negocio</p>
-            </div>
-          </button>
+          
           {stateModal.infoPartner && <PartnerCard />}
           {stateModal.infoOperations && (
             <div
