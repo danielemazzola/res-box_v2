@@ -73,7 +73,7 @@ const PartnerCard = () => {
         if (partner._id === data.updatePartner._id) {
           return {
             ...partner,
-            ...data.updatePartner
+            ...data.getPartner
           }
         }
         return partner
@@ -85,7 +85,7 @@ const PartnerCard = () => {
     }
     dispatchAuth({
       type: 'SET_PARTNER',
-      payload: data.updatePartner
+      payload: data.getPartner
     })
   }
 

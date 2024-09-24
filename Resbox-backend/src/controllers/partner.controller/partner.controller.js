@@ -61,12 +61,10 @@ const newPartner = async (req, res, next) => {
   try {
     const exist = await Partner.findOne({ email })
     if (exist) {
-      return res
-        .status(409)
-        .json({
-          message:
-            'El email ya existe, debe esperar a ser activado el establecimiento.'
-        })
+      return res.status(409).json({
+        message:
+          'El email ya existe, debe esperar a ser activado el establecimiento.'
+      })
     } else {
       const newPartner = new Partner({
         ...req.body,
@@ -81,14 +79,12 @@ const newPartner = async (req, res, next) => {
         path: 'users',
         select: '_id name lastname email avatar roles'
       })
-      return res
-        .status(201)
-        .json({
-          message:
-            'Partner registrado correctamente, tu perfil a cambiado los roles',
-          partner,
-          user
-        })
+      return res.status(201).json({
+        message:
+          'Partner registrado correctamente, tu perfil a cambiado los roles',
+        partner,
+        user
+      })
     }
   } catch (error) {
     next(error)
@@ -151,9 +147,11 @@ const updatAvatar = async (req, res, next) => {
         { $set: { avatar: req.body.image } },
         { new: true }
       )
-      return res
-        .status(200)
-        .json({ message: 'Avatar actualizado.', updatePartner })
+      const getPartner = await Partner.findById(updatePartner._id).populate({
+        path: 'users',
+        select: '_id name lastname email avatar roles'
+      })
+      return res.status(200).json({ message: 'Avatar actualizado.', getPartner })
     }
   } catch (error) {
     next(error)
@@ -181,9 +179,13 @@ const updateBanner = async (req, res, next) => {
         { $set: { banner: req.body.image } },
         { new: true }
       )
+      const getPartner = await Partner.findById(updatePartner._id).populate({
+        path: 'users',
+        select: '_id name lastname email avatar roles'
+      })
       return res
         .status(200)
-        .json({ message: 'Banner actualizado.', updatePartner })
+        .json({ message: 'Banner actualizado.', getPartner })
     }
   } catch (error) {
     next(error)
