@@ -35,9 +35,7 @@ const OperationCard = ({ operation }) => {
         <p>Resultado:</p>
         <p
           className={`operation__get-result ${
-            operation.status.includes('completed')
-              ? 'green'
-              : 'cancelled'
+            operation.status.includes('completed') ? 'green' : 'cancelled'
           }`}
         >
           {operation.status.includes('completed') ? 'Aprobado' : 'Cancelado'}

@@ -139,7 +139,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   const handleOperations = async () => {
-    if (Object.keys(operations).length <= 0) {
+    if (operations.length <= 0) {
       await getOperationsByPartner(
         token,
         API_URL.my_operations,
