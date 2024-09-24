@@ -7,6 +7,6 @@ export const arrayFormPartner = [
   { key: 'email', title: 'E-mail' },
   { key: 'bank_name', title: 'Nombre Banco' },
   { key: 'bank_number', title: 'Número IBAN' },
-  { key: 'country', title: 'Ciudad' },
+  { key: 'city', title: 'Ciudad' },
   { key: 'address', title: 'Dirección' }
 ]

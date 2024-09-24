@@ -26,7 +26,7 @@ const newPartnerFile = async (req, res, next) => {
             email: partner.email,
             bank_name: partner.bank_name,
             bank_number: partner.bank_number,
-            country: partner.country,
+            city: partner.city,
             address: partner.address,
             coordinate_x: partner.coordinate_x,
             coordinate_y: partner.coordinate_y
@@ -56,22 +56,39 @@ const newPartnerFile = async (req, res, next) => {
 }
 
 const newPartner = async (req, res, next) => {
-  console.log(req.body);
-  
+  const { user } = req
   const email = req.body.email.toLowerCase()
   try {
     const exist = await Partner.findOne({ email })
     if (exist) {
-      return res.status(409).json({ message: 'El email ya existe.' })
+      return res
+        .status(409)
+        .json({
+          message:
+            'El email ya existe, debe esperar a ser activado el establecimiento.'
+        })
     } else {
-      const partner = new Partner({
+      const newPartner = new Partner({
         ...req.body,
-        email
+        email,
+        users: [user._id]
       })
-      await partner.save()
+      await newPartner.save()
+      user.idPartner = newPartner._id
+      user.roles.push('partner')
+      await user.save()
+      const partner = await Partner.findById(newPartner._id).populate({
+        path: 'users',
+        select: '_id name lastname email avatar roles'
+      })
       return res
         .status(201)
-        .json({ message: 'Partner registrado correctamente', partner })
+        .json({
+          message:
+            'Partner registrado correctamente, tu perfil a cambiado los roles',
+          partner,
+          user
+        })
     }
   } catch (error) {
     next(error)
@@ -134,7 +151,9 @@ const updatAvatar = async (req, res, next) => {
         { $set: { avatar: req.body.image } },
         { new: true }
       )
-      return res.status(200).json({ message: 'Avatar actualizado.', updatePartner })
+      return res
+        .status(200)
+        .json({ message: 'Avatar actualizado.', updatePartner })
     }
   } catch (error) {
     next(error)
@@ -162,7 +181,9 @@ const updateBanner = async (req, res, next) => {
         { $set: { banner: req.body.image } },
         { new: true }
       )
-      return res.status(200).json({ message: 'Banner actualizado.', updatePartner })
+      return res
+        .status(200)
+        .json({ message: 'Banner actualizado.', updatePartner })
     }
   } catch (error) {
     next(error)

@@ -63,3 +63,20 @@ export const fetchPartner = async (user, token) => {
     console.log(error.message)
   }
 }
+
+export const createPartner = async (url, token, formFields) => {
+  try {
+    const response = await fetch(`${url}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formFields)
+    })
+    const data = await response.json()
+    return { response, data }
+  } catch (error) {
+    console.log(error.message)
+  }
+}

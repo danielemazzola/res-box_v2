@@ -1,7 +1,7 @@
 import { fetchGetOperations } from '../../services/fetch-partner/fetchPartners'
 
 export const getFilterPartners = (
-  country,
+  city,
   partners,
   dispatchPartners,
   arrayFilterPartners
@@ -10,22 +10,22 @@ export const getFilterPartners = (
   if (arrayFilterPartners.length > 0) {
     dispatchPartners({ type: 'SET_FILTER_STATE_FALSE' })
     setTimeout(() => {
-      const filtered = handleFilterCountry(country, partners)
+      const filtered = handleFiltercity(city, partners)
       dispatchPartners({ type: 'SET_FILTER_PARTNERS', payload: filtered })
       dispatchPartners({ type: 'SET_FILTER_STATE_TRUE' })
     }, 300)
   } else {
-    const filtered = handleFilterCountry(country, partners)
+    const filtered = handleFiltercity(city, partners)
     dispatchPartners({ type: 'SET_FILTER_PARTNERS', payload: filtered })
     dispatchPartners({ type: 'SET_FILTER_STATE_TRUE' })
   }
 }
-const handleFilterCountry = (country, partners) => {
+const handleFiltercity = (city, partners) => {
   let newArrayPartners = partners
-  const getFilterPartnersCountry = newArrayPartners.filter(
-    (partner) => partner.country === country
+  const getFilterPartnerscity = newArrayPartners.filter(
+    (partner) => partner.city === city
   )
-  return getFilterPartnersCountry
+  return getFilterPartnerscity
 }
 
 export const handleSearchPartner = (

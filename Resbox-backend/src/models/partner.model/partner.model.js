@@ -22,11 +22,12 @@ const partnerSchema = mongoose.Schema(
       default:
         'https://www.shutterstock.com/image-photo/various-asian-meals-on-rustic-600nw-1125066479.jpg'
     },
-    country: { type: String, trim: true, required: true },
+    city: { type: String, trim: true, required: true },
     address: { type: String, trim: true, required: true },
-    coordinate_x: { type: String, trim: true, required: true },
-    coordinate_y: { type: String, trim: true, required: true },
-    users: { type: [mongoose.Schema.Types.ObjectId], ref: 'User' }
+    coordinate_x: { type: String, trim: true, default: '0' },
+    coordinate_y: { type: String, trim: true, default: '0' },
+    users: { type: [mongoose.Schema.Types.ObjectId], ref: 'User' },
+    confirmed: { type: Boolean, default: false }
   },
   {
     timestamps: true,

@@ -69,11 +69,14 @@
   flex-wrap: wrap;
   gap: 5px;
 }
-.partner__contain-information > div > p:first-child {
+.partner__bg_p{
   background-color: var(--rb-bg-primary);
+  
+}
+.partner__contain-information > div > p:first-child {
+  color: var(--rb-text-primary);
   padding: 0 5px;
   border-radius: 5px;
-  color: var(--rb-text-primary);
   font-size: var(--rb-font-size-small);
   text-transform: capitalize;
 }
@@ -118,6 +121,7 @@
   font-size: var(--rb-font-size-small);
   border-radius: 5px;
 }
+.inactive{}
 
 .partner__contain-roles > p {
   display: flex;

@@ -32,20 +32,21 @@ const InformationApp = () => {
         <div className='contain-partners-title show'>
           <h2 className=''>¿Donde puedes consumir tus boxs?</h2>
         </div>
-        <div className='container-country-partners'>
+        <div className='container-city-partners'>
           <h3 className='show'>Estamos en:</h3>
         </div>
         <ul ref={filterPartnersRef} className='container-ul-targets'>
           {partners
-            ?.map((el) => el.country)
+            .filter((el) => el.confirmed)
+            ?.map((el) => el.city)
             .filter((value, index, self) => self.indexOf(value) === index)
-            .map((country, index) => (
+            .map((city, index) => (
               <li
                 key={index}
                 className='show'
                 onClick={() => {
                   getFilterPartners(
-                    country,
+                    city,
                     partners,
                     dispatchPartners,
                     arrayFilterPartners
@@ -53,7 +54,7 @@ const InformationApp = () => {
                   scrollToRef(filterPartnersRef)
                 }}
               >
-                {country}
+                {city}
               </li>
             ))}
         </ul>
@@ -64,7 +65,7 @@ const InformationApp = () => {
           <div>
             <div className='contain-tilte-search-filter'>
               <h4 className={`result-filter-partners`}>
-                {arrayFilterPartners[0].country}
+                {arrayFilterPartners[0].city}
               </h4>
               <div className='container-result-search'>
                 <img
@@ -105,28 +106,33 @@ const InformationApp = () => {
             <div className='last-ten-partners-filter'>
               <p>Resultados de busqueda: {arrayFilterPartnersSearch.length}</p>
               <div className={`container-cards-partners `}>
-                {arrayFilterPartnersSearch?.map((partner) => (
-                  <div key={partner._id}>
-                    <Partner
-                      partner={partner}
-                      arrayFilterPartners={arrayFilterPartnersSearch}
-                    />
-                  </div>
-                ))}
+                {arrayFilterPartnersSearch
+                  ?.filter((el) => el.confirmed)
+                  .map((partner) => (
+                    <div key={partner._id}>
+                      <Partner
+                        partner={partner}
+                        arrayFilterPartners={arrayFilterPartnersSearch}
+                      />
+                    </div>
+                  ))}
               </div>
             </div>
             <div className='last-ten-partners-filter'>
-              <p>Últimos 10 Partners en {arrayFilterPartners[0].country}:</p>
+              <p>Últimos 10 Partners en {arrayFilterPartners[0].city}:</p>
               <div className={`container-cards-partners`}>
-                {arrayFilterPartners?.map((partner) => (
-                  <div key={partner._id}>
-                    <Partner
-                      partner={partner}
-                      arrayFilterPartners={arrayFilterPartners}
-                    />
-                  </div>
-                )).reverse()
-                .slice(0, 10)}
+                {arrayFilterPartners
+                  ?.filter((el) => el.confirmed)
+                  .map((partner) => (
+                    <div key={partner._id}>
+                      <Partner
+                        partner={partner}
+                        arrayFilterPartners={arrayFilterPartners}
+                      />
+                    </div>
+                  ))
+                  .reverse()
+                  .slice(0, 10)}
               </div>
             </div>
           </div>
@@ -135,6 +141,7 @@ const InformationApp = () => {
       {partners && partners.length > 0 ? (
         <div className='container-cards-partners'>
           {partners
+            .filter((el) => el.confirmed)
             .map((partner) => (
               <div key={partner._id}>
                 <Partner partner={partner} />

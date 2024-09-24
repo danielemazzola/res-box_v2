@@ -14,14 +14,14 @@
   text-align: center;
   color: var(--rb-text-primary);
 }
-.container-country-partners {
+.container-city-partners {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px;
 }
-.container-country-partners > h3 {
+.container-city-partners > h3 {
   color: var(--rb-text-primary);
 }
 .container-ul-targets {

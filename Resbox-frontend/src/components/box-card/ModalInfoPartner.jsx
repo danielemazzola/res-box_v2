@@ -25,7 +25,7 @@ const ModalInfoPartner = ({ stateBoxCard, handleCloseModalInfoPartner }) => {
           <p>{stateBoxCard.infoPartner.name}</p>
           <p>{stateBoxCard.infoPartner.phone}</p>
           <p>{stateBoxCard.infoPartner.address}</p>
-          <p>{stateBoxCard.infoPartner.country}</p>
+          <p>{stateBoxCard.infoPartner.city}</p>
         </div>
         <div className='modal-details-users'>
           {stateBoxCard?.infoPartner?.users?.map((user, index) => (

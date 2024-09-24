@@ -8,7 +8,7 @@ import { getDate } from '../../helpers/date'
 import './PartnerCard.css'
 import { sizeImg } from '../../helpers/sizeImg'
 
-const PartnerCard = ({ array }) => {
+const PartnerCard = () => {
   const [userModal, setUserModal] = useState({})
   const [toogleModal, setToogleModal] = useState(false)
   const { fileBannerRef, fileAvatarRef, refPartnerInfo } =
@@ -19,7 +19,8 @@ const PartnerCard = ({ array }) => {
     dispatchToast,
     dispatchAuth,
     dispatchPartners,
-    statePartners: { partners }
+    statePartners: { partners },
+    stateIsAuth: { partner }
   } = useContext(ReducersContext)
   const handleUser = (user) => {
     setUserModal(user)
@@ -53,8 +54,6 @@ const PartnerCard = ({ array }) => {
       })
       return
     }
-
-    const imageUrl = URL.createObjectURL(file)
     const formData = new FormData()
     if (banner) {
       formData.append('banner', file)
@@ -114,15 +113,15 @@ const PartnerCard = ({ array }) => {
           />
         </form>
         <img
-          src={array.banner}
-          alt={array.name}
+          src={partner.banner}
+          alt={partner.name}
           onClick={() => handleChangeImage({ banner: true })}
         />
       </div>
       <div className='partner__avatar'>
         <img
-          src={array.avatar}
-          alt={array.name}
+          src={partner.avatar}
+          alt={partner.name}
           width='70'
           onClick={() => handleChangeImage({ avatar: true })}
         />
@@ -132,28 +131,28 @@ const PartnerCard = ({ array }) => {
       </div>
       <div className='partner__contain-information'>
         <div>
-          <p>nombre</p>
-          <p>{array.name}</p>
+          <p className='partner__bg_p'>nombre</p>
+          <p>{partner.name}</p>
         </div>
         <div>
-          <p>CIF</p>
-          <p>{array.cif}</p>
+          <p className='partner__bg_p'>CIF</p>
+          <p>{partner.cif}</p>
         </div>
         <div>
-          <p>email</p>
-          <p>{array.email}</p>
+          <p className='partner__bg_p'>email</p>
+          <p>{partner.email}</p>
         </div>
         <div>
-          <p>propietari@</p>
-          <p>{array.owner_name + ' ' + array.owner_lastname}</p>
+          <p className='partner__bg_p'>propietari@</p>
+          <p>{partner.owner_name + ' ' + partner.owner_lastname}</p>
         </div>
         <div>
-          <p>Dirección</p>
-          <p>{array.country + ', ' + array.address}</p>
+          <p className='partner__bg_p'>Dirección</p>
+          <p>{partner.city + ', ' + partner.address}</p>
         </div>
         <div>
-          <p>Usuarios vinculados</p>
-          {array.users?.map((user, index) => (
+          <p className='partner__bg_p'>Usuarios vinculados</p>
+          {partner.users?.map((user, index) => (
             <button
               className='partner__contain-btn-users waveEffect'
               key={index}
@@ -164,8 +163,13 @@ const PartnerCard = ({ array }) => {
           ))}
         </div>
         <div>
-          <p>Cuenta creada</p>
-          <p>{getDate(array.createdAt)}</p>
+          <p className='partner__bg_p'>Cuenta creada</p>
+          <p>{getDate(partner.createdAt)}</p>
+        </div>
+        <div>
+          <p className={`${partner.confirmed ? 'green' : 'cancelled'}`}>
+            {partner.confirmed ? 'Activo' : 'A la espera de confirmación'}
+          </p>
         </div>
       </div>
       <Modal

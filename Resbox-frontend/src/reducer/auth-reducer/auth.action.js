@@ -1,4 +1,5 @@
 import {
+  createPartner,
   fetchAuth,
   fetchPartner,
   fetchUpdateImg
@@ -128,6 +129,54 @@ export const handleInfoPartner = async (
     setTimeout(() => {
       dispatchLoader({ type: 'SET_LOAD_FALSE' })
     }, 1500)
+  }
+}
+
+export const newPartner = async (
+  dispatchLoader,
+  dispatchToast,
+  dispatchAuth,
+  reset,
+  navigate,
+  API_URL,
+  token,
+  formFields
+) => {
+  const url = `${import.meta.env.VITE_URL_API}/${API_URL.new_partner}`
+  try {
+    dispatchLoader({ type: 'SET_LOAD_TRUE' })
+    const { response, data } = await createPartner(url, token, formFields)
+    if (response.status !== 201) {
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: {
+          msg: data.message,
+          error: true
+        }
+      })
+    } else {
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: {
+          msg: data.message,
+          error: false
+        }
+      })
+      dispatchAuth({ type: 'SET_USER', payload: data.user })
+      dispatchAuth({ type: 'SET_PARTNER', payload: data.partner })
+      reset()
+      navigate('../dashboard')
+    }
+  } catch (error) {
+    dispatchToast({
+      type: 'ADD_NOTIFICATION',
+      payload: {
+        msg: error.message,
+        error: true
+      }
+    })
+  } finally {
+    dispatchLoader({ type: 'SET_LOAD_FALSE' })
   }
 }
 

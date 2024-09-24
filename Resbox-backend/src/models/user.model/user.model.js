@@ -55,7 +55,8 @@ const userSchema = new mongoose.Schema(
     },
     idPartner: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Partner'
+      ref: 'Partner',
+      default: null
     },
     purchasedBoxes: [purchasedBoxSchema],
     roles: {

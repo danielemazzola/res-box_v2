@@ -70,24 +70,28 @@ const Dashboard = () => {
       <ProfileCard array={user} />
       {user.roles.includes('partner') && (
         <>
-          <button
-            className='dashboard__banner-partner fadeIn'
-            onClick={() => handleOperations(setStateModal, stateModal)}
-          >
-            <img src={operationsImg} width='150' />
-            <div>
-              <p>Operaciones</p>
-            </div>
-          </button>
-          <button
-            className='dashboard__banner-partner fadeIn'
-            onClick={() => handleRedeemCode(setStateModal, stateModal)}
-          >
-            <img src={redeemCode} className='dashboard__img-redeem' />
-            <div>
-              <p>Canjear Código</p>
-            </div>
-          </button>
+          {partner.confirmed && (
+            <>
+              <button
+                className='dashboard__banner-partner fadeIn'
+                onClick={() => handleOperations(setStateModal, stateModal)}
+              >
+                <img src={operationsImg} width='150' />
+                <div>
+                  <p>Operaciones</p>
+                </div>
+              </button>
+              <button
+                className='dashboard__banner-partner fadeIn'
+                onClick={() => handleRedeemCode(setStateModal, stateModal)}
+              >
+                <img src={redeemCode} className='dashboard__img-redeem' />
+                <div>
+                  <p>Canjear Código</p>
+                </div>
+              </button>
+            </>
+          )}
           <button
             className='dashboard__banner-partner fadeIn'
             onClick={() => handlePartner(setStateModal, stateModal)}
@@ -97,9 +101,7 @@ const Dashboard = () => {
               <p>Negocio</p>
             </div>
           </button>
-          {stateModal.infoPartner && (
-            <PartnerCard array={partner} />
-          )}
+          {stateModal.infoPartner && <PartnerCard />}
           {stateModal.infoOperations && (
             <div
               ref={refOperations}

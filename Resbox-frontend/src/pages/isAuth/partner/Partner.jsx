@@ -7,12 +7,17 @@ import { arrayFormPartner } from './helpers'
 import './Partner.css'
 import Alert from '../../../components/alert/Alert'
 import { AuthContext } from '../../../context/auth/AuthContext'
+import { ReducersContext } from '../../../context/reducers/ReducersContext'
+import { useNavigate } from 'react-router-dom'
+import { newPartner } from '../../../reducer/auth-reducer/auth.action'
 
 const Partner = () => {
   const [openModal, setOpenModal] = useState(false)
-
+  const navigate = useNavigate()
   const { refNewPartner } = useContext(ScrollRefContext)
   const { API_URL, token } = useContext(AuthContext)
+  const { dispatchToast, dispatchLoader, dispatchAuth } =
+    useContext(ReducersContext)
   const useScrolltoref = useScrollToRef()
 
   useEffect(() => {
@@ -36,28 +41,22 @@ const Partner = () => {
       email: '',
       bank_name: '',
       bank_number: '',
-      country: '',
+      city: '',
       address: ''
     }
   })
 
   const onSubmit = async (formFields) => {
-    console.log(formFields)
-    const response = await fetch(
-      `${import.meta.env.VITE_URL_API}/${API_URL.new_partner}`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formFields)
-      }
+    await newPartner(
+      dispatchLoader,
+      dispatchToast,
+      dispatchAuth,
+      reset,
+      navigate,
+      API_URL,
+      token,
+      formFields
     )
-    const data = await response.json()
-    if(response.status !== 201){}
-    console.log(response)
-    console.log(data)
   }
 
   return (
@@ -120,7 +119,7 @@ const Partner = () => {
                         ? 'Mi Banco'
                         : field.key === 'bank_number'
                         ? '1234123112311231'
-                        : field.key === 'country'
+                        : field.key === 'city'
                         ? 'Alicante'
                         : field.key === 'address' &&
                           'Av. la Estación 3, 03003 Alicante'

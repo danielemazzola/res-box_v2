@@ -58,7 +58,7 @@ const Partner = ({ partner, arrayFilterPartners }) => {
             <p>{partner.name}</p>
             <p>{partner.phone}</p>
             <p>{partner.address}</p>
-            <p>{partner.country}</p>
+            <p>{partner.city}</p>
           </div>
           <div className='container-map-view'>
             <div>
