@@ -23,8 +23,6 @@ const Dashboard = () => {
     statePartners: { operations }
   } = useContext(ReducersContext)
 
-  console.log(user);
-  
   const {
     handleImageChange,
     handlePartner,
@@ -81,7 +79,7 @@ const Dashboard = () => {
               <p>Negocio</p>
             </div>
           </button>
-          {partner.confirmed && (
+          {user.idPartner.confirmed && (
             <>
               <button
                 className='dashboard__banner-partner fadeIn'

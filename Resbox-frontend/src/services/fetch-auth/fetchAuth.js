@@ -49,7 +49,7 @@ export const fetchUpdateImg = async (formData, url, token) => {
 export const fetchPartner = async (user, token) => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_URL_API}/partner/${user.idPartner}`,
+      `${import.meta.env.VITE_URL_API}/partner/${user.idPartner._id}`,
       {
         method: 'GET',
         headers: {

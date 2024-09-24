@@ -106,7 +106,7 @@ const getPartners = async (req, res, next) => {
 }
 
 const getPartner = async (req, res, next) => {
-  const { id_partner } = req.params
+  const { id_partner } = req.params  
   try {
     const partner = await Partner.findById(id_partner).populate({
       path: 'users',

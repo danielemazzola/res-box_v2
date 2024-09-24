@@ -119,7 +119,7 @@ export const AuthProvider = ({ children }) => {
     })
   }
 
-  const handlePartner = async () => {
+  const handlePartner = async () => {    
     if (Object.keys(partner).length <= 0) {
       const { data } = await handleInfoPartner(
         user,
