@@ -8,8 +8,6 @@ const {
   recoverEmail,
   newPasswordEmail
 } = require('./mails/send.mails')
-const fetch = (...args) =>
-  import('node-fetch').then(({ default: fetch }) => fetch(...args))
 
 const newUser = async (req, res, next) => {
   const email = req.body.email.toLowerCase()
@@ -44,18 +42,17 @@ const authGoogle = async (req, res) => {
     const { email, name, picture, sub } = userInfo
     let user_google = await User.findOne({ email })
     if (!user_google) {
-      // Si el usuario no existe, creamos uno nuevo
-      const names = name.split(' ') // Separar el nombre completo
-      const firstname = names[0] || '' // Primer nombre
-      const lastname = names.slice(1).join(' ') || '' // El resto como apellido
+      const names = name.split(' ')
+      const firstname = names[0] || ''
+      const lastname = names.slice(1).join(' ') || ''
 
       user_google = new User({
         name: firstname,
         lastname,
         email,
-        password: sub, // Puedes usar el 'sub' de Google como password temporal (ya que no se usará realmente)
+        password: sub,
         avatar: picture,
-        token: null // Puedes generar un token JWT aquí si lo usas para autenticación
+        token: null
       })
       await user_google.save()
     }

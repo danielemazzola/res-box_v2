@@ -13,8 +13,8 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_HOST,
     pass: process.env.PASSWORD_HOST
   },
-  logger: true, // Habilita los logs
-  debug: true
+  logger: false, // Habilita los logs
+  debug: false
 })
 
 const sendMail = async (to, subject, htmlContent) => {
