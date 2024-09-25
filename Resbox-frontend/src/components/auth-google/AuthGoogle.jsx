@@ -1,4 +1,4 @@
-import React from 'react'
+/* import React from 'react'
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 
 const AuthGoogle = () => {
@@ -26,3 +26,4 @@ const AuthGoogle = () => {
 }
 
 export default AuthGoogle
+ */
