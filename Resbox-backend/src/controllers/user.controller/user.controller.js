@@ -1,6 +1,7 @@
 const { generateJWT } = require('../../config/jwt/jwt')
 const User = require('../../models/user.model/user.model')
 const bcrypt = require('bcrypt')
+const { OAuth2Client } = require('google-auth-library')
 const { deleteImg } = require('../../helpers/delete.avatar')
 const { createToken } = require('../../helpers/createToken')
 const {
@@ -8,6 +9,8 @@ const {
   recoverEmail,
   newPasswordEmail
 } = require('./mails/send.mails')
+const fetch = (...args) =>
+  import('node-fetch').then(({ default: fetch }) => fetch(...args))
 
 const newUser = async (req, res, next) => {
   const email = req.body.email.toLowerCase()
@@ -23,6 +26,34 @@ const newUser = async (req, res, next) => {
       .json({ message: 'Usuario registrado correctamente', user })
   } catch (error) {
     next(error)
+  }
+}
+
+const authGoogle = async (req, res) => {
+  const { id_token } = req.body
+  try {
+    const userInfoResponse = await fetch(
+      'https://www.googleapis.com/oauth2/v3/userinfo',
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${id_token.access_token}`
+        }
+      }
+    )
+    const userInfo = await userInfoResponse.json()
+    console.log('Información del usuario:', userInfo)
+
+    res.status(200).json({ success: true, user: userInfo })
+  } catch (error) {
+    console.error(
+      'Error verificando el token o obteniendo información del usuario:',
+      error
+    )
+    res.status(401).json({
+      success: false,
+      message: 'Token inválido o error al obtener información del usuario.'
+    })
   }
 }
 
@@ -127,6 +158,7 @@ const getUserWithPopulates = async (userId) => {
 
 module.exports = {
   newUser,
+  authGoogle,
   login,
   profile,
   recoverPassword,
