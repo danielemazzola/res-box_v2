@@ -42,14 +42,14 @@ const authGoogle = async (req, res) => {
     )
     const userInfo = await userInfoResponse.json()
     const { email, name, picture, sub } = userInfo
-    let user = await User.findOne({ email })
-    if (!user) {
+    let user_google = await User.findOne({ email })
+    if (!user_google) {
       // Si el usuario no existe, creamos uno nuevo
       const names = name.split(' ') // Separar el nombre completo
       const firstname = names[0] || '' // Primer nombre
       const lastname = names.slice(1).join(' ') || '' // El resto como apellido
 
-      user = new User({
+      user_google = new User({
         name: firstname,
         lastname,
         email,
@@ -57,8 +57,9 @@ const authGoogle = async (req, res) => {
         avatar: picture,
         token: null // Puedes generar un token JWT aquí si lo usas para autenticación
       })
-      await user.save()
+      await user_google.save()
     }
+    const user = await getUserWithPopulates(user_google._id)
     const token = generateJWT(user._id)
     res.status(200).json({
       user,
