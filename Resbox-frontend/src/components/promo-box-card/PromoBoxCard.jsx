@@ -1,10 +1,10 @@
-import { useContext, useEffect, useMemo } from 'react'
+import { useContext, useMemo } from 'react'
+import confetti from 'canvas-confetti'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
-import { randomImage } from './helpers'
-import './PromoBoxCard.css'
 import { AuthContext } from '../../context/auth/AuthContext'
 import { handleBuyBox } from '../../reducer/promo-box/promobox.action'
-import confetti from 'canvas-confetti'
+import { randomImage } from './helpers'
+import './PromoBoxCard.css'
 
 const PromoBoxCard = ({ box }) => {
   const image = useMemo(() => randomImage(), [])

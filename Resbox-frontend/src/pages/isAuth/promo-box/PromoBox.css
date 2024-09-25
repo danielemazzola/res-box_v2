@@ -50,16 +50,6 @@
   text-align: center;
 }
 
-.promobox__paragraph-rotate {
-  transform: rotate(6deg);
-  color: var(--rb-text-primary);
-  background-color: var(--rb-bg-card-img);
-  padding: 3px;
-  border-radius: 10px;
-  font-size: var(--rb-font-size-large);
-  font-weight: 300;
-}
-
 @media (max-width: 1456px) {
   .promobox__container {
     padding: 80px 50px 120px;

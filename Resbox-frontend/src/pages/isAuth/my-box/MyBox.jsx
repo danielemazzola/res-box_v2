@@ -22,12 +22,10 @@ const MyBox = () => {
 
   return (
     <section ref={purchasedBoxes.length > 0 ? refBoxesSection : null} className='mybox__container fadeIn'>
-      <div className='mybox__cards-container '>
+      <div className='mybox__cards-container'>
         <div className='mybox__card'>
           <div>
-            <h3>MIS BOXES❤️</h3>
-            <p className='mybox__paragraph-rotate'>En un solo lugar</p>
-            <p className='mybox__user_name'>¡{user.name}!</p>
+            <h3>MIS BOXES</h3>
           </div>
         </div>
       </div>

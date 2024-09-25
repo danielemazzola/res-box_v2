@@ -3,13 +3,12 @@ import confetti from 'canvas-confetti'
 import useFilterPartner from '../../hooks/useFilterPartner'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import { AuthContext } from '../../context/auth/AuthContext'
-import { fetchOperation } from '../../services/fetch-operation/fetchOperation'
-import ModalRedeem from './ModalRedeem'
 import { containInformation, getRandomBackgroundColor } from './helpers'
-import { getDate } from '../../helpers/date'
-import ModalInfoPartner from './ModalInfoPartner'
-import './BoxCard.css'
 import { handleBuyBox } from '../../reducer/promo-box/promobox.action'
+import ModalRedeem from './ModalRedeem'
+import ModalInfoPartner from './ModalInfoPartner'
+import { getDate } from '../../helpers/date'
+import './BoxCard.css'
 
 const BoxCard = ({ box }) => {
   const [stateBoxCard, setStateBoxCard] = useState({
