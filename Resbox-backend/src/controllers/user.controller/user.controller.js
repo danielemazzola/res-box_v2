@@ -1,7 +1,6 @@
 const { generateJWT } = require('../../config/jwt/jwt')
 const User = require('../../models/user.model/user.model')
 const bcrypt = require('bcrypt')
-const { OAuth2Client } = require('google-auth-library')
 const { deleteImg } = require('../../helpers/delete.avatar')
 const { createToken } = require('../../helpers/createToken')
 const {
