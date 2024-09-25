@@ -41,9 +41,29 @@ const authGoogle = async (req, res) => {
       }
     )
     const userInfo = await userInfoResponse.json()
-    console.log('Información del usuario:', userInfo)
+    const { email, name, picture, sub } = userInfo
+    let user = await User.findOne({ email })
+    if (!user) {
+      // Si el usuario no existe, creamos uno nuevo
+      const names = name.split(' ') // Separar el nombre completo
+      const firstname = names[0] || '' // Primer nombre
+      const lastname = names.slice(1).join(' ') || '' // El resto como apellido
 
-    res.status(200).json({ success: true, user: userInfo })
+      user = new User({
+        name: firstname,
+        lastname,
+        email,
+        password: sub, // Puedes usar el 'sub' de Google como password temporal (ya que no se usará realmente)
+        avatar: picture,
+        token: null // Puedes generar un token JWT aquí si lo usas para autenticación
+      })
+      await user.save()
+    }
+    const token = generateJWT(user._id)
+    res.status(200).json({
+      user,
+      token
+    })
   } catch (error) {
     console.error(
       'Error verificando el token o obteniendo información del usuario:',

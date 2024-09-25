@@ -124,7 +124,7 @@ const Form = ({ handleCloseModal, recovery = false }) => {
               : formType.recovery && 'Nueva contraseña'}
           </p>
         </div>
-      <AuthGoogle />
+      <AuthGoogle handleCloseModal={handleCloseModal} />
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className={`formGroup`}>
         <div className='container-form'>
