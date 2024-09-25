@@ -4,9 +4,11 @@ import google from '/images/google.png'
 import './AuthGoogle.css'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import { AuthContext } from '../../context/auth/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
-const AuthGoogle = ({handleCloseModal}) => {
-  
+const AuthGoogle = ({ handleCloseModal }) => {
+  const navigate = useNavigate()
+
   const { dispatchToast, dispatchAuth, dispatchLoader } =
     useContext(ReducersContext)
 
@@ -22,10 +24,9 @@ const AuthGoogle = ({handleCloseModal}) => {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ id_token: credentialResponse }) // Asegúrate de enviar el ID token
+          body: JSON.stringify({ id_token: credentialResponse })
         }
       )
-
       const data = await response.json()
       if (response.status !== 200) {
         dispatchToast({
@@ -41,6 +42,9 @@ const AuthGoogle = ({handleCloseModal}) => {
         dispatchAuth({ type: 'SET_AUTH_TRUE' })
         localStorage.setItem('SECURE_CODE_RESBOX', data.token)
         setToken(localStorage.getItem('SECURE_CODE_RESBOX'))
+        setTimeout(() => {
+          navigate('./dashboard')
+        }, 500)
       }
       setTimeout(() => {
         handleCloseModal()
