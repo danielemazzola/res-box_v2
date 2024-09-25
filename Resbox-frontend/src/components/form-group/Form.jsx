@@ -10,9 +10,10 @@ import {
   getFormFields,
   renderFields
 } from './helpers'
-import './Form.css'
-import logo from '/images/logo.png'
 import { AuthContext } from '../../context/auth/AuthContext'
+import logo from '/images/logo.png'
+import './Form.css'
+import AuthGoogle from '../auth-google/AuthGoogle'
 
 const Form = ({ handleCloseModal, recovery = false }) => {
   const [fadeClass, setFadeClass] = useState('')
@@ -143,6 +144,7 @@ const Form = ({ handleCloseModal, recovery = false }) => {
           ))}
         </div>
         <div className='container-btn-forms'>
+        <AuthGoogle />
           <button type='submit' className='button green'>
             {getButtonText(formType)}
           </button>

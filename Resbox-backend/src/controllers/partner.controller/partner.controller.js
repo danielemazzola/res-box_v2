@@ -139,7 +139,7 @@ const updatAvatar = async (req, res, next) => {
         .json({ message: 'No tienes permisos para realizar estos cambios.' })
     } else {
       if (req.file) {
-        await deleteImg(partner.avatar)
+        deleteImg(partner.avatar)
         req.body.image = req.file.path
       }
       const updatePartner = await Partner.findByIdAndUpdate(
@@ -171,7 +171,7 @@ const updateBanner = async (req, res, next) => {
         .json({ message: 'No tienes permisos para realizar estos cambios.' })
     } else {
       if (req.file) {
-        await deleteImg(partner.banner)
+        deleteImg(partner.banner)
         req.body.image = req.file.path
       }
       const updatePartner = await Partner.findByIdAndUpdate(

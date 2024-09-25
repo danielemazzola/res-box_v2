@@ -84,7 +84,7 @@ const updateAvatar = async (req, res, next) => {
   const { user } = req
   try {
     if (req.file) {
-      await deleteImg(user.avatar)
+      deleteImg(user.avatar)
       req.body.image = req.file.path
     }
     const avatar = await User.findByIdAndUpdate(
