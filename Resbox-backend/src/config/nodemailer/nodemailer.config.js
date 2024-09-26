@@ -7,13 +7,13 @@ const transporter = nodemailer.createTransport({
     pass: process.env.PASSWORD_HOST
   } */
   host: 'smtp.gmail.com',
-  port: 465, // Usa 465 para SSL o 587 para TLS
-  secure: true, // true para 465, false para 587
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.EMAIL_HOST,
     pass: process.env.PASSWORD_HOST
   },
-  logger: false, // Habilita los logs
+  logger: false,
   debug: false
 })
 
