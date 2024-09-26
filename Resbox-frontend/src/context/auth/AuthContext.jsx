@@ -138,7 +138,7 @@ export const AuthProvider = ({ children }) => {
     }))
   }
 
-  const handleOperations = async () => {
+  const handleOperations = async (modal = true) => {
     if (operations.length <= 0 && !stateModal.infoOperations) {
       await getOperationsByPartner(
         token,
@@ -151,10 +151,12 @@ export const AuthProvider = ({ children }) => {
     setTimeout(() => {
       useScrolltoRef(refOperations)
     }, 500)
-    setStateModal((prev) => ({
-      ...prev,
-      infoOperations: !stateModal.infoOperations
-    }))
+    if (modal) {
+      setStateModal((prev) => ({
+        ...prev,
+        infoOperations: !stateModal.infoOperations
+      }))
+    }
   }
 
   return (

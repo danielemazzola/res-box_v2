@@ -39,7 +39,7 @@ const Operations = () => {
     setTimeout(() => {
       useScroll(sectionRefOperations)
     }, 1000)
-    handleOperations()
+    handleOperations(false)
   }, [])
 
   const sumByDate = (operations, filterFn) =>
