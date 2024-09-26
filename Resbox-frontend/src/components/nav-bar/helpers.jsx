@@ -23,6 +23,10 @@ export const NavOptions = ({ setShowMenu, showMenu }) => {
       route: 'promo-box',
       title: 'Promo - Box'
     },
+    user.roles.includes('partner') && {
+      route: 'operations',
+      title:'Mis Operaciones'
+    },
     !user.roles.includes('partner') && {
       route: 'partner',
       title: 'Quiero ser Partner'

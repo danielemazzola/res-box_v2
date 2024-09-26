@@ -6,7 +6,19 @@
   transition: all 0.5s;
   gap: 20px;
   padding: 20px;
-  flex:auto;
+  flex: auto;
+}
+.operation__container-operation {
+  display: flex;
+  flex-direction: column;
+  flex: end;
+  align-items: flex-end;
+}
+.operation__get-result-paid {
+  padding: 2px 4px;
+  color: white;
+  font-size: var(--rb-font-size-small);
+  border-radius: 5px 5px 0 0;
 }
 .operation__operations-title {
   border-radius: 10px;
@@ -37,7 +49,7 @@
 .operation__contain-card {
   background-color: white;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 5px 0 5px 5px;
   display: flex;
   gap: 10px;
   align-items: start;
@@ -49,10 +61,10 @@
   display: flex;
   align-items: start;
   flex-wrap: wrap;
-  gap:5px;
+  gap: 5px;
 }
 .operation__contain-card > div > p {
-  font-size: 14px;;
+  font-size: 14px;
 }
 .operation__get-result {
   background-color: var(--rb-bg-options);
@@ -60,4 +72,3 @@
   padding: 0 5px;
   border-radius: 5px;
 }
-

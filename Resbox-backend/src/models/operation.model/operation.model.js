@@ -3,15 +3,25 @@ const mongoose = require('mongoose')
 const paidSchema = mongoose.Schema(
   {
     paid: {
-      type: Boolean
+      type: Boolean,
+      default: false,
+      required: true
     },
     id_who_paid: {
       type: mongoose.Types.ObjectId,
-      ref: 'User'
+      ref: 'User',
+      default: null, // Valor por defecto: nadie ha pagado aún
+      required: function () {
+        return this.paid // Solo requerido si 'paid' es true
+      }
     },
     id_transaction: {
       type: String,
-      trim: true
+      trim: true,
+      default: null, // No hay transacción por defecto
+      required: function () {
+        return this.paid // Solo requerido si 'paid' es true
+      }
     }
   },
   { timestamps: true }
@@ -38,7 +48,14 @@ const operationsSchema = mongoose.Schema(
       required: true
     },
     paid: {
-      type: paidSchema
+      type: paidSchema,
+      default: () => ({ paid: false, id_who_paid: null, id_transaction: null }),
+      required: true
+    },
+    amount: {
+      type: Number,
+      default: 0,
+      required: true
     },
     transaction_date: {
       type: Date,
