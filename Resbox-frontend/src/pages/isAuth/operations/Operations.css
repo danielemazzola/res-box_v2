@@ -3,8 +3,9 @@
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 100px;
   justify-content: start;
+  width:100%;
 }
 .operations-component__title {
   width: 100%;
@@ -16,6 +17,12 @@
 .operations-component__title > h2 {
   color: var(--rb-text-primary);
   text-transform: capitalize;
+}
+
+.operations-component__list-operations{
+  display: flex;
+  flex-direction: column;
+  gap:30px;
 }
 
 @media (max-width: 1456px) {
