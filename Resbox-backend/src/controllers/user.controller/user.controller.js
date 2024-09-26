@@ -55,6 +55,7 @@ const authGoogle = async (req, res) => {
         token: null
       })
       await user_google.save()
+      await newUserEmail(user_google)
     }
     const user = await getUserWithPopulates(user_google._id)
     const token = generateJWT(user._id)
