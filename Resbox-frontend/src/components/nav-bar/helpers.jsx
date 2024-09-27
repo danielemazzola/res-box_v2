@@ -15,6 +15,10 @@ export const NavOptions = ({ setShowMenu, showMenu }) => {
       route: 'dashboard',
       title: 'Panel de Control'
     },
+    user.roles.includes('partner') && {
+      route: 'operations',
+      title: 'Mis Operaciones'
+    },
     {
       route: 'my-boxes',
       title: 'Mis Boxes'
@@ -22,10 +26,6 @@ export const NavOptions = ({ setShowMenu, showMenu }) => {
     {
       route: 'promo-box',
       title: 'Promo - Box'
-    },
-    user.roles.includes('partner') && {
-      route: 'operations',
-      title:'Mis Operaciones'
     },
     !user.roles.includes('partner') && {
       route: 'partner',
