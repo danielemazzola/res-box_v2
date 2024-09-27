@@ -22,8 +22,9 @@ import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import { AuthContext } from '../../../context/auth/AuthContext'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import OperationCard from '../../../components/operation-card/OperationCard'
-import './Operations.css'
 import { getDate } from '../../../helpers/date'
+import './Operations.css'
+import logo from '/images/logo.png'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
@@ -49,15 +50,18 @@ const Operations = () => {
   const today = new Date()
   const yesterday = subDays(today, 1)
 
+  const paidOperations = useMemo(() => {
+    const operationsPending = operations.filter(
+      (op) => op.paid.paid === 'completed'
+    )
+    return sumByDate(operationsPending, (op) => op.status === 'completed')
+  }, [operations])
+
   const pendingSales = useMemo(() => {
     const operationsPending = operations.filter(
       (op) => op.paid.paid === 'pending'
     )
-    return sumByDate(
-      operationsPending,
-      (op) =>
-        op.status === 'completed' && isSameDay(new Date(op.updatedAt), today)
-    )
+    return sumByDate(operationsPending, (op) => op.status === 'completed')
   }, [operations])
 
   const salesToday = useMemo(
@@ -96,21 +100,6 @@ const Operations = () => {
         op.status === 'completed' &&
         new Date(op.updatedAt) >= startOfCurrentMonth
     )
-  }, [operations])
-
-  const operationsStatus = useMemo(() => {
-    const startOfCurrentMonth = startOfMonth(today)
-    const confirmed = operations.filter(
-      (op) =>
-        op.status === 'completed' &&
-        new Date(op.updatedAt) >= startOfCurrentMonth
-    ).length
-    const cancelled = operations.filter(
-      (op) =>
-        op.status === 'cancelled' &&
-        new Date(op.updatedAt) >= startOfCurrentMonth
-    ).length
-    return { confirmed, cancelled }
   }, [operations])
 
   // Obtener las ventas diarias de la semana actual
@@ -160,8 +149,6 @@ const Operations = () => {
 
     return dailySales
   }, [operations])
-
-  console.log(operationsStatus)
 
   const chartData = {
     labels: dailySalesThisWeek.map((day) => day.date.toLocaleDateString()),
@@ -225,6 +212,41 @@ const Operations = () => {
     }
   }
 
+  const arrayInformationSales = [
+    {
+      title: 'Abonado',
+      value: paidOperations,
+      bg_color: 'var(--rb-bg-green)'
+    },
+    {
+      title: 'Acumulado',
+      value: pendingSales,
+      bg_color: 'var(--rb-bg-register)'
+    },
+    {
+      title: 'Hoy',
+      date: getDate(today),
+      value: salesToday,
+      bg_color: 'var(--rb-bg-options)'
+    },
+    {
+      title: 'Ayer',
+      date: getDate(yesterday),
+      value: salesYesterday,
+      bg_color: 'var(--rb-bg-secondary)'
+    },
+    {
+      title: 'Mi semana',
+      value: salesThisWeek,
+      bg_color: 'var(--rb-bg-secondary)'
+    },
+    {
+      title: 'Abonado',
+      value: salesThisMonth,
+      bg_color: 'var(--rb-bg-secondary)'
+    }
+  ]
+
   return (
     <div className='operations-component__container' ref={sectionRefOperations}>
       <div className='operations-component__title'>
@@ -236,63 +258,26 @@ const Operations = () => {
         </div>
       </div>
       <div className='operations-component__sales'>
-        <div className='show'>
-          <div className='operations-component__sales-title'>
-            <p>Ayer</p>
-            <span>{getDate(yesterday)}</span>
+        {arrayInformationSales?.map((arr, index) => (
+          <div className='show' key={index}>
+            <div className='operations-component__sales-title'>
+              <p>{arr.title}</p>
+              {arr.date && <span>{arr.date}</span>}
+            </div>
+            <div
+              className='operations-component__sales-amount'
+              style={{ backgroundColor: arr.bg_color }}
+            >
+              <p>{arr.value} EUR</p>
+            </div>
+            <img
+              src={logo}
+              alt='logo res-box'
+              width='50'
+              className='operations-component__sales-img'
+            />
           </div>
-          <div
-            className='operations-component__sales-amount'
-            style={{ backgroundColor: 'var(--rb-bg-secondary)' }}
-          >
-            <p>{salesYesterday} EUR</p>
-          </div>
-        </div>
-        <div className='show'>
-          <div className='operations-component__sales-title'>
-            <p>Hoy</p>
-            <span>{getDate(today)}</span>
-          </div>
-          <div
-            className='operations-component__sales-amount'
-            style={{ backgroundColor: 'var(--rb-bg-options)' }}
-          >
-            <p>{salesToday} EUR</p>
-          </div>
-        </div>
-        <div className='show'>
-          <div className='operations-component__sales-title'>
-            <p>mi semana</p>
-          </div>
-          <div
-            className='operations-component__sales-amount'
-            style={{ backgroundColor: 'var(--rb-bg-register)' }}
-          >
-            <p>{salesThisWeek} EUR</p>
-          </div>
-        </div>
-        <div className='show'>
-          <div className='operations-component__sales-title'>
-            <p>mi mes</p>
-          </div>
-          <div
-            className='operations-component__sales-amount'
-            style={{ backgroundColor: 'var(--rb-bg-register)' }}
-          >
-            <p>{salesThisWeek} EUR</p>
-          </div>
-        </div>
-        <div className='show'>
-          <div className='operations-component__sales-title'>
-            <p>Pendiente de pago</p>
-          </div>
-          <div
-            className='operations-component__sales-amount'
-            style={{ backgroundColor: 'var(--rb-bg-green)' }}
-          >
-            <p>{pendingSales} EUR</p>
-          </div>
-        </div>
+        ))}
       </div>
       {/* <div className='operations-component__list-operations'>
         {operations

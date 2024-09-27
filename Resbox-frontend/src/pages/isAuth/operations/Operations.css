@@ -28,10 +28,11 @@
   width: 100%;
 }
 .operations-component__chart > div {
-  width: 70%;
-  height: 100%;
+  width: 100%;
+  height: 350px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .operations-component__list-operations {
@@ -50,38 +51,38 @@
 }
 
 .operations-component__sales > div {
+  position:relative;
   overflow: hidden;
   border-radius: 10px;
   background-color: var(--rb-bg-light);
   display: flex;
   flex: auto;
-  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-.operations-component__sales > div > div{
-  flex:auto;
-  height:180px;
-  padding:10px;
+.operations-component__sales > div > div {
+  flex: auto;
+  height: 180px;
+  padding: 20px;
 }
 
 .operations-component__sales-title {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   gap: 10px;
 }
 .operations-component__sales-title > p {
   color: var(--rb-bg-primary);
-  font-size: var(--rb-font-size-xlarge);
+  font-size: var(--rb-font-size-large);
   text-transform: uppercase;
   text-align: center;
   font-weight: bolder;
-  line-height: 25px;;
+  line-height: 25px;
 }
 
 .operations-component__sales-amount {
-  border-radius: 10px 0 0 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -93,6 +94,13 @@
   font-weight: bolder;
   text-align: center;
   line-height: 25px;
+}
+
+.operations-component__sales-img{
+  position: absolute;
+  left:0;
+  bottom:0;
+  padding:10px
 }
 
 @media (max-width: 1456px) {
@@ -108,8 +116,5 @@
 @media (max-width: 600px) {
   .operations-component__title > h2 {
     font-size: 30px;
-  }
-  .operations-component__chart > div {
-    width: 100%;
   }
 }
