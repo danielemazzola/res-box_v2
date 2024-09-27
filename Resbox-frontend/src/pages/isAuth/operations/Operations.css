@@ -35,11 +35,6 @@
   justify-content: center;
 }
 
-.operations-component__list-operations {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
 .operations-component__sales {
   display: flex;
   flex-wrap: wrap;
@@ -51,7 +46,7 @@
 }
 
 .operations-component__sales > div {
-  position:relative;
+  position: relative;
   overflow: hidden;
   border-radius: 10px;
   background-color: var(--rb-bg-light);
@@ -86,7 +81,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius:10px;
+  border-radius: 10px;
 }
 
 .operations-component__sales-amount > p {
@@ -97,11 +92,22 @@
   line-height: 25px;
 }
 
-.operations-component__sales-img{
+.operations-component__sales-img {
   position: absolute;
-  left:0;
-  bottom:0;
-  padding:10px
+  left: 0;
+  bottom: 0;
+  padding: 10px;
+}
+
+.operations-component__list-operations {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.operations-component__list-operations > h3,
+.operations-component__list-operations > p  {
+  text-align: center;
+  color:var(--rb-text-primary)
 }
 
 @media (max-width: 1456px) {

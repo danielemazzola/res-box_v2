@@ -291,14 +291,16 @@ const Operations = () => {
           </div>
         ))}
       </div>
-      {/* <div className='operations-component__list-operations'>
+      <div className='operations-component__list-operations'>
+      <h3 className='show'>Últimas 20 operaciones</h3> 
+      <p className='show'>¿Necesitas comprobar las últimas operaciones? ¡Adelante!</p>
         {operations
           .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
-          .slice(0, 10)
+          .slice(0, 20)
           .map((operation, index) => (
             <OperationCard key={index} operation={operation} />
           ))}
-      </div> */}
+      </div>
     </div>
   )
 }

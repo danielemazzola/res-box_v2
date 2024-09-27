@@ -11,12 +11,19 @@ const OperationCard = ({ operation }) => {
           className='operation__get-result-paid'
           style={{
             backgroundColor:
-              operation.paid.paid === false
-                ? 'var(--rb-bg-secondary)'
-                : 'var(--rb-bg-green)'
+              operation.paid.paid === 'pending'
+                ? 'var(--rb-bg-register)'
+                : operation.paid.paid === 'completed'
+                ? 'var(--rb-bg-green)'
+                : operation.paid.paid === 'cancelled' &&
+                  'var(--rb-bg-secondary)'
           }}
         >
-          {operation.paid.paid === false ? 'Pendiente de pago' : 'Pagado'}
+          {operation.paid.paid === 'pending'
+            ? 'Pendiente de pago'
+            : operation.paid.paid === 'completed'
+            ? 'Pagado'
+            : operation.paid.paid === 'cancelled' && 'Anulado'}
         </p>
       </div>
       <div className='operation__contain-card'>

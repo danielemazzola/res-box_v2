@@ -45,7 +45,7 @@ const Dashboard = () => {
     <section ref={refDashboardSection} className='dashboard__container'>
       <div className='dashboard__cards-container fadeIn'>
         <div className='dashboard__card'>
-          <div>
+          <div className=''>
             <h3>Hola👋🏼 ¡{user.name}!</h3>
             <form>
               <input
@@ -110,11 +110,11 @@ const Dashboard = () => {
               className='operation__container-operations fadeIn'
             >
               <div className='operation__operations-title'>
-                <p>Mis operaciones</p>
+                <p className=''>Mis operaciones</p>
                 {operations.length > 0 ? (
-                  <p>Descubre las 5 últimas operaciones realizadas.</p>
+                  <p className=''>Descubre las 5 últimas operaciones realizadas.</p>
                 ) : (
-                  <p>Aún no hay operaciones para mostrar</p>
+                  <p className=''>Aún no hay operaciones para mostrar</p>
                 )}
               </div>
               <div className='operation__operations-card'>
