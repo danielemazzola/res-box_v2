@@ -23,6 +23,7 @@ import { AuthContext } from '../../../context/auth/AuthContext'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import OperationCard from '../../../components/operation-card/OperationCard'
 import './Operations.css'
+import { getDate } from '../../../helpers/date'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
@@ -47,6 +48,17 @@ const Operations = () => {
 
   const today = new Date()
   const yesterday = subDays(today, 1)
+
+  const pendingSales = useMemo(() => {
+    const operationsPending = operations.filter(
+      (op) => op.paid.paid === 'pending'
+    )
+    return sumByDate(
+      operationsPending,
+      (op) =>
+        op.status === 'completed' && isSameDay(new Date(op.updatedAt), today)
+    )
+  }, [operations])
 
   const salesToday = useMemo(
     () =>
@@ -149,13 +161,7 @@ const Operations = () => {
     return dailySales
   }, [operations])
 
-  console.log(salesToday)
-  console.log(salesYesterday)
-  console.log(salesThisWeek)
-  console.log(salesThisMonth)
   console.log(operationsStatus)
-  console.log(dailySalesCancelledThisWeek)
-  console.log(dailySalesThisWeek)
 
   const chartData = {
     labels: dailySalesThisWeek.map((day) => day.date.toLocaleDateString()),
@@ -224,16 +230,78 @@ const Operations = () => {
       <div className='operations-component__title'>
         <h2>Mis operaciones</h2>
       </div>
-      <Bar data={chartData} options={chartOptions} />
-
-      <div className='operations-component__list-operations'>
+      <div className='operations-component__chart show'>
+        <div>
+          <Bar data={chartData} options={chartOptions} />
+        </div>
+      </div>
+      <div className='operations-component__sales'>
+        <div className='show'>
+          <div className='operations-component__sales-title'>
+            <p>Ayer</p>
+            <span>{getDate(yesterday)}</span>
+          </div>
+          <div
+            className='operations-component__sales-amount'
+            style={{ backgroundColor: 'var(--rb-bg-secondary)' }}
+          >
+            <p>{salesYesterday} EUR</p>
+          </div>
+        </div>
+        <div className='show'>
+          <div className='operations-component__sales-title'>
+            <p>Hoy</p>
+            <span>{getDate(today)}</span>
+          </div>
+          <div
+            className='operations-component__sales-amount'
+            style={{ backgroundColor: 'var(--rb-bg-options)' }}
+          >
+            <p>{salesToday} EUR</p>
+          </div>
+        </div>
+        <div className='show'>
+          <div className='operations-component__sales-title'>
+            <p>mi semana</p>
+          </div>
+          <div
+            className='operations-component__sales-amount'
+            style={{ backgroundColor: 'var(--rb-bg-register)' }}
+          >
+            <p>{salesThisWeek} EUR</p>
+          </div>
+        </div>
+        <div className='show'>
+          <div className='operations-component__sales-title'>
+            <p>mi mes</p>
+          </div>
+          <div
+            className='operations-component__sales-amount'
+            style={{ backgroundColor: 'var(--rb-bg-register)' }}
+          >
+            <p>{salesThisWeek} EUR</p>
+          </div>
+        </div>
+        <div className='show'>
+          <div className='operations-component__sales-title'>
+            <p>Pendiente de pago</p>
+          </div>
+          <div
+            className='operations-component__sales-amount'
+            style={{ backgroundColor: 'var(--rb-bg-green)' }}
+          >
+            <p>{pendingSales} EUR</p>
+          </div>
+        </div>
+      </div>
+      {/* <div className='operations-component__list-operations'>
         {operations
           .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
           .slice(0, 10)
           .map((operation, index) => (
             <OperationCard key={index} operation={operation} />
           ))}
-      </div>
+      </div> */}
     </div>
   )
 }

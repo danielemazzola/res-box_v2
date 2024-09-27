@@ -3,25 +3,20 @@ const mongoose = require('mongoose')
 const paidSchema = mongoose.Schema(
   {
     paid: {
-      type: Boolean,
-      default: false,
+      type: String,
+      enum: ['pending', 'completed', 'cancelled'],
+      default: 'pending',
       required: true
     },
     id_who_paid: {
       type: mongoose.Types.ObjectId,
       ref: 'User',
-      default: null, // Valor por defecto: nadie ha pagado aún
-      required: function () {
-        return this.paid // Solo requerido si 'paid' es true
-      }
+      default: null
     },
     id_transaction: {
       type: String,
       trim: true,
-      default: null, // No hay transacción por defecto
-      required: function () {
-        return this.paid // Solo requerido si 'paid' es true
-      }
+      default: null
     }
   },
   { timestamps: true }
@@ -49,7 +44,11 @@ const operationsSchema = mongoose.Schema(
     },
     paid: {
       type: paidSchema,
-      default: () => ({ paid: false, id_who_paid: null, id_transaction: null }),
+      default: () => ({
+        paid: 'pending',
+        id_who_paid: null,
+        id_transaction: null
+      }),
       required: true
     },
     amount: {

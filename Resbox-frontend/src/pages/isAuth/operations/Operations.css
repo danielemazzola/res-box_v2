@@ -5,7 +5,7 @@
   flex-direction: column;
   gap: 100px;
   justify-content: start;
-  width:100%;
+  width: 100%;
 }
 .operations-component__title {
   width: 100%;
@@ -17,12 +17,82 @@
 .operations-component__title > h2 {
   color: var(--rb-text-primary);
   text-transform: capitalize;
+  font-size: 50px;
+  text-align: center;
 }
 
-.operations-component__list-operations{
+.operations-component__chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.operations-component__chart > div {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.operations-component__list-operations {
   display: flex;
   flex-direction: column;
-  gap:30px;
+  gap: 30px;
+}
+.operations-component__sales {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+  flex-direction: row;
+  align-content: stretch;
+}
+
+.operations-component__sales > div {
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: var(--rb-bg-light);
+  display: flex;
+  flex: auto;
+  justify-content: space-between;
+}
+
+.operations-component__sales > div > div{
+  flex:auto;
+  height:180px;
+  padding:10px;
+}
+
+.operations-component__sales-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+}
+.operations-component__sales-title > p {
+  color: var(--rb-bg-primary);
+  font-size: var(--rb-font-size-xlarge);
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bolder;
+  line-height: 25px;;
+}
+
+.operations-component__sales-amount {
+  border-radius: 10px 0 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.operations-component__sales-amount > p {
+  color: white;
+  font-size: var(--rb-font-size-xlarge);
+  font-weight: bolder;
+  text-align: center;
+  line-height: 25px;
 }
 
 @media (max-width: 1456px) {
@@ -33,5 +103,13 @@
 @media (max-width: 855px) {
   .operations-component__container {
     padding: 80px 20px 120px;
+  }
+}
+@media (max-width: 600px) {
+  .operations-component__title > h2 {
+    font-size: 30px;
+  }
+  .operations-component__chart > div {
+    width: 100%;
   }
 }

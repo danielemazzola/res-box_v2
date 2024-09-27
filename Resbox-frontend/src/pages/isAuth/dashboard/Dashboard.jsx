@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import useScrollToRef from '../../../hooks/useScrollToRef'
 import { AuthContext } from '../../../context/auth/AuthContext'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
@@ -124,6 +125,9 @@ const Dashboard = () => {
                     <OperationCard key={index} operation={operation} />
                   ))}
               </div>
+              <Link to='../operations'>
+                <button className='button yellow'>Más detalles</button>
+              </Link>
             </div>
           )}
         </>
