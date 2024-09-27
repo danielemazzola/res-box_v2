@@ -86,10 +86,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius:10px;
 }
 
 .operations-component__sales-amount > p {
-  color: white;
+  color: var(--rb-text-primary);
   font-size: var(--rb-font-size-xlarge);
   font-weight: bolder;
   text-align: center;

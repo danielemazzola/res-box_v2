@@ -4,8 +4,10 @@ import {
   isSameDay,
   isThisWeek,
   startOfWeek,
+  endOfWeek,
   addDays,
-  startOfMonth
+  startOfMonth,
+  endOfMonth
 } from 'date-fns'
 import { Bar } from 'react-chartjs-2'
 import {
@@ -49,6 +51,10 @@ const Operations = () => {
 
   const today = new Date()
   const yesterday = subDays(today, 1)
+  const startWeek = startOfWeek(today, { weekStartsOn: 1 })
+  const endWeek = endOfWeek(today, { weekStartsOn: 1 })
+  const startMonth = startOfMonth(today)
+  const endMonth = endOfMonth(today)
 
   const paidOperations = useMemo(() => {
     const operationsPending = operations.filter(
@@ -182,7 +188,11 @@ const Operations = () => {
       },
       title: {
         display: true,
-        text: 'Mis ventas de la semana'
+        text: 'Mis ventas de la semana',
+        color: '#ececec',
+        font: {
+          size: 24
+        }
       },
       tooltip: {
         callbacks: {
@@ -236,14 +246,16 @@ const Operations = () => {
       bg_color: 'var(--rb-bg-secondary)'
     },
     {
-      title: 'Mi semana',
+      title: 'Semana en curso',
+      date: `${getDate(startWeek)} - ${getDate(endWeek)}`,
       value: salesThisWeek,
-      bg_color: 'var(--rb-bg-secondary)'
+      bg_color: 'var(--rb-bg-options)'
     },
     {
-      title: 'Abonado',
+      title: 'Mes en curso',
+      date: `${getDate(startMonth)} - ${getDate(endMonth)}`,
       value: salesThisMonth,
-      bg_color: 'var(--rb-bg-secondary)'
+      bg_color: 'var(--rb-bg-options)'
     }
   ]
 
@@ -274,7 +286,7 @@ const Operations = () => {
               src={logo}
               alt='logo res-box'
               width='50'
-              className='operations-component__sales-img'
+              className='operations-component__sales-img waveEffect'
             />
           </div>
         ))}
