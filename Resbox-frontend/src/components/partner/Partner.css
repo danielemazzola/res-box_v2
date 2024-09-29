@@ -46,6 +46,7 @@
 .logo-absolute > img:hover {
   transform: scale(1.1);
 }
+
 .name-partner-span {
   color: var(--rb-text-primary);
   opacity: 0.5;
@@ -121,6 +122,9 @@
   padding: 0px 5px;
   border-radius: 5px;
 }
+.modal-details-users{
+  margin-top: 10px;;
+}
 
 .container-map-view {
   margin-top: 10px;
@@ -130,4 +134,16 @@
 }
 .container-map-view > div {
   width: 80%;
+}
+
+.modal-content-favorite {
+  padding: 5px 20px;
+  display: flex;
+  justify-content: end;
+  gap:10px;
+}
+.modal-content-favorite > button {
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
 }

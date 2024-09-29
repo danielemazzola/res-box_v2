@@ -11,9 +11,9 @@ import {
   renderFields
 } from './helpers'
 import { AuthContext } from '../../context/auth/AuthContext'
+import AuthGoogle from '../auth-google/AuthGoogle'
 import logo from '/images/logo.png'
 import './Form.css'
-import AuthGoogle from '../auth-google/AuthGoogle'
 
 const Form = ({ handleCloseModal, recovery = false }) => {
   const [fadeClass, setFadeClass] = useState('')
@@ -124,7 +124,7 @@ const Form = ({ handleCloseModal, recovery = false }) => {
               : formType.recovery && 'Nueva contraseña'}
           </p>
         </div>
-      <AuthGoogle handleCloseModal={handleCloseModal} />
+        <AuthGoogle handleCloseModal={handleCloseModal} />
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className={`formGroup`}>
         <div className='container-form'>

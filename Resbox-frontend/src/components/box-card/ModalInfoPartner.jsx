@@ -1,20 +1,22 @@
 import React from 'react'
 import Modal from '../modal/Modal'
 
+import LikeReview from '../like-review/LikeReview'
+
 const ModalInfoPartner = ({ stateBoxCard, handleCloseModalInfoPartner }) => {
+  
   return (
     <Modal
       isModalOpen={stateBoxCard.modalStatePartner}
       handleCloseModal={handleCloseModalInfoPartner}
     >
       <div className='modal-content'>
-      <div className='modal-content-banner'>
-        <img
-          src={stateBoxCard.infoPartner.banner}
-          alt={`${stateBoxCard.infoPartner.name} banner`}
-        />
-        
-      </div>
+        <div className='modal-content-banner'>
+          <img
+            src={stateBoxCard.infoPartner.banner}
+            alt={`${stateBoxCard.infoPartner.name} banner`}
+          />
+        </div>
         <div className='logo-absolute'>
           <img
             className='partner-avatar'
@@ -41,6 +43,7 @@ const ModalInfoPartner = ({ stateBoxCard, handleCloseModalInfoPartner }) => {
             />
           ))}
         </div>
+        <LikeReview />
       </div>
     </Modal>
   )
