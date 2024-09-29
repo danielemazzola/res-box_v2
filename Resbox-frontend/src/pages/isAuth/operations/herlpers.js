@@ -1,12 +1,12 @@
 import { getDate } from '../../../helpers/date'
 
-export const formatCash = (money) => {
+export const formatCash = (amount) => {
   const formatEuro = new Intl.NumberFormat('es-ES', {
     style: 'currency',
     currency: 'EUR',
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
-  }).format(money)
+  }).format(amount)
   return formatEuro
 }
 
