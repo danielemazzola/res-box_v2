@@ -24,9 +24,10 @@ import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import { AuthContext } from '../../../context/auth/AuthContext'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import OperationCard from '../../../components/operation-card/OperationCard'
-import { getDate } from '../../../helpers/date'
+import { arrayInformationSales, sumByDate } from './herlpers'
 import './Operations.css'
 import logo from '/images/logo.png'
+import { chartData, chartOptions } from './configCharts'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
@@ -45,9 +46,6 @@ const Operations = () => {
     }, 1000)
     handleOperations(false)
   }, [])
-
-  const sumByDate = (operations, filterFn) =>
-    operations.filter(filterFn).reduce((acc, curr) => acc + curr.amount, 0)
 
   const today = new Date()
   const yesterday = subDays(today, 1)
@@ -108,13 +106,10 @@ const Operations = () => {
     )
   }, [operations])
 
-  // Obtener las ventas diarias de la semana actual
   const dailySalesThisWeek = useMemo(() => {
-    // Obtener el inicio de la semana (lunes)
-    const startOfCurrentWeek = startOfWeek(today, { weekStartsOn: 1 }) // Lunes
+    const startOfCurrentWeek = startOfWeek(today, { weekStartsOn: 1 })
     const daysInWeek = 7
 
-    // Recorrer cada día de la semana (del lunes al domingo)
     const dailySales = Array.from({ length: daysInWeek }).map((_, i) => {
       const currentDay = addDays(startOfCurrentWeek, i)
       const sales = sumByDate(
@@ -132,13 +127,10 @@ const Operations = () => {
     return dailySales
   }, [operations])
 
-  // Obtener las ventas diarias de la semana actual
   const dailySalesCancelledThisWeek = useMemo(() => {
-    // Obtener el inicio de la semana (lunes)
-    const startOfCurrentWeek = startOfWeek(today, { weekStartsOn: 1 }) // Lunes
+    const startOfCurrentWeek = startOfWeek(today, { weekStartsOn: 1 })
     const daysInWeek = 7
 
-    // Recorrer cada día de la semana (del lunes al domingo)
     const dailySales = Array.from({ length: daysInWeek }).map((_, i) => {
       const currentDay = addDays(startOfCurrentWeek, i)
       const sales = sumByDate(
@@ -156,108 +148,22 @@ const Operations = () => {
     return dailySales
   }, [operations])
 
-  const chartData = {
-    labels: dailySalesThisWeek.map((day) => day.date.toLocaleDateString()),
-    datasets: [
-      {
-        label: 'Venta del día',
-        data: dailySalesThisWeek.map((day) => day.sales),
-        backgroundColor: 'rgb(119, 223, 119)',
-        borderColor: '#d2b48c',
-        borderWidth: 1,
-        borderRadius: 5,
-        borderSkipped: false
-      },
-      {
-        label: 'Venta canceladas del día',
-        data: dailySalesCancelledThisWeek.map((day) => day.sales * -1),
-        backgroundColor: '#ff5e5e',
-        borderColor: '#ff5e5e',
-        borderWidth: 1,
-        borderRadius: 5,
-        borderSkipped: false
-      }
-    ]
-  }
+  const char_data = chartData(dailySalesThisWeek, dailySalesCancelledThisWeek)
 
-  const chartOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top'
-      },
-      title: {
-        display: true,
-        text: 'Mis ventas de la semana',
-        color: '#ececec',
-        font: {
-          size: 24
-        }
-      },
-      tooltip: {
-        callbacks: {
-          label: function (tooltipItem) {
-            let value = tooltipItem.raw
-            if (value < 0) {
-              return `Cancelaciones: €-${Math.abs(value)}`
-            }
-            return `Ventas: €${value}`
-          }
-        }
-      }
-    },
-    scales: {
-      x: {
-        stacked: true
-      },
-      y: {
-        stacked: true,
-        beginAtZero: true,
-        ticks: {
-          callback: function (value) {
-            return value < 0 ? `€${value}` : `€${value}`
-          }
-        }
-      }
-    }
-  }
-
-  const arrayInformationSales = [
-    {
-      title: 'Abonado',
-      value: paidOperations,
-      bg_color: 'var(--rb-bg-green)'
-    },
-    {
-      title: 'Acumulado',
-      value: pendingSales,
-      bg_color: 'var(--rb-bg-register)'
-    },
-    {
-      title: 'Hoy',
-      date: getDate(today),
-      value: salesToday,
-      bg_color: 'var(--rb-bg-options)'
-    },
-    {
-      title: 'Ayer',
-      date: getDate(yesterday),
-      value: salesYesterday,
-      bg_color: 'var(--rb-bg-secondary)'
-    },
-    {
-      title: 'Semana en curso',
-      date: `${getDate(startWeek)} - ${getDate(endWeek)}`,
-      value: salesThisWeek,
-      bg_color: 'var(--rb-bg-options)'
-    },
-    {
-      title: 'Mes en curso',
-      date: `${getDate(startMonth)} - ${getDate(endMonth)}`,
-      value: salesThisMonth,
-      bg_color: 'var(--rb-bg-options)'
-    }
-  ]
+  const arr_info_sales = arrayInformationSales(
+    paidOperations,
+    pendingSales,
+    today,
+    salesToday,
+    yesterday,
+    salesYesterday,
+    startWeek,
+    endWeek,
+    salesThisWeek,
+    startMonth,
+    endMonth,
+    salesThisMonth
+  )
 
   return (
     <div className='operations-component__container' ref={sectionRefOperations}>
@@ -266,11 +172,11 @@ const Operations = () => {
       </div>
       <div className='operations-component__chart show'>
         <div>
-          <Bar data={chartData} options={chartOptions} />
+          <Bar data={char_data} options={chartOptions} />
         </div>
       </div>
       <div className='operations-component__sales'>
-        {arrayInformationSales?.map((arr, index) => (
+        {arr_info_sales?.map((arr, index) => (
           <div className='show' key={index}>
             <div className='operations-component__sales-title'>
               <p>{arr.title}</p>
@@ -292,8 +198,10 @@ const Operations = () => {
         ))}
       </div>
       <div className='operations-component__list-operations'>
-      <h3 className='show'>Últimas 20 operaciones</h3> 
-      <p className='show'>¿Necesitas comprobar las últimas operaciones? ¡Adelante!</p>
+        <h3 className='show'>Últimas 20 operaciones</h3>
+        <p className='show'>
+          ¿Necesitas comprobar las últimas operaciones? ¡Adelante!
+        </p>
         {operations
           .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
           .slice(0, 20)
