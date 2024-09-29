@@ -36,9 +36,7 @@ const Dashboard = () => {
     useContext(ScrollRefContext)
 
   useEffect(() => {
-    setTimeout(() => {
-      useScrolltoRef(refDashboardSection)
-    }, 1000)
+    useScrolltoRef(refDashboardSection)
   }, [])
 
   return (

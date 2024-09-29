@@ -129,9 +129,7 @@ export const AuthProvider = ({ children }) => {
       )
       dispatchAuth({ type: 'SET_PARTNER', payload: data.partner })
     }
-    setTimeout(() => {
-      useScrolltoRef(refPartnerInfo)
-    }, 500)
+    useScrolltoRef(refPartnerInfo)
     setStateModal((prev) => ({
       ...prev,
       infoPartner: !stateModal.infoPartner
@@ -148,9 +146,7 @@ export const AuthProvider = ({ children }) => {
         dispatchPartners
       )
     }
-    setTimeout(() => {
-      useScrolltoRef(refOperations)
-    }, 500)
+    useScrolltoRef(refOperations)
     if (modal) {
       setStateModal((prev) => ({
         ...prev,

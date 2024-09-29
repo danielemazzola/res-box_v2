@@ -21,9 +21,7 @@ const Partner = () => {
   const useScrolltoref = useScrollToRef()
 
   useEffect(() => {
-    setTimeout(() => {
-      useScrolltoref(refNewPartner)
-    }, 1000)
+    useScrolltoref(refNewPartner)
   }, [])
 
   const {

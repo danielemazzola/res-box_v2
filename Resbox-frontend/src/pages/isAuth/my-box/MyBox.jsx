@@ -15,9 +15,7 @@ const MyBox = () => {
   const { purchasedBoxes } = user
 
   useEffect(() => {
-    setTimeout(() => {
-      useScrolltoRef(refBoxesSection)
-    }, 1000)
+    useScrolltoRef(refBoxesSection)
   }, [])
 
   return (

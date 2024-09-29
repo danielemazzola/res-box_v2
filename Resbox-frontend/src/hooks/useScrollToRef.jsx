@@ -3,7 +3,9 @@ import { useCallback } from 'react'
 const useScrollToRef = () => {
   const scrollToRef = useCallback((ref) => {
     if (ref.current) {
-      ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      setTimeout(() => {
+        ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 300)
     }
   }, [])
 

@@ -41,9 +41,7 @@ const Operations = () => {
   const { handleOperations } = useContext(AuthContext)
 
   useEffect(() => {
-    setTimeout(() => {
-      useScroll(sectionRefOperations)
-    }, 1000)
+    useScroll(sectionRefOperations)
     handleOperations(false)
   }, [])
 
