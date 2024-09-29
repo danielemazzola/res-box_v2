@@ -96,7 +96,7 @@ const BoxCard = ({ box }) => {
 
   return (
     <>
-      <div className='boxcard__container fadeIn' style={{ backgroundColor }}>
+      <div className='boxcard__container fadeIn'>
         <div className='boxcard__title'>
           <p className='boxcard__description'>{box.box.name_box}</p>
         </div>
@@ -111,35 +111,35 @@ const BoxCard = ({ box }) => {
                   ?.map((partner) => partner.name)
                   .filter((value, index, self) => self.indexOf(value) === index)
                   .map((partner, index) => (
-                    <p
+                    <button
                       key={index}
-                      className='boxcard__bg-white'
+                      className='boxcard__btn-info-partner'
                       style={{ cursor: 'pointer' }}
                       onClick={() => handlePartner(partner, box)}
                     >
                       {partner}
-                    </p>
+                    </button>
                   ))
               )}
             </div>
           ))}
+        </div>
+
+        <div className='boxcard__date-active'>
+          <p className='boxcard__date'>
+            Fecha de compra: {getDate(box.createdAt)}
+          </p>
         </div>
         <div className='boxcard__title-active'>
           <p className='boxcard__description-active'>
             Actvos <span>{box.remainingItems}</span>
           </p>
         </div>
-        <div className='boxcard__date-active'>
-          <p className='boxcard__date'>
-            Fecha de compra: {getDate(box.createdAt)}
-          </p>
-        </div>
         <div className='boxcard__container-btn'>
           <div>
             {box.remainingItems > 0 && (
               <button
-                className='button'
-                style={{ backgroundColor: 'var(--rb-bg-options)!important' }}
+                className='button green'
                 onClick={() =>
                   setStateBoxCard((prevState) => ({
                     ...prevState,
@@ -153,9 +153,10 @@ const BoxCard = ({ box }) => {
 
             <button
               disabled={!box?.box.status.includes('active')}
-              className={`button yellow ${
+              className={`button ${
                 box.box.status.includes('active') ? 'active' : 'disabled'
               }`}
+              style={{ backgroundColor: 'var(--rb-bg-options)!important' }}
               onClick={() => handleAddMoreBox(box.box._id)}
             >
               Añadir más

@@ -1,7 +1,6 @@
-import { useContext } from 'react'
 import './OperationCard.css'
-import { ScrollRefContext } from '../../context/scroll-ref/ScrollRefContext'
 import { getDate } from '../../helpers/date'
+import { formatCash } from '../../pages/isAuth/operations/herlpers'
 
 const OperationCard = ({ operation }) => {
   return (
@@ -28,44 +27,37 @@ const OperationCard = ({ operation }) => {
       </div>
       <div className='operation__contain-card'>
         <div>
-          <p>Iniciado por:</p>
-          <p className='operation__get-result'>
-            {operation.id_user.name + ' ' + operation.id_user.lastname}
-          </p>
+          <p>Box</p>
+          <p>{operation.id_box.name_box}</p>
         </div>
         <div>
-          <p>¿Cuándo?</p>
-          <p className='operation__get-result'>
-            {getDate(operation.transaction_date)}
-          </p>
+          <p>Cliente</p>
+          <p>{operation.id_user.name + ' ' + operation.id_user.lastname}</p>
         </div>
         <div>
-          <p>Se cierra el</p>
-          <p className='operation__get-result'>
-            {getDate(operation.updatedAt)}
-          </p>
+          <p>Fecha inicio</p>
+          <p>{getDate(operation.transaction_date)}</p>
         </div>
         <div>
-          <p>Box:</p>
-          <p className='operation__get-result'>{operation.id_box.name_box}</p>
+          <p>fecha cierre</p>
+          <p>{getDate(operation.updatedAt)}</p>
         </div>
+
         <div>
-          <p>Cantidad canjeada:</p>
-          <p className='operation__get-result'>{operation.consumed}</p>
+          <p>Cantidad</p>
+          <p>{operation.consumed}</p>
         </div>
         <div>
           <p>Importe:</p>
-          <p className='operation__get-result'>{operation.amount}€</p>
+          <p>{formatCash(operation.amount)}</p>
         </div>
         <div>
-          <p>Resultado:</p>
-          <p
-            className={`operation__get-result ${
-              operation.status.includes('completed') ? 'green' : 'cancelled'
-            }`}
-          >
-            {operation.status.includes('completed') ? 'Aprobado' : 'Cancelado'}
-          </p>
+        <p>Resultad</p>
+          {operation.status.includes('completed') ? (
+            <p className='green' style={{color:'white'}}>OK</p>
+          ) : (
+            <p className='cancelled' style={{color:'white'}}>KO</p>
+          )}
         </div>
       </div>
     </div>

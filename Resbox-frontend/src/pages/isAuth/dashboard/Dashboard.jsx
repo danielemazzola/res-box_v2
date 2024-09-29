@@ -124,7 +124,7 @@ const Dashboard = () => {
                   ))}
               </div>
               <Link to='../operations'>
-                <button className='button yellow'>Más detalles</button>
+                <button className='button'>Más detalles</button>
               </Link>
             </div>
           )}

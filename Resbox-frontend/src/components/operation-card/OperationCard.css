@@ -17,7 +17,7 @@
 .operation__get-result-paid {
   padding: 2px 4px;
   color: white;
-  font-size: var(--rb-font-size-small);
+  font-size: 12px;;
   border-radius: 5px 5px 0 0;
 }
 .operation__operations-title {
@@ -47,15 +47,16 @@
   transition: all 0.3s;
 }
 .operation__contain-card {
+  position:relative;
   background-color: white;
   padding: 20px;
-  border-radius: 5px 0 5px 5px;
   display: flex;
   gap: 10px;
   align-items: start;
   flex: 1;
   flex-wrap: wrap;
   min-width: 200px;
+  overflow: hidden;
 }
 .operation__contain-card > div {
   display: flex;
@@ -65,10 +66,19 @@
 }
 .operation__contain-card > div > p {
   font-size: 14px;
-}
-.operation__get-result {
-  background-color: var(--rb-bg-options);
-  color: var(--rb-text-primary);
   padding: 0 5px;
   border-radius: 5px;
+}
+.operation__contain-card > div > p:first-child {
+  color: var(--rb-text-primary);
+  background-color: var(--rb-bg-primary);
+}
+
+.operation__contain-card > div > img {
+  position:absolute;
+  right:10px;
+  bottom:10px;
+  object-fit: cover;
+  width:40px;
+  height:40px;
 }

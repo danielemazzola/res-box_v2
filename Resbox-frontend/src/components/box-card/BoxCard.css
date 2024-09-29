@@ -2,16 +2,17 @@
   width: 100%;
   min-height: 220px;
   padding: 20px;
-  background-image: url('/images/caja.webp');
+  /* background-image: url('/images/caja.webp');
   background-position: 110% 80%;
   background-repeat: no-repeat;
-  background-size: 300px; 
+  background-size: 300px;  */
+  background-color: var(--rb-bg-light);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
   transition: all 0.3s;
   position: relative;
 }
@@ -22,14 +23,13 @@
   align-items: end;
 }
 .boxcard__description {
-  color: var(--rb-text-secondary);
+  color: var(--rb-text-primary);
   text-transform: uppercase;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.404);
   padding: 8px 10px;
   border-radius: 5px;
   font-size: var(--rb-font-size-large);
   font-weight: 900;
-  background-color: rgba(255, 255, 255, 0.733);
+  background-color: var(--rb-bg-secondary);
   text-align: center;
   display: flex;
 }
@@ -39,14 +39,21 @@
   justify-content: start;
   align-items: start;
   flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
+  gap: 10px;
+  padding: 10px;
 }
 .boxcard__contain-information > div {
   display: flex;
   align-items: start;
   flex-wrap: wrap;
   gap: 5px;
+}
+.boxcard__btn-partners{
+  border: none;
+  box-shadow: none;
+  background-color: none;
+  display: flex;
+  align-items: center;
 }
 .boxcard__contain-information > div > p:first-child {
   background-color: var(--rb-bg-primary);
@@ -57,7 +64,7 @@
   text-transform: capitalize;
   text-align: center;
 }
-.boxcard__bg-white {
+.boxcard__btn-info-partner {
   background-color: var(--rb-bg-light);
   padding: 0 5px;
   border-radius: 5px;
@@ -91,7 +98,7 @@
   font-size: 35px;
 }
 .boxcard__date-active {
-  background-color: var(--rb-bg-light);
+  background-color: var(--rb-bg-primary);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -101,6 +108,7 @@
 .boxcard__date {
   font-size: 14px;
   font-weight: 600;
+  color: var(--rb-text-primary);
 }
 .boxcard__container-btn {
   width: 100%;
@@ -112,12 +120,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  background-color: rgba(255, 255, 255, 0.623);
-  padding: 10px;
-  border-radius: 10px;
-}
-.boxcard__container-btn > div > button {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.534);
 }
 
 .boxcard__container-form {
@@ -243,8 +245,6 @@
   border-radius: 10px;
 }
 
-
-
 .info-avatar-partner {
   width: 50px;
   height: 50px;
@@ -272,7 +272,7 @@
   margin-left: 0;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 620px) {
   .boxcard__title-active {
     background-color: rgba(0, 0, 0, 0.712);
     border-radius: 0 10px 10px 0px;

@@ -98,7 +98,7 @@ const Operations = () => {
     const sales = formatCash(
       sumByDate(
         operations,
-        (op) => op.status === 'completed' && isThisWeek(new Date(op.updatedAt))
+        (op) => op.status === 'completed' && isThisWeek(new Date(op.updatedAt), { weekStartsOn: 1 })
       )
     )
     return sales
