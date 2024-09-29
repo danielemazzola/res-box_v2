@@ -37,7 +37,7 @@ const Form = ({ handleCloseModal, recovery = false }) => {
   const navigate = useNavigate()
   const { dispatchLoader, dispatchToast, dispatchAuth } =
     useContext(ReducersContext)
-  const { setToken } = useContext(AuthContext)
+  const { setToken, API_URL } = useContext(AuthContext)
   const {
     handleSubmit,
     reset,
@@ -70,7 +70,8 @@ const Form = ({ handleCloseModal, recovery = false }) => {
       dispatchToast,
       dispatchAuth,
       token,
-      setToken
+      setToken,
+      API_URL
     )
     if (response) {
       let loginResponse
@@ -84,7 +85,8 @@ const Form = ({ handleCloseModal, recovery = false }) => {
           dispatchToast,
           dispatchAuth,
           token,
-          setToken
+          setToken,
+          API_URL
         )
       }
       if (formType.login || loginResponse) {

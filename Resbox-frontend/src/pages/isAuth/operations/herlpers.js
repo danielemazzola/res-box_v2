@@ -1,5 +1,15 @@
 import { getDate } from '../../../helpers/date'
 
+export const formatCash = (money) => {
+  const formatEuro = new Intl.NumberFormat('es-ES', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(money)
+  return formatEuro
+}
+
 export const arrayInformationSales = (
   paidOperations,
   pendingSales,

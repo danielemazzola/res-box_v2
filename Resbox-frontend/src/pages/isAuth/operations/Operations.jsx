@@ -24,7 +24,7 @@ import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import { AuthContext } from '../../../context/auth/AuthContext'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import OperationCard from '../../../components/operation-card/OperationCard'
-import { arrayInformationSales, sumByDate } from './herlpers'
+import { formatCash, arrayInformationSales, sumByDate } from './herlpers'
 import './Operations.css'
 import logo from '/images/logo.png'
 import { chartData, chartOptions } from './configCharts'
@@ -56,52 +56,65 @@ const Operations = () => {
     const operationsPending = operations.filter(
       (op) => op.paid.paid === 'completed'
     )
-    return sumByDate(operationsPending, (op) => op.status === 'completed')
+    const sales = formatCash(
+      sumByDate(operationsPending, (op) => op.status === 'completed')
+    )
+    return sales
   }, [operations])
 
   const pendingSales = useMemo(() => {
     const operationsPending = operations.filter(
       (op) => op.paid.paid === 'pending'
     )
-    return sumByDate(operationsPending, (op) => op.status === 'completed')
+    const sales = formatCash(
+      sumByDate(operationsPending, (op) => op.status === 'completed')
+    )
+    return sales
   }, [operations])
 
-  const salesToday = useMemo(
-    () =>
+  const salesToday = useMemo(() => {
+    const sales = formatCash(
       sumByDate(
         operations,
         (op) =>
           op.status === 'completed' && isSameDay(new Date(op.updatedAt), today)
-      ),
-    [operations]
-  )
-  const salesYesterday = useMemo(
-    () =>
+      )
+    )
+    return sales
+  }, [operations])
+  const salesYesterday = useMemo(() => {
+    const sales = formatCash(
       sumByDate(
         operations,
         (op) =>
           op.status === 'completed' &&
           isSameDay(new Date(op.updatedAt), yesterday)
-      ),
-    [operations]
-  )
+      )
+    )
+    return sales
+  }, [operations])
 
-  const salesThisWeek = useMemo(
-    () =>
+  const salesThisWeek = useMemo(() => {
+    const sales = formatCash(
       sumByDate(
         operations,
         (op) => op.status === 'completed' && isThisWeek(new Date(op.updatedAt))
-      ),
-    [operations]
-  )
+      )
+    )
+    return sales
+  }, [operations])
+
   const salesThisMonth = useMemo(() => {
     const startOfCurrentMonth = startOfMonth(today)
-    return sumByDate(
-      operations,
-      (op) =>
-        op.status === 'completed' &&
-        new Date(op.updatedAt) >= startOfCurrentMonth
+    const sales = formatCash(
+      sumByDate(
+        operations,
+        (op) =>
+          op.status === 'completed' &&
+          new Date(op.updatedAt) >= startOfCurrentMonth
+      )
     )
+    return sales
   }, [operations])
 
   const dailySalesThisWeek = useMemo(() => {
@@ -184,7 +197,7 @@ const Operations = () => {
               className='operations-component__sales-amount'
               style={{ backgroundColor: arr.bg_color }}
             >
-              <p>{arr.value} EUR</p>
+              <p>{arr.value}</p>
             </div>
             <img
               src={logo}

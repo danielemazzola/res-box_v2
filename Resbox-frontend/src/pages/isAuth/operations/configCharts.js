@@ -1,3 +1,5 @@
+import { formatCash } from './herlpers'
+
 export const chartData = (dailySalesThisWeek, dailySalesCancelledThisWeek) => {
   return {
     labels: dailySalesThisWeek.map((day) => day.date.toLocaleDateString()),
@@ -43,9 +45,9 @@ export const chartOptions = {
         label: function (tooltipItem) {
           let value = tooltipItem.raw
           if (value < 0) {
-            return `Cancelaciones: €-${Math.abs(value)}`
+            return `Cancelaciones: ${formatCash(Math.abs(value))}`
           }
-          return `Ventas: €${value}`
+          return `Ventas: ${formatCash(value)}`
         }
       }
     }

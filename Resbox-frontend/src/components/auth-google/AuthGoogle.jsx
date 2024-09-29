@@ -12,13 +12,13 @@ const AuthGoogle = ({ handleCloseModal }) => {
   const { dispatchToast, dispatchAuth, dispatchLoader } =
     useContext(ReducersContext)
 
-  const { setToken } = useContext(AuthContext)
+  const { setToken, API_URL } = useContext(AuthContext)
 
   const handleLoginSuccess = async (credentialResponse) => {
     try {
       dispatchLoader({ type: 'SET_LOAD_TRUE' })
       const response = await fetch(
-        `${import.meta.env.VITE_URL_API}/user/auth-google`,
+        `${import.meta.env.VITE_URL_API}/${API_URL.login_google}`,
         {
           method: 'POST',
           headers: {

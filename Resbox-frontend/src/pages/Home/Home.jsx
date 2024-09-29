@@ -10,6 +10,7 @@ import './Home.css'
 const Home = () => {
   const { refPartnersSection, refFunctionAppSection, refBoxesSection } =
     useContext(ScrollRefContext)
+
   const {
     statePartners: { partners },
     dispatchPartners,
@@ -18,26 +19,27 @@ const Home = () => {
   } = useContext(ReducersContext)
 
   useEffect(() => {
-    const getPartners = async () => {
-      try {
-        dispatchLoader({ type: 'SET_LOAD_TRUE' })
-        const { data } = await fetchGetPartners()
-        dispatchPartners({ type: 'SET_PARTNERS', payload: data.partners })
-      } catch (error) {
-        dispatchToast({
-          type: 'ADD_NOTIFICATION',
-          payload: { msg: error.message, error: true }
-        })
-      } finally {
-        setTimeout(() => {
-          dispatchLoader({ type: 'SET_LOAD_FALSE' })
-        }, 1500)
-      }
-    }
     if (partners.length <= 0) {
       getPartners()
     } else return
   }, [])
+
+  const getPartners = async () => {
+    try {
+      dispatchLoader({ type: 'SET_LOAD_TRUE' })
+      const { data } = await fetchGetPartners()
+      dispatchPartners({ type: 'SET_PARTNERS', payload: data.partners })
+    } catch (error) {
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: { msg: error.message, error: true }
+      })
+    } finally {
+      setTimeout(() => {
+        dispatchLoader({ type: 'SET_LOAD_FALSE' })
+      }, 1500)
+    }
+  }
 
   return (
     <>

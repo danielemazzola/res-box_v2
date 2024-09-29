@@ -13,13 +13,14 @@ export const fetchSubmit = async (
   dispatchToast,
   dispatchAuth,
   token,
-  setToken
+  setToken,
+  API_URL
 ) => {
   let url
-  if (formType.login) url = 'user/login-user'
-  if (formType.register) url = 'user/register-user'
-  if (formType.forgot) url = 'user/recovery-password-user'
-  if (formType.recovery) url = `user/new-password/${token}`
+  if (formType.login) url = API_URL.login
+  if (formType.register) url = API_URL.register
+  if (formType.forgot) url = API_URL.recovery_password
+  if (formType.recovery) url = `${API_URL.new_password}/${token}`
 
   try {
     dispatchLoader({ type: 'SET_LOAD_TRUE' })

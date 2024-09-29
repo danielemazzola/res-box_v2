@@ -14,6 +14,11 @@ export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
   const [API_URL, setUrlImageChange] = useState({
+    login: 'user/login-user',
+    login_google: 'user/auth-google',
+    register: 'user/register-user',
+    recovery_password: 'user/recovery-password-user',
+    new_password: 'user/new-password',
     user_avatar: 'user/update-avatar',
     partner_avatar: 'partner/update-avatar',
     partner_banner: 'partner/update-banner',
@@ -41,42 +46,39 @@ export const AuthProvider = ({ children }) => {
   } = useContext(ReducersContext)
   const { refPartnerInfo, refOperations } = useContext(ScrollRefContext)
 
-  useEffect(() => {
-    const isAuth = async () => {
-      if (token) {
-        try {
-          dispatchLoader({ type: 'SET_LOAD_TRUE' })
-          const { response, data } = await fetchAuth(
-            'user/profile-user',
-            {},
-            'GET',
-            token
-          )
-          if (response.status !== 200) {
-            dispatchToast({
-              type: 'ADD_NOTIFICATION',
-              payload: { msg: `Error: ${data.message}`, error: true }
-            })
-            localStorage.removeItem('SECURE_CODE_RESBOX')
-            dispatchAuth({ type: 'SET_AUTH_FALSE' })
-          } else {
-            dispatchAuth({ type: 'SET_USER', payload: data.user })
-            dispatchAuth({ type: 'SET_AUTH_TRUE' })
-          }
-        } catch (error) {
+  const isAuth = async () => {
+    if (token) {
+      try {
+        dispatchLoader({ type: 'SET_LOAD_TRUE' })
+        const { response, data } = await fetchAuth(
+          'user/profile-user',
+          {},
+          'GET',
+          token
+        )
+        if (response.status !== 200) {
           dispatchToast({
             type: 'ADD_NOTIFICATION',
-            payload: { msg: `Error: ${error.message}`, error: true }
+            payload: { msg: `Error: ${data.message}`, error: true }
           })
-        } finally {
-          setTimeout(() => {
-            dispatchLoader({ type: 'SET_LOAD_FALSE' })
-          }, 1500)
+          localStorage.removeItem('SECURE_CODE_RESBOX')
+          dispatchAuth({ type: 'SET_AUTH_FALSE' })
+        } else {
+          dispatchAuth({ type: 'SET_USER', payload: data.user })
+          dispatchAuth({ type: 'SET_AUTH_TRUE' })
         }
+      } catch (error) {
+        dispatchToast({
+          type: 'ADD_NOTIFICATION',
+          payload: { msg: `Error: ${error.message}`, error: true }
+        })
+      } finally {
+        setTimeout(() => {
+          dispatchLoader({ type: 'SET_LOAD_FALSE' })
+        }, 1500)
       }
     }
-    isAuth()
-  }, [])
+  }
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0]
@@ -129,7 +131,9 @@ export const AuthProvider = ({ children }) => {
       )
       dispatchAuth({ type: 'SET_PARTNER', payload: data.partner })
     }
-    useScrolltoRef(refPartnerInfo)
+    setTimeout(() => {
+      useScrolltoRef(refPartnerInfo)
+    }, 500)
     setStateModal((prev) => ({
       ...prev,
       infoPartner: !stateModal.infoPartner
@@ -146,7 +150,9 @@ export const AuthProvider = ({ children }) => {
         dispatchPartners
       )
     }
-    useScrolltoRef(refOperations)
+    setTimeout(() => {
+      useScrolltoRef(refOperations)
+    }, 500)
     if (modal) {
       setStateModal((prev) => ({
         ...prev,
@@ -158,6 +164,7 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
+        isAuth,
         API_URL,
         stateModal,
         setStateModal,
