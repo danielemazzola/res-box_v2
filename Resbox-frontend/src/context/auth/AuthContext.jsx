@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
         } finally {
           setTimeout(() => {
             dispatchLoader({ type: 'SET_LOAD_FALSE' })
-          }, 1000)
+          }, 1500)
         }
       }
     }

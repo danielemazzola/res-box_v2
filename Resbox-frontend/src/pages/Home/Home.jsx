@@ -8,11 +8,8 @@ import { fetchGetPartners } from '../../services/fetch-partner/fetchPartners'
 import './Home.css'
 
 const Home = () => {
-  const {
-    refPartnersSection,
-    refFunctionAppSection,
-    refBoxesSection
-  } = useContext(ScrollRefContext)
+  const { refPartnersSection, refFunctionAppSection, refBoxesSection } =
+    useContext(ScrollRefContext)
   const {
     statePartners: { partners },
     dispatchPartners,
@@ -32,7 +29,9 @@ const Home = () => {
           payload: { msg: error.message, error: true }
         })
       } finally {
-        dispatchLoader({ type: 'SET_LOAD_FALSE' })
+        setTimeout(() => {
+          dispatchLoader({ type: 'SET_LOAD_FALSE' })
+        }, 1500)
       }
     }
     if (partners.length <= 0) {
