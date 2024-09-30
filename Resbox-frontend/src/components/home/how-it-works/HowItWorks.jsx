@@ -11,7 +11,7 @@ const HowItWorks = () => {
         </div>
       <div className='contain-box-work'>
         <div className='contain-box-img-work show'>
-          <img alt='image coffe banner' src={coffe} />
+          <img alt='image coffe banner' src={coffe} loading='lazy' />
         </div>
         <div className='contain-description-work'>
           <div className='contain-title-app-work'>
@@ -25,7 +25,7 @@ const HowItWorks = () => {
       </div>
       <div className='contain-box-work'>
         <div className='contain-box-img-work show'>
-          <img alt='image coffe banner' src={box} />
+          <img alt='image coffe banner' src={box} loading='lazy' />
         </div>
         <div className='contain-description-work'>
           <div className='contain-title-app-work'>
@@ -38,7 +38,7 @@ const HowItWorks = () => {
       </div>
       <div className='contain-box-work'>
         <div className='contain-box-img-work show'>
-          <img alt='image coffe banner' src={tazaCafe} />
+          <img alt='image coffe banner' src={tazaCafe} loading='lazy' />
         </div>
         <div className='contain-description-work'>
           <div className='contain-title-app-work'>

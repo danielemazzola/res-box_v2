@@ -112,7 +112,7 @@ const Form = ({ handleCloseModal, recovery = false }) => {
     <div className={`container-form-groups ${fadeClass}`}>
       <div className='container-img-formGroup'>
         <div className='contain-img-title'>
-          <img src={logo} alt='Logo Res-Box' className='waveEffect' />
+          <img src={logo} alt='Logo Res-Box' className='waveEffect' loading='lazy' />
           <h1>RES-BOX</h1>
         </div>
         <div className='target-description-form'>

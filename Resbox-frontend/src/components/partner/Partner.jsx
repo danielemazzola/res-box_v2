@@ -42,7 +42,7 @@ const Partner = ({ partner, arrayFilterPartners }) => {
       >
         <div className='modal-content'>
           <div className='modal-content-banner'>
-            <img src={partner.banner} alt={`${partner.name} banner`} />
+            <img src={partner.banner} alt={`${partner.name} banner`} loading='lazy' />
           </div>
           <div className='logo-absolute'>
             <img

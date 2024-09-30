@@ -32,7 +32,7 @@ const Nav = () => {
             }`}
             onClick={() => setShowMenu(!showMenu)}
           >
-            <img src={menu} width='30' />
+            <img src={menu} width='30' alt='icon-menu' loading='lazy' />
           </button>
         </div>
       </div>
@@ -83,7 +83,7 @@ const Nav = () => {
                 rel='noopener noreferrer'
                 title='Linkedin'
               >
-                <img src={linkedin} width='30' />
+                <img src={linkedin} width='30' alt='icon-linkedin' loading='lazy' />
               </a>
               <a
                 className='link-social-media'
@@ -92,7 +92,7 @@ const Nav = () => {
                 rel='noopener noreferrer'
                 title='Linkedin'
               >
-                <img src={github} width='30' />
+                <img src={github} width='30' alt='icon-github' loading='lazy' />
               </a>
             </div>
           </div>

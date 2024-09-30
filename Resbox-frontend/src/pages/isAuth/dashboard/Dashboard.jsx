@@ -55,7 +55,7 @@ const Dashboard = () => {
               />
             </form>
             <div className='dashboard__contain-avatar'>
-              <img alt={user.name} src={user.avatar} width='150' height='150' />
+              <img alt={user.name} src={user.avatar} width='150' height='150' loading='lazy' />
               <img
                 alt='edit'
                 src={edit}
@@ -73,7 +73,7 @@ const Dashboard = () => {
             className='dashboard__banner-partner fadeIn'
             onClick={() => handlePartner(setStateModal, stateModal)}
           >
-            <img src={restaurante} />
+            <img src={restaurante} loading='lazy' alt='icon' />
             <div>
               <p>Negocio</p>
             </div>
@@ -84,7 +84,7 @@ const Dashboard = () => {
                 className='dashboard__banner-partner fadeIn'
                 onClick={() => handleOperations(setStateModal, stateModal)}
               >
-                <img src={operationsImg} width='150' />
+                <img src={operationsImg} width='150' loading='lazy' alt='icon' />
                 <div>
                   <p>Operaciones</p>
                 </div>
@@ -93,7 +93,7 @@ const Dashboard = () => {
                 className='dashboard__banner-partner fadeIn'
                 onClick={() => handleRedeemCode(setStateModal, stateModal)}
               >
-                <img src={redeemCode} className='dashboard__img-redeem' />
+                <img src={redeemCode} className='dashboard__img-redeem' loading='lazy' alt='icon' />
                 <div>
                   <p>Canjear Código</p>
                 </div>

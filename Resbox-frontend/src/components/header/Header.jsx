@@ -40,7 +40,7 @@ const Header = () => {
           } `}
         >
           <Link to='/'>
-            <img alt='logo Res-Box' src={logo} />
+            <img alt='logo Res-Box' src={logo} loading='lazy' />
           </Link>
         </div>
         {!isAuth ? (

@@ -54,7 +54,7 @@ const ModalRedeem = ({
           <div className='boxcard__contain-form'>
             <div className='boxcard__container-img-form'>
               <div className='boxcard__contain-img-title'>
-                <img src={logo} alt='Logo Res-Box' className='waveEffect' />
+                <img src={logo} alt='Logo Res-Box' className='waveEffect' loading='lazy' />
                 <h1>{box.box.name_box}</h1>
               </div>
               <div className='boxcard__target-description-form boxcard__center'>

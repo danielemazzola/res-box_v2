@@ -183,7 +183,7 @@ const PartnerCard = () => {
       >
         <div className='partner__modal-card'>
           <div>
-            <img src={userModal.avatar} alt={userModal.name} />
+            <img src={userModal.avatar} alt={userModal.name} loading='lazy' />
           </div>
           <div>
             <div>

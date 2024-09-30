@@ -28,7 +28,7 @@ const ButtonTopScroll = () => {
       onClick={() => scrollToRef(refHeaderSection)}
     >
       <div className='container-btn-scroll'>
-        <img alt='icono logo resbox' src={logo} width='20' />
+        <img alt='icono logo resbox' src={logo} width='20' loading='lazy' />
         Volver arriba
       </div>
     </button>

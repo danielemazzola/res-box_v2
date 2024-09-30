@@ -47,7 +47,7 @@ const InstallApp = () => {
           onClick={handleInstallClick}
         >
           <p>¡Instalar RES-BOX!</p>
-          <img src={logo} alt='logo res-box' width='65' />
+          <img src={logo} alt='logo res-box' width='65' loading='lazy' />
           <p className='heart waveEffect'>❤️</p>
           <p className='work-install-app'>Descargame ¡YA!</p>
         </button>

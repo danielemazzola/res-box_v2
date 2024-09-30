@@ -11,11 +11,11 @@ const LikeReview = () => {
     <div className='modal-content-favorite'>
       {likes ? (
         <button onClick={() => setLikes(!likes)}>
-          <img alt='Like' src={like} width='30' className='' title='Favorito' />
+          <img alt='Like' src={like} width='30' className='' title='Favorito' loading='lazy' />
         </button>
       ) : (
         <button onClick={() => setLikes(!likes)}>
-          <img alt='Like' src={heart} width='30' title='Agregar a favorito' />
+          <img alt='Like' src={heart} width='30' title='Agregar a favorito' loading='lazy' />
         </button>
       )}
       {reviews ? (
@@ -30,7 +30,7 @@ const LikeReview = () => {
         </button>
       ) : (
         <button onClick={() => setReviews(!reviews)}>
-          <img alt='Like' src={rev_null} width='40' title='¿Lo garantizas?' />
+          <img alt='Like' src={rev_null} width='40' title='¿Lo garantizas?' loading='lazy' />
         </button>
       )}
     </div>
