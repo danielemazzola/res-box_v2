@@ -1,5 +1,6 @@
 const { generateJWT } = require('../../config/jwt/jwt')
 const User = require('../../models/user.model/user.model')
+const Partner = require('../../models/partner.model/partner.model')
 const bcrypt = require('bcrypt')
 const { deleteImg } = require('../../helpers/delete.avatar')
 const { createToken } = require('../../helpers/createToken')
@@ -156,6 +157,48 @@ const updateAvatar = async (req, res, next) => {
   }
 }
 
+const addFavorite = async (req, res, next) => {
+  const { idPartner } = req.params
+  const { user } = req
+
+  try {
+    const partner = await Partner.findById(idPartner)
+    if (!partner) {
+      return res.status(404).json({
+        message:
+          'No existe el colaborador o hubo un problema. Por favor actualiza la página.'
+      })
+    }
+    if (partner.favorite === undefined || partner.favorite === null) {
+      partner.favorite = 0
+    }
+    const isFavorite = user?.favorites.find(
+      (favorite) => favorite.toString() === idPartner.toString()
+    )
+    if (isFavorite) {
+      user.favorites.pull(idPartner)
+      await user.save()
+      const updatePartner = await Partner.findByIdAndUpdate(idPartner, {
+        $inc: { favorite: -1 }
+      })
+      return res.status(201).json({ message: 'Eliminado de mis favoritos.', updatePartner })
+    } else {
+      if (!Array.isArray(user.favorites)) {
+        user.favorites = []
+      }
+      user.favorites.push(partner._id)
+      await user.save()
+      const updatePartner =  await Partner.findByIdAndUpdate(idPartner, { $inc: { favorite: 1 } })
+      const favorites = await getUserWithPopulates(user._id)
+      return res
+        .status(201)
+        .json({ message: 'Guardado en mis favoritos.', favorites,updatePartner })
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
 const getUserWithPopulates = async (userId) => {
   return await User.findById(userId)
     .select('-password')
@@ -181,5 +224,6 @@ module.exports = {
   profile,
   recoverPassword,
   putPassword,
-  updateAvatar
+  updateAvatar,
+  addFavorite
 }

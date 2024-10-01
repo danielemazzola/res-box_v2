@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { type } = require('os')
 
 const partnerSchema = mongoose.Schema(
   {
@@ -27,7 +28,11 @@ const partnerSchema = mongoose.Schema(
     coordinate_x: { type: String, trim: true, default: '0' },
     coordinate_y: { type: String, trim: true, default: '0' },
     users: { type: [mongoose.Schema.Types.ObjectId], ref: 'User' },
-    confirmed: { type: Boolean, default: false }
+    confirmed: { type: Boolean, default: false },
+    favorite: {
+      type: Number,
+      default: 0
+    }
   },
   {
     timestamps: true,

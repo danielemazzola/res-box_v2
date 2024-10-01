@@ -6,7 +6,8 @@ const {
   profile,
   recoverPassword,
   putPassword,
-  updateAvatar
+  updateAvatar,
+  addFavorite
 } = require('../../controllers/user.controller/user.controller')
 const { profileAvatar } = require('../../middleware/checkAvatar.middleware')
 const {
@@ -28,5 +29,6 @@ ROUTER.put(
   profileAvatar.single('avatar'),
   updateAvatar
 )
+ROUTER.post('/add-favorite/:idPartner', authenticateUser, addFavorite)
 
 module.exports = ROUTER

@@ -59,8 +59,9 @@ const removeBox = async (req, res, next) => {
     const isAcquired = await Box.findById(box._id)
     if (!isAcquired.items_acquired_by.length) {
       const remove = await Box.findByIdAndDelete(box._id)
-      if (!remove)
+      if (!remove) {
         return res.status(409).json({ message: 'Box no encontrado.' })
+      }
       return res.status(200).json({ message: 'Box eliminado correctamente.' })
     } else {
       return res.status(409).json({

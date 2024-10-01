@@ -4,7 +4,6 @@ import Modal from '../modal/Modal'
 import LikeReview from '../like-review/LikeReview'
 
 const ModalInfoPartner = ({ stateBoxCard, handleCloseModalInfoPartner }) => {
-  
   return (
     <Modal
       isModalOpen={stateBoxCard.modalStatePartner}
@@ -43,7 +42,7 @@ const ModalInfoPartner = ({ stateBoxCard, handleCloseModalInfoPartner }) => {
             />
           ))}
         </div>
-        <LikeReview />
+        <LikeReview idPartner={stateBoxCard.infoPartner._id} />
       </div>
     </Modal>
   )
