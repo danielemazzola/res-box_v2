@@ -26,12 +26,21 @@ export const AuthProvider = ({ children }) => {
     user_operation: 'operation/new-operation',
     my_operations: 'operation',
     operation_update: 'operation/update-operation',
-    new_partner: 'partner/new-partner'
+    new_partner: 'partner/new-partner',
+    like: 'user/add-favorite'
   })
   const [stateModal, setStateModal] = useState({
     infoPartner: false,
     infoOperations: false,
     redeem: false
+  })
+
+  const [stateBoxCard, setStateBoxCard] = useState({
+    quantityRedeem: 1,
+    modalState: false,
+    secureTokenRedeem: 0,
+    modalStatePartner: false,
+    infoPartner: {}
   })
 
   const [token, setToken] = useState(localStorage.getItem('SECURE_CODE_RESBOX'))
@@ -160,14 +169,6 @@ export const AuthProvider = ({ children }) => {
       }))
     }
   }
-
-  const [stateBoxCard, setStateBoxCard] = useState({
-    quantityRedeem: 1,
-    modalState: false,
-    secureTokenRedeem: 0,
-    modalStatePartner: false,
-    infoPartner: {}
-  })
 
   const handleCloseModalInfoPartner = () => {
     setStateBoxCard((prevState) => ({

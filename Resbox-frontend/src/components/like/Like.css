@@ -1,4 +1,5 @@
 .like-content-favorite {
+  position: absolute;
   padding: 5px;
   display: flex;
   justify-content: end;

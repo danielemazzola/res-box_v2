@@ -5,33 +5,40 @@ import HeartLoader from '../loader/HeartLoader'
 import './Like.css'
 import like from '/images/like.png'
 import heart from '/images/heart.png'
+import { fetchLike } from '../../services/fetch-like/fetchLike'
 
 const Like = ({ idPartner }) => {
-  const { token, setStateBoxCard } = useContext(AuthContext)
+  const { token, API_URL, setStateBoxCard } = useContext(AuthContext)
   const {
     stateIsAuth: { user },
     dispatchAuth,
     statePartners: { partners },
-    dispatchPartners
+    dispatchPartners,
+    dispatchToast
   } = useContext(ReducersContext)
 
   const [loadLike, setLoadLike] = useState(false)
-  //! PENDIENTE ACTUALIZAR AL PARTNER
 
   const handleAddToFavorite = async () => {
     try {
       setLoadLike(true)
-      const response = await fetch(
-        `${import.meta.env.VITE_URL_API}/user/add-favorite/${idPartner}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
+      const urlApi = `${import.meta.env.VITE_URL_API}/${
+        API_URL.like
+      }/${idPartner}`
+      const { response, data } = await fetchLike(urlApi, token)
+      console.log(response)
+
+      if (response.status !== 201) {
+        const error = new Error('Hubo un problema en su solicitud.')
+        dispatchToast({
+          type: 'ADD_NOTIFICATION',
+          payload: {
+            msg: error,
+            error: true
           }
-        }
-      )
-      const data = await response.json()
+        })
+        return
+      }
       const updatePartner = partners?.find(
         (partner) => partner._id.toString() === idPartner.toString()
       )

@@ -281,7 +281,7 @@
   color:var(--rb-text-secondary);
   padding:2px 5px;
   border-radius: 5px;
-  transform: translateX(17px);
+  transform: translateX(-17px);
   opacity: 0.7;
 }
 
