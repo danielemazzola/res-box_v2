@@ -1,0 +1,10 @@
+.like-content-favorite {
+  padding: 5px;
+  display: flex;
+  justify-content: end;
+}
+.like-content-favorite > button {
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+}

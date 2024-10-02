@@ -5,6 +5,8 @@ import L from 'leaflet'
 import Modal from '../modal/Modal'
 import restaurant from '/images/restaurante.ico'
 import './Partner.css'
+import like from '/images/like.png'
+import heart from '/images/heart.png'
 
 // Define el ícono personalizado
 const restaurantIcon = new L.Icon({
@@ -42,7 +44,11 @@ const Partner = ({ partner, arrayFilterPartners }) => {
       >
         <div className='modal-content'>
           <div className='modal-content-banner'>
-            <img src={partner.banner} alt={`${partner.name} banner`} loading='lazy' />
+            <img
+              src={partner.banner}
+              alt={`${partner.name} banner`}
+              loading='lazy'
+            />
           </div>
           <div className='logo-absolute'>
             <img
@@ -74,6 +80,18 @@ const Partner = ({ partner, arrayFilterPartners }) => {
                 </Marker>
               </MapContainer>
             </div>
+          </div>
+          <div className='partner__like-content-favorite'>
+            <span>{partner.favorite}</span>
+            {partner.favorite <= 0 ? (
+              <>
+                <img alt='Likes' src={heart} width='30' />
+              </>
+            ) : (
+              <>
+                <img alt='Likes' src={like} width='30' />
+              </>
+            )}
           </div>
         </div>
       </Modal>

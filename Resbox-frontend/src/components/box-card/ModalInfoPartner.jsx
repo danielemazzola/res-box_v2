@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Modal from '../modal/Modal'
 
-import LikeReview from '../like-review/LikeReview'
+import Like from '../like/Like'
+import { AuthContext } from '../../context/auth/AuthContext'
 
-const ModalInfoPartner = ({ stateBoxCard, handleCloseModalInfoPartner }) => {
+const ModalInfoPartner = ({ handleCloseModalInfoPartner }) => {
+  const { stateBoxCard } = useContext(AuthContext)
   return (
     <Modal
       isModalOpen={stateBoxCard.modalStatePartner}
@@ -42,7 +44,10 @@ const ModalInfoPartner = ({ stateBoxCard, handleCloseModalInfoPartner }) => {
             />
           ))}
         </div>
-        <LikeReview idPartner={stateBoxCard.infoPartner._id} />
+        <div className='content-favorite'>
+          <span>{stateBoxCard.infoPartner.favorite} 🤙🏼</span>
+          <Like idPartner={stateBoxCard.infoPartner._id} />
+        </div>
       </div>
     </Modal>
   )

@@ -161,6 +161,22 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  const [stateBoxCard, setStateBoxCard] = useState({
+    quantityRedeem: 1,
+    modalState: false,
+    secureTokenRedeem: 0,
+    modalStatePartner: false,
+    infoPartner: {}
+  })
+
+  const handleCloseModalInfoPartner = () => {
+    setStateBoxCard((prevState) => ({
+      ...prevState,
+      modalStatePartner: false,
+      infoPartner: {}
+    }))
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -172,7 +188,10 @@ export const AuthProvider = ({ children }) => {
         setToken,
         handleImageChange,
         handlePartner,
-        handleOperations
+        handleOperations,
+        handleCloseModalInfoPartner,
+        stateBoxCard,
+        setStateBoxCard
       }}
     >
       {children}

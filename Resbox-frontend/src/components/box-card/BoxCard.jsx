@@ -11,13 +11,6 @@ import { getDate } from '../../helpers/date'
 import './BoxCard.css'
 
 const BoxCard = ({ box }) => {
-  const [stateBoxCard, setStateBoxCard] = useState({
-    quantityRedeem: 1,
-    modalState: false,
-    secureTokenRedeem: 0,
-    modalStatePartner: false,
-    infoPartner: {}
-  })
   const {
     dispatchAuth,
     dispatchLoader,
@@ -27,7 +20,13 @@ const BoxCard = ({ box }) => {
     dispatchPromoBoxes,
     statePartners: { arrayFilterPartnersSearch }
   } = useContext(ReducersContext)
-  const { API_URL, token } = useContext(AuthContext)
+  const {
+    API_URL,
+    token,
+    handleCloseModalInfoPartner,
+    stateBoxCard,
+    setStateBoxCard
+  } = useContext(AuthContext)
   const backgroundColor = useMemo(() => getRandomBackgroundColor(), [box])
   const newArrayInfoBox = containInformation(box)
 
@@ -85,14 +84,6 @@ const BoxCard = ({ box }) => {
       }))
     }
   }, [arrayFilterPartnersSearch])
-
-  const handleCloseModalInfoPartner = () => {
-    setStateBoxCard((prevState) => ({
-      ...prevState,
-      modalStatePartner: false,
-      infoPartner: {}
-    }))
-  }
 
   return (
     <>
@@ -166,7 +157,9 @@ const BoxCard = ({ box }) => {
       </div>
       <ModalInfoPartner
         stateBoxCard={stateBoxCard}
-        handleCloseModalInfoPartner={handleCloseModalInfoPartner}
+        handleCloseModalInfoPartner={() =>
+          handleCloseModalInfoPartner(setStateBoxCard)
+        }
       />
       <ModalRedeem
         box={box}

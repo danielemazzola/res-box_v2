@@ -136,14 +136,21 @@
   width: 80%;
 }
 
-.modal-content-favorite {
-  padding: 5px 20px;
+.partner__like-content-favorite{
+  position: absolute;
+  top:150px;
+  right:0px;
   display: flex;
-  justify-content: end;
-  gap:10px;
+  align-items: end;
+  margin:0 20px;
 }
-.modal-content-favorite > button {
-  border: none;
-  background-color: transparent;
-  box-shadow: none;
+.partner__like-content-favorite > span {
+  background-color: var(--rb-bg-light);
+  display: flex;
+  align-items: start;
+  color:var(--rb-text-secondary);
+  padding:2px 5px;
+  border-radius: 5px;
+  transform: translateX(10px);
+  opacity: 0.8;
 }
