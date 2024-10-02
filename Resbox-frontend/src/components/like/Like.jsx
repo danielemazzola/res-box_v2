@@ -26,8 +26,6 @@ const Like = ({ idPartner }) => {
         API_URL.like
       }/${idPartner}`
       const { response, data } = await fetchLike(urlApi, token)
-      console.log(response)
-
       if (response.status !== 201) {
         const error = new Error('Hubo un problema en su solicitud.')
         dispatchToast({
