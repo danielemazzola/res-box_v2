@@ -137,12 +137,10 @@
 }
 
 .partner__like-content-favorite{
-  position: absolute;
-  top:150px;
-  right:0px;
   display: flex;
   align-items: end;
-  margin:0 20px;
+  gap:10px;
+  padding:5px 20px
 }
 .partner__like-content-favorite > span {
   background-color: var(--rb-bg-light);
@@ -151,5 +149,5 @@
   color:var(--rb-text-secondary);
   padding:2px 5px;
   border-radius: 5px;
-  transform: translateX(10px);
+  transform: translateX(-15px);
 }

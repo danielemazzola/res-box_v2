@@ -58,6 +58,18 @@ const Partner = ({ partner, arrayFilterPartners }) => {
               loading='lazy'
             />
           </div>
+          <div className='partner__like-content-favorite'>
+            {partner.favorite <= 0 ? (
+              <>
+                <img alt='Likes' src={heart} width='30' />
+              </>
+            ) : (
+              <>
+                <img alt='Likes' src={like} width='30' />
+              </>
+            )}
+            <span>{partner.favorite}</span>
+          </div>
           <div className='modal-details'>
             <p>{partner.name}</p>
             <p>Tlf: {partner.phone}</p>
@@ -80,18 +92,6 @@ const Partner = ({ partner, arrayFilterPartners }) => {
                 </Marker>
               </MapContainer>
             </div>
-          </div>
-          <div className='partner__like-content-favorite'>
-            <span>{partner.favorite}</span>
-            {partner.favorite <= 0 ? (
-              <>
-                <img alt='Likes' src={heart} width='30' />
-              </>
-            ) : (
-              <>
-                <img alt='Likes' src={like} width='30' />
-              </>
-            )}
           </div>
         </div>
       </Modal>
