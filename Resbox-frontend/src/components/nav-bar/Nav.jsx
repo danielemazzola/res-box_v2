@@ -32,7 +32,7 @@ const Nav = () => {
             }`}
             onClick={() => setShowMenu(!showMenu)}
           >
-            <img src={menu} width='30' alt='icon-menu' loading='lazy' />
+            <img src={menu} width='20' alt='icon-menu' loading='lazy' />
           </button>
         </div>
       </div>
