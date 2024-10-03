@@ -3,22 +3,20 @@
   width: 25px;
   height: 32px;
   animation: heartBeat 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
-  opacity: 0.5;
 }
 
 .heart-loader:before,
 .heart-loader:after {
   content: '';
-  background: #ff3d00;
+  background: #ff5e5e;
   width: 20px;
-  height: 30px;
-  border-radius: 50px 50px 0 0;
+  height: 27px;
+  border-radius: 50px 50px 10px 10px;
   position: absolute;
-  left: 0;
-  bottom: 0;
+  left: 0px;
+  bottom: 10px;
   transform: rotate(45deg);
   transform-origin: 50% 68%;
-  box-shadow: 5px 4px 5px #0004 inset;
 }
 .heart-loader:after {
   transform: rotate(-45deg);

@@ -45,7 +45,7 @@ const ModalInfoPartner = ({ handleCloseModalInfoPartner }) => {
           ))}
         </div>
         <div className='content-favorite'>
-          <span>{stateBoxCard.infoPartner.favorite} 🤙🏼</span>
+          <span>{stateBoxCard.infoPartner.favorite}</span>
           <Like idPartner={stateBoxCard.infoPartner._id} />
         </div>
       </div>
