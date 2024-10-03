@@ -1,5 +1,6 @@
 const { verifyToken } = require('../config/jwt/jwt')
 const User = require('../models/user.model/user.model')
+const {findUserByEmail} = require('./helpers/helpers')
 
 // Middleware para verificar si un usuario ya existe (registro)
 const checkDuplicateUser = async (req, res, next) => {
@@ -76,7 +77,7 @@ const checkToken = async (req, res, next) => {
   }
 }
 
-const findUserByEmail = async (email) => {
+/* const findUserByEmail = async (email) => {
   const user_email = email.toLowerCase()
   try {
     const exist = await User.findOne({ email: user_email })
@@ -84,7 +85,7 @@ const findUserByEmail = async (email) => {
   } catch (error) {
     throw new Error('Error al buscar el usuario en la base de datos')
   }
-}
+} */
 
 module.exports = {
   checkDuplicateUser,
