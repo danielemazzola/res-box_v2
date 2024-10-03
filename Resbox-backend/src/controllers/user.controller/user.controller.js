@@ -178,21 +178,38 @@ const addFavorite = async (req, res, next) => {
     if (isFavorite) {
       user.favorites.pull(idPartner)
       await user.save()
-      const updatePartner = await Partner.findByIdAndUpdate(idPartner, {
-        $inc: { favorite: -1 }
+      const updatePartner = await Partner.findByIdAndUpdate(
+        idPartner,
+        {
+          $inc: { favorite: -1 }
+        },
+        { new: true }
+      )
+      const favorites = await getUserWithPopulates(user._id)
+      return res.status(201).json({
+        message: 'Eliminado de mis favoritos.',
+        favorites,
+        updatePartner
       })
-      return res.status(201).json({ message: 'Eliminado de mis favoritos.', updatePartner })
     } else {
       if (!Array.isArray(user.favorites)) {
         user.favorites = []
       }
       user.favorites.push(partner._id)
       await user.save()
-      const updatePartner =  await Partner.findByIdAndUpdate(idPartner, { $inc: { favorite: 1 } })
+      const updatePartner = await Partner.findByIdAndUpdate(
+        idPartner,
+        {
+          $inc: { favorite: 1 }
+        },
+        { new: true }
+      )
       const favorites = await getUserWithPopulates(user._id)
-      return res
-        .status(201)
-        .json({ message: 'Guardado en mis favoritos.', favorites,updatePartner })
+      return res.status(201).json({
+        message: 'Guardado en mis favoritos.',
+        favorites,
+        updatePartner
+      })
     }
   } catch (error) {
     next(error)

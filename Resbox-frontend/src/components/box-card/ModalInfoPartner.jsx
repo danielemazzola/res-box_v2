@@ -4,8 +4,8 @@ import Modal from '../modal/Modal'
 import Like from '../like/Like'
 import { AuthContext } from '../../context/auth/AuthContext'
 
-const ModalInfoPartner = ({ handleCloseModalInfoPartner }) => {
-  const { stateBoxCard } = useContext(AuthContext)
+const ModalInfoPartner = ({ handleCloseModalInfoPartner, box }) => {
+  const { stateBoxCard } = useContext(AuthContext)  
   return (
     <Modal
       isModalOpen={stateBoxCard.modalStatePartner}
@@ -45,8 +45,7 @@ const ModalInfoPartner = ({ handleCloseModalInfoPartner }) => {
           ))}
         </div>
         <div className='content-favorite'>
-          <span>{stateBoxCard.infoPartner.favorite}</span>
-          <Like idPartner={stateBoxCard.infoPartner._id} />
+          <Like idPartner={stateBoxCard.infoPartner._id} box={box} />
         </div>
       </div>
     </Modal>

@@ -8,7 +8,8 @@ import heart from '/images/heart.png'
 import { fetchLike } from '../../services/fetch-like/fetchLike'
 
 const Like = ({ idPartner }) => {
-  const { token, API_URL, setStateBoxCard } = useContext(AuthContext)
+  const { token, API_URL, stateBoxCard, setStateBoxCard } =
+    useContext(AuthContext)
   const {
     stateIsAuth: { user },
     dispatchAuth,
@@ -26,6 +27,7 @@ const Like = ({ idPartner }) => {
         API_URL.like
       }/${idPartner}`
       const { response, data } = await fetchLike(urlApi, token)
+
       if (response.status !== 201) {
         const error = new Error('Hubo un problema en su solicitud.')
         dispatchToast({
@@ -37,63 +39,36 @@ const Like = ({ idPartner }) => {
         })
         return
       }
-      const updatePartner = partners?.find(
+      dispatchAuth({
+        type: 'SET_USER',
+        payload: data.favorites
+      })
+
+      setStateBoxCard((prevState) => ({
+        ...prevState,
+        infoPartner: {
+          ...prevState.infoPartner,
+          favorite: data.updatePartner.favorite
+        }
+      }))
+
+      let updatePartner = partners?.find(
         (partner) => partner._id.toString() === idPartner.toString()
       )
-      if (data.favorites) {
-        dispatchAuth({
-          type: 'SET_USER',
-          payload: { ...user, favorites: data.favorites.favorites }
-        })
-        if (updatePartner) {
-          updatePartner.favorite = updatePartner.favorite + 1
-          const updatedPartners = partners.map((par) =>
-            par._id.toString() === idPartner.toString()
-              ? { ...updatePartner, favorite: updatePartner.favorite }
-              : par
-          )
-          dispatchPartners({
-            type: 'SET_PARTNERS',
-            payload: updatedPartners
-          })
-        }
-        setTimeout(() => {
-          setStateBoxCard((prevState) => ({
-            ...prevState,
-            infoPartner: {
-              ...prevState.infoPartner,
-              favorite: prevState.infoPartner.favorite + 1
-            }
-          }))
-        }, 1000)
-      } else {
-        const updatedFavorites = user.favorites.filter(
-          (fav) => fav !== idPartner
+
+      if (updatePartner) {
+        const updatePartner = data.updatePartner
+        const updatedPartners = partners.map((partner) =>
+          partner._id.toString() === updatePartner._id.toString()
+            ? {
+                ...partner,
+                ...updatePartner
+              }
+            : partner
         )
-        if (updatePartner) {
-          updatePartner.favorite = updatePartner.favorite - 1
-          const updatedPartners = partners.map((par) =>
-            par._id.toString() === idPartner.toString()
-              ? { ...updatePartner, favorite: updatePartner.favorite }
-              : par
-          )
-          dispatchPartners({
-            type: 'SET_PARTNERS',
-            payload: updatedPartners
-          })
-        }
-        setTimeout(() => {
-          setStateBoxCard((prevState) => ({
-            ...prevState,
-            infoPartner: {
-              ...prevState.infoPartner,
-              favorite: prevState.infoPartner.favorite - 1
-            }
-          }))
-        }, 1000)
-        dispatchAuth({
-          type: 'SET_USER',
-          payload: { ...user, favorites: updatedFavorites }
+        dispatchPartners({
+          type: 'SET_PARTNERS',
+          payload: updatedPartners
         })
       }
     } catch (error) {
@@ -101,7 +76,7 @@ const Like = ({ idPartner }) => {
     } finally {
       setTimeout(() => {
         setLoadLike(false)
-      }, 1000)
+      }, 500)
     }
   }
 
@@ -109,16 +84,18 @@ const Like = ({ idPartner }) => {
 
   return (
     <div className='like-content-favorite'>
+      <span>{stateBoxCard.infoPartner.favorite}</span>
       {loadLike ? (
         <HeartLoader />
       ) : (
         <>
+          <span></span>
           {existFavorite ? (
             <button onClick={handleAddToFavorite}>
               <img
                 alt='Like'
                 src={like}
-                width='30'
+                width='20'
                 className=''
                 title='Favorito'
                 loading='lazy'
@@ -129,7 +106,7 @@ const Like = ({ idPartner }) => {
               <img
                 alt='Like'
                 src={heart}
-                width='30'
+                width='20'
                 title='Agregar a favorito'
                 loading='lazy'
               />

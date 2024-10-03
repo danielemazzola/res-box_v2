@@ -1,6 +1,6 @@
 .heart-loader {
   position: relative;
-  width: 25px;
+  width: 26px;
   height: 32px;
   animation: heartBeat 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
 }
@@ -9,12 +9,12 @@
 .heart-loader:after {
   content: '';
   background: #ff5e5e;
-  width: 20px;
-  height: 27px;
+  width: 11px;
+  height: 17px;
   border-radius: 50px 50px 10px 10px;
   position: absolute;
-  left: 0px;
-  bottom: 10px;
+  left: 40px;
+  bottom: 7px;
   transform: rotate(45deg);
   transform-origin: 50% 68%;
 }

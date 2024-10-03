@@ -66,13 +66,10 @@ const BoxCard = ({ box }) => {
     })
   }
   const handlePartner = (partner, box) => {
-    dispatchPartners({
-      type: 'SET_FILTER_SEARCH',
-      payload: useFilterPartner(partner, box.id_partner_consumed)
-    })
     setStateBoxCard((prevState) => ({
       ...prevState,
-      modalStatePartner: true
+      modalStatePartner: true,
+      infoPartner: partner
     }))
   }
 
@@ -84,6 +81,12 @@ const BoxCard = ({ box }) => {
       }))
     }
   }, [arrayFilterPartnersSearch])
+
+  const uniquePartners = Array.from(
+    new Map(
+      box.id_partner_consumed.map((partner) => [partner.name, partner])
+    ).values()
+  )
 
   return (
     <>
@@ -98,19 +101,18 @@ const BoxCard = ({ box }) => {
               {!info.text.includes('Usado en') ? (
                 <p className='boxcard__bg-white'>{info.value}</p>
               ) : (
-                box.id_partner_consumed
-                  ?.map((partner) => partner.name)
-                  .filter((value, index, self) => self.indexOf(value) === index)
-                  .map((partner, index) => (
+                <>
+                  {uniquePartners.map((partner, index) => (
                     <button
                       key={index}
                       className='boxcard__btn-info-partner'
                       style={{ cursor: 'pointer' }}
                       onClick={() => handlePartner(partner, box)}
                     >
-                      {partner}
+                      {partner.name}
                     </button>
-                  ))
+                  ))}
+                </>
               )}
             </div>
           ))}
@@ -160,6 +162,7 @@ const BoxCard = ({ box }) => {
         handleCloseModalInfoPartner={() =>
           handleCloseModalInfoPartner(setStateBoxCard)
         }
+        box={box}
       />
       <ModalRedeem
         box={box}

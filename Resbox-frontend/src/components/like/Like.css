@@ -3,6 +3,12 @@
   padding: 5px;
   display: flex;
   justify-content: end;
+  align-items: end;
+}
+.like-content-favorite > span{
+  position:absolute;
+  right:30px
+
 }
 .like-content-favorite > button {
   border: none;

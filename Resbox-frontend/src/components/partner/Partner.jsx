@@ -61,11 +61,11 @@ const Partner = ({ partner, arrayFilterPartners }) => {
           <div className='partner__like-content-favorite'>
             {partner.favorite <= 0 ? (
               <>
-                <img alt='Likes' src={heart} width='30' />
+                <img alt='Likes' src={heart} width='20' />
               </>
             ) : (
               <>
-                <img alt='Likes' src={like} width='30' />
+                <img alt='Likes' src={like} width='20' />
               </>
             )}
             <span>{partner.favorite}</span>
