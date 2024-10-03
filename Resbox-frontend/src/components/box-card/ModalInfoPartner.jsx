@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import Modal from '../modal/Modal'
 
 import Like from '../like/Like'
 import { AuthContext } from '../../context/auth/AuthContext'
 
 const ModalInfoPartner = ({ handleCloseModalInfoPartner, box }) => {
-  const { stateBoxCard } = useContext(AuthContext)  
+  const { stateBoxCard } = useContext(AuthContext)
   return (
     <Modal
       isModalOpen={stateBoxCard.modalStatePartner}
@@ -44,6 +45,9 @@ const ModalInfoPartner = ({ handleCloseModalInfoPartner, box }) => {
             />
           ))}
         </div>
+        {/* <div className='content-comments-card-partner'>
+          <Link to={`../comments/${stateBoxCard.infoPartner._id}`}>Comenatarios</Link>
+        </div> */}
         <div className='content-favorite'>
           <Like idPartner={stateBoxCard.infoPartner._id} box={box} />
         </div>

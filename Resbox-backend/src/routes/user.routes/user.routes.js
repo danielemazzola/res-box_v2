@@ -1,5 +1,6 @@
 const ROUTER = require('express').Router()
 const {
+  getUsers,
   newUser,
   authGoogle,
   login,
@@ -17,6 +18,7 @@ const {
   checkToken
 } = require('../../middleware/user.middleware')
 
+ROUTER.get('/', getUsers)
 ROUTER.get('/profile-user', authenticateUser, profile)
 ROUTER.post('/auth-google', authGoogle)
 ROUTER.post('/register-user', checkDuplicateUser, newUser)

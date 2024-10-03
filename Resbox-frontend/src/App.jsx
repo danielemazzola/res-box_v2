@@ -9,6 +9,7 @@ import MyBox from './pages/isAuth/my-box/MyBox'
 import PromoBox from './pages/isAuth/promo-box/PromoBox'
 import Partner from './pages/isAuth/partner/Partner'
 import Operations from './pages/isAuth/operations/Operations'
+/* import Comments from './pages/isAuth/comments/Comments' */
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
         <Route path={`/promo-box`} element={<ProtectedRoute><PromoBox /></ProtectedRoute>}/>
         <Route path={`/partner`} element={<ProtectedRoute><Partner /></ProtectedRoute>}/>
         <Route path={`/operations`} element={<ProtectedRoute><Operations /></ProtectedRoute>}/>
+        {/* <Route path={`/comments/:partner`} element={<ProtectedRoute><Comments /></ProtectedRoute>}/> */}
         <Route path='*' element={<NotFound />} />
       </Route>
     </Routes>

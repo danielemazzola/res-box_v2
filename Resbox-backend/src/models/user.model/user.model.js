@@ -61,7 +61,7 @@ const userSchema = new mongoose.Schema(
     purchasedBoxes: [purchasedBoxSchema],
     roles: {
       type: [String],
-      enum: ['user', 'partner', 'admin'],
+      enum: ['user', 'partner', 'admin', 'zeus'],
       default: ['user']
     },
     favorites:{

@@ -1,6 +1,6 @@
-export const fetchGetPartners = async () => {
+export const fetchGetHome = async (urlApi) => {
   try {
-    const response = await fetch(`${import.meta.env.VITE_URL_API}/partner`)
+    const response = await fetch(urlApi)
     const data = await response.json()
     return { data }
   } catch (error) {

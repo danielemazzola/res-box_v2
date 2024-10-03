@@ -4,7 +4,7 @@ import { ReducersContext } from '../../context/reducers/ReducersContext'
 import HowItWorks from '../../components/home/how-it-works/HowItWorks'
 import InformationApp from '../../components/home/information-app/InformationApp'
 import PromoBox from '../isAuth/promo-box/PromoBox'
-import { fetchGetPartners } from '../../services/fetch-partner/fetchPartners'
+import { fetchGetHome } from '../../services/fetch-partner/fetchPartners'
 import './Home.css'
 
 const Home = () => {
@@ -12,7 +12,7 @@ const Home = () => {
     useContext(ScrollRefContext)
 
   const {
-    statePartners: { partners },
+    statePartners: { partners, usersCount },
     dispatchPartners,
     dispatchLoader,
     dispatchToast
@@ -21,13 +21,17 @@ const Home = () => {
   useEffect(() => {
     if (partners.length <= 0) {
       getPartners()
+    }
+    if (usersCount <= 0) {
+      getUsers()
     } else return
   }, [])
 
   const getPartners = async () => {
     try {
       dispatchLoader({ type: 'SET_LOAD_TRUE' })
-      const { data } = await fetchGetPartners()
+      const urlApi = `${import.meta.env.VITE_URL_API}/partner`
+      const { data } = await fetchGetHome(urlApi)
       dispatchPartners({ type: 'SET_PARTNERS', payload: data.partners })
     } catch (error) {
       dispatchToast({
@@ -35,9 +39,23 @@ const Home = () => {
         payload: { msg: error.message, error: true }
       })
     } finally {
-      setTimeout(() => {
-        dispatchLoader({ type: 'SET_LOAD_FALSE' })
-      }, 1500)
+      dispatchLoader({ type: 'SET_LOAD_FALSE' })
+    }
+  }
+
+  const getUsers = async () => {
+    try {
+      dispatchLoader({ type: 'SET_LOAD_TRUE' })
+      const urlApi = `${import.meta.env.VITE_URL_API}/user`
+      const { data } = await fetchGetHome(urlApi)
+      dispatchPartners({ type: 'SET_COUNT_USERS', payload: data.users })
+    } catch (error) {
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: { msg: error.message, error: true }
+      })
+    } finally {
+      dispatchLoader({ type: 'SET_LOAD_FALSE' })
     }
   }
 

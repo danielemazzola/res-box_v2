@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import InstallApp from '../install-app/InstallApp'
 import useScrollToRef from '../../hooks/useScrollToRef'
 import { ScrollRefContext } from '../../context/scroll-ref/ScrollRefContext'
-import Modal from '../modal/Modal'
+import { ReducersContext } from '../../context/reducers/ReducersContext'
 import Form from '../form-group/Form'
+import Modal from '../modal/Modal'
+import Nav from '../nav-bar/Nav'
 import './Header.css'
 import logo from '/images/logo.png'
-import InstallApp from '../install-app/InstallApp'
-import { ReducersContext } from '../../context/reducers/ReducersContext'
-import Nav from '../nav-bar/Nav'
 
 const Header = () => {
   const [openForm, setOpenForm] = useState(false)
@@ -25,8 +25,21 @@ const Header = () => {
   } = useContext(ScrollRefContext)
 
   const {
-    stateIsAuth: { user, isAuth }
+    stateIsAuth: { isAuth },
+    statePartners: { usersCount }
   } = useContext(ReducersContext)
+
+  const [showCounter, setShowCounter] = useState(0)
+  useEffect(() => {
+    if (showCounter === usersCount) {
+      return
+    } else {
+      
+      setTimeout(() => {
+        setShowCounter(showCounter + 1)
+      }, 200)
+    }
+  })
 
   return (
     <>
@@ -43,8 +56,13 @@ const Header = () => {
             <img alt='logo Res-Box' src={logo} loading='lazy' />
           </Link>
         </div>
+
         {!isAuth ? (
           <div className='contain-description'>
+            <div className='containt-counter-users'>
+              <p><strong>{showCounter}</strong></p>
+              <p>Usuarios registrados</p>
+            </div>
             <div className='contain-title-app fadeIn'>
               <h1 className='name-app'>res-box</h1>
               <p>Todas las ofertas en un único lugar</p>
