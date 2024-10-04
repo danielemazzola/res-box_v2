@@ -31,8 +31,6 @@ const Header = () => {
     statePromoBoxes: { cart }
   } = useContext(ReducersContext)
 
-  console.log(cart)
-
   const [showCounter, setShowCounter] = useState(0)
   useEffect(() => {
     if (showCounter === usersCount) {
@@ -107,9 +105,7 @@ const Header = () => {
           </div>
         ) : (
           <>
-            {cart.length > 0 && (
-              <Cart />
-            )}
+            {cart.length > 0 && <Cart />}
             <Nav />
           </>
         )}

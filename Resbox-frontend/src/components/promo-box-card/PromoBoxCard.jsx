@@ -1,14 +1,17 @@
-import { useContext, useMemo, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import confetti from 'canvas-confetti'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import { AuthContext } from '../../context/auth/AuthContext'
 import { handleBuyBox } from '../../reducer/promo-box/promobox.action'
 import { randomImage } from './helpers'
 import './PromoBoxCard.css'
+import { useLocation } from 'react-router-dom'
 
 const PromoBoxCard = ({ box }) => {
   const [explode, setExplode] = useState(false)
+  const [btnBuy, setBtnBuy] = useState(true)
   const image = useMemo(() => randomImage(), [])
+  const location = useLocation()
   const {
     dispatchToast,
     dispatchAuth,
@@ -18,6 +21,12 @@ const PromoBoxCard = ({ box }) => {
     stateIsAuth: { user }
   } = useContext(ReducersContext)
   const { API_URL, token } = useContext(AuthContext)
+
+  useEffect(() => {
+    if (location.pathname === '/cart-items') {
+      setBtnBuy(false)
+    }
+  }, [])
 
   const handleBuyBoxes = async () => {
     const { response, data } = await handleBuyBox(
@@ -123,15 +132,17 @@ const PromoBoxCard = ({ box }) => {
                 +🛒
               </button>
             )}
-            <button
-              disabled={!box.status.includes('active')}
-              className={`${
-                box.status.includes('active') ? 'active' : 'disabled'
-              }`}
-              onClick={handleBuyBoxes}
-            >
-              Comprar
-            </button>
+            {btnBuy && (
+              <button
+                disabled={!box.status.includes('active')}
+                className={`${
+                  box.status.includes('active') ? 'active' : 'disabled'
+                }`}
+                onClick={handleBuyBoxes}
+              >
+                Comprar
+              </button>
+            )}
           </div>
         )}
       </div>
