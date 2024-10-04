@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import useScrollToRef from '../../hooks/useScrollToRef'
-import './ButtonTopScroll.css'
 import { ScrollRefContext } from '../../context/scroll-ref/ScrollRefContext'
+import './ButtonTopScroll.css'
 import logo from '/images/logo.png'
 
 const ButtonTopScroll = () => {

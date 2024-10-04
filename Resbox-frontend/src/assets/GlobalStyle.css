@@ -14,9 +14,9 @@
   --rb-bg-toast_error: #ffeeeee5;
 
   --br-bg-boxes-1: #515a47;
-  --br-bg-boxes-2: #D7BE82;
-  --br-bg-boxes-3: #7A4419;
-  --br-bg-boxes-4: #755C1B;
+  --br-bg-boxes-2: #d7be82;
+  --br-bg-boxes-3: #7a4419;
+  --br-bg-boxes-4: #755c1b;
   --br-bg-boxes-5: #400406;
 
   --rb-text-primary: #ececec;
@@ -58,7 +58,8 @@ h2 {
 
 h2,
 h3,
-h4 {
+h4,
+h5 {
   font-size: var(--rb-font-size-xlarge);
 }
 
