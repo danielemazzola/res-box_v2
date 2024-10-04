@@ -109,7 +109,7 @@ const PromoBoxCard = ({ box }) => {
                 <button className='' onClick={() => handleRemoveItemCart(box)}>
                   -
                 </button>
-                🛒
+                <p>🛒</p>
                 <p
                   className={`promobox__quantity-cart ${
                     explode ? 'explode' : ''
@@ -135,12 +135,12 @@ const PromoBoxCard = ({ box }) => {
             {btnBuy && (
               <button
                 disabled={!box.status.includes('active')}
-                className={`${
+                className={`yellow ${
                   box.status.includes('active') ? 'active' : 'disabled'
                 }`}
                 onClick={handleBuyBoxes}
               >
-                Comprar
+                Compra rapida
               </button>
             )}
           </div>

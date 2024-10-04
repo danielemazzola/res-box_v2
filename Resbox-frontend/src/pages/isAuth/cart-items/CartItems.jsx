@@ -42,7 +42,7 @@ const CartItems = () => {
         ) : (
           <>
             <p>
-              Actualmente hay <strong>"{cart.length}"</strong> articulos en tu
+              Actualmente hay <strong>"{cart.length}"</strong> {cart.length === 1 ? 'articulo' : 'articulos'} en tu
               cesta:
             </p>
             <p>¿Quieres añadir MÁS articulos?</p>
