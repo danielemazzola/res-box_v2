@@ -12,11 +12,12 @@ const CartItems = () => {
   const [amount, setAmount] = useState(0)
   const {
     statePromoBoxes: { cart },
+    dispatchPromoBoxes,
     stateIsAuth: { user }
   } = useContext(ReducersContext)
   const scrollToRef = useScrollToRef()
   const { sectionRefCartItems } = useContext(ScrollRefContext)
-  
+
   useEffect(() => {
     scrollToRef(sectionRefCartItems)
   }, [])
@@ -54,6 +55,18 @@ const CartItems = () => {
           <Link to='../promo-box'>
             <button className='button green'>PROMOCIONES DESTACADAS</button>
           </Link>
+          {cart.length > 0 && (
+            <button
+              className=''
+              style={{
+                backgroundColor: 'var(--rb-bg-options)',
+                color: 'white'
+              }}
+              onClick={() => dispatchPromoBoxes({ type: 'SET_DELETE_CART' })}
+            >
+              Vaciar mi cesta
+            </button>
+          )}
         </div>
       </div>
       <div>
