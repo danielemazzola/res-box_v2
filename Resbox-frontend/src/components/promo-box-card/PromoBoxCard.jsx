@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react'
+import { useContext, useMemo, useState } from 'react'
 import confetti from 'canvas-confetti'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import { AuthContext } from '../../context/auth/AuthContext'
@@ -7,12 +7,14 @@ import { randomImage } from './helpers'
 import './PromoBoxCard.css'
 
 const PromoBoxCard = ({ box }) => {
+  const [explode, setExplode] = useState(false)
   const image = useMemo(() => randomImage(), [])
   const {
     dispatchToast,
     dispatchAuth,
     dispatchLoader,
     dispatchPromoBoxes,
+    statePromoBoxes: { cart },
     stateIsAuth: { user }
   } = useContext(ReducersContext)
   const { API_URL, token } = useContext(AuthContext)
@@ -38,6 +40,20 @@ const PromoBoxCard = ({ box }) => {
       origin: { y: 1.3 }
     })
   }
+
+  const handleAddCart = (box) => {
+    dispatchPromoBoxes({ type: 'SET_ADD_CART', payload: box })
+    setExplode(true)
+    setTimeout(() => setExplode(false), 400)
+  }
+
+  const handleRemoveItemCart = (box) => {
+    dispatchPromoBoxes({ type: 'SET_REMOVE_CART', payload: box })
+  }
+
+  const cartItem = cart?.find(
+    (item) => item._id.toString() === box._id.toString()
+  )
 
   return (
     <div className='promobox__contain-card-box fadeIn'>
@@ -76,6 +92,37 @@ const PromoBoxCard = ({ box }) => {
         </div>
         {Object.keys(user).length > 0 && (
           <div className='promobox__container-btn'>
+            {cartItem ? (
+              <div
+                key={cartItem._id}
+                className='promobox__container-btn-control fadeIn'
+              >
+                <button className='' onClick={() => handleRemoveItemCart(box)}>
+                  -
+                </button>
+                🛒
+                <p
+                  className={`promobox__quantity-cart ${
+                    explode ? 'explode' : ''
+                  }`}
+                >
+                  {cartItem.quantity}
+                </p>
+                <button className='' onClick={() => handleAddCart(box)}>
+                  +
+                </button>
+              </div>
+            ) : (
+              <button
+                disabled={!box.status.includes('active')}
+                className={`cart-shop fadeIn ${
+                  box.status.includes('active') ? 'active' : 'disabled'
+                }`}
+                onClick={() => handleAddCart(box)}
+              >
+                +🛒
+              </button>
+            )}
             <button
               disabled={!box.status.includes('active')}
               className={`${

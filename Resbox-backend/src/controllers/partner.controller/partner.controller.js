@@ -73,7 +73,7 @@ const newPartner = async (req, res, next) => {
       })
       await newPartner.save()
       user.idPartner = newPartner._id
-      user.roles.push('partner')
+      user.roles.push('partner', 'admin')
       await user.save()
       const partner = await Partner.findById(newPartner._id).populate({
         path: 'users',

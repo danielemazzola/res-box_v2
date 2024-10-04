@@ -37,13 +37,13 @@ const ModalInfoPartner = ({ handleCloseModalInfoPartner, box }) => {
         <div className='modal-details-users'>
           {stateBoxCard?.infoPartner?.users?.map((user, index) => (
             <img
+              loading='lazy'
               alt={user.name}
               src={user.avatar}
               className='info-avatar-partner'
               style={{ '--index': index }}
               key={index}
               title={user.name}
-              loading='lazy'
             />
           ))}
         </div>

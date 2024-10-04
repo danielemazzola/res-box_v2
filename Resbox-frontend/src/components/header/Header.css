@@ -72,7 +72,6 @@
   flex-direction: column;
   gap: 10px;
 }
-
 @media (max-width: 840px) {
   .contain-hero {
     flex-direction: column;

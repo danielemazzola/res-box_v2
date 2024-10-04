@@ -196,10 +196,12 @@ export const handleCloseSesion = (
   dispatchPartners,
   navigate,
   user,
+  setToken,
   setStateModal
 ) => {
   dispatchLoader({ type: 'SET_LOAD_TRUE' })
   localStorage.removeItem('SECURE_CODE_RESBOX')
+  setToken(null)
   dispatchToast({
     type: 'ADD_NOTIFICATION',
     payload: { msg: `Gracias por visitarnos❤️ ${user.name}`, error: false }

@@ -20,7 +20,7 @@ const Nav = () => {
     dispatchPartners,
     stateIsAuth: { user }
   } = useContext(ReducersContext)
-  const {setStateModal} = useContext(AuthContext)
+  const {setStateModal, setToken} = useContext(AuthContext)
 
   return (
     <>
@@ -56,6 +56,7 @@ const Nav = () => {
                     dispatchPartners,
                     navigate,
                     user,
+                    setToken,
                     setStateModal
                   )
                   setShowMenu(false)

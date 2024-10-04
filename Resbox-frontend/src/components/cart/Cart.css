@@ -1,0 +1,25 @@
+.cart__container{
+  margin-right:80px;
+  position: fixed;
+  top:50px;
+  right:0;
+  z-index:5;
+}
+.cart__container > button {
+  position: relative;
+  width:38px;
+  height:38px;
+  background-color: rgb(240, 240, 240);;
+}
+.cart__quantity-number{
+  position: absolute;
+  background-color: var(--rb-bg-options);
+  left:-10px;
+  width:25px;
+  height:25px;
+  border-radius: 50%;;
+  color:var(--rb-text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

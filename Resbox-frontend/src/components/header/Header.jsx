@@ -9,6 +9,7 @@ import Modal from '../modal/Modal'
 import Nav from '../nav-bar/Nav'
 import './Header.css'
 import logo from '/images/logo.png'
+import Cart from '../cart/Cart'
 
 const Header = () => {
   const [openForm, setOpenForm] = useState(false)
@@ -26,15 +27,17 @@ const Header = () => {
 
   const {
     stateIsAuth: { isAuth },
-    statePartners: { usersCount }
+    statePartners: { usersCount },
+    statePromoBoxes: { cart }
   } = useContext(ReducersContext)
+
+  console.log(cart)
 
   const [showCounter, setShowCounter] = useState(0)
   useEffect(() => {
     if (showCounter === usersCount) {
       return
     } else {
-      
       setTimeout(() => {
         setShowCounter(showCounter + 1)
       }, 200)
@@ -60,7 +63,9 @@ const Header = () => {
         {!isAuth ? (
           <div className='contain-description'>
             <div className='containt-counter-users'>
-              <p><strong>{showCounter}</strong></p>
+              <p>
+                <strong>{showCounter}</strong>
+              </p>
               <p>Usuarios registrados</p>
             </div>
             <div className='contain-title-app fadeIn'>
@@ -102,6 +107,9 @@ const Header = () => {
           </div>
         ) : (
           <>
+            {cart.length > 0 && (
+              <Cart />
+            )}
             <Nav />
           </>
         )}

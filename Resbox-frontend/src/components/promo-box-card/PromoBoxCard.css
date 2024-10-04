@@ -32,6 +32,7 @@
   text-align: start;
   flex-direction: column;
   gap: 30px;
+  justify-content: space-between;
 }
 
 .promobox__contain_title {
@@ -57,7 +58,6 @@
   padding: 0 3px;
   align-self: flex-start;
   border-radius: 3px;
-
 }
 .promobox__information {
   display: flex;
@@ -77,12 +77,48 @@
   width: 100%;
   display: flex;
   justify-content: end;
+  gap: 10px;
+}
+.promobox__container-btn-control {
+  position: relative;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.932);
+  padding: 0 10px;
+  border-radius: 5px;
+}
+.promobox__quantity-cart {
+  position: absolute;
+  left: 38%;
+  top: -17px;
+  background-color: var(--rb-bg-options);
+  color: var(--rb-text-primary);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.promobox__container-btn-control > button {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px!important;
+}
+.cart-shop {
+  background-color: var(--rb-bg-light) !important;
+  color: var(--rb-text-secundary) !important;
 }
 .promobox__container-btn > button {
   border: none;
   padding: 5px 8px;
   color: var(--rb-text-primary);
-  font-size: var(--rb-font-size-large);
+  font-size: var(--rb-font-size-medium);
+  text-transform: uppercase;
 }
 
 .active {
@@ -106,4 +142,23 @@ button:disabled {
   .promobox__contain-card-box {
     min-width: 150px;
   }
+}
+
+@keyframes explode {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.explode {
+  animation: explode 0.4s ease forwards;
 }
