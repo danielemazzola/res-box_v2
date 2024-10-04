@@ -116,6 +116,7 @@ const PartnerCard = () => {
           src={partner.banner}
           alt={partner.name}
           onClick={() => handleChangeImage({ banner: true })}
+          loading='lazy'
         />
       </div>
       <div className='partner__avatar'>
@@ -124,6 +125,7 @@ const PartnerCard = () => {
           alt={partner.name}
           width='70'
           onClick={() => handleChangeImage({ avatar: true })}
+          loading='lazy'
         />
       </div>
       <div className='partner__title'>

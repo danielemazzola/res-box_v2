@@ -69,6 +69,7 @@ const AuthGoogle = ({ handleCloseModal }) => {
   return (
     <>
       <img
+        loading='lazy'
         onClick={handleCustomLogin}
         src={google}
         className='google__btn-login'

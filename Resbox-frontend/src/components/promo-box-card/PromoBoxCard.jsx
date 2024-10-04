@@ -43,7 +43,9 @@ const PromoBoxCard = ({ box }) => {
     <div className='promobox__contain-card-box fadeIn'>
       <img
         src={`/images/coffe/${image}.webp`}
-        className='promobox__images-banner' alt='banner'
+        className='promobox__images-banner'
+        alt='banner'
+        loading='lazy'
       />
       <div className='promobox__details'>
         <div className='promobox__contain_title'>

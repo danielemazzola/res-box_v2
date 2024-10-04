@@ -72,6 +72,7 @@ const Nav = () => {
                 alt='Logo res-box'
                 className={`${showMenu ? '' : 'fadeIn'}`}
                 onClick={() => setShowMenu(!showMenu)}
+                loading='lazy'
               />
               <p>RES-BOX</p>
             </div>

@@ -33,7 +33,7 @@ const Footer = () => {
             {year === 2024 ? '2024' : `2024-${year}`}
           </span>
           <i className='text-gray-300 font-light'>Powered by</i>
-          <img alt='Logo Res-Box' src={logo} width='70' />
+          <img alt='Logo Res-Box' src={logo} width='70' loading='lazy' />
           <i className='text-gray-300 font-semibold'>RES-BOX</i>
         </div>
       </div>

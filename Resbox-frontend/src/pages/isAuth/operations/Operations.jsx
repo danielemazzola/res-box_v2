@@ -98,7 +98,9 @@ const Operations = () => {
     const sales = formatCash(
       sumByDate(
         operations,
-        (op) => op.status === 'completed' && isThisWeek(new Date(op.updatedAt), { weekStartsOn: 1 })
+        (op) =>
+          op.status === 'completed' &&
+          isThisWeek(new Date(op.updatedAt), { weekStartsOn: 1 })
       )
     )
     return sales
@@ -204,6 +206,7 @@ const Operations = () => {
               alt='logo res-box'
               width='50'
               className='operations-component__sales-img waveEffect'
+              loading='lazy'
             />
           </div>
         ))}

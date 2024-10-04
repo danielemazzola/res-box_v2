@@ -73,6 +73,7 @@ const InformationApp = () => {
                   alt='logo res-box'
                   width='38'
                   className='waveEffect'
+                  loading='lazy'
                 />
                 <input
                   placeholder='Buscar colaborador'

@@ -61,6 +61,7 @@ const Dashboard = () => {
                 src={edit}
                 className='dashboard__edit-avatar'
                 onClick={() => handleImageClick(fileInputRef)}
+                loading='lazy'
               />
             </div>
           </div>

@@ -15,6 +15,7 @@ const ModalInfoPartner = ({ handleCloseModalInfoPartner, box }) => {
       <div className='modal-content'>
         <div className='modal-content-banner'>
           <img
+            loading='lazy'
             src={stateBoxCard.infoPartner.banner}
             alt={`${stateBoxCard.infoPartner.name} banner`}
           />
@@ -42,6 +43,7 @@ const ModalInfoPartner = ({ handleCloseModalInfoPartner, box }) => {
               style={{ '--index': index }}
               key={index}
               title={user.name}
+              loading='lazy'
             />
           ))}
         </div>
