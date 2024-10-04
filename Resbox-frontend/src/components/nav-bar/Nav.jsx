@@ -28,7 +28,7 @@ const Nav = () => {
         <div className='fadeIn'>
           <button
             className={`btn-menu fadeIn z-index-1000 ${
-              !showMenu ? 'bg-white-menu' : ''
+              !showMenu ? 'bg-white-menu' : 'fixed'
             }`}
             onClick={() => setShowMenu(!showMenu)}
           >
