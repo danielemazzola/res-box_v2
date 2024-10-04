@@ -4,6 +4,7 @@ footer {
   padding: 80px 50px 120px 50px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   flex: 1;
   gap: 50px;
   transition: all 0.3s;
@@ -12,7 +13,7 @@ footer {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: start;
   gap: 50px;
   transition: all 0.3s;
