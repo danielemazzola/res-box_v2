@@ -49,6 +49,13 @@ export const statePromoBox = (state, action) => {
       return { ...state, cart: [] }
     }
 
+    case 'SET_REMOVE_CART_ITEMS':
+      const updatedItem = state.cart.filter(
+        (item) => item._id !== action.payload._id
+      )
+      localStorage.setItem('CART_RES-BOX', JSON.stringify(updatedItem))
+      return { ...state, cart: updatedItem }
+
     default:
       return state
   }

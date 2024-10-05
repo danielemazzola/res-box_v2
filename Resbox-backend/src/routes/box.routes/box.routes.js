@@ -1,5 +1,5 @@
 const ROUTER = require('express').Router()
-const { existBox } = require('../../middleware/checkBox.middleware')
+const { existBox, existBoxes } = require('../../middleware/checkBox.middleware')
 const { isAdmin } = require('../../middleware/protected.middleware')
 const { authenticateUser } = require('../../middleware/user.middleware')
 const {
@@ -7,7 +7,8 @@ const {
   newBox,
   updateBox,
   removeBox,
-  buyBox
+  buyBox,
+  buyBoxCart
 } = require('../../controllers/box.controller/box.controller')
 
 ROUTER.get('/', getBoxes)
@@ -27,5 +28,6 @@ ROUTER.delete(
   removeBox
 )
 ROUTER.post('/buy-box/:id_box', existBox, authenticateUser, buyBox)
+ROUTER.post('/buy-box-cart', existBoxes, authenticateUser, buyBoxCart)
 
 module.exports = ROUTER

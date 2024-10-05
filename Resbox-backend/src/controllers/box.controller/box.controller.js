@@ -108,10 +108,49 @@ const buyBox = async (req, res, next) => {
   }
 }
 
+const buyBoxCart = async (req, res) => {
+  const { exist, no_exist, inactive, user } = req
+
+  if (no_exist.length > 0) {
+    return res
+      .status(404)
+      .json({ message: 'Algunos Boxes ya no existen.', no_exist })
+  }
+
+  if (inactive.length > 0) {
+    return res
+      .status(409)
+      .json({ message: 'Algunos Boxes están inactivas.', inactive })
+  }
+
+  try {
+    for (const box of exist) {
+      const userBoxIndex = user.purchasedBoxes.findIndex(
+        (userBox) => userBox.box.toString() === box._id.toString()
+      )
+      if (userBoxIndex !== -1) {
+        await updateUserBox(user._id, box._id, box.usage_limit * box.quantity)
+      } else {
+        await addUserBox(user._id, box._id, box.usage_limit * box.quantity)
+      }
+      await updateBoxItemsAcquired(box._id, user._id)
+    }
+    const updatedUser = await getUserDetails(user._id)
+    const boxes = await Box.find()
+    return res.status(201).json({
+      message: 'Compra realizada correctamente. Las cajas se han actualizado.',
+      updatedUser, boxes
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   newBox,
   getBoxes,
   updateBox,
   removeBox,
-  buyBox
+  buyBox,
+  buyBoxCart
 }

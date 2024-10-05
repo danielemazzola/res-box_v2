@@ -64,6 +64,20 @@ const PromoBoxCard = ({ box }) => {
     (item) => item._id.toString() === box._id.toString()
   )
 
+  useEffect(() => {
+    if (box.status.includes('inactive')) {
+      const itemToRemove = cart.find(
+        (item) => item._id.toString() === box._id.toString()
+      )
+      if (itemToRemove) {
+        dispatchPromoBoxes({
+          type: 'SET_REMOVE_CART_ITEMS',
+          payload: itemToRemove
+        })
+      }
+    }
+  }, [box, cart, dispatchPromoBoxes])
+
   return (
     <div className='promobox__contain-card-box fadeIn'>
       <img

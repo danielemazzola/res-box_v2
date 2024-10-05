@@ -15,4 +15,29 @@ const existBox = async (req, res, next) => {
   }
 }
 
-module.exports = { existBox }
+const existBoxes = async (req, res, next) => {
+  const { boxes } = req.body
+  let exist = []
+  let no_exist = []
+  let inactive = []
+  try {
+    for (const box of boxes) {
+      const exist_box = await Box.findById(box._id)
+      if (!exist_box) {
+        no_exist.push(box)
+      } else if (exist_box.status.includes('active')) {
+        exist.push(box)
+      } else {
+        inactive.push(box)
+      }
+    }
+    req.no_exist = no_exist
+    req.exist = exist
+    req.inactive = inactive
+    next()
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports = { existBox, existBoxes }
