@@ -89,9 +89,7 @@ const buyBox = async (req, res, next) => {
     )
     if (userBoxIndex !== -1) {
       await updateUserBox(user._id, box._id, box.usage_limit)
-      const updateBox = await updateBoxItemsAcquired(box._id, user._id)
-      console.log(updateBox);
-      
+      const updateBox = await updateBoxItemsAcquired(box._id, user._id)      
       const updatedUser = await getUserDetails(user._id)
       return res.status(201).json({
         message: 'Compra realizada correctamente. Tu box se ha actualizado',
