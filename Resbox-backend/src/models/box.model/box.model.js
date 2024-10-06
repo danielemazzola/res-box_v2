@@ -50,7 +50,11 @@ const boxSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: 'User'
     },
-    items_acquired_by: [acquisitionSchema]
+    items_acquired_by: [acquisitionSchema],
+    purchase_count: {
+      type: Number,
+      default: 0
+    }
   },
   {
     timestamps: true,

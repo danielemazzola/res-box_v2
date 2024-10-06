@@ -9,10 +9,14 @@ const updateUserBox = async (userId, boxId, usageLimit) => {
   )
 }
 
-const updateBoxItemsAcquired = async (boxId, userId) => {
+const updateBoxItemsAcquired = async (boxId, userId, quantity = 1) => {
   return Box.findByIdAndUpdate(
     boxId,
-    { $push: { items_acquired_by: { user: userId, box: boxId } } },
+    {
+      $push: { items_acquired_by: { user: userId, box: boxId } },
+      $inc: { purchase_count: quantity }
+    },
+
     { new: true }
   )
 }

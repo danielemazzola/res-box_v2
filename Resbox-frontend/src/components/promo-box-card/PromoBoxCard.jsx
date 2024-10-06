@@ -42,7 +42,7 @@ const PromoBoxCard = ({ box }) => {
       type: 'ADD_NOTIFICATION',
       payload: { msg: data.message, error: false }
     })
-    box.items_acquired_by.push(data.updatedUser)
+    box.purchase_count = box.purchase_count + 1
     confetti({
       particleCount: 250,
       spread: 170,
@@ -106,7 +106,7 @@ const PromoBoxCard = ({ box }) => {
             {box.price / (box.items_included + box.bonus_items)}€
           </p>
           <p>
-            <strong>Vendidos:</strong> {box.items_acquired_by.length}
+            <strong>Vendidos:</strong> {box.purchase_count}
           </p>
           <p>
             <strong>Estado:</strong>{' '}

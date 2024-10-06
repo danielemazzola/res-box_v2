@@ -89,19 +89,22 @@ const buyBox = async (req, res, next) => {
     )
     if (userBoxIndex !== -1) {
       await updateUserBox(user._id, box._id, box.usage_limit)
-      await updateBoxItemsAcquired(box._id, user._id)
+      const updateBox = await updateBoxItemsAcquired(box._id, user._id)
+      console.log(updateBox);
+      
       const updatedUser = await getUserDetails(user._id)
       return res.status(201).json({
         message: 'Compra realizada correctamente. Tu box se ha actualizado',
-        updatedUser
+        updatedUser,
+        updateBox
       })
     } else {
       await addUserBox(user._id, box._id, box.usage_limit)
-      await updateBoxItemsAcquired(box._id, user._id)
+      const updateBox = await updateBoxItemsAcquired(box._id, user._id)
       const updatedUser = await getUserDetails(user._id)
       return res
         .status(201)
-        .json({ message: 'Nuevo box adquirido correctamente.', updatedUser })
+        .json({ message: 'Nuevo box adquirido correctamente.', updatedUser, updateBox })
     }
   } catch (error) {
     next(error)
@@ -133,13 +136,14 @@ const buyBoxCart = async (req, res) => {
       } else {
         await addUserBox(user._id, box._id, box.usage_limit * box.quantity)
       }
-      await updateBoxItemsAcquired(box._id, user._id)
+      await updateBoxItemsAcquired(box._id, user._id, box.quantity)
     }
     const updatedUser = await getUserDetails(user._id)
     const boxes = await Box.find()
     return res.status(201).json({
       message: 'Compra realizada correctamente. Las cajas se han actualizado.',
-      updatedUser, boxes
+      updatedUser,
+      boxes
     })
   } catch (error) {
     next(error)
