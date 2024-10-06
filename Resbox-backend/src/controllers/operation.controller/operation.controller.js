@@ -28,8 +28,6 @@ const newOperation = async (req, res, next) => {
   const { user } = req
   const { consumed } = req.body
   const { id_box } = req.params
-  console.log(id_box)
-
   try {
     const userBox = user.purchasedBoxes.find(
       (arr) => arr.box.toString() === id_box.toString()
