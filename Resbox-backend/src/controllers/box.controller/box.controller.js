@@ -5,6 +5,8 @@ const {
   getUserDetails,
   addUserBox
 } = require('./helpers/box.helpers')
+const { newInvoiceBox } = require('../../helpers/newInvoiceOperation')
+const Invoice = require('../../models/box.model/invoice.model')
 
 const newBox = async (req, res, next) => {
   const { user } = req
@@ -87,23 +89,48 @@ const buyBox = async (req, res, next) => {
     const userBoxIndex = user.purchasedBoxes.findIndex(
       (userBox) => userBox.box.toString() === box._id.toString()
     )
+    let updatedUser, updateBox, message
+    const invoiceNumber = await newInvoiceBox('RESBOX')
+    const newInvoice = new Invoice({
+      invoice_number: invoiceNumber,
+      user: user._id,
+      box: box._id,
+      amount: box.price
+    })
+    await newInvoice.save()
+    //AQUI PASARELA DE PAGO, SI PAGO OK, invoice -> status aprovado
+    //SI PAGO DENEGADO
+    // newInvoice.status = 'denegado'
+    // await newInvoice.save()
+    /*
+    return res.status(402).json({
+        message: 'El pago ha sido rechazado, no se completó la compra.',
+        invoice: newInvoice
+      })
+    */
+
+    //CASO PAGO APROBADO
+    newInvoice.status = 'aprobado'
+    await newInvoice.save()
+
     if (userBoxIndex !== -1) {
       await updateUserBox(user._id, box._id, box.usage_limit)
-      const updateBox = await updateBoxItemsAcquired(box._id, user._id)      
-      const updatedUser = await getUserDetails(user._id)
-      return res.status(201).json({
-        message: 'Compra realizada correctamente. Tu box se ha actualizado',
-        updatedUser,
-        updateBox
-      })
+      updateBox = await updateBoxItemsAcquired(box._id, user._id)
+      updatedUser = await getUserDetails(user._id)
+      message = 'Compra realizada correctamente. Tu box se ha actualizado.'
     } else {
       await addUserBox(user._id, box._id, box.usage_limit)
-      const updateBox = await updateBoxItemsAcquired(box._id, user._id)
-      const updatedUser = await getUserDetails(user._id)
-      return res
-        .status(201)
-        .json({ message: 'Nuevo box adquirido correctamente.', updatedUser, updateBox })
+      updateBox = await updateBoxItemsAcquired(box._id, user._id)
+      updatedUser = await getUserDetails(user._id)
+      message = 'Nuevo box adquirido correctamente.'
     }
+
+    return res.status(201).json({
+      message: message,
+      updatedUser,
+      updateBox,
+      invoice: newInvoice
+    })
   } catch (error) {
     next(error)
   }
@@ -111,20 +138,19 @@ const buyBox = async (req, res, next) => {
 
 const buyBoxCart = async (req, res) => {
   const { exist, no_exist, inactive, user } = req
-
   if (no_exist.length > 0) {
     return res
       .status(404)
       .json({ message: 'Algunos Boxes ya no existen.', no_exist })
   }
-
   if (inactive.length > 0) {
     return res
       .status(409)
       .json({ message: 'Algunos Boxes están inactivas.', inactive })
   }
-
   try {
+    let totalAmount = 0
+    const validBoxes = []
     for (const box of exist) {
       const userBoxIndex = user.purchasedBoxes.findIndex(
         (userBox) => userBox.box.toString() === box._id.toString()
@@ -135,13 +161,40 @@ const buyBoxCart = async (req, res) => {
         await addUserBox(user._id, box._id, box.usage_limit * box.quantity)
       }
       await updateBoxItemsAcquired(box._id, user._id, box.quantity)
+      totalAmount += box.price * box.quantity
+      validBoxes.push(box._id)
     }
+    const invoiceNumber = await newInvoiceBox('RESBOX')
+    const newInvoice = new Invoice({
+      invoice_number: invoiceNumber,
+      user: user._id,
+      box: validBoxes,
+      amount: totalAmount
+    })
+    await newInvoice.save()
+
+    //AQUI PASARELA DE PAGO, SI PAGO OK, invoice -> status aprovado
+    //SI PAGO DENEGADO
+    // newInvoice.status = 'denegado'
+    // await newInvoice.save()
+    /*
+    return res.status(402).json({
+        message: 'El pago ha sido rechazado, no se completó la compra.',
+        invoice: newInvoice
+      })
+    */
+
+    //CASO PAGO APROBADO
+    newInvoice.status = 'aprobado'
+    await newInvoice.save()
     const updatedUser = await getUserDetails(user._id)
     const boxes = await Box.find()
+
     return res.status(201).json({
       message: 'Compra realizada correctamente. Las cajas se han actualizado.',
       updatedUser,
-      boxes
+      boxes,
+      invoice: newInvoice
     })
   } catch (error) {
     next(error)
