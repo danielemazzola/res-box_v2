@@ -24,6 +24,10 @@ const paidSchema = mongoose.Schema(
 
 const operationsSchema = mongoose.Schema(
   {
+    invoice_number:{
+      type:String,
+      required:true
+    },
     id_user: {
       type: mongoose.Types.ObjectId,
       ref: 'User',

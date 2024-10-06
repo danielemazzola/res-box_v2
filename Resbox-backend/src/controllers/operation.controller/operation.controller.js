@@ -3,10 +3,32 @@ const Box = require('../../models/box.model/box.model')
 const Operation = require('../../models/operation.model/operation.model')
 const User = require('../../models/user.model/user.model')
 
+const newInvoice = async () => {
+  const corporateName = 'RESBOX'
+  const currentDate = new Date()
+  const year = currentDate.getFullYear()
+  const month = String(currentDate.getMonth() + 1).padStart(2, '0')
+  const day = String(currentDate.getDate()).padStart(2, '0')
+  const todayString = `${year}${month}${day}`
+  const lastInvoiceToday = await Operation.findOne({
+    invoice_number: { $regex: `${corporateName}${todayString}` }
+  }).sort({ createdAt: -1 })
+  const lastInvoiceNumber = lastInvoiceToday
+    ? lastInvoiceToday.invoice_number.split('/')[1]
+    : '0000'
+  const newInvoiceNumber = String(Number(lastInvoiceNumber) + 1).padStart(
+    4,
+    '0'
+  )
+  const invoiceNumber = `${corporateName}${todayString}/${newInvoiceNumber}`
+  return invoiceNumber
+}
+
 const newOperation = async (req, res, next) => {
   const { user } = req
   const { consumed } = req.body
   const { id_box } = req.params
+  console.log(id_box)
 
   try {
     const userBox = user.purchasedBoxes.find(
@@ -30,7 +52,9 @@ const newOperation = async (req, res, next) => {
     }
     const itemCost = box.price / (box.items_included + box.bonus_items)
     const token = createTokenOperation()
+    const invoice_number = await newInvoice()
     const newOperation = new Operation({
+      invoice_number,
       id_user: user._id,
       id_box: id_box,
       consumed,

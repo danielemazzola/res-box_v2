@@ -40,7 +40,8 @@ export const AuthProvider = ({ children }) => {
     modalState: false,
     secureTokenRedeem: 0,
     modalStatePartner: false,
-    infoPartner: {}
+    infoPartner: {},
+    box:{}
   })
 
   const [token, setToken] = useState(localStorage.getItem('SECURE_CODE_RESBOX'))

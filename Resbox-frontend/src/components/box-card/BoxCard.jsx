@@ -40,14 +40,14 @@ const BoxCard = ({ box }) => {
       dispatchToast
     )
     if (boxes.length > 0) {
-      const updatedBoxes = boxes.map((box) => {
-        if (box._id.toString() === idBox.toString()) {
+      const updatedBoxes = boxes.map((boxItem) => {
+        if (boxItem._id.toString() === idBox.toString()) {
           return {
-            ...box,
-            items_acquired_by: [...box.items_acquired_by, data.updatedUser]
+            ...boxItem,
+            items_acquired_by: [...boxItem.items_acquired_by, data.updatedUser]
           }
         }
-        return box
+        return boxItem
       })
       dispatchPromoBoxes({
         type: 'SET_BOXES',
@@ -65,12 +65,20 @@ const BoxCard = ({ box }) => {
       origin: { y: 1.3 }
     })
   }
-  const handlePartner = (partner, box) => {
+
+  const openModal = (options = {}) => {
     setStateBoxCard((prevState) => ({
       ...prevState,
-      modalStatePartner: true,
-      infoPartner: partner
+      ...options
     }))
+  }
+
+  const handlePartner = (partner, box) => {
+    openModal({ modalStatePartner: true, infoPartner: partner })
+  }
+
+  const handleRedeem = (thisBox) => {
+    openModal({ modalState: true, box: thisBox })
   }
 
   useEffect(() => {
@@ -133,12 +141,7 @@ const BoxCard = ({ box }) => {
             {box.remainingItems > 0 && (
               <button
                 className='button green'
-                onClick={() =>
-                  setStateBoxCard((prevState) => ({
-                    ...prevState,
-                    modalState: true
-                  }))
-                }
+                onClick={() => handleRedeem(box)}
               >
                 Canjear
               </button>
@@ -165,8 +168,6 @@ const BoxCard = ({ box }) => {
         box={box}
       />
       <ModalRedeem
-        box={box}
-        remainingItems={box.remainingItems}
         stateBoxCard={stateBoxCard}
         setStateBoxCard={setStateBoxCard}
       />
