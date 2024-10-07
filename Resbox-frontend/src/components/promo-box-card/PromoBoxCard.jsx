@@ -18,7 +18,8 @@ const PromoBoxCard = ({ box }) => {
     dispatchLoader,
     dispatchPromoBoxes,
     statePromoBoxes: { cart },
-    stateIsAuth: { user }
+    stateIsAuth: { user },
+    dispatchInvoice
   } = useContext(ReducersContext)
   const { API_URL, token } = useContext(AuthContext)
 
@@ -37,6 +38,8 @@ const PromoBoxCard = ({ box }) => {
       dispatchLoader,
       dispatchToast
     )
+    dispatchInvoice({ type: 'SET_INVOICES', payload: data.invoice })
+    dispatchInvoice({ type: 'SET_INVOICE', payload: data.invoice })
     dispatchAuth({ type: 'SET_USER', payload: data.updatedUser })
     dispatchToast({
       type: 'ADD_NOTIFICATION',

@@ -8,6 +8,11 @@
   padding: 20px;
   flex: auto;
 }
+.operation__content-result{
+  display: flex;
+  flex-direction: row-reverse;
+  gap:5px;
+}
 .operation__container-operation {
   display: flex;
   flex-direction: column;
@@ -19,6 +24,13 @@
   color: white;
   font-size: 12px;;
   border-radius: 5px 5px 0 0;
+}
+.operation__get-result-invoice{
+  padding: 2px 4px;
+  color: white;
+  font-size: 12px;;
+  border-radius: 5px 5px 0 0;
+  background-color: var(--rb-bg-options);
 }
 .operation__operations-title {
   border-radius: 10px;

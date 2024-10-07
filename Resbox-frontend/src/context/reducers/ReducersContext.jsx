@@ -19,6 +19,10 @@ import {
   initStatePromoBox,
   statePromoBox
 } from '../../reducer/promo-box/promobox.reducer'
+import {
+  initStateInvoice,
+  stateInvoice
+} from '../../reducer/invoice-reducer/invoice.reducer'
 
 export const ReducersContext = createContext()
 
@@ -34,6 +38,10 @@ export const ReducersProvider = ({ children }) => {
     statePromoBox,
     initStatePromoBox
   )
+  const [stateInvoices, dispatchInvoice] = useReducer(
+    stateInvoice,
+    initStateInvoice
+  )
 
   return (
     <ReducersContext.Provider
@@ -47,7 +55,9 @@ export const ReducersProvider = ({ children }) => {
         stateLoader,
         dispatchLoader,
         statePromoBoxes,
-        dispatchPromoBoxes
+        dispatchPromoBoxes,
+        stateInvoices,
+        dispatchInvoice
       }}
     >
       {children}

@@ -18,7 +18,8 @@ const BoxCard = ({ box }) => {
     dispatchPartners,
     statePromoBoxes: { boxes },
     dispatchPromoBoxes,
-    statePartners: { arrayFilterPartnersSearch }
+    statePartners: { arrayFilterPartnersSearch },
+    dispatchInvoice
   } = useContext(ReducersContext)
   const {
     API_URL,
@@ -49,6 +50,8 @@ const BoxCard = ({ box }) => {
         }
         return boxItem
       })
+      dispatchInvoice({ type: 'SET_INVOICES', payload: data.invoice })
+      dispatchInvoice({ type: 'SET_INVOICE', payload: data.invoice })
       dispatchPromoBoxes({
         type: 'SET_BOXES',
         payload: updatedBoxes

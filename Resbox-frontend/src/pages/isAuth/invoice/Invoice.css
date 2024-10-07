@@ -1,0 +1,121 @@
+.invoice__content{
+  margin-bottom: 80px;;
+}
+.invoice-container {
+  background-color: var(--rb-bg-light); /* Fondo claro */
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+.invoice-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.invoice-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.invoice-info,
+.invoice-client {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.invoice-info h3,
+.invoice-client h4 {
+  margin-bottom: 10px;
+}
+.invoice-table-container {
+  margin-top: 20px;
+  overflow-x: auto; /* Para soporte responsivo en pantallas pequeñas */
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse; /* Elimina el espacio entre las celdas */
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.invoice-table th,
+.invoice-table td {
+  border: 1px solid #ddd; /* Bordes para las celdas */
+  padding: 8px; /* Espaciado interno */
+}
+
+.invoice-table th {
+  background-color: var(--rb-bg-light); /* Fondo claro para el encabezado */
+  color: #333; /* Color del texto del encabezado */
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.invoice-table td {
+  font-size: 14px;
+}
+
+.invoice-table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Color de fondo alternativo para las filas pares */
+}
+
+.invoice-table tr:hover {
+  background-color: #f1f1f1; /* Efecto hover para resaltar la fila */
+}
+
+.invoice-total {
+  margin-top: 20px;
+  font-size: 18px;
+  text-align: right;
+}
+
+.invoice-total p {
+  font-weight: bold;
+  color: #333;
+}
+
+.invoice-status {
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: right;
+  color: #555;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap:8px;
+
+}
+
+.invoice-status p {
+  font-weight: bold;
+  color: var(--rb-bg-dark);
+}
+
+.invoice-status p::first-letter {
+  text-transform: uppercase;
+}
+
+.invoice-status > p:last-child{
+  text-transform: uppercase;
+}
+
+.invoice__btn-my-boxes{
+  position: fixed;
+  bottom: 100px;
+  right:10px;
+}
+
+@media (max-width: 768px) {
+  .invoice-table-container {
+    overflow-x: scroll; /* Permite el desplazamiento horizontal en pantallas pequeñas */
+  }
+}

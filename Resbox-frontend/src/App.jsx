@@ -10,6 +10,7 @@ import PromoBox from './pages/isAuth/promo-box/PromoBox'
 import Partner from './pages/isAuth/partner/Partner'
 import Operations from './pages/isAuth/operations/Operations'
 import CartItems from './pages/isAuth/cart-items/CartItems'
+import Invoice from './pages/isAuth/invoice/Invoice'
 /* import Comments from './pages/isAuth/comments/Comments' */
 
 const App = () => {
@@ -58,6 +59,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Operations />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={`/invoice/:invoice`}
+          element={
+            <ProtectedRoute>
+              <Invoice />
             </ProtectedRoute>
           }
         />

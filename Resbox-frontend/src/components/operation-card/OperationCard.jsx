@@ -3,9 +3,11 @@ import { getDate } from '../../helpers/date'
 import { formatCash } from '../../pages/isAuth/operations/herlpers'
 
 const OperationCard = ({ operation }) => {
+  console.log(operation);
+  
   return (
     <div className='operation__container-operation'>
-      <div>
+      <div className='operation__content-result'>
         <p
           className='operation__get-result-paid'
           style={{
@@ -23,6 +25,12 @@ const OperationCard = ({ operation }) => {
             : operation.paid.paid === 'completed'
             ? 'Pagado'
             : operation.paid.paid === 'cancelled' && 'Anulado'}
+        </p>
+        <p
+          className='operation__get-result-invoice'
+          title='Orden número'
+        >
+          {operation.invoice_number}
         </p>
       </div>
       <div className='operation__contain-card'>
@@ -52,7 +60,7 @@ const OperationCard = ({ operation }) => {
           <p>{formatCash(operation.amount)}</p>
         </div>
         <div>
-        <p>Resultad</p>
+        <p>Resultado</p>
           {operation.status.includes('completed') ? (
             <p className='green' style={{color:'white'}}>OK</p>
           ) : (

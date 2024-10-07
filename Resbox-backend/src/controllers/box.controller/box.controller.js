@@ -94,7 +94,7 @@ const buyBox = async (req, res, next) => {
     const newInvoice = new Invoice({
       invoice_number: invoiceNumber,
       user: user._id,
-      box: box._id,
+      box: { box: box._id, quantity: 1 },
       amount: box.price
     })
     await newInvoice.save()
@@ -112,6 +112,9 @@ const buyBox = async (req, res, next) => {
     //CASO PAGO APROBADO
     newInvoice.status = 'aprobado'
     await newInvoice.save()
+    const invoice = await Invoice.findById(newInvoice._id).populate({
+      path: 'box.box'
+    })
 
     if (userBoxIndex !== -1) {
       await updateUserBox(user._id, box._id, box.usage_limit)
@@ -129,7 +132,7 @@ const buyBox = async (req, res, next) => {
       message: message,
       updatedUser,
       updateBox,
-      invoice: newInvoice
+      invoice
     })
   } catch (error) {
     next(error)
@@ -162,7 +165,7 @@ const buyBoxCart = async (req, res) => {
       }
       await updateBoxItemsAcquired(box._id, user._id, box.quantity)
       totalAmount += box.price * box.quantity
-      validBoxes.push(box._id)
+      validBoxes.push({ box: box._id, quantity: box.quantity })
     }
     const invoiceNumber = await newInvoiceBox('RESBOX')
     const newInvoice = new Invoice({
@@ -187,6 +190,9 @@ const buyBoxCart = async (req, res) => {
     //CASO PAGO APROBADO
     newInvoice.status = 'aprobado'
     await newInvoice.save()
+    const invoice = await Invoice.findById(newInvoice._id).populate({
+      path: 'box.box'
+    })
     const updatedUser = await getUserDetails(user._id)
     const boxes = await Box.find()
 
@@ -194,7 +200,7 @@ const buyBoxCart = async (req, res) => {
       message: 'Compra realizada correctamente. Las cajas se han actualizado.',
       updatedUser,
       boxes,
-      invoice: newInvoice
+      invoice
     })
   } catch (error) {
     next(error)

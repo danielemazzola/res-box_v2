@@ -19,7 +19,8 @@ const CartItems = () => {
     dispatchLoader,
     statePromoBoxes: { cart },
     dispatchPromoBoxes,
-    stateIsAuth: { user }
+    stateIsAuth: { user },
+    dispatchInvoice
   } = useContext(ReducersContext)
   const scrollToRef = useScrollToRef()
   const { sectionRefCartItems } = useContext(ScrollRefContext)
@@ -51,6 +52,7 @@ const CartItems = () => {
         }
       )
       const data = await response.json()
+      console.log(data)
       if (response.status !== 201) {
         dispatchToast({
           type: 'ADD_NOTIFICATION',
@@ -63,6 +65,8 @@ const CartItems = () => {
         type: 'ADD_NOTIFICATION',
         payload: { msg: data.message, error: false }
       })
+      dispatchInvoice({ type:'SET_INVOICES', payload:data.invoice})
+      dispatchInvoice({ type:'SET_INVOICE', payload:data.invoice})
       dispatchPromoBoxes({ type: 'SET_DELETE_CART' })
       confetti({
         particleCount: 250,
@@ -70,7 +74,7 @@ const CartItems = () => {
         origin: { y: 1.3 }
       })
       dispatchPromoBoxes({ type: 'SET_BOXES', payload: data.boxes })
-      navigate('../my-boxes')
+      navigate(`../invoice/${data.invoice._id}`)
     } catch (error) {
     } finally {
       dispatchLoader({ type: 'SET_LOAD_FALSE' })
@@ -94,30 +98,23 @@ const CartItems = () => {
               Actualmente hay <strong>"{cart.length}"</strong>{' '}
               {cart.length === 1 ? 'articulo' : 'articulos'} en tu cesta:
             </p>
+            {cart.length > 0 && (
+              <button className='button green' onClick={handlePayCart}>
+                Pagar ahora: {formatCash(amount)}
+              </button>
+            )}
             <p>¿Quieres añadir MÁS articulos?</p>
           </>
         )}
         <div className='cartitems__contentbtn-actions'>
-          {cart.length > 0 && (
-            <button className='' onClick={handlePayCart}>
-              Pagar ahora: {formatCash(amount)}
-            </button>
-          )}
           <Link to='../promo-box'>
-            <button className='button green'>PROMOCIONES DESTACADAS</button>
-          </Link>
-          {cart.length > 0 && (
             <button
-              className=''
-              style={{
-                backgroundColor: 'var(--rb-bg-options)',
-                color: 'white'
-              }}
-              onClick={() => dispatchPromoBoxes({ type: 'SET_DELETE_CART' })}
+              className='button'
+              style={{ backgroundColor: 'var(--rb-bg-options) !important' }}
             >
-              Vaciar mi cesta
+              PROMOCIONES DESTACADAS
             </button>
-          )}
+          </Link>
         </div>
       </div>
       <div>
@@ -125,6 +122,15 @@ const CartItems = () => {
           <PromoBoxCard key={index} box={item} />
         ))}
       </div>
+      {cart.length > 0 && (
+        <button
+          className='more-info'
+          style={{backgroundColor:'white', padding:'3px'}}
+          onClick={() => dispatchPromoBoxes({ type: 'SET_DELETE_CART' })}
+        >
+          Vaciar mi cesta
+        </button>
+      )}
       <div className='cart-items__content-img'>
         <img alt='logo res-box' loading='lazy' src={logo} />
       </div>
