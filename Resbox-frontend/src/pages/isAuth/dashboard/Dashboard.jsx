@@ -36,7 +36,9 @@ const Dashboard = () => {
     useContext(ScrollRefContext)
 
   useEffect(() => {
-    useScrolltoRef(refDashboardSection)
+    setTimeout(() => {
+      useScrolltoRef(refDashboardSection)
+    }, 500)
   }, [])
 
   return (
@@ -55,7 +57,13 @@ const Dashboard = () => {
               />
             </form>
             <div className='dashboard__contain-avatar'>
-              <img alt={user.name} src={user.avatar} width='150' height='150' loading='lazy' />
+              <img
+                alt={user.name}
+                src={user.avatar}
+                width='150'
+                height='150'
+                loading='lazy'
+              />
               <img
                 alt='edit'
                 src={edit}
@@ -85,7 +93,12 @@ const Dashboard = () => {
                 className='dashboard__banner-partner fadeIn'
                 onClick={() => handleOperations(setStateModal, stateModal)}
               >
-                <img src={operationsImg} width='150' loading='lazy' alt='icon' />
+                <img
+                  src={operationsImg}
+                  width='150'
+                  loading='lazy'
+                  alt='icon'
+                />
                 <div>
                   <p>Operaciones</p>
                 </div>
@@ -94,7 +107,12 @@ const Dashboard = () => {
                 className='dashboard__banner-partner fadeIn'
                 onClick={() => handleRedeemCode(setStateModal, stateModal)}
               >
-                <img src={redeemCode} className='dashboard__img-redeem' loading='lazy' alt='icon' />
+                <img
+                  src={redeemCode}
+                  className='dashboard__img-redeem'
+                  loading='lazy'
+                  alt='icon'
+                />
                 <div>
                   <p>Canjear Código</p>
                 </div>
@@ -111,7 +129,9 @@ const Dashboard = () => {
               <div className='operation__operations-title'>
                 <p className=''>Mis operaciones</p>
                 {operations.length > 0 ? (
-                  <p className=''>Descubre las 5 últimas operaciones realizadas.</p>
+                  <p className=''>
+                    Descubre las 5 últimas operaciones realizadas.
+                  </p>
                 ) : (
                   <p className=''>Aún no hay operaciones para mostrar</p>
                 )}

@@ -15,11 +15,16 @@ const MyBox = () => {
   const { purchasedBoxes } = user
 
   useEffect(() => {
-    useScrolltoRef(refBoxesSection)
+    setTimeout(() => {
+      useScrolltoRef(refBoxesSection)
+    }, 500)
   }, [])
 
   return (
-    <section ref={purchasedBoxes.length > 0 ? refBoxesSection : null} className='mybox__container fadeIn'>
+    <section
+      ref={purchasedBoxes.length > 0 ? refBoxesSection : null}
+      className='mybox__container fadeIn'
+    >
       <div className='mybox__cards-container'>
         <div className='mybox__card'>
           <div>
@@ -29,16 +34,19 @@ const MyBox = () => {
       </div>
       {purchasedBoxes.length > 0 ? (
         <>
-          {purchasedBoxes?.map((box, index) => (
-            <BoxCard key={index} box={box} />
-          )).reverse()}
+          {purchasedBoxes
+            ?.map((box, index) => <BoxCard key={index} box={box} />)
+            .reverse()}
         </>
       ) : (
         <>
-          <p className='mybox__no-box' ref={!purchasedBoxes.length > 0 ? refBoxesSection : null}>
+          <p
+            className='mybox__no-box'
+            ref={!purchasedBoxes.length > 0 ? refBoxesSection : null}
+          >
             ¿Aún sin tu BOX?
           </p>
-          
+
           <PromoBox />
         </>
       )}

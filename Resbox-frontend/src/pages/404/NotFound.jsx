@@ -11,7 +11,9 @@ const NotFound = () => {
 
   useEffect(() => {
     if (refNotFoundSection.current) {
-      scrollToRef(refNotFoundSection)
+      setTimeout(() => {
+        scrollToRef(refNotFoundSection)
+      }, 500)
     }
   }, [scrollToRef, refNotFoundSection])
 

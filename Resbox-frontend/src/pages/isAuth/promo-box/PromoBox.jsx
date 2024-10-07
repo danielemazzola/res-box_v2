@@ -20,7 +20,9 @@ const PromoBox = () => {
   useEffect(() => {
     if (location.pathname === '/promo-box') {
       if (Object.keys(user).length > 0) {
-        useScrolltoRef(refBoxesSection)
+        setTimeout(() => {
+          useScrolltoRef(refBoxesSection)
+        }, 500)
       }
     }
   }, [])

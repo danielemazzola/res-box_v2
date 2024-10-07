@@ -6,9 +6,11 @@ import InformationApp from '../../components/home/information-app/InformationApp
 import PromoBox from '../isAuth/promo-box/PromoBox'
 import { fetchGetHome } from '../../services/fetch-partner/fetchPartners'
 import './Home.css'
+import useScrollToRef from '../../hooks/useScrollToRef'
 
 const Home = () => {
-  const { refPartnersSection, refFunctionAppSection, refBoxesSection } =
+  const scrollToRef = useScrollToRef()
+  const { refPartnersSection, refFunctionAppSection, refBoxesSection, refHeaderSection } =
     useContext(ScrollRefContext)
 
   const {
@@ -26,6 +28,12 @@ const Home = () => {
       getUsers()
     } else return
   }, [])
+
+  useEffect(() => {
+    setTimeout(() => {
+      scrollToRef(refHeaderSection)
+    }, 500);
+  },[])
 
   const getPartners = async () => {
     try {

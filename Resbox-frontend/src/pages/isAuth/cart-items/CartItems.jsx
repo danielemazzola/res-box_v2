@@ -29,7 +29,9 @@ const CartItems = () => {
   const { token } = useContext(AuthContext)
 
   useEffect(() => {
-    scrollToRef(sectionRefCartItems)
+    setTimeout(() => {
+      scrollToRef(sectionRefCartItems)
+    }, 500)
   }, [])
 
   useEffect(() => {

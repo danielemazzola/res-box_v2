@@ -19,7 +19,9 @@ const Invoice = () => {
   const scrollToRef = useScrollToRef()
 
   useEffect(() => {
-    scrollToRef(refInvoidSection)
+    setTimeout(() => {
+      scrollToRef(refInvoidSection)
+    }, 500)
   }, [])
 
   useEffect(() => {

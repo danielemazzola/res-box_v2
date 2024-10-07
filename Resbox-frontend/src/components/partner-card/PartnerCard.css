@@ -94,7 +94,13 @@
   flex-direction: column;
   gap: 20px;
 }
-
+.partner__state{
+  color: var(--rb-text-primary);
+  padding: 0 5px;
+  border-radius: 5px;
+  font-size: var(--rb-font-size-small);
+  text-transform: capitalize;
+}
 .partner__modal-card > div > img {
   border-radius: 50%;
   width: 80px;

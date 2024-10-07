@@ -1,14 +1,15 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../context/auth/AuthContext'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import { ScrollRefContext } from '../../context/scroll-ref/ScrollRefContext'
 import { uploadImage } from '../../reducer/auth-reducer/auth.action'
 import Modal from '../modal/Modal'
 import { getDate } from '../../helpers/date'
-import './PartnerCard.css'
 import { sizeImg } from '../../helpers/sizeImg'
+import './PartnerCard.css'
 import like from '/images/like.png'
 import heart from '/images/heart.png'
+import { arrInfoPartner } from './helpers'
 
 const PartnerCard = () => {
   const [userModal, setUserModal] = useState({})
@@ -90,8 +91,9 @@ const PartnerCard = () => {
       payload: data.getPartner
     })
   }
-
-  console.log(partner)
+  const [infoPartner, setInfoPartner] = useState(
+    () => arrInfoPartner(partner) || []
+  )
 
   return (
     <div ref={refPartnerInfo} className='partner__container fadeIn'>
@@ -136,57 +138,37 @@ const PartnerCard = () => {
         <p>Perfil de negocio</p>
       </div>
       <div className='partner__contain-information'>
-        <div>
-          <p className='partner__bg_p'>nombre</p>
-          <p>{partner.name}</p>
-        </div>
-        <div>
-          <p className='partner__bg_p'>CIF</p>
-          <p>{partner.cif}</p>
-        </div>
-        <div>
-          <p className='partner__bg_p'>email</p>
-          <p>{partner.email}</p>
-        </div>
-        <div>
-          <p className='partner__bg_p'>propietari@</p>
-          <p>{partner.owner_name + ' ' + partner.owner_lastname}</p>
-        </div>
-        <div>
-          <p className='partner__bg_p'>Dirección</p>
-          <p>{partner.city + ', ' + partner.address}</p>
-        </div>
-        <div>
-          <p className='partner__bg_p'>Usuarios vinculados</p>
-          {partner.users?.map((user, index) => (
-            <button
-              className='partner__contain-btn-users waveEffect'
-              key={index}
-              onClick={() => handleUser(user)}
-            >
-              {user.name}
-            </button>
-          ))}
-        </div>
-        <div>
-          <p className='partner__bg_p'>Cuenta creada</p>
-          <p>{getDate(partner.createdAt)}</p>
-        </div>
-        <div>
-          <p className={`${partner.confirmed ? 'green' : 'cancelled'}`}>
-            {partner.confirmed ? 'Activo' : 'A la espera de confirmación'}
-          </p>
-        </div>
-        <div>
-          {partner.favorite <= 0 ? (
-            <img alt='likes' src={heart} width='20' />
-          ) : (
-            <>
-              <img alt='likes' src={like} width='20' />
-              {partner.favorite}
-            </>
-          )}
-        </div>
+        {infoPartner?.map((info, index) => (
+          <div key={index}>
+            <p className='partner__bg_p'>{info.key}</p>
+            {info.key.includes('Usuarios vinculados') ? (
+              info?.value?.map((user, index) => (
+                <button
+                  key={index}
+                  className='partner__contain-btn-users waveEffect'
+                  onClick={() => handleUser(user)}
+                >
+                  {user.name}
+                </button>
+              ))
+            ) : info.key.includes('Estado') ? (
+              <p
+                className={`partner__state ${
+                  info.value.includes('ACTIVO') ? 'green' : 'cancelled'
+                }`}
+              >
+                {info.value}
+              </p>
+            ) : info.key.includes('Likes') ? (
+              <>
+                <img alt='likes' loading='lazy' width='20' src={info.value} />
+                <span>({info.value_text})</span>
+              </>
+            ) : (
+              <p>{info.value}</p>
+            )}
+          </div>
+        ))}
       </div>
       <Modal
         isModalOpen={toogleModal}
