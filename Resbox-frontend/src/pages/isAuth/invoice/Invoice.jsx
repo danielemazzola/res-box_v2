@@ -1,6 +1,5 @@
 import { useContext, useEffect } from 'react'
-import jsPDF from 'jspdf'
-import html2canvas from 'html2canvas'
+
 import useScrollToRef from '../../../hooks/useScrollToRef'
 import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
@@ -9,6 +8,7 @@ import { formatCash } from '../operations/herlpers'
 import { getDate } from '../../../helpers/date'
 import './Invoice.css'
 import logo from '/images/logo.png'
+import { downloadPDF } from './helpers'
 
 const Invoice = () => {
   const navigate = useNavigate()
@@ -28,33 +28,6 @@ const Invoice = () => {
       navigate('../my-boxes')
     }
   }, [])
-
-  const downloadPDF = () => {
-    // Utiliza el ref directamente en lugar de un ID
-    html2canvas(refInvoidPDF.current, { scale: 2 }).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png')
-      const pdf = new jsPDF()
-      const imgWidth = 190 // ancho del PDF
-      const pageHeight = pdf.internal.pageSize.height
-      const imgHeight = (canvas.height * imgWidth) / canvas.width
-      let heightLeft = imgHeight
-
-      let position = 0
-
-      // Agregar la imagen al PDF
-      pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight)
-      heightLeft -= pageHeight
-
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight
-        pdf.addPage()
-        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight)
-        heightLeft -= pageHeight
-      }
-
-      pdf.save(`factura_${invoice.invoice_number}.pdf`) // nombre del archivo PDF
-    })
-  }
 
   return (
     <section ref={refInvoidSection} className='invoice__content fadeIn'>
@@ -104,14 +77,11 @@ const Invoice = () => {
             </tbody>
           </table>
         </div>
-        {/* Total de la factura */}
         <div className='invoice-total'>
           <p>
             <strong>Total:</strong> {formatCash(invoice.amount)}
           </p>
         </div>
-
-        {/* Estado de la factura */}
         <div className='invoice-status'>
           <p>
             <strong>Estado de la compra:</strong>
@@ -126,7 +96,7 @@ const Invoice = () => {
         <button
           className='button'
           style={{ backgroundColor: 'var(--rb-bg-options)!important' }}
-          onClick={downloadPDF}
+          onClick={() => downloadPDF(refInvoidPDF, invoice, user)}
         >
           Descargar Factura
         </button>
