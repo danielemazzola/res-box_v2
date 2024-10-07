@@ -9,8 +9,10 @@ import ModalRedeem from './ModalRedeem'
 import ModalInfoPartner from './ModalInfoPartner'
 import { getDate } from '../../helpers/date'
 import './BoxCard.css'
+import { useNavigate } from 'react-router-dom'
 
 const BoxCard = ({ box }) => {
+  const navigate = useNavigate()
   const {
     dispatchAuth,
     dispatchLoader,
@@ -50,8 +52,7 @@ const BoxCard = ({ box }) => {
         }
         return boxItem
       })
-      dispatchInvoice({ type: 'SET_INVOICES', payload: data.invoice })
-      dispatchInvoice({ type: 'SET_INVOICE', payload: data.invoice })
+
       dispatchPromoBoxes({
         type: 'SET_BOXES',
         payload: updatedBoxes
@@ -67,6 +68,9 @@ const BoxCard = ({ box }) => {
       spread: 170,
       origin: { y: 1.3 }
     })
+    dispatchInvoice({ type: 'SET_INVOICES', payload: data.invoice })
+    dispatchInvoice({ type: 'SET_INVOICE', payload: data.invoice })
+    navigate(`../invoice/${data.invoice._id}`)
   }
 
   const openModal = (options = {}) => {

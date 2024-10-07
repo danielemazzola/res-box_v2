@@ -52,7 +52,6 @@ const CartItems = () => {
         }
       )
       const data = await response.json()
-      console.log(data)
       if (response.status !== 201) {
         dispatchToast({
           type: 'ADD_NOTIFICATION',
@@ -65,8 +64,8 @@ const CartItems = () => {
         type: 'ADD_NOTIFICATION',
         payload: { msg: data.message, error: false }
       })
-      dispatchInvoice({ type:'SET_INVOICES', payload:data.invoice})
-      dispatchInvoice({ type:'SET_INVOICE', payload:data.invoice})
+      dispatchInvoice({ type: 'SET_INVOICES', payload: data.invoice })
+      dispatchInvoice({ type: 'SET_INVOICE', payload: data.invoice })
       dispatchPromoBoxes({ type: 'SET_DELETE_CART' })
       confetti({
         particleCount: 250,
@@ -125,7 +124,7 @@ const CartItems = () => {
       {cart.length > 0 && (
         <button
           className='more-info'
-          style={{backgroundColor:'white', padding:'3px'}}
+          style={{ backgroundColor: 'white', padding: '3px' }}
           onClick={() => dispatchPromoBoxes({ type: 'SET_DELETE_CART' })}
         >
           Vaciar mi cesta

@@ -5,9 +5,10 @@ import { AuthContext } from '../../context/auth/AuthContext'
 import { handleBuyBox } from '../../reducer/promo-box/promobox.action'
 import { randomImage } from './helpers'
 import './PromoBoxCard.css'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const PromoBoxCard = ({ box }) => {
+  const navigate = useNavigate()
   const [explode, setExplode] = useState(false)
   const [btnBuy, setBtnBuy] = useState(true)
   const image = useMemo(() => randomImage(), [])
@@ -51,6 +52,7 @@ const PromoBoxCard = ({ box }) => {
       spread: 170,
       origin: { y: 1.3 }
     })
+    navigate(`../invoice/${data.invoice._id}`)
   }
 
   const handleAddCart = (box) => {

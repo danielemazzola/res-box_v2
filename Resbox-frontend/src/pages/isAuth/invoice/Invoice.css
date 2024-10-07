@@ -1,5 +1,6 @@
 .invoice__content{
-  margin-bottom: 80px;;
+  margin-bottom: 180px;
+  padding:20px;
 }
 .invoice-container {
   background-color: var(--rb-bg-light); /* Fondo claro */
@@ -110,8 +111,12 @@
 
 .invoice__btn-my-boxes{
   position: fixed;
-  bottom: 100px;
-  right:10px;
+  bottom: 95px;
+  right:0px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap:10px;
 }
 
 @media (max-width: 768px) {

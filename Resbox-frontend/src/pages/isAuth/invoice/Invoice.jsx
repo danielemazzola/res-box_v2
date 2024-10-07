@@ -1,20 +1,66 @@
-import { useContext } from 'react'
-import './Invoice.css'
+import { useContext, useEffect } from 'react'
+import jsPDF from 'jspdf'
+import html2canvas from 'html2canvas'
+import useScrollToRef from '../../../hooks/useScrollToRef'
 import { ReducersContext } from '../../../context/reducers/ReducersContext'
-import { getDate } from '../../../helpers/date'
+import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
+import { Link, useNavigate } from 'react-router-dom'
 import { formatCash } from '../operations/herlpers'
-import { Link } from 'react-router-dom'
+import { getDate } from '../../../helpers/date'
+import './Invoice.css'
+import logo from '/images/logo.png'
 
 const Invoice = () => {
+  const navigate = useNavigate()
   const {
     stateInvoices: { invoice },
     stateIsAuth: { user }
   } = useContext(ReducersContext)
+  const { refInvoidSection, refInvoidPDF } = useContext(ScrollRefContext)
+  const scrollToRef = useScrollToRef()
+
+  useEffect(() => {
+    scrollToRef(refInvoidSection)
+  }, [])
+
+  useEffect(() => {
+    if (Object.keys(invoice).length <= 0) {
+      navigate('../my-boxes')
+    }
+  }, [])
+
+  const downloadPDF = () => {
+    // Utiliza el ref directamente en lugar de un ID
+    html2canvas(refInvoidPDF.current, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png')
+      const pdf = new jsPDF()
+      const imgWidth = 190 // ancho del PDF
+      const pageHeight = pdf.internal.pageSize.height
+      const imgHeight = (canvas.height * imgWidth) / canvas.width
+      let heightLeft = imgHeight
+
+      let position = 0
+
+      // Agregar la imagen al PDF
+      pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight)
+      heightLeft -= pageHeight
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight
+        pdf.addPage()
+        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight)
+        heightLeft -= pageHeight
+      }
+
+      pdf.save(`factura_${invoice.invoice_number}.pdf`) // nombre del archivo PDF
+    })
+  }
 
   return (
-    <div className='invoice__content'>
-      <div className='invoice-container'>
+    <section ref={refInvoidSection} className='invoice__content fadeIn'>
+      <div ref={refInvoidPDF} className='invoice-container'>
         <div className='invoice-header'>
+          <img src={logo} alt='logo res-box' width='50' />
           <p className='invoice-title'>RES-BOX</p>
           <p>NIF: X-123456789Y</p>
           <p>DIRECCIÓN: PASAJE LOS LUCERS 5, 3-A.</p>
@@ -75,10 +121,17 @@ const Invoice = () => {
       </div>
       <div className='invoice__btn-my-boxes'>
         <Link to={`../my-boxes`}>
-          <button className='button yellow'>Ir a mis Boxes</button>
+          <button className='button yellow'>MIS BOXES</button>
         </Link>
+        <button
+          className='button'
+          style={{ backgroundColor: 'var(--rb-bg-options)!important' }}
+          onClick={downloadPDF}
+        >
+          Descargar Factura
+        </button>
       </div>
-    </div>
+    </section>
   )
 }
 
