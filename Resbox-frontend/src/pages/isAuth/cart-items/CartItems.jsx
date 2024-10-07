@@ -9,6 +9,7 @@ import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import useScrollToRef from '../../../hooks/useScrollToRef'
 import { formatCash } from '../operations/herlpers'
 import { AuthContext } from '../../../context/auth/AuthContext'
+import { buyBox } from '../../../reducer/invoice-reducer/invoice.action'
 
 const CartItems = () => {
   const [amount, setAmount] = useState(0)
@@ -38,45 +39,31 @@ const CartItems = () => {
   }, [cart])
 
   const handlePayCart = async () => {
+    const urlApi = `${import.meta.env.VITE_URL_API}/box/buy-box-cart`
     try {
-      dispatchLoader({ type: 'SET_LOAD_TRUE' })
-      const response = await fetch(
-        `${import.meta.env.VITE_URL_API}/box/buy-box-cart`,
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ boxes: cart })
-        }
+      const { response, data } = await buyBox(
+        dispatchLoader,
+        urlApi,
+        token,
+        cart,
+        dispatchToast,
+        dispatchAuth,
+        dispatchInvoice,
+        dispatchPromoBoxes
       )
-      const data = await response.json()
-      if (response.status !== 201) {
-        dispatchToast({
-          type: 'ADD_NOTIFICATION',
-          payload: { msg: data.message, error: true }
+      if (response.status === 201) {
+        confetti({
+          particleCount: 250,
+          spread: 170,
+          origin: { y: 1.3 }
         })
-        return
+        navigate(`../invoice/${data.invoice._id}`)
       }
-      dispatchAuth({ type: 'SET_USER', payload: data.updatedUser })
+    } catch (error) {
       dispatchToast({
         type: 'ADD_NOTIFICATION',
-        payload: { msg: data.message, error: false }
+        payload: { msg: error.message, error: true }
       })
-      dispatchInvoice({ type: 'SET_INVOICES', payload: data.invoice })
-      dispatchInvoice({ type: 'SET_INVOICE', payload: data.invoice })
-      dispatchPromoBoxes({ type: 'SET_DELETE_CART' })
-      confetti({
-        particleCount: 250,
-        spread: 170,
-        origin: { y: 1.3 }
-      })
-      dispatchPromoBoxes({ type: 'SET_BOXES', payload: data.boxes })
-      navigate(`../invoice/${data.invoice._id}`)
-    } catch (error) {
-    } finally {
-      dispatchLoader({ type: 'SET_LOAD_FALSE' })
     }
   }
 

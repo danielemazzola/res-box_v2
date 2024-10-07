@@ -1,14 +1,13 @@
 import { useContext, useEffect } from 'react'
-
 import useScrollToRef from '../../../hooks/useScrollToRef'
 import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { formatCash } from '../operations/herlpers'
 import { getDate } from '../../../helpers/date'
+import { downloadPDF } from './helpers'
 import './Invoice.css'
 import logo from '/images/logo.png'
-import { downloadPDF } from './helpers'
 
 const Invoice = () => {
   const navigate = useNavigate()

@@ -7,6 +7,8 @@ import Modal from '../modal/Modal'
 import { getDate } from '../../helpers/date'
 import './PartnerCard.css'
 import { sizeImg } from '../../helpers/sizeImg'
+import like from '/images/like.png'
+import heart from '/images/heart.png'
 
 const PartnerCard = () => {
   const [userModal, setUserModal] = useState({})
@@ -88,6 +90,8 @@ const PartnerCard = () => {
       payload: data.getPartner
     })
   }
+
+  console.log(partner)
 
   return (
     <div ref={refPartnerInfo} className='partner__container fadeIn'>
@@ -172,6 +176,16 @@ const PartnerCard = () => {
           <p className={`${partner.confirmed ? 'green' : 'cancelled'}`}>
             {partner.confirmed ? 'Activo' : 'A la espera de confirmación'}
           </p>
+        </div>
+        <div>
+          {partner.favorite <= 0 ? (
+            <img alt='likes' src={heart} width='20' />
+          ) : (
+            <>
+              <img alt='likes' src={like} width='20' />
+              {partner.favorite}
+            </>
+          )}
         </div>
       </div>
       <Modal
