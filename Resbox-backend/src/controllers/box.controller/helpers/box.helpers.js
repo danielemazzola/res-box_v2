@@ -53,3 +53,8 @@ module.exports = {
   getUserDetails,
   addUserBox
 }
+
+//! PENDIENTE POR HACER:
+//? PASARELA DE PAGO PAYPAL 💰
+//? COMENTARIOS Y NOTIFICACIONES 🪧
+//? REGALOS 🎁
