@@ -2,7 +2,6 @@ const nodemailer = require('nodemailer')
 const { oauth2Client } = require('../gmail.oauth/oauth.google')
 
 const EMAIL_HOST = process.env.EMAIL_HOST
-const PASSWORD_HOST = process.env.PASSWORD_HOST
 const OAUTH_CLIENT_ID = process.env.OAUTH_CLIENTID
 const OAUTH_CLIENT_SECRET = process.env.OAUTH_CLIENT_SECRET
 const OAUTH_REFRESH_TOKEN = process.env.OAUTH_REFRESH_TOKEN
@@ -39,8 +38,8 @@ const sendMail = async (to, subject, htmlContent) => {
       html: htmlContent
     }
 
-    const info = await transporter.sendMail(mailOptions)
-    console.log(`Email enviado a: ${info.response}`)
+    const { response } = await transporter.sendMail(mailOptions)
+    console.log(`Email enviado a: ${response}`)
   } catch (error) {
     console.error(`Error al enviar el correo: ${error}`)
   }
