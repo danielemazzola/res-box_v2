@@ -15,7 +15,7 @@ import useFilterPartner from '../../../hooks/useFilterPartner'
 const InformationApp = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const scrollToRef = useScrollToRef()
-  const { filterPartnersRef, refPartnersSection } = useContext(ScrollRefContext)
+  const { filterPartnersRef, refPartnerSearch, refPartnersSection } = useContext(ScrollRefContext)
   const {
     statePartners: {
       partners,
@@ -60,7 +60,7 @@ const InformationApp = () => {
         </ul>
       </div>
 
-      <div className={` ${filterState ? 'container-filter-results' : ''}`}>
+      <div ref={refPartnerSearch} className={` ${filterState ? 'container-filter-results' : ''}`}>
         {filterState && (
           <div>
             <div className='contain-tilte-search-filter'>

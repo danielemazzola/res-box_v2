@@ -6,6 +6,7 @@ export const ScrollRefProvider = ({ children }) => {
   const refHeaderSection = useRef(null)
   const refPartnersSection = useRef(null)
   const refFunctionAppSection = useRef(null)
+  const refPartnerSearch = useRef(null)
   const refPartner = useRef(null)
   const refFunctionApp = useRef(null)
   const filterPartnersRef = useRef(null)
@@ -30,6 +31,7 @@ export const ScrollRefProvider = ({ children }) => {
         refPartnersSection,
         refFunctionAppSection,
         refPartner,
+        refPartnerSearch,
         refFunctionApp,
         filterPartnersRef,
         refDashboardSection,
