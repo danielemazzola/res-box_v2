@@ -39,7 +39,7 @@ const Home = () => {
     if (usersCount <= 0) {
       getUsers()
     }
-  }, [])
+  }, [user, partners, usersCount])
 
   useEffect(() => {
     setTimeout(() => {
