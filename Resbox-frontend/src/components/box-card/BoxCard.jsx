@@ -89,10 +89,7 @@ const BoxCard = ({ box }) => {
   }
 
   const handlePartner = (partner) => {
-    openModal({ infoPartner: partner })
-    setTimeout(() => {
-      openModal({ modalStatePartner: true })
-    }, 200)
+    openModal({ infoPartner: partner, modalStatePartner: true })
   }
 
   const handleRedeem = (thisBox) => {
@@ -133,7 +130,7 @@ const BoxCard = ({ box }) => {
                       key={index}
                       className='boxcard__btn-info-partner'
                       style={{ cursor: 'pointer' }}
-                      onClick={() => handlePartner(partner, box)}
+                      onClick={() => handlePartner(partner)}
                     >
                       {partner.name}
                     </button>
@@ -178,12 +175,7 @@ const BoxCard = ({ box }) => {
           </div>
         </div>
       </div>
-      <ModalInfoPartner
-        box={box}
-        handleCloseModalInfoPartner={() =>
-          handleCloseModalInfoPartner(setStateBoxCard)
-        }
-      />
+      <ModalInfoPartner box={box} />
       <ModalRedeem
         stateBoxCard={stateBoxCard}
         setStateBoxCard={setStateBoxCard}

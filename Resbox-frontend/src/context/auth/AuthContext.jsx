@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
     secureTokenRedeem: 0,
     modalStatePartner: false,
     infoPartner: {},
-    box:{}
+    box: {}
   })
 
   const [token, setToken] = useState(localStorage.getItem('SECURE_CODE_RESBOX'))
@@ -174,14 +174,8 @@ export const AuthProvider = ({ children }) => {
   const handleCloseModalInfoPartner = () => {
     setStateBoxCard((prevState) => ({
       ...prevState,
-      modalStatePartner: false,
+      modalStatePartner: false
     }))
-    setTimeout(() => {
-      setStateBoxCard((prevState) => ({
-        ...prevState,
-        infoPartner: {}
-      }))
-    }, 500);
   }
 
   return (

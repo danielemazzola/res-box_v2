@@ -42,7 +42,7 @@ const Dashboard = () => {
   }, [])
 
   return (
-    <section ref={refDashboardSection} className='dashboard__container'>
+    <section ref={refDashboardSection} className='dashboard__container fadeIn'>
       <div className='dashboard__cards-container fadeIn'>
         <div className='dashboard__card'>
           <div className=''>

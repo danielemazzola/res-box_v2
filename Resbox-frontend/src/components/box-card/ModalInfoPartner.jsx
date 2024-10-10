@@ -1,12 +1,11 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Modal from '../modal/Modal'
-
 import Like from '../like/Like'
 import { AuthContext } from '../../context/auth/AuthContext'
 
-const ModalInfoPartner = ({ box, handleCloseModalInfoPartner }) => {
-  const { stateBoxCard } = useContext(AuthContext)
+const ModalInfoPartner = ({ box }) => {
+  const { handleCloseModalInfoPartner, stateBoxCard } = useContext(AuthContext)
   return (
     <Modal
       isModalOpen={stateBoxCard.modalStatePartner}
@@ -17,7 +16,7 @@ const ModalInfoPartner = ({ box, handleCloseModalInfoPartner }) => {
           <img
             loading='lazy'
             src={stateBoxCard.infoPartner.banner}
-            alt={`${stateBoxCard.infoPartner?.name ?? 'Partner'} banner`}
+            alt={`${stateBoxCard.infoPartner?.name ?? 'Partner'} logo`}
           />
         </div>
         <div className='logo-absolute'>

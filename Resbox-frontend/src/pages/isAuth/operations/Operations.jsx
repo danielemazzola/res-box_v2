@@ -181,7 +181,7 @@ const Operations = () => {
   )
 
   return (
-    <div className='operations-component__container' ref={sectionRefOperations}>
+    <div className='operations-component__container fadeIn' ref={sectionRefOperations}>
       <div className='operations-component__title'>
         <h2>Mis operaciones</h2>
       </div>
