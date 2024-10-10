@@ -175,8 +175,13 @@ export const AuthProvider = ({ children }) => {
     setStateBoxCard((prevState) => ({
       ...prevState,
       modalStatePartner: false,
-      infoPartner: {}
     }))
+    setTimeout(() => {
+      setStateBoxCard((prevState) => ({
+        ...prevState,
+        infoPartner: {}
+      }))
+    }, 200);
   }
 
   return (
