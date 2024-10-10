@@ -1,15 +1,14 @@
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import confetti from 'canvas-confetti'
-import useFilterPartner from '../../hooks/useFilterPartner'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import { AuthContext } from '../../context/auth/AuthContext'
-import { containInformation, getRandomBackgroundColor } from './helpers'
 import { handleBuyBox } from '../../reducer/promo-box/promobox.action'
 import ModalRedeem from './ModalRedeem'
-import ModalInfoPartner from './ModalInfoPartner'
 import { getDate } from '../../helpers/date'
+import { containInformation } from './helpers'
+import ModalInfoPartner from './ModalInfoPartner'
 import './BoxCard.css'
-import { useNavigate } from 'react-router-dom'
 
 const BoxCard = ({ box }) => {
   const navigate = useNavigate()
@@ -30,47 +29,56 @@ const BoxCard = ({ box }) => {
     stateBoxCard,
     setStateBoxCard
   } = useContext(AuthContext)
-  const backgroundColor = useMemo(() => getRandomBackgroundColor(), [box])
   const newArrayInfoBox = containInformation(box)
 
   const handleAddMoreBox = async (idBox) => {
-    const { response, data } = await handleBuyBox(
-      token,
-      API_URL.user_add_more,
-      idBox,
-      'POST',
-      dispatchLoader,
-      dispatchToast
-    )
-    if (boxes.length > 0) {
-      const updatedBoxes = boxes.map((boxItem) => {
-        if (boxItem._id.toString() === idBox.toString()) {
-          return {
-            ...boxItem,
-            items_acquired_by: [...boxItem.items_acquired_by, data.updatedUser]
+    try {
+      const { response, data } = await handleBuyBox(
+        token,
+        API_URL.user_add_more,
+        idBox,
+        'POST',
+        dispatchLoader,
+        dispatchToast
+      )
+      if (boxes.length > 0) {
+        const updatedBoxes = boxes.map((boxItem) => {
+          if (boxItem._id.toString() === idBox.toString()) {
+            return {
+              ...boxItem,
+              items_acquired_by: [
+                ...boxItem.items_acquired_by,
+                data.updatedUser
+              ]
+            }
           }
-        }
-        return boxItem
-      })
+          return boxItem
+        })
 
-      dispatchPromoBoxes({
-        type: 'SET_BOXES',
-        payload: updatedBoxes
+        dispatchPromoBoxes({
+          type: 'SET_BOXES',
+          payload: updatedBoxes
+        })
+      }
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: { msg: `${data.message}`, error: false }
+      })
+      dispatchAuth({ type: 'SET_USER', payload: data.updatedUser })
+      confetti({
+        particleCount: 250,
+        spread: 170,
+        origin: { y: 1.3 }
+      })
+      dispatchInvoice({ type: 'SET_INVOICES', payload: data.invoice })
+      dispatchInvoice({ type: 'SET_INVOICE', payload: data.invoice })
+      navigate(`../invoice/${data.invoice._id}`)
+    } catch (error) {
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: { msg: `${error.message}`, error: true }
       })
     }
-    dispatchToast({
-      type: 'ADD_NOTIFICATION',
-      payload: { msg: `${data.message}`, error: false }
-    })
-    dispatchAuth({ type: 'SET_USER', payload: data.updatedUser })
-    confetti({
-      particleCount: 250,
-      spread: 170,
-      origin: { y: 1.3 }
-    })
-    dispatchInvoice({ type: 'SET_INVOICES', payload: data.invoice })
-    dispatchInvoice({ type: 'SET_INVOICE', payload: data.invoice })
-    navigate(`../invoice/${data.invoice._id}`)
   }
 
   const openModal = (options = {}) => {
@@ -81,7 +89,10 @@ const BoxCard = ({ box }) => {
   }
 
   const handlePartner = (partner) => {
-    openModal({ modalStatePartner: true, infoPartner: partner })
+    openModal({ infoPartner: partner })
+    setTimeout(() => {
+      openModal({ modalStatePartner: true })
+    }, 200)
   }
 
   const handleRedeem = (thisBox) => {

@@ -1,4 +1,4 @@
-import { createContext, useEffect, useContext, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 import { fetchAuth } from '../../services/fetch-auth/fetchAuth'
 import { ReducersContext } from '../reducers/ReducersContext'
 import { sizeImg } from '../../helpers/sizeImg'
@@ -181,7 +181,7 @@ export const AuthProvider = ({ children }) => {
         ...prevState,
         infoPartner: {}
       }))
-    }, 200);
+    }, 500);
   }
 
   return (

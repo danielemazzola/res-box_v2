@@ -17,15 +17,15 @@ const ModalInfoPartner = ({ box, handleCloseModalInfoPartner }) => {
           <img
             loading='lazy'
             src={stateBoxCard.infoPartner.banner}
-            alt={`${stateBoxCard.infoPartner.name} banner`}
+            alt={`${stateBoxCard.infoPartner?.name ?? 'Partner'} banner`}
           />
         </div>
         <div className='logo-absolute'>
           <img
+            loading='lazy'
             className='partner-avatar'
             src={stateBoxCard.infoPartner.avatar}
-            alt={`${stateBoxCard.infoPartner.name} logo`}
-            loading='lazy'
+            alt={`${stateBoxCard.infoPartner?.name ?? 'Partner'} logo`}
           />
         </div>
         <div className='modal-details'>
