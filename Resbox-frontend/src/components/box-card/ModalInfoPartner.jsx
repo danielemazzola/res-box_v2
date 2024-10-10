@@ -5,7 +5,7 @@ import Modal from '../modal/Modal'
 import Like from '../like/Like'
 import { AuthContext } from '../../context/auth/AuthContext'
 
-const ModalInfoPartner = ({ handleCloseModalInfoPartner, box }) => {
+const ModalInfoPartner = ({ box, handleCloseModalInfoPartner }) => {
   const { stateBoxCard } = useContext(AuthContext)
   return (
     <Modal

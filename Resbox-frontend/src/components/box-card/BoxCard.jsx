@@ -80,7 +80,7 @@ const BoxCard = ({ box }) => {
     }))
   }
 
-  const handlePartner = (partner, box) => {
+  const handlePartner = (partner) => {
     openModal({ modalStatePartner: true, infoPartner: partner })
   }
 
@@ -168,11 +168,10 @@ const BoxCard = ({ box }) => {
         </div>
       </div>
       <ModalInfoPartner
-        stateBoxCard={stateBoxCard}
+        box={box}
         handleCloseModalInfoPartner={() =>
           handleCloseModalInfoPartner(setStateBoxCard)
         }
-        box={box}
       />
       <ModalRedeem
         stateBoxCard={stateBoxCard}
