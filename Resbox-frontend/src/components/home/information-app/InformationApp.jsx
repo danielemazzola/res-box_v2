@@ -27,7 +27,7 @@ const InformationApp = () => {
   } = useContext(ReducersContext)
 
   return (
-    <>
+    <div className='container__partners'>
       <div className='container-partners'>
         <div className='contain-partners-title show'>
           <h2 className=''>¿Donde puedes consumir tus boxs?</h2>
@@ -106,7 +106,7 @@ const InformationApp = () => {
             </div>
             <div className='last-ten-partners-filter'>
               <p>Resultados de busqueda: {arrayFilterPartnersSearch.length}</p>
-              <div className={`container-cards-partners `}>
+              <div className={`scroll`}>
                 {arrayFilterPartnersSearch
                   ?.filter((el) => el.confirmed)
                   .map((partner) => (
@@ -121,7 +121,7 @@ const InformationApp = () => {
             </div>
             <div className='last-ten-partners-filter'>
               <p>Últimos 10 Partners en {arrayFilterPartners[0].city}:</p>
-              <div className={`container-cards-partners`}>
+              <div className={`scroll`}>
                 {arrayFilterPartners
                   ?.filter((el) => el.confirmed)
                   .map((partner) => (
@@ -156,7 +156,7 @@ const InformationApp = () => {
           No hay colaboradores disponibles
         </p>
       )}
-    </>
+    </div>
   )
 }
 

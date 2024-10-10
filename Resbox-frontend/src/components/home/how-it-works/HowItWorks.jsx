@@ -7,7 +7,7 @@ const HowItWorks = () => {
   return (
     <div className='container-how-work'>
       <div className='contain-how-work-title show'>
-          <h2 className=''>¿Cómo funciona?</h2>
+          <h2 className=''>¿Cómo funciona RES-BOX?</h2>
         </div>
       <div className='contain-box-work'>
         <div className='contain-box-img-work show'>

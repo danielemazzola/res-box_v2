@@ -8,8 +8,7 @@ const useFilterPartner = (searchTerm, arrayPartners) => {
     addressMatch = element.address
       .toLowerCase()
       .includes(searchTerm.toLowerCase())
-      idPartner = element._id
-    return nameMatch || addressMatch || idPartner
+    return nameMatch || addressMatch
   })
   return filteredResults
 }

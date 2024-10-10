@@ -1,11 +1,11 @@
 footer {
   background-color: var(--rb-bg-light);
+  min-height:100svh;
   margin-top: -5px;
   padding: 80px 50px 120px 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  flex: 1;
   gap: 50px;
   transition: all 0.3s;
 }
@@ -27,9 +27,6 @@ footer {
 }
 .footer__content-info > div > * {
   text-align: center;
-}
-.footer__content-info > div > h5 {
-  line-height: 25px;
 }
 .footer__content-reserved {
   position: relative;

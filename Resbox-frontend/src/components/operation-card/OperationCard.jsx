@@ -3,7 +3,6 @@ import { getDate } from '../../helpers/date'
 import { formatCash } from '../../pages/isAuth/operations/herlpers'
 
 const OperationCard = ({ operation }) => {
-  console.log(operation);
   
   return (
     <div className='operation__container-operation'>

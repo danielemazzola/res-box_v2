@@ -5,6 +5,8 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
+  min-height:100svh;
+  padding:100px 0; 
 }
 .contain-how-work-title {
   display: flex;

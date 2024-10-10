@@ -1,3 +1,6 @@
+.contain-hero {
+  min-height: 100svh;
+}
 .contain-hero,
 .contain-hero-auth {
   background-color: var(--rb-bg-light);
@@ -6,7 +9,6 @@
   align-items: center;
   flex-wrap: wrap;
   transition: all 0.5s;
-  padding: 0 20px;;
 }
 
 .contain-log,
@@ -17,7 +19,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex:1;
+  flex: 1;
 }
 .contain-log > a > img {
   display: flex;
@@ -32,27 +34,27 @@
   width: 130px;
   transition: all 0.5s;
 }
-.containt-counter-users{
+.containt-counter-users {
   position: fixed;
-  right:0;
-  bottom:10px;
-  padding:3px 3px;
+  right: 0;
+  bottom: 10px;
+  padding: 3px 3px;
   border-radius: 10px 0 0 10px;
   display: flex;
   align-items: end;
-  gap:10px;
+  gap: 10px;
   background-color: var(--rb-bg-primary-transparent);
-  color:var(--rb-text-primary);
-  z-index:151;
+  color: var(--rb-text-primary);
+  z-index: 151;
 }
-.containt-counter-users > p{
+.containt-counter-users > p {
   text-transform: uppercase;
   font-size: 14px;
 }
-.containt-counter-users > p:first-child{
+.containt-counter-users > p:first-child {
   background-color: white;
-  padding:0px 4px;
-  color:var(--rb-bg-primary-transparent);
+  padding: 0px 4px;
+  color: var(--rb-bg-primary-transparent);
   text-align: center;
   border-radius: 10px;
   display: flex;
@@ -73,6 +75,9 @@
   gap: 10px;
 }
 @media (max-width: 840px) {
+  .contain-hero {
+    padding: 100px 0;
+  }
   .contain-hero {
     flex-direction: column;
     justify-content: center;
