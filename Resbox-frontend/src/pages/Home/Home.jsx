@@ -1,4 +1,6 @@
 import React, { useContext, useEffect } from 'react'
+import useScrollToRef from '../../hooks/useScrollToRef'
+import { AuthContext } from '../../context/auth/AuthContext'
 import { ScrollRefContext } from '../../context/scroll-ref/ScrollRefContext'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import HowItWorks from '../../components/home/how-it-works/HowItWorks'
@@ -6,8 +8,6 @@ import InformationApp from '../../components/home/information-app/InformationApp
 import PromoBox from '../isAuth/promo-box/PromoBox'
 import { fetchGetHome } from '../../services/fetch-partner/fetchPartners'
 import './Home.css'
-import useScrollToRef from '../../hooks/useScrollToRef'
-import { AuthContext } from '../../context/auth/AuthContext'
 
 const Home = () => {
   const scrollToRef = useScrollToRef()
@@ -21,6 +21,7 @@ const Home = () => {
   const { isAuth, token } = useContext(AuthContext)
 
   const {
+    stateIsAuth: { user },
     statePartners: { partners, usersCount },
     dispatchPartners,
     dispatchLoader,
@@ -28,7 +29,7 @@ const Home = () => {
   } = useContext(ReducersContext)
 
   useEffect(() => {
-    if (token) {
+    if (token && Object.keys(user).length <= 0) {
       isAuth()
     }
 
@@ -55,7 +56,10 @@ const Home = () => {
     } catch (error) {
       dispatchToast({
         type: 'ADD_NOTIFICATION',
-        payload: { msg: error.message, error: true }
+        payload: {
+          msg: 'Hubo un problema, por favor refresque pestaña.',
+          error: true
+        }
       })
     } finally {
       dispatchLoader({ type: 'SET_LOAD_FALSE' })
@@ -69,10 +73,7 @@ const Home = () => {
       const { data } = await fetchGetHome(urlApi)
       dispatchPartners({ type: 'SET_COUNT_USERS', payload: data.users })
     } catch (error) {
-      dispatchToast({
-        type: 'ADD_NOTIFICATION',
-        payload: { msg: error.message, error: true }
-      })
+      console.log(error)
     } finally {
       dispatchLoader({ type: 'SET_LOAD_FALSE' })
     }

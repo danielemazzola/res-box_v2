@@ -78,9 +78,10 @@ export const AuthProvider = ({ children }) => {
           dispatchAuth({ type: 'SET_AUTH_TRUE' })
         }
       } catch (error) {
+        localStorage.removeItem('SECURE_CODE_RESBOX')
         dispatchToast({
           type: 'ADD_NOTIFICATION',
-          payload: { msg: `Error: ${error.message}`, error: true }
+          payload: { msg: `Hubo un problema, por favor refresque pestaña.`, error: true }
         })
       } finally {
         setTimeout(() => {
