@@ -16,11 +16,11 @@ const Layout = () => {
   } = useContext(ReducersContext)
   const { isAuth, token } = useContext(AuthContext)
   const { stateIsAuth } = useContext(ReducersContext)
-  useEffect(() => {
+/*   useEffect(() => {
     if (token) {
       isAuth()
     }
-  }, [])
+  }, []) */
 
   return (
     <>

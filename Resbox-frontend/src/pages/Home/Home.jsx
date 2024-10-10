@@ -7,11 +7,18 @@ import PromoBox from '../isAuth/promo-box/PromoBox'
 import { fetchGetHome } from '../../services/fetch-partner/fetchPartners'
 import './Home.css'
 import useScrollToRef from '../../hooks/useScrollToRef'
+import { AuthContext } from '../../context/auth/AuthContext'
 
 const Home = () => {
   const scrollToRef = useScrollToRef()
-  const { refPartnersSection, refFunctionAppSection, refBoxesSection, refHeaderSection } =
-    useContext(ScrollRefContext)
+  const {
+    refPartnersSection,
+    refFunctionAppSection,
+    refBoxesSection,
+    refHeaderSection
+  } = useContext(ScrollRefContext)
+
+  const { isAuth, token } = useContext(AuthContext)
 
   const {
     statePartners: { partners, usersCount },
@@ -21,19 +28,23 @@ const Home = () => {
   } = useContext(ReducersContext)
 
   useEffect(() => {
+    if (token) {
+      isAuth()
+    }
+
     if (partners.length <= 0) {
       getPartners()
     }
     if (usersCount <= 0) {
       getUsers()
-    } else return
+    }
   }, [])
 
   useEffect(() => {
     setTimeout(() => {
       scrollToRef(refHeaderSection)
-    }, 500);
-  },[])
+    }, 500)
+  }, [])
 
   const getPartners = async () => {
     try {
