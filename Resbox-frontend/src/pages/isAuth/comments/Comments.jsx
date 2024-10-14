@@ -42,8 +42,6 @@ const Comments = () => {
 
   useEffect(() => {
     if (partner._id !== idPartner) {
-      console.log(idPartner)
-      console.log(partner)
       getComment()
     }
   }, [])
