@@ -1,24 +1,111 @@
-/* import React, { useCallback, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-
+import { AuthContext } from '../../../context/auth/AuthContext'
+import './Comments.css'
+import { getComments } from '../../../reducer/comment.reducer/comment.action'
+import { ReducersContext } from '../../../context/reducers/ReducersContext'
+import Like from '../../../components/like/Like'
+import { getDate } from '../../../helpers/date'
+import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
+import useScrollToRef from '../../../hooks/useScrollToRef'
 const Comments = () => {
   const location = useLocation()
-  const [idPartner, setIdPartner] = useState(location.pathname.split('/')[2])
-
-  const getCommets = useCallback(async () => {
-    const response = await fetch(
-      `${import.meta.env.VITE_URL_API}/partner/comments/${idPartner}`
-    )
-    const data = await response.json()
-    console.log(data)
-  }, [idPartner])
+  const [idPartner, setIdPartner] = useState(
+    location.pathname.split('/')[2] || ''
+  )
+  const { token, API_URL } = useContext(AuthContext)
+  const {
+    dispatchToast,
+    dispatchLoader,
+    stateComments: { partner, comments },
+    dispatchComments
+  } = useContext(ReducersContext)
+  const { refCommentsSection } = useContext(ScrollRefContext)
+  const scrollRef = useScrollToRef()
 
   useEffect(() => {
-    getCommets()
-  }, [getCommets])
+    setTimeout(() => {
+      scrollRef(refCommentsSection)
+    }, 500)
+  }, [])
 
-  return <div>Comments</div>
+  const getComment = async () => {
+    const data = await getComments(
+      token,
+      API_URL,
+      idPartner,
+      dispatchComments,
+      dispatchToast,
+      dispatchLoader
+    )
+  }
+
+  useEffect(() => {
+    if (partner._id !== idPartner) {
+      console.log(idPartner)
+      console.log(partner)
+      getComment()
+    }
+  }, [])
+
+  return (
+    <section ref={refCommentsSection} className='comments__container'>
+      <div className='comments__content'>
+        <div>
+          <div className='comments__content-banner'>
+            <img
+              src={partner.banner}
+              alt={`${partner.name} banner`}
+              loading='lazy'
+            />
+          </div>
+          <div className='comments__logo-absolute'>
+            <img
+              className='partner-avatar'
+              src={partner.avatar}
+              alt={`${partner.name} logo`}
+              loading='lazy'
+            />
+          </div>
+          <div className='comments__content-favorite'>
+            <Like idPartner={partner._id} />
+          </div>
+          <div className='comments__modal-details'>
+            <p>{partner.name}</p>
+            <p>Tlf: {partner.phone}</p>
+            <p>{partner.address}</p>
+            <p>{partner.city}</p>
+          </div>
+        </div>
+      </div>
+      <div className='comments__content-view'>
+        <h2>Comentarios</h2>
+        <div>
+          {comments.length ? (
+            <>
+              {comments
+                ?.map((comment, index) => (
+                  <div key={index}>
+                    <p>
+                      <strong>Públicado por:</strong> {comment.idUser.name}
+                    </p>
+                    <p>{comment.content}</p>
+                    <i>
+                      <strong>
+                        Fecha públicación {getDate(comment.createdAt)}
+                      </strong>
+                    </i>
+                  </div>
+                ))
+                .reverse()}
+            </>
+          ) : (
+            <p>No hay comntarios</p>
+          )}
+        </div>
+      </div>
+    </section>
+  )
 }
 
 export default Comments
- */

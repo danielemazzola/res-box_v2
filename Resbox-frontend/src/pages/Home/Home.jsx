@@ -18,10 +18,7 @@ const Home = () => {
     refHeaderSection
   } = useContext(ScrollRefContext)
 
-  const { isAuth, token } = useContext(AuthContext)
-
   const {
-    stateIsAuth: { user },
     statePartners: { partners, usersCount },
     dispatchPartners,
     dispatchLoader,
@@ -29,10 +26,6 @@ const Home = () => {
   } = useContext(ReducersContext)
 
   useEffect(() => {
-    if (token && Object.keys(user).length <= 0) {
-      isAuth()
-    }
-
     if (partners.length <= 0) {
       getPartners()
     }

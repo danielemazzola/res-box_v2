@@ -1,5 +1,5 @@
 .cart-items__container {
-  padding: 20px;
+  padding: 80px 20px;
   background-color: var(--rb-bg-primary);
   border-radius: 20px;
   display: flex;

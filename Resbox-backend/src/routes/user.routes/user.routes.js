@@ -26,7 +26,7 @@ ROUTER.post('/login-user', checkUserExist, login)
 ROUTER.post('/recovery-password-user', checkUserExist, recoverPassword)
 ROUTER.put(`/new-password/:token`, checkToken, putPassword)
 ROUTER.put(
-  `/update-avatar`,
+  '/update-avatar',
   authenticateUser,
   profileAvatar.single('avatar'),
   updateAvatar

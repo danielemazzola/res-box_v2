@@ -46,9 +46,14 @@ const ModalInfoPartner = ({ box }) => {
             />
           ))}
         </div>
-        {/* <div className='content-comments-card-partner'>
-          <Link to={`../comments/${stateBoxCard.infoPartner._id}`}>Comenatarios</Link>
-        </div> */}
+        <div className='content-comments-card-partner'>
+          <Link
+            to={`../comments/${stateBoxCard.infoPartner._id}`}
+            onClick={handleCloseModalInfoPartner}
+          >
+            Comenatarios
+          </Link>
+        </div>
         <div className='content-favorite'>
           <Like idPartner={stateBoxCard.infoPartner._id} box={box} />
         </div>

@@ -6,8 +6,8 @@ import { AuthContext } from '../../context/auth/AuthContext'
 import { handleBuyBox } from '../../reducer/promo-box/promobox.action'
 import ModalRedeem from './ModalRedeem'
 import { getDate } from '../../helpers/date'
-import { containInformation } from './helpers'
 import ModalInfoPartner from './ModalInfoPartner'
+import { containInformation } from './helpers'
 import './BoxCard.css'
 
 const BoxCard = ({ box }) => {
@@ -25,7 +25,6 @@ const BoxCard = ({ box }) => {
   const {
     API_URL,
     token,
-    handleCloseModalInfoPartner,
     stateBoxCard,
     setStateBoxCard
   } = useContext(AuthContext)

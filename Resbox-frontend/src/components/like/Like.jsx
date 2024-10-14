@@ -8,8 +8,7 @@ import heart from '/images/heart.png'
 import { fetchLike } from '../../services/fetch-like/fetchLike'
 
 const Like = ({ idPartner }) => {
-  const { token, API_URL, stateBoxCard, setStateBoxCard } =
-    useContext(AuthContext)
+  const { token, API_URL, setStateBoxCard } = useContext(AuthContext)
   const {
     stateIsAuth: { user },
     dispatchAuth,
@@ -84,35 +83,27 @@ const Like = ({ idPartner }) => {
 
   return (
     <div className='like-content-favorite'>
-      <span>{stateBoxCard.infoPartner.favorite}</span>
-      {loadLike ? (
-        <HeartLoader />
+      {existFavorite ? (
+        <button onClick={handleAddToFavorite}>
+          <img
+            alt='Like'
+            src={like}
+            width='20'
+            className=''
+            title='Favorito'
+            loading='lazy'
+          />
+        </button>
       ) : (
-        <>
-          <span></span>
-          {existFavorite ? (
-            <button onClick={handleAddToFavorite}>
-              <img
-                alt='Like'
-                src={like}
-                width='20'
-                className=''
-                title='Favorito'
-                loading='lazy'
-              />
-            </button>
-          ) : (
-            <button onClick={handleAddToFavorite}>
-              <img
-                alt='Like'
-                src={heart}
-                width='20'
-                title='Agregar a favorito'
-                loading='lazy'
-              />
-            </button>
-          )}
-        </>
+        <button onClick={handleAddToFavorite}>
+          <img
+            alt='Like'
+            src={heart}
+            width='20'
+            title='Agregar a favorito'
+            loading='lazy'
+          />
+        </button>
       )}
     </div>
   )

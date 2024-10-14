@@ -11,7 +11,7 @@ import Partner from './pages/isAuth/partner/Partner'
 import Operations from './pages/isAuth/operations/Operations'
 import CartItems from './pages/isAuth/cart-items/CartItems'
 import Invoice from './pages/isAuth/invoice/Invoice'
-/* import Comments from './pages/isAuth/comments/Comments' */
+import Comments from './pages/isAuth/comments/Comments'
 
 const App = () => {
   return (
@@ -70,7 +70,14 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        {/* <Route path={`/comments/:partner`} element={<ProtectedRoute><Comments /></ProtectedRoute>}/> */}
+        <Route
+          path={`/comments/:partner`}
+          element={
+            <ProtectedRoute>
+              <Comments />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path={`/cart-items`}
           element={

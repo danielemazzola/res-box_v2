@@ -23,6 +23,7 @@ export const ScrollRefProvider = ({ children }) => {
   const sectionRefCartItems = useRef(null)
   const refInvoidSection = useRef(null)
   const refInvoidPDF = useRef(null)
+  const refCommentsSection = useRef(null)
 
   return (
     <ScrollRefContext.Provider
@@ -34,6 +35,7 @@ export const ScrollRefProvider = ({ children }) => {
         refPartnerSearch,
         refFunctionApp,
         filterPartnersRef,
+        refCommentsSection,
         refDashboardSection,
         fileInputRef,
         sectionRefOperations,
@@ -46,7 +48,7 @@ export const ScrollRefProvider = ({ children }) => {
         refNewPartner,
         sectionRefCartItems,
         refInvoidSection,
-        refInvoidPDF
+        refInvoidPDF,
       }}
     >
       {children}

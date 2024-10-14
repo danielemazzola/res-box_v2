@@ -27,7 +27,8 @@ export const AuthProvider = ({ children }) => {
     my_operations: 'operation',
     operation_update: 'operation/update-operation',
     new_partner: 'partner/new-partner',
-    like: 'user/add-favorite'
+    like: 'user/add-favorite',
+    get_comments: 'comment/get-comments'
   })
   const [stateModal, setStateModal] = useState({
     infoPartner: false,

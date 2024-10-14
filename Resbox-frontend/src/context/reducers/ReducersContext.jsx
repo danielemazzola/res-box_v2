@@ -23,6 +23,10 @@ import {
   initStateInvoice,
   stateInvoice
 } from '../../reducer/invoice-reducer/invoice.reducer'
+import {
+  initStateComment,
+  stateComment
+} from '../../reducer/comment.reducer/comment.reducer'
 
 export const ReducersContext = createContext()
 
@@ -42,6 +46,10 @@ export const ReducersProvider = ({ children }) => {
     stateInvoice,
     initStateInvoice
   )
+  const [stateComments, dispatchComments] = useReducer(
+    stateComment,
+    initStateComment
+  )
 
   return (
     <ReducersContext.Provider
@@ -57,7 +65,9 @@ export const ReducersProvider = ({ children }) => {
         statePromoBoxes,
         dispatchPromoBoxes,
         stateInvoices,
-        dispatchInvoice
+        dispatchInvoice,
+        stateComments,
+        dispatchComments
       }}
     >
       {children}

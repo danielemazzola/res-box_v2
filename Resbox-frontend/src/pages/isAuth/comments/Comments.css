@@ -1,0 +1,107 @@
+.comments__container {
+  background-color: var(--rb-bg-light);
+  padding: 80px 20px;
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 50px;
+}
+.comments__content {
+  background: var(--rb-text-primary);
+  border-radius: 10px;
+  padding: 0 0 var(--rb-spacing-medium) 0;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform 0.5s ease;
+}
+.comments__content-banner {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+.comments__content-banner > img {
+  width: 100%;
+  height: 200px;
+  transition: all 0.5s;
+  object-fit: cover;
+}
+.comments__content-banner > img:hover {
+  transform: scale(1.1);
+}
+
+.comments__modal-details {
+  display: flex;
+  gap: 10px;
+  justify-content: start;
+  align-items: center;
+  padding: 30px 10px 10px;
+  flex-wrap: wrap;
+}
+
+.comments__modal-details > p {
+  background-color: var(--rb-bg-primary);
+  color: var(--rb-text-primary);
+  padding: 0px 5px;
+  border-radius: 5px;
+}
+.comments__modal-details-users {
+  margin-top: 10px;
+}
+
+.comments__logo-absolute {
+  position: absolute;
+  top: var(--rb-spacing-small);
+  left: var(--rb-spacing-small);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.comments__logo-absolute > img {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  object-fit: cover;
+  transition: all 0.5s;
+}
+.comments__logo-absolute > img:hover {
+  transform: scale(1.1);
+}
+.comments__content-favorite {
+  position: absolute;
+  right: 40px;
+  bottom: 50px;
+}
+
+.comments__content-view > h2 {
+  text-align: center;
+}
+
+.comments__content-view {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.comments__content-view > div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.comments__content-view > div > div {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.comments__content-view > div > div > p{
+  text-transform: uppercase;
+  font-size: var(--rb-font-size-small);
+}
+.comments__content-view > div > div > i {
+  text-align: end;
+}

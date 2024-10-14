@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from '../components/header/Header'
 import ToastNotification from '../components/toast-notification/ToastNotification'
@@ -7,15 +7,20 @@ import Loader from '../components/loader/Loader'
 import { ReducersContext } from '../context/reducers/ReducersContext'
 import { canvas_index } from '../helpers/canvas'
 import Footer from '../components/footer/Footer'
+import { AuthContext } from '../context/auth/AuthContext'
 
 const Layout = () => {
   canvas_index()
   const {
     stateLoader: { load }
   } = useContext(ReducersContext)
-  const {
-    stateIsAuth: { isAuth }
-  } = useContext(ReducersContext)
+  const { token, isAuth } = useContext(AuthContext)
+
+  useEffect(() => {
+    if (token) {
+      isAuth()
+    }
+  }, [])
 
   return (
     <>
