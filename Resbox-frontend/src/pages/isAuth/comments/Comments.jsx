@@ -48,7 +48,7 @@ const Comments = () => {
 
   return (
     <section ref={refCommentsSection} className='comments__container'>
-      <div className='comments__content'>
+      <div className='comments__content fadeIn'>
         <div>
           <div className='comments__content-banner'>
             <img
@@ -75,12 +75,12 @@ const Comments = () => {
       </div>
       <div className='comments__content-view'>
         <h2>Comentarios</h2>
-        <div>
+        <div className=''>
           {comments.length ? (
             <>
               {comments
                 ?.map((comment, index) => (
-                  <div key={index}>
+                  <div key={index} className='show'>
                     <p>
                       <strong>Públicado por</strong> {comment.idUser.name}
                     </p>
