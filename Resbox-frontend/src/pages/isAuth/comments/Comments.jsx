@@ -65,9 +65,6 @@ const Comments = () => {
               loading='lazy'
             />
           </div>
-          <div className='comments__content-favorite'>
-            <Like idPartner={partner._id} />
-          </div>
           <div className='comments__modal-details'>
             <p>{partner.name}</p>
             <p>Tlf: {partner.phone}</p>
@@ -85,13 +82,12 @@ const Comments = () => {
                 ?.map((comment, index) => (
                   <div key={index}>
                     <p>
-                      <strong>Públicado por:</strong> {comment.idUser.name}
+                      <strong>Públicado por</strong> {comment.idUser.name}
                     </p>
                     <p>{comment.content}</p>
                     <i>
-                      <strong>
-                        Fecha públicación {getDate(comment.createdAt)}
-                      </strong>
+                      <strong>Fecha públicación</strong>{' '}
+                      {getDate(comment.createdAt)}
                     </i>
                   </div>
                 ))

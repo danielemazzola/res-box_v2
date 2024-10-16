@@ -5,7 +5,7 @@
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   gap: 50px;
 }
 .comments__content {
@@ -71,11 +71,6 @@
 .comments__logo-absolute > img:hover {
   transform: scale(1.1);
 }
-.comments__content-favorite {
-  position: absolute;
-  right: 40px;
-  bottom: 50px;
-}
 
 .comments__content-view > h2 {
   text-align: center;
@@ -100,7 +95,14 @@
 }
 .comments__content-view > div > div > p{
   text-transform: uppercase;
-  font-size: var(--rb-font-size-small);
+  font-size: 14px;;
+}
+.comments__content-view > div > div > p > strong, .comments__content-view > div > div > i > strong {
+  background-color: black;
+  color: white;
+  padding: 0 4px;
+  border-radius: 5px;
+  font-size: 12px;
 }
 .comments__content-view > div > div > i {
   text-align: end;
