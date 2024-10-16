@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
   } = useContext(ReducersContext)
   const { refPartnerInfo, refOperations } = useContext(ScrollRefContext)
 
-  const isAuth = async () => {
+  const getProfile = async () => {
     if (token) {
       try {
         dispatchLoader({ type: 'SET_LOAD_TRUE' })
@@ -183,7 +183,7 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        isAuth,
+        getProfile,
         API_URL,
         stateModal,
         setStateModal,
