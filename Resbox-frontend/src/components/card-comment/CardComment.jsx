@@ -94,21 +94,23 @@ const CardComment = ({ comment }) => {
           Responder
         </button>
       </div>
-      <div className='comment__replies'>
-        <i
-          className='comment__view-replies'
-          onClick={() => setViewReplies(!viewReplies)}
-        >
-          {viewReplies ? 'Cerrar' : 'Respuestas'}
-        </i>
-        {viewReplies && (
-          <>
-            {comment?.replies
-              ?.map((rep) => <CardReplies key={rep._id} reply={rep} />)
-              .reverse()}
-          </>
-        )}
-      </div>
+      {comment.replies.length>0 && (
+        <div className='comment__replies'>
+          <i
+            className='comment__view-replies'
+            onClick={() => setViewReplies(!viewReplies)}
+          >
+            {viewReplies ? 'Cerrar' : 'Respuestas'} ({comment.replies.length})
+          </i>
+          {viewReplies && (
+            <>
+              {comment?.replies
+                ?.map((rep) => <CardReplies key={rep._id} reply={rep} />)
+                .reverse()}
+            </>
+          )}
+        </div>
+      )}
     </div>
   )
 }
