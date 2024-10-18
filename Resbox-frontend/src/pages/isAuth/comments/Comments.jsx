@@ -8,7 +8,7 @@ import Like from '../../../components/like/Like'
 import { getDate } from '../../../helpers/date'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import useScrollToRef from '../../../hooks/useScrollToRef'
-import CardCommnet from '../../../components/card-comment/cardCommnet'
+import CardComment from '../../../components/card-comment/CardComment'
 const Comments = () => {
   const location = useLocation()
   const [idPartner, setIdPartner] = useState(
@@ -81,7 +81,7 @@ const Comments = () => {
             <>
               {comments
                 ?.map((comment, index) => (
-                  <CardCommnet key={index} comment={comment} />
+                  <CardComment key={index} comment={comment} />
                 ))
                 .reverse()}
             </>

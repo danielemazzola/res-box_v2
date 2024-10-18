@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../context/auth/AuthContext'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
-import './cardCommnet.css'
+import './CardComment.css'
 import { getDate } from '../../helpers/date'
 
-const CardCommnet = ({ comment }) => {
+const CardComment = ({ comment }) => {
   const [reply, setReply] = useState('')
   const { token, API_URL } = useContext(AuthContext)
   const [viewReplies, setViewReplies] = useState(false)
@@ -114,4 +114,4 @@ const CardCommnet = ({ comment }) => {
   )
 }
 
-export default CardCommnet
+export default CardComment
