@@ -78,7 +78,6 @@ const Comments = () => {
         type: 'SET_COMMENTS',
         payload: [...comments, data.comment]
       })
-      console.log(data)
     } catch (error) {
     } finally {
       dispatchLoader({ type: 'SET_LOAD_FALSE' })
