@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../context/auth/AuthContext'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
-import { getDate } from '../../helpers/date'
 import './cardCommnet.css'
+import { getDate } from '../../helpers/date'
 
 const CardCommnet = ({ comment }) => {
   const [reply, setReply] = useState('')
