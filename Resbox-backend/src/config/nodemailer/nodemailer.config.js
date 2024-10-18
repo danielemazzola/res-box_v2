@@ -9,7 +9,6 @@ const OAUTH_REFRESH_TOKEN = process.env.OAUTH_REFRESH_TOKEN
 const createTransporter = async () => {
   try {
     const accessToken = await oauth2Client.getAccessToken()
-    console.log(accessToken.token)
 
     return nodemailer.createTransport({
       service: 'gmail',
@@ -37,7 +36,6 @@ const sendMail = async (to, subject, htmlContent) => {
       subject,
       html: htmlContent
     }
-
     const { response } = await transporter.sendMail(mailOptions)
     console.log(`Email enviado a: ${response}`)
   } catch (error) {

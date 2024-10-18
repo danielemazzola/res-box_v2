@@ -9,6 +9,9 @@ const getComments = async (req, res) => {
     .populate({
       path: 'idUser',
       select: 'name avatar'
+    }).populate({
+      path: 'replies.idUser',
+      select: 'name avatar'
     })
   const partner = await Partner.findById(idPartner)
     .select('-bank_name -bank_number -owner_lastname -owner_name')
@@ -54,11 +57,11 @@ const replyComment = async (req, res) => {
   const { content } = req.body
 
   try {
-    const comment = await Comment.findById(idComment)
-    if (!comment) {
+    const updateComment = await Comment.findById(idComment)
+    if (!updateComment) {
       return res.status(404).json({ message: 'No existe dicho comentario.' })
     }
-    const existingReply = comment.replies.find((reply) =>
+    const existingReply = updateComment.replies.find((reply) =>
       reply.idUser.equals({ idUser: user._id })
     )
     if (existingReply) {
@@ -66,9 +69,13 @@ const replyComment = async (req, res) => {
         .status(400)
         .json({ message: 'Ya has respondido a este comentario.' })
     }
-    comment.replies.push({ content, idUser: user._id })
-    await comment.save()
-    res.status(201).json(comment)
+    updateComment.replies.push({ content, idUser: user._id })
+    await updateComment.save()
+    const comment = await Comment.findById(updateComment._id).populate({
+      path: 'replies.idUser',
+      select: 'name avatar'
+    })
+    res.status(201).json({ message: 'Post respondido.', comment })
   } catch (error) {
     next(error)
   }

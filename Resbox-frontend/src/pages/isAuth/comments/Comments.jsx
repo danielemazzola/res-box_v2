@@ -8,6 +8,7 @@ import Like from '../../../components/like/Like'
 import { getDate } from '../../../helpers/date'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import useScrollToRef from '../../../hooks/useScrollToRef'
+import CardCommnet from '../../../components/card-comment/cardCommnet'
 const Comments = () => {
   const location = useLocation()
   const [idPartner, setIdPartner] = useState(
@@ -75,21 +76,12 @@ const Comments = () => {
       </div>
       <div className='comments__content-view'>
         <h2>Comentarios</h2>
-        <div className=''>
+        <div>
           {comments.length ? (
             <>
               {comments
                 ?.map((comment, index) => (
-                  <div key={index} className='show'>
-                    <p>
-                      <strong>Públicado por</strong> {comment.idUser.name}
-                    </p>
-                    <p>{comment.content}</p>
-                    <i>
-                      <strong>Fecha públicación</strong>{' '}
-                      {getDate(comment.createdAt)}
-                    </i>
-                  </div>
+                  <CardCommnet key={index} comment={comment} />
                 ))
                 .reverse()}
             </>

@@ -86,24 +86,3 @@
   flex-direction: column;
   gap: 20px;
 }
-.comments__content-view > div > div {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.comments__content-view > div > div > p{
-  text-transform: uppercase;
-  font-size: 14px;;
-}
-.comments__content-view > div > div > p > strong, .comments__content-view > div > div > i > strong {
-  background-color: black;
-  color: white;
-  padding: 0 4px;
-  border-radius: 5px;
-  font-size: 12px;
-}
-.comments__content-view > div > div > i {
-  text-align: end;
-}

@@ -13,7 +13,6 @@ const Layout = () => {
   canvas_index()
   const {
     stateLoader: { load }
-    /* isAuth */
   } = useContext(ReducersContext)
 
   const { token, getProfile } = useContext(AuthContext)
@@ -35,7 +34,6 @@ const Layout = () => {
         <ButtonTopScroll />
         <Outlet />
       </main>
-      {/* {isAuth && <Footer />} */}
       <Footer />
     </>
   )

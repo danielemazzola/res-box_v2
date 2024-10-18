@@ -28,7 +28,8 @@ export const AuthProvider = ({ children }) => {
     operation_update: 'operation/update-operation',
     new_partner: 'partner/new-partner',
     like: 'user/add-favorite',
-    get_comments: 'comment/get-comments'
+    get_comments: 'comment/get-comments',
+    reply_comment: 'comment/reply-comment'
   })
   const [stateModal, setStateModal] = useState({
     infoPartner: false,
@@ -82,7 +83,10 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('SECURE_CODE_RESBOX')
         dispatchToast({
           type: 'ADD_NOTIFICATION',
-          payload: { msg: `Hubo un problema, por favor refresque pestaña.`, error: true }
+          payload: {
+            msg: `Hubo un problema, por favor refresque pestaña.`,
+            error: true
+          }
         })
       } finally {
         setTimeout(() => {
