@@ -17,6 +17,26 @@
   border-radius: 5px;
   font-size: 12px;
 }
+.comment__content-info-user{
+  display: flex;
+  align-items: center;
+  gap:5px;
+}
+.comment__content-info-user > img {
+  width:30px;
+  height:30px;
+  border-radius: 50%;
+}
+.comment__content-msg{
+  margin: 10px 0;
+  background-color: var(--rb-bg-toast);
+  border-radius: 10px;
+}
+.comment__content-msg > p {
+  padding:20px;
+  text-align: start;
+  text-align: justify;
+}
 .comment__container-comments > i {
   text-align: end;
 }
@@ -26,66 +46,41 @@
   gap: 30px;
   transition: all 0.5s;
 }
-.comment__content {
-  margin: 0 30px;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: rgb(248, 248, 248);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
 
-.comment__container-info-user {
-  display: flex;
-  gap: 10px;
-  align-items: start;
-  flex-direction: column;
-}
-.comment__container-info-user > p {
-  background-color: black;
-  color: white;
-  padding: 0 4px;
-  border-radius: 5px;
-  font-size: 12px;
-}
-.comment__container-info-user > div > img {
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-}
-
-.comment__view-replies{
+.comment__view-replies {
   font-weight: bold;
-  text-decoration:underline;
-  cursor:pointer;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .comment__reply-post-content {
-  background-color: rgb(255, 255, 255);
+  background-color: var(--rb-bg-toast);
   padding: 10px;
   border-radius: 20px;
   display: flex;
+  flex-direction: column;
+  align-items: start;
   gap: 10px;
-  align-items: center;
-  margin:10px 0;
+  margin: 10px 0;
 }
 .comment__reply-input {
   border: none;
   width: 100%;
   padding: 10px;
+  background-color: var(--rb-bg-toast);
 }
-.comment__reply-input:focus{
+.comment__reply-input:focus {
   outline: none;
   border: none;
   box-shadow: none;
 }
 .comment__reply-btn {
-  background-color: rgb(255, 255, 255);
-  border:none;
+  background-color: var(--rb-bg-primary);
+  border: none;
   box-shadow: none;
-  color: var(--rb-text-cancel)
+  color: var(--rb-text-primary);
+  padding:5px;
 }
-.comment__reply-btn:disabled{
+.comment__reply-btn:disabled {
   cursor: no-drop;
 }

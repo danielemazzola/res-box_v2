@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }) => {
     new_partner: 'partner/new-partner',
     like: 'user/add-favorite',
     get_comments: 'comment/get-comments',
+    new_comment: 'comment/new-comment',
     reply_comment: 'comment/reply-comment'
   })
   const [stateModal, setStateModal] = useState({

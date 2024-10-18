@@ -1,0 +1,28 @@
+.comment__content {
+  margin: 0 30px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: var(--rb-bg-toast);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.comment__container-info-user {
+  display: flex;
+  gap: 10px;
+  align-items: start;
+  flex-direction: column;
+}
+.comment__container-info-user > p {
+  background-color: black;
+  color: var(--rb-bg-toast);
+  padding: 0 4px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+.comment__container-info-user > div > img {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}

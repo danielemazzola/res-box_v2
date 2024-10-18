@@ -3,6 +3,7 @@ import { AuthContext } from '../../context/auth/AuthContext'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import './CardComment.css'
 import { getDate } from '../../helpers/date'
+import CardReplies from './CardReplies'
 
 const CardComment = ({ comment }) => {
   const [reply, setReply] = useState('')
@@ -17,7 +18,7 @@ const CardComment = ({ comment }) => {
 
   const handleReply = async (comment, reply) => {
     try {
-      dispatchLoader({ type: 'SET:LOAD_TRUE' })
+      dispatchLoader({ type: 'SET_LOAD_TRUE' })
       const response = await fetch(
         `${import.meta.env.VITE_URL_API}/${API_URL.reply_comment}/${
           comment._id
@@ -32,6 +33,13 @@ const CardComment = ({ comment }) => {
         }
       )
       const data = await response.json()
+      if (response.status !== 201) {
+        dispatchToast({
+          type: 'ADD_NOTIFICATION',
+          payload: { msg: data.message, error: true }
+        })
+        return
+      }
       dispatchToast({
         type: 'ADD_NOTIFICATION',
         payload: { msg: data.message, error: false }
@@ -50,36 +58,40 @@ const CardComment = ({ comment }) => {
         payload: { msg: error.message || 'Error desconocido', error: true }
       })
     } finally {
-      dispatchLoader({ type: 'SET:LOAD_FALSE' })
+      dispatchLoader({ type: 'SET_LOAD_FALSE' })
     }
   }
-
-  console.log(comment)
 
   return (
     <div className='comment__container-comments'>
       <p>
-        <strong>Públicado por</strong> {comment.idUser.name}
+        <strong>Públicado por</strong>
       </p>
-      <p>{comment.content}</p>
+      <div className='comment__content-info-user'>
+        <img src={comment.idUser.avatar} alt={comment.idUser.name} width='30' />
+        <p>{comment.idUser.name}</p>
+      </div>
+      <div className='comment__content-msg'>
+        <p>{comment.content}</p>
+      </div>
       <i>
         <strong>Fecha públicación</strong> {getDate(comment.createdAt)}
       </i>
       <div className='comment__reply-post-content'>
-        <input
+        <textarea
           className='comment__reply-input'
           type='text'
           value={reply}
           onChange={(e) => setReply(e.target.value)}
-          placeholder='Escribe aquí...'
+          placeholder='Responder...'
+          rows='1'
         />
         <button
           disabled={reply.length > 0 ? false : true}
-          type='submit'
           className='comment__reply-btn'
           onClick={() => handleReply(comment, reply)}
         >
-          Enviar
+          Responder
         </button>
       </div>
       <div className='comment__replies'>
@@ -92,20 +104,7 @@ const CardComment = ({ comment }) => {
         {viewReplies && (
           <>
             {comment?.replies
-              ?.map((r) => (
-                <div key={r._id} className='comment__content'>
-                  <div className='comment__container-info-user'>
-                    <div>
-                      <img src={r.idUser.avatar} alt={r.idUser.name} />
-                      <i>{r.idUser.name}</i>
-                    </div>
-                    <p>{getDate(r.createdAt)}</p>
-                  </div>
-                  <div>
-                    <p>{r.content}</p>
-                  </div>
-                </div>
-              ))
+              ?.map((rep) => <CardReplies key={rep._id} reply={rep} />)
               .reverse()}
           </>
         )}

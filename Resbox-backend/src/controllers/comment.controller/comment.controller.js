@@ -9,7 +9,8 @@ const getComments = async (req, res) => {
     .populate({
       path: 'idUser',
       select: 'name avatar'
-    }).populate({
+    })
+    .populate({
       path: 'replies.idUser',
       select: 'name avatar'
     })
@@ -34,18 +35,22 @@ const newComment = async (req, res, next) => {
     if (!existPartner) {
       return res.status(409).json({ message: 'Colaborador no existe.' })
     }
-    const comment = await Comment.findOne({
+    const existComment = await Comment.findOne({
       idUser: user._id,
       idPartner
     })
-    if (comment) {
+    if (existComment) {
       return res.status(400).json({ message: 'Ya has comentado este partner.' })
     }
     const newComment = new Comment({ content, idUser: user._id, idPartner })
     await newComment.save()
+    const comment = await Comment.findById(newComment._id).populate({
+      path: 'idUser',
+      select: 'name avatar'
+    })
     return res
       .status(201)
-      .json({ message: 'Comentario creado correctamente', newComment })
+      .json({ message: 'Comentario creado correctamente', comment })
   } catch (error) {
     next(error)
   }
