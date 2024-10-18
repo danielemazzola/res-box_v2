@@ -10,17 +10,6 @@ const {
   newPasswordEmail
 } = require('./mails/send.mails')
 
-const getUsers = async (req, res) => {
-  try {
-    const users = await User.countDocuments()
-    return res
-      .status(200)
-      .json({ message: 'Todoso los usuarios resgistrados', users })
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 const newUser = async (req, res, next) => {
   const email = req.body.email.toLowerCase()
   try {
@@ -246,7 +235,6 @@ const getUserWithPopulates = async (userId) => {
 }
 
 module.exports = {
-  getUsers,
   newUser,
   authGoogle,
   login,

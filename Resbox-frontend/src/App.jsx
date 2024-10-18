@@ -70,14 +70,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route
-          path={`/comments/:partner`}
-          element={
-            <ProtectedRoute>
-              <Comments />
-            </ProtectedRoute>
-          }
-        />
+        <Route path={`/comments/:partner`} element={<Comments />} />
         <Route
           path={`/cart-items`}
           element={

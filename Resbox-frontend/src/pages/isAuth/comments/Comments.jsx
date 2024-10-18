@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../../context/auth/AuthContext'
 import './Comments.css'
 import { getComments } from '../../../reducer/comment.reducer/comment.action'
@@ -7,6 +7,7 @@ import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import useScrollToRef from '../../../hooks/useScrollToRef'
 import CardComment from '../../../components/card-comment/CardComment'
+import BtnGoBack from '../../../components/btn-go-back/BtnGoBack'
 
 const Comments = () => {
   const [newComment, setNewComment] = useState('')
@@ -16,6 +17,7 @@ const Comments = () => {
   )
   const { token, API_URL } = useContext(AuthContext)
   const {
+    stateIsAuth: { isAuth },
     dispatchToast,
     dispatchLoader,
     stateComments: { partner, comments },
@@ -111,32 +113,35 @@ const Comments = () => {
           </div>
         </div>
       </div>
-      <div>
-        <strong>
-          <p>
-            {comments.length
-              ? 'Deja tu comentario:'
-              : 'Serás el primero en dejar un comentario:'}
-          </p>
-        </strong>
-        <div className='comment__reply-post-content'>
-          <textarea
-            className='comment__reply-input'
-            type='text'
-            placeholder='¿Te ha gustado nuestro servicio?'
-            onChange={(e) => setNewComment(e.target.value)}
-            value={newComment}
-            rows='1'
-          />
-          <button
-            className='comment__reply-btn'
-            onClick={handleNewComment}
-            disabled={newComment.length > 0 ? false : true}
-          >
-            Comentar
-          </button>
+      {isAuth && (
+        <div>
+          <strong>
+            <p>
+              {comments.length
+                ? 'Deja tu comentario:'
+                : 'Serás el primero en dejar un comentario:'}
+            </p>
+          </strong>
+          <div className='comment__reply-post-content'>
+            <textarea
+              className='comment__reply-input'
+              type='text'
+              placeholder='¿Te ha gustado nuestro servicio?'
+              onChange={(e) => setNewComment(e.target.value)}
+              value={newComment}
+              rows='1'
+            />
+            <button
+              className='comment__reply-btn'
+              onClick={handleNewComment}
+              disabled={newComment.length > 0 ? false : true}
+            >
+              Comentar
+            </button>
+          </div>
         </div>
-      </div>
+      )}
+      {!isAuth && <BtnGoBack />}
       <div className='comments__content-view'>
         <h2>Comentarios</h2>
         <div>

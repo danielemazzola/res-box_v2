@@ -7,6 +7,7 @@ import restaurant from '/images/restaurante.ico'
 import './Partner.css'
 import like from '/images/like.png'
 import heart from '/images/heart.png'
+import { Link } from 'react-router-dom'
 
 // Define el ícono personalizado
 const restaurantIcon = new L.Icon({
@@ -75,6 +76,9 @@ const Partner = ({ partner, arrayFilterPartners }) => {
             <p>Tlf: {partner.phone}</p>
             <p>{partner.address}</p>
             <p>{partner.city}</p>
+            <Link to={`/comments/${partner._id}`} className='link__RRD'>¿Que dicen de nosotros?</Link>
+          </div>
+          <div>
           </div>
           <div className='container-map-view'>
             <div>

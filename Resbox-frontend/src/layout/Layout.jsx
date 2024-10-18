@@ -8,11 +8,13 @@ import { ReducersContext } from '../context/reducers/ReducersContext'
 import { canvas_index } from '../helpers/canvas'
 import Footer from '../components/footer/Footer'
 import { AuthContext } from '../context/auth/AuthContext'
+import BtnGoBack from '../components/btn-go-back/BtnGoBack'
 
 const Layout = () => {
   canvas_index()
   const {
-    stateLoader: { load }
+    stateLoader: { load },
+    stateIsAuth:{isAuth}
   } = useContext(ReducersContext)
 
   const { token, getProfile } = useContext(AuthContext)
@@ -31,6 +33,7 @@ const Layout = () => {
       </header>
       <main>
         <ToastNotification />
+        {isAuth && <BtnGoBack />}
         <ButtonTopScroll />
         <Outlet />
       </main>

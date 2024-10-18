@@ -10,6 +10,7 @@ const CardComment = ({ comment }) => {
   const { token, API_URL } = useContext(AuthContext)
   const [viewReplies, setViewReplies] = useState(false)
   const {
+    stateIsAuth: { isAuth },
     dispatchToast,
     dispatchLoader,
     dispatchComments,
@@ -65,7 +66,7 @@ const CardComment = ({ comment }) => {
   return (
     <div className='comment__container-comments'>
       <p>
-        <strong>Públicado por</strong>
+        <strong>Publicado por</strong>
       </p>
       <div className='comment__content-info-user'>
         <img src={comment.idUser.avatar} alt={comment.idUser.name} width='30' />
@@ -75,26 +76,28 @@ const CardComment = ({ comment }) => {
         <p>{comment.content}</p>
       </div>
       <i>
-        <strong>Fecha públicación</strong> {getDate(comment.createdAt)}
+        <strong>Fecha publicación</strong> {getDate(comment.createdAt)}
       </i>
-      <div className='comment__reply-post-content'>
-        <textarea
-          className='comment__reply-input'
-          type='text'
-          value={reply}
-          onChange={(e) => setReply(e.target.value)}
-          placeholder='Responder...'
-          rows='1'
-        />
-        <button
-          disabled={reply.length > 0 ? false : true}
-          className='comment__reply-btn'
-          onClick={() => handleReply(comment, reply)}
-        >
-          Responder
-        </button>
-      </div>
-      {comment.replies.length>0 && (
+      {isAuth && (
+        <div className='comment__reply-post-content'>
+          <textarea
+            className='comment__reply-input'
+            type='text'
+            value={reply}
+            onChange={(e) => setReply(e.target.value)}
+            placeholder='Responder...'
+            rows='1'
+          />
+          <button
+            disabled={reply.length > 0 ? false : true}
+            className='comment__reply-btn'
+            onClick={() => handleReply(comment, reply)}
+          >
+            Responder
+          </button>
+        </div>
+      )}
+      {comment.replies.length > 0 && (
         <div className='comment__replies'>
           <i
             className='comment__view-replies'

@@ -1,0 +1,17 @@
+.btn-go-back {
+  position: fixed;
+  bottom: 10px;
+  left: 5px;
+  padding: 5px 20px;
+  z-index: 99;
+  background-color: var(--rb-bg-tertiary);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  font-weight: bold;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+}

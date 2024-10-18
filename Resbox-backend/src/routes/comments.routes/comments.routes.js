@@ -6,7 +6,7 @@ const {
   replyComment
 } = require('../../controllers/comment.controller/comment.controller')
 
-ROUTER.get('/get-comments/:idPartner', authenticateUser, getComments)
+ROUTER.get('/get-comments/:idPartner', getComments)
 ROUTER.post('/new-comment/:idPartner', authenticateUser, newComment)
 ROUTER.post('/reply-comment/:idComment', authenticateUser, replyComment)
 

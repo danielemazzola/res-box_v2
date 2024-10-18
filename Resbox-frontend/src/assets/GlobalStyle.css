@@ -154,7 +154,11 @@ select {
   background-color: rgba(221, 221, 221, 0.281);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.534);
 }
-
+.link__RRD {
+  color: var(--rb-text-secondary);
+  font-size: var(--rb-font-size-small);
+  text-decoration: underline;
+}
 .opacity-none {
   opacity: 0;
   animation: opacityNone 0.5s ease-in;
