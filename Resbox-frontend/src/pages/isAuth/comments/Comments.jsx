@@ -1,7 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { AuthContext } from '../../../context/auth/AuthContext'
-import { getComments } from '../../../reducer/comment.reducer/comment.action'
+import {
+  getComments,
+  handleNewComment
+} from '../../../reducer/comment.reducer/comment.action'
 import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import useScrollToRef from '../../../hooks/useScrollToRef'
@@ -49,29 +52,17 @@ const Comments = () => {
     }
   }, [])
 
-  const handleNewComment = async () => {
+  const handleNewComments = async () => {
     try {
-      dispatchLoader({ type: 'SET_LOAD_TRUE' })
-      const response = await fetch(
-        `${import.meta.env.VITE_URL_API}/${API_URL.new_comment}/${partner._id}`,
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ content: newComment })
-        }
+      const { data } = await handleNewComment(
+        API_URL,
+        partner,
+        token,
+        newComment,
+        dispatchLoader,
+        dispatchToast
       )
-      const data = await response.json()
       setNewComment('')
-      if (response.status !== 201) {
-        dispatchToast({
-          type: 'ADD_NOTIFICATION',
-          payload: { msg: data.message, error: true }
-        })
-        return
-      }
       dispatchToast({
         type: 'ADD_NOTIFICATION',
         payload: { msg: data.message, error: false }
@@ -84,8 +75,7 @@ const Comments = () => {
         scrollRef(refComment)
       }, 500)
     } catch (error) {
-    } finally {
-      dispatchLoader({ type: 'SET_LOAD_FALSE' })
+      console.log(`ERROR: ${error}`)
     }
   }
 
@@ -136,7 +126,7 @@ const Comments = () => {
             />
             <button
               className='comment__reply-btn'
-              onClick={handleNewComment}
+              onClick={handleNewComments}
               disabled={newComment.length > 0 ? false : true}
             >
               Comentar

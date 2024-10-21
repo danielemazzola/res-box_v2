@@ -1,10 +1,10 @@
 import { useContext, useEffect, useRef, useState } from 'react'
+import useScrollToRef from '../../hooks/useScrollToRef'
 import { AuthContext } from '../../context/auth/AuthContext'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
-import './CardComment.css'
-import { getDate } from '../../helpers/date'
 import CardReplies from './CardReplies'
-import useScrollToRef from '../../hooks/useScrollToRef'
+import { getDate } from '../../helpers/date'
+import './CardComment.css'
 
 const CardComment = ({ comment }) => {
   const [reply, setReply] = useState('')
@@ -81,7 +81,7 @@ const CardComment = ({ comment }) => {
   }
 
   const handleGetReplies = async (idComment) => {
-    if (repliesVisible.replies.length > 1) {
+    if (repliesVisible.replies.length >= 1 && comment.replies >= 1) {
       setRepliesVisible((prev) => ({
         ...prev,
         stateView: !repliesVisible.stateView
