@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { AuthContext } from '../../../context/auth/AuthContext'
-import './Comments.css'
 import { getComments } from '../../../reducer/comment.reducer/comment.action'
 import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
 import useScrollToRef from '../../../hooks/useScrollToRef'
 import CardComment from '../../../components/card-comment/CardComment'
-import BtnGoBack from '../../../components/btn-go-back/BtnGoBack'
+import './Comments.css'
 
 const Comments = () => {
   const [newComment, setNewComment] = useState('')
@@ -141,7 +140,6 @@ const Comments = () => {
           </div>
         </div>
       )}
-      {!isAuth && <BtnGoBack />}
       <div className='comments__content-view'>
         <h2>Comentarios</h2>
         <div>
