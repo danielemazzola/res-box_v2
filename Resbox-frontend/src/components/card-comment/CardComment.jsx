@@ -1,14 +1,16 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { AuthContext } from '../../context/auth/AuthContext'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import './CardComment.css'
 import { getDate } from '../../helpers/date'
 import CardReplies from './CardReplies'
+import useScrollToRef from '../../hooks/useScrollToRef'
 
 const CardComment = ({ comment }) => {
   const [reply, setReply] = useState('')
+  const [repliesVisible, setRepliesVisible] = useState([])
+  const useScroll = useScrollToRef()
   const { token, API_URL } = useContext(AuthContext)
-  const [viewReplies, setViewReplies] = useState(false)
   const {
     stateIsAuth: { isAuth },
     dispatchToast,
@@ -16,14 +18,21 @@ const CardComment = ({ comment }) => {
     dispatchComments,
     stateComments: { comments }
   } = useContext(ReducersContext)
+  const refReply = useRef(null)
+
+  useEffect(() => {
+    if (repliesVisible.length > 0) {
+      setTimeout(() => {
+        useScroll(refReply)
+      }, 500)
+    } else return
+  }, [repliesVisible])
 
   const handleReply = async (comment, reply) => {
     try {
       dispatchLoader({ type: 'SET_LOAD_TRUE' })
       const response = await fetch(
-        `${import.meta.env.VITE_URL_API}/${API_URL.reply_comment}/${
-          comment._id
-        }`,
+        `${import.meta.env.VITE_URL_API}/${API_URL.new_reply}/${comment._id}`,
         {
           method: 'POST',
           headers: {
@@ -52,19 +61,50 @@ const CardComment = ({ comment }) => {
         type: 'SET_COMMENTS',
         payload: updatedComments
       })
+      setRepliesVisible([...repliesVisible, data.reply])
       setReply('')
     } catch (error) {
       dispatchToast({
         type: 'ADD_NOTIFICATION',
-        payload: { msg: error.message || 'Error desconocido', error: true }
+        payload: { msg: error.message, error: true }
       })
     } finally {
       dispatchLoader({ type: 'SET_LOAD_FALSE' })
     }
   }
 
+  const handleGetReplies = async (idComment) => {
+    if (repliesVisible.length > 0) {
+      setRepliesVisible([])
+      return
+    }
+    try {
+      dispatchLoader({ type: 'SET_LOAD_TRUE' })
+      const response = await fetch(
+        `${import.meta.env.VITE_URL_API}/comment/get-replies/${idComment}`
+      )
+      const data = await response.json()
+      if (response.status !== 200) {
+        dispatchToast({
+          type: 'ADD_NOTIFICATION',
+          payload: {
+            msg: data.message,
+            error: true
+          }
+        })
+        return
+      }
+      setRepliesVisible(data)
+    } catch (error) {
+    } finally {
+      setTimeout(() => {
+        dispatchLoader({ type: 'SET_LOAD_FALSE' })
+      }, 300)
+    }
+  }
+
   return (
-    <div className='comment__container-comments'>
+    <div ref={refReply} className='comment__container-comments'>
       <p>
         <strong>Publicado por</strong>
       </p>
@@ -97,21 +137,17 @@ const CardComment = ({ comment }) => {
           </button>
         </div>
       )}
-      {comment.replies.length > 0 && (
+      {comment.replies > 0 && (
         <div className='comment__replies'>
           <i
             className='comment__view-replies'
-            onClick={() => setViewReplies(!viewReplies)}
+            onClick={() => handleGetReplies(comment._id)}
           >
-            {viewReplies ? 'Cerrar' : 'Respuestas'} ({comment.replies.length})
+            Ver comentarios ({comment.replies})
           </i>
-          {viewReplies && (
-            <>
-              {comment?.replies
-                ?.map((rep) => <CardReplies key={rep._id} reply={rep} />)
-                .reverse()}
-            </>
-          )}
+          {repliesVisible
+            ?.map((reply) => <CardReplies key={reply._id} reply={reply} />)
+            .reverse()}
         </div>
       )}
     </div>

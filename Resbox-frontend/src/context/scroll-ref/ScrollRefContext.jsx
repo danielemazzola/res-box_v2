@@ -48,7 +48,7 @@ export const ScrollRefProvider = ({ children }) => {
         refNewPartner,
         sectionRefCartItems,
         refInvoidSection,
-        refInvoidPDF,
+        refInvoidPDF
       }}
     >
       {children}

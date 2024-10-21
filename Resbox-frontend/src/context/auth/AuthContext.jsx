@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     like: 'user/add-favorite',
     get_comments: 'comment/get-comments',
     new_comment: 'comment/new-comment',
-    reply_comment: 'comment/reply-comment'
+    new_reply: 'comment/new-reply'
   })
   const [stateModal, setStateModal] = useState({
     infoPartner: false,

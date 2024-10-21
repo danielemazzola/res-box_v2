@@ -3,7 +3,7 @@ import './CardReplies.css'
 
 const CardReplies = ({ reply }) => {
   return (
-    <div className='comment__content'>
+    <div className='comment__content fadeIn'>
       <div className='comment__container-info-user'>
         <div>
           <img src={reply.idUser.avatar} alt={reply.idUser.name} />

@@ -154,7 +154,7 @@ const Comments = () => {
                 .reverse()}
             </>
           ) : (
-            <p>No hay comntarios😢</p>
+            <p>Aún no hay comentarios para mostrar.</p>
           )}
         </div>
       </div>
