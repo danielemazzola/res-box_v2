@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import useScrollToRef from '../../hooks/useScrollToRef'
 import { AuthContext } from '../../context/auth/AuthContext'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
+import { handleReply } from '../../reducer/comment.reducer/comment.action'
 import CardReplies from './CardReplies'
 import { getDate } from '../../helpers/date'
 import './CardComment.css'
@@ -31,28 +32,18 @@ const CardComment = ({ comment }) => {
     } else return
   }, [repliesVisible])
 
-  const handleReply = async (comment, reply) => {
+  const handleNewReply = async (comment, reply) => {
+    const url = `${import.meta.env.VITE_URL_API}/${API_URL.new_reply}/${
+      comment._id
+    }`
     try {
-      dispatchLoader({ type: 'SET_LOAD_TRUE' })
-      const response = await fetch(
-        `${import.meta.env.VITE_URL_API}/${API_URL.new_reply}/${comment._id}`,
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ content: reply })
-        }
+      const { data } = await handleReply(
+        reply,
+        url,
+        token,
+        dispatchLoader,
+        dispatchToast
       )
-      const data = await response.json()
-      if (response.status !== 201) {
-        dispatchToast({
-          type: 'ADD_NOTIFICATION',
-          payload: { msg: data.message, error: true }
-        })
-        return
-      }
       dispatchToast({
         type: 'ADD_NOTIFICATION',
         payload: { msg: data.message, error: false }
@@ -75,13 +66,11 @@ const CardComment = ({ comment }) => {
         type: 'ADD_NOTIFICATION',
         payload: { msg: error.message, error: true }
       })
-    } finally {
-      dispatchLoader({ type: 'SET_LOAD_FALSE' })
     }
   }
 
   const handleGetReplies = async (idComment) => {
-    if (repliesVisible.replies.length >= 1 && comment.replies >= 1) {
+    if (repliesVisible.replies.length === comment.replies ) {
       setRepliesVisible((prev) => ({
         ...prev,
         stateView: !repliesVisible.stateView
@@ -145,7 +134,7 @@ const CardComment = ({ comment }) => {
           <button
             disabled={reply.length > 0 ? false : true}
             className='comment__reply-btn'
-            onClick={() => handleReply(comment, reply)}
+            onClick={() => handleNewReply(comment, reply)}
           >
             Responder
           </button>

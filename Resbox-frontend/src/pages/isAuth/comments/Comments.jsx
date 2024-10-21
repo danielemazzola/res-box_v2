@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import useScrollToRef from '../../../hooks/useScrollToRef'
 import { AuthContext } from '../../../context/auth/AuthContext'
 import {
   getComments,
@@ -7,7 +8,6 @@ import {
 } from '../../../reducer/comment.reducer/comment.action'
 import { ReducersContext } from '../../../context/reducers/ReducersContext'
 import { ScrollRefContext } from '../../../context/scroll-ref/ScrollRefContext'
-import useScrollToRef from '../../../hooks/useScrollToRef'
 import CardComment from '../../../components/card-comment/CardComment'
 import './Comments.css'
 
@@ -53,10 +53,10 @@ const Comments = () => {
   }, [])
 
   const handleNewComments = async () => {
+    const url = `${import.meta.env.VITE_URL_API}/${API_URL.new_comment}/${partner._id}`
     try {
       const { data } = await handleNewComment(
-        API_URL,
-        partner,
+        url,
         token,
         newComment,
         dispatchLoader,

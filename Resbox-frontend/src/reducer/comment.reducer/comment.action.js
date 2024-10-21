@@ -24,8 +24,7 @@ export const getComments = async (
 }
 
 export const handleNewComment = async (
-  API_URL,
-  partner,
+  url,
   token,
   newComment,
   dispatchLoader,
@@ -33,12 +32,7 @@ export const handleNewComment = async (
 ) => {
   try {
     dispatchLoader({ type: 'SET_LOAD_TRUE' })
-    const { response, data } = await fetchNewComment(
-      API_URL,
-      partner,
-      token,
-      newComment
-    )
+    const { response, data } = await fetchNewComment(url, token, newComment)
     if (response.status !== 201) {
       dispatchToast({
         type: 'ADD_NOTIFICATION',
@@ -49,6 +43,34 @@ export const handleNewComment = async (
     return { data }
   } catch (error) {
     console.log(error)
+  } finally {
+    dispatchLoader({ type: 'SET_LOAD_FALSE' })
+  }
+}
+
+export const handleReply = async (
+  reply,
+  url,
+  token,
+  dispatchLoader,
+  dispatchToast
+) => {
+  try {
+    dispatchLoader({ type: 'SET_LOAD_TRUE' })
+    const { response, data } = await fetchNewComment(url, token, reply)
+    if (response.status !== 201) {
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: { msg: data.message, error: true }
+      })
+      return
+    }
+    return { data }
+  } catch (error) {
+    dispatchToast({
+      type: 'ADD_NOTIFICATION',
+      payload: { msg: error.message, error: true }
+    })
   } finally {
     dispatchLoader({ type: 'SET_LOAD_FALSE' })
   }
