@@ -8,7 +8,10 @@ import useScrollToRef from '../../hooks/useScrollToRef'
 
 const CardComment = ({ comment }) => {
   const [reply, setReply] = useState('')
-  const [repliesVisible, setRepliesVisible] = useState([])
+  const [repliesVisible, setRepliesVisible] = useState({
+    replies: [],
+    stateView: false
+  })
   const useScroll = useScrollToRef()
   const { token, API_URL } = useContext(AuthContext)
   const {
@@ -21,7 +24,7 @@ const CardComment = ({ comment }) => {
   const refReply = useRef(null)
 
   useEffect(() => {
-    if (repliesVisible.length > 0) {
+    if (repliesVisible.replies.length > 0) {
       setTimeout(() => {
         useScroll(refReply)
       }, 500)
@@ -61,7 +64,11 @@ const CardComment = ({ comment }) => {
         type: 'SET_COMMENTS',
         payload: updatedComments
       })
-      setRepliesVisible([...repliesVisible, data.reply])
+      setRepliesVisible((prev) => ({
+        ...prev,
+        stateView: true,
+        replies: [...repliesVisible.replies, data.reply]
+      }))
       setReply('')
     } catch (error) {
       dispatchToast({
@@ -74,8 +81,11 @@ const CardComment = ({ comment }) => {
   }
 
   const handleGetReplies = async (idComment) => {
-    if (repliesVisible.length > 0) {
-      setRepliesVisible([])
+    if (repliesVisible.replies.length > 1) {
+      setRepliesVisible((prev) => ({
+        ...prev,
+        stateView: !repliesVisible.stateView
+      }))
       return
     }
     try {
@@ -94,7 +104,11 @@ const CardComment = ({ comment }) => {
         })
         return
       }
-      setRepliesVisible(data)
+      setRepliesVisible((prev) => ({
+        ...prev,
+        replies: data,
+        stateView: true
+      }))
     } catch (error) {
     } finally {
       setTimeout(() => {
@@ -145,9 +159,13 @@ const CardComment = ({ comment }) => {
           >
             Ver comentarios ({comment.replies})
           </i>
-          {repliesVisible
-            ?.map((reply) => <CardReplies key={reply._id} reply={reply} />)
-            .reverse()}
+          {repliesVisible.stateView && (
+            <>
+              {repliesVisible.replies
+                ?.map((reply) => <CardReplies key={reply._id} reply={reply} />)
+                .reverse()}
+            </>
+          )}
         </div>
       )}
     </div>

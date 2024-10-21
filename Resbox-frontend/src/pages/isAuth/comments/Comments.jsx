@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { AuthContext } from '../../../context/auth/AuthContext'
 import { getComments } from '../../../reducer/comment.reducer/comment.action'
@@ -14,6 +14,7 @@ const Comments = () => {
   const [idPartner, setIdPartner] = useState(
     location.pathname.split('/')[2] || ''
   )
+  const refComment = useRef(null)
   const { token, API_URL } = useContext(AuthContext)
   const {
     stateIsAuth: { isAuth },
@@ -79,6 +80,9 @@ const Comments = () => {
         type: 'SET_COMMENTS',
         payload: [...comments, data.comment]
       })
+      setTimeout(() => {
+        scrollRef(refComment)
+      }, 500)
     } catch (error) {
     } finally {
       dispatchLoader({ type: 'SET_LOAD_FALSE' })
@@ -140,7 +144,7 @@ const Comments = () => {
           </div>
         </div>
       )}
-      <div className='comments__content-view'>
+      <div ref={refComment} className='comments__content-view'>
         <h2>Comentarios</h2>
         <div>
           {comments.length ? (
@@ -152,7 +156,7 @@ const Comments = () => {
                 .reverse()}
             </>
           ) : (
-            <p>Aún no hay comentarios para mostrar.</p>
+            <p>Aún no hay comentarios a mostrar.</p>
           )}
         </div>
       </div>

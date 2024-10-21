@@ -18,7 +18,7 @@ const Footer = () => {
           <div>
             <h5>Colabora con Res-Box</h5>
             <p>Res-Box para Partners</p>
-            <p>Cómo funsiona</p>
+            <p>Cómo funciona</p>
           </div>
           <div>
             <h5>Enlaces de interes</h5>
@@ -38,7 +38,7 @@ const Footer = () => {
           <div className='footer__content-reserved-info'>
             <span>
               All Rights Reserved &#174;​{' '}
-              {year === 2024 ? '2024' : `2024-${year}`}
+              {year}
             </span>
             <i className='text-gray-300 font-light'>Powered by</i>
             <img alt='Logo Res-Box' src={logo} width='70' loading='lazy' />
