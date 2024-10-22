@@ -1,5 +1,5 @@
 .comment__content {
-  margin: 0 30px;
+  margin: 0 15px;
   padding: 10px;
   border-radius: 10px;
   background-color: var(--rb-bg-toast);
@@ -20,6 +20,11 @@
   padding: 0 4px;
   border-radius: 5px;
   font-size: 12px;
+}
+.comment__container-info-user > div{
+  display: flex;
+  gap:5px;
+  align-items: center;
 }
 .comment__container-info-user > div > img {
   border-radius: 50%;

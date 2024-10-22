@@ -33,7 +33,7 @@
   border-radius: 10px;
 }
 .comment__content-msg > p {
-  padding:20px;
+  padding:10px;
   text-align: start;
   text-align: justify;
 }
@@ -68,6 +68,9 @@
   width: 100%;
   padding: 10px;
   background-color: var(--rb-bg-toast);
+  resize: vertical;
+  overflow-wrap: break-word;
+
 }
 .comment__reply-input:focus {
   outline: none;
