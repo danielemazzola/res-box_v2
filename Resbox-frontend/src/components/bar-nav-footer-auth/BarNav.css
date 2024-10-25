@@ -1,0 +1,28 @@
+.bar-nav-footer__container {
+  background-color: rgba(255, 255, 255, 0.349);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 15px 10px;
+  z-index: 70;
+  align-items: center;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.bar-nav-footer__container > link {
+  border: none;
+  box-shadow: none;
+}
+.bar-nav-footer__container > a > img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+@media (max-width: 600px) {
+  .bar-nav-footer__container {
+    justify-content: space-between;
+  }
+}

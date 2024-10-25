@@ -8,12 +8,13 @@ import { ReducersContext } from '../context/reducers/ReducersContext'
 import { canvas_index } from '../helpers/canvas'
 import Footer from '../components/footer/Footer'
 import { AuthContext } from '../context/auth/AuthContext'
+import BarNav from '../components/bar-nav-footer-auth/BarNav'
 
 const Layout = () => {
   canvas_index()
   const {
     stateLoader: { load },
-    stateIsAuth:{isAuth}
+    stateIsAuth: { isAuth }
   } = useContext(ReducersContext)
 
   const { token, getProfile } = useContext(AuthContext)
@@ -34,6 +35,7 @@ const Layout = () => {
         <ToastNotification />
         <ButtonTopScroll />
         <Outlet />
+        {isAuth && <BarNav />}
       </main>
       <Footer />
     </>

@@ -10,6 +10,7 @@ import useScrollToRef from '../../../hooks/useScrollToRef'
 import { formatCash } from '../operations/herlpers'
 import { AuthContext } from '../../../context/auth/AuthContext'
 import { buyBox } from '../../../reducer/invoice-reducer/invoice.action'
+import PromoBox from '../promo-box/PromoBox'
 
 const CartItems = () => {
   const [amount, setAmount] = useState(0)
@@ -71,13 +72,13 @@ const CartItems = () => {
 
   return (
     <div ref={sectionRefCartItems} className='cart-items__container'>
-      <div>
+      <div className='fadeIn'>
         <h3>Mi 🛒 de compras</h3>
         {cart.length <= 0 ? (
           <>
-            <p>
-              Actualmente no hay productos en tu cesta, pero te dejaremos un
-              enlace rapido para veas los BOX más comprados.
+            <p className='fadeIn'>
+              Actualmente no hay productos en tu cesta, pero dale un vistazo a
+              nuestras promociones:
             </p>
           </>
         ) : (
@@ -94,16 +95,19 @@ const CartItems = () => {
             <p>¿Quieres añadir MÁS articulos?</p>
           </>
         )}
-        <div className='cartitems__contentbtn-actions'>
-          <Link to='../promo-box'>
-            <button
-              className='button'
-              style={{ backgroundColor: 'var(--rb-bg-options) !important' }}
-            >
-              PROMOCIONES DESTACADAS
-            </button>
-          </Link>
-        </div>
+        {amount !== 0 && (
+          <div className='cartitems__contentbtn-actions fadeIn'>
+            <Link to='../promo-box'>
+              <button
+                className='button'
+                style={{ backgroundColor: 'var(--rb-bg-options) !important' }}
+              >
+                PROMOCIONES DESTACADAS
+              </button>
+            </Link>
+          </div>
+        )}
+        {amount === 0 && <div className='fadeIn' onClick={() => scrollToRef(sectionRefCartItems)}><PromoBox /></div>}
       </div>
       <div>
         {cart.map((item, index) => (
@@ -114,7 +118,10 @@ const CartItems = () => {
         <button
           className='more-info'
           style={{ backgroundColor: 'white', padding: '3px' }}
-          onClick={() => dispatchPromoBoxes({ type: 'SET_DELETE_CART' })}
+          onClick={() => {
+            dispatchPromoBoxes({ type: 'SET_DELETE_CART' })
+            scrollToRef(sectionRefCartItems)
+          }}
         >
           Vaciar mi cesta
         </button>

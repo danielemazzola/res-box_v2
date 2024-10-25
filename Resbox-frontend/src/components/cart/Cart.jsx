@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState } from 'react'
-import './Cart.css'
-import { ReducersContext } from '../../context/reducers/ReducersContext'
 import { Link } from 'react-router-dom'
+import { ReducersContext } from '../../context/reducers/ReducersContext'
+import { cartQuantity } from './helper'
+import carrito from '/images/carrito.png'
+import './Cart.css'
 
 const Cart = () => {
   const [itemsQuantity, setItemsQuantity] = useState(0)
@@ -10,18 +12,14 @@ const Cart = () => {
   } = useContext(ReducersContext)
 
   useEffect(() => {
-    setItemsQuantity(() => cart.reduce((acc, item) => acc + item.quantity, 0))
+    setItemsQuantity(() => cartQuantity(cart))
   }, [cart])
 
   return (
-    <div className='cart__container fadeIn'>
-      <button>
-        <Link to='../cart-items'>
-          🛒
-          <p className='cart__quantity-number'>{itemsQuantity}</p>
-        </Link>
-      </button>
-    </div>
+    <Link to='../cart-items' className='content_cart__quantity-number'>
+      <img src={carrito} alt='Carrito de compras' />
+      {itemsQuantity > 0 && <p className='fadeIn'>{itemsQuantity}</p>}
+    </Link>
   )
 }
 

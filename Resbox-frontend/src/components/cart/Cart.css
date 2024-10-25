@@ -1,25 +1,17 @@
-.cart__container{
-  margin-right:80px;
-  position: fixed;
-  top:50px;
-  right:0;
-  z-index:5;
-}
-.cart__container > button {
+.content_cart__quantity-number{
   position: relative;
-  width:38px;
-  height:38px;
-  background-color: rgba(255, 255, 255, 0.897);
 }
-.cart__quantity-number{
+.content_cart__quantity-number > p {
   position: absolute;
-  background-color: var(--rb-bg-options);
-  left:-10px;
-  width:25px;
-  height:25px;
-  border-radius: 50%;;
-  color:var(--rb-text-primary);
+  background-color: rgb(93, 218, 68);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  color: var(--rb-text-primary);
   display: flex;
   justify-content: center;
   align-items: center;
+  bottom: -5px;
+  right: 10px;
+
 }

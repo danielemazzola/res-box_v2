@@ -101,7 +101,6 @@ const Header = () => {
           </div>
         ) : (
           <>
-            {cart.length > 0 && <Cart />}
             <Nav />
           </>
         )}
