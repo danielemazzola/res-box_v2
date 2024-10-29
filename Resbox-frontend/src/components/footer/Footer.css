@@ -46,11 +46,12 @@ footer {
   text-align: center;
   color: var(--rb-text-primary);
   transition: all 0.3s;
+  gap:10px;
 }
 .coffee-drop {
   position: relative;
-  width: 230px;
-  height: 230px;
+  width: 280px;
+  height: 330px;
   background-color: var(--rb-bg-primary-transparent); /* Color de café */
   border-radius: 30% 70% 40% 60%; /* Deformación inicial */
   position: relative;

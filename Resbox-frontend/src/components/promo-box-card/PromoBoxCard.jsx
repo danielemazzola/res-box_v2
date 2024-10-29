@@ -86,7 +86,7 @@ const PromoBoxCard = ({ box }) => {
   return (
     <div className='promobox__contain-card-box fadeIn'>
       <img
-        src={`/images/coffe/${image}.webp`}
+        src={`/images/coffe/slide1.jpg`}
         className='promobox__images-banner'
         alt='banner'
         loading='lazy'
@@ -104,19 +104,19 @@ const PromoBoxCard = ({ box }) => {
             <strong>Extra:</strong> {box.bonus_items}
           </p>
           <p>
-            <strong>Precio:</strong> {box.price}€
+            <strong>Precio:</strong> {box.price.toFixed(2)}€
           </p>
           <p>
             <strong>P/U:</strong>{' '}
-            {box.price / (box.items_included + box.bonus_items)}€
+            {(box.price / (box.items_included + box.bonus_items)).toFixed(2)}€
           </p>
           <p>
             <strong>Vendidos:</strong> {box.purchase_count}
           </p>
-          <p>
+          {/* <p>
             <strong>Estado:</strong>{' '}
             {box.status.includes('active') ? 'Activo' : 'Inactivo'}
-          </p>
+          </p> */}
         </div>
         {Object.keys(user).length > 0 && (
           <div className='promobox__container-btn'>
