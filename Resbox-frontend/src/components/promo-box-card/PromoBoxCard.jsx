@@ -1,11 +1,11 @@
 import { useContext, useEffect, useMemo, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import confetti from 'canvas-confetti'
 import { ReducersContext } from '../../context/reducers/ReducersContext'
 import { AuthContext } from '../../context/auth/AuthContext'
 import { handleBuyBox } from '../../reducer/promo-box/promobox.action'
 import { randomImage } from './helpers'
 import './PromoBoxCard.css'
-import { useLocation, useNavigate } from 'react-router-dom'
 
 const PromoBoxCard = ({ box }) => {
   const navigate = useNavigate()

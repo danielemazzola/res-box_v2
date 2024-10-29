@@ -1,5 +1,5 @@
 .bar-nav-footer__container {
-  background-color: rgba(255, 255, 255, 0.349);
+  background-color: rgb(255, 255, 255);
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -16,8 +16,8 @@
   box-shadow: none;
 }
 .bar-nav-footer__container > a > img {
-  width: 35px;
-  height: 35px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   overflow: hidden;
   object-fit: contain;
