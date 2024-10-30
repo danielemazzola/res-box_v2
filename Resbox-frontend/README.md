@@ -92,23 +92,45 @@ preview: Starts a local server to preview the production build.
 npm run preview
 ```
 
-Use this script to view the final production build locally, which is especially helpful for testing before deploying.
+### ESLint Configuration
 
-ESLint Configuration
-The ESLint configuration, located in eslint.config.js, includes the following key settings and rules:
+The ESLint configuration, located in `eslint.config.js`, defines essential settings and rules for maintaining code quality in the Resbox project. Below is a detailed overview of its components:
 
-Plugins:
+#### Plugins
+The following plugins are included to enhance linting capabilities:
 
-react: Provides linting rules specific to React best practices.
-react-hooks: Ensures correct usage of React hooks.
-react-refresh: Helps manage component refresh behavior, useful for maintaining consistent hot-reloading during development.
-Rules:
+- **react**: 
+  - Provides linting rules specific to React best practices.
+  
+- **react-hooks**: 
+  - Ensures correct usage of React hooks to avoid common pitfalls.
+  
+- **react-refresh**: 
+  - Manages component refresh behavior, which is crucial for consistent hot-reloading during development.
 
-'react/jsx-no-target-blank': 'off': Disables warnings for links opening in new tabs without rel="noopener noreferrer".
-'react-refresh/only-export-components': ['warn', { allowConstantExport: false }]: Warns if non-components are exported when using React Fast Refresh.
-'react/prop-types': 'off': Disables the rule requiring prop-types for component props.
-'react/jsx-one-expression-per-line': 'off': Disables enforcing one JSX expression per line.
-'max-len': ['off']: Disables the max line length rule for flexibility.
-The configuration file also sets up environment settings, such as ECMAScript version 2020 and jsx support, ensuring compatibility with React 18 and modern JavaScript features.
+#### Rules
+Several custom rules have been defined to tailor ESLint to the project's needs:
 
-This section should help clarify each script’s purpose and the ESLint setup for maintaining code quality. Let me know if you’re ready for the next part!
+- **`'react/jsx-no-target-blank': 'off'`**: 
+  - Disables warnings for links opening in new tabs without `rel="noopener noreferrer"`.
+  
+- **`'react-refresh/only-export-components': ['warn', { allowConstantExport: false }]`**: 
+  - Issues a warning if non-components are exported while using React Fast Refresh.
+  
+- **`'react/prop-types': 'off'`**: 
+  - Disables the requirement for `prop-types` in component props.
+  
+- **`'react/jsx-one-expression-per-line': 'off'`**: 
+  - Allows multiple expressions per line in JSX for improved flexibility.
+  
+- **`'max-len': ['off']`**: 
+  - Disables the maximum line length rule, providing more freedom in code formatting.
+
+#### Environment Settings
+The ESLint configuration also specifies the environment settings:
+
+- **ECMAScript Version**: Set to **2020** for compatibility with modern JavaScript features.
+- **JSX Support**: Enabled to accommodate React's JSX syntax, ensuring smooth integration with React 18.
+
+This structured approach to ESLint ensures that the project adheres to best practices while allowing flexibility where necessary.
+
