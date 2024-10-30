@@ -8,21 +8,36 @@
 
 ### Objective
 
-**Resbox** is a web application created as the final project for the Rock The Code bootcamp. This application aims to address a specific need within the restaurant industry, providing useful tools for both restaurants and their consumer clients. The idea for Resbox stems from a passion for the restaurant sector, where this solution can help streamline processes and improve customer engagement.
+## About Resbox
 
-### Main Technologies
+**Resbox** is an innovative web application developed as the final project for the Rock The Code bootcamp. 🎓 This application is designed to fulfill a specific need in the restaurant industry, providing valuable tools for both restaurant owners and their consumer clients. 
 
-The frontend of Resbox is built with the following core technologies:
+### Why Resbox?
 
-- **React**: Library for building the user interface.
-- **Vite**: Module bundler and development server for fast builds.
-- **ESLint**: Linting tool to maintain code quality.
-- **Chart.js & react-chartjs-2**: For creating interactive charts and data visualizations.
-- **Leaflet & react-leaflet**: For integrating maps and geolocation.
-- **date-fns**: Library for handling dates and times.
-- **jsPDF & jsPDF-autotable**: For generating downloadable PDF reports.
-- **react-hook-form**: For managing forms and validation.
-- **@react-oauth/google**: OAuth integration with Google for secure user authentication.
+With a deep passion for the restaurant sector, Resbox aims to streamline operations and enhance customer engagement through user-friendly features. Whether it’s managing reservations, analyzing customer data, or improving communication, Resbox is here to transform the dining experience for all stakeholders involved.
+
+### Key Features
+
+- **Streamlined Processes**: Simplifies restaurant management tasks.
+- **Enhanced Customer Engagement**: Facilitates better interaction between restaurants and consumers.
+- **Data-Driven Insights**: Empowers restaurants with analytics to improve service and satisfaction.
+
+Join us in revolutionizing the restaurant experience with **Resbox**! 🌍
+
+## Main Technologies
+
+| Technology                     | Description                                                             |
+| ------------------------------ | ----------------------------------------------------------------------- |
+| **React**                      | Library for building the user interface.                               |
+| **Vite**                       | Module bundler and development server for fast builds.                 |
+| **ESLint**                     | Linting tool to maintain code quality.                                 |
+| **Chart.js & react-chartjs-2**| For creating interactive charts and data visualizations.               |
+| **Leaflet & react-leaflet**   | For integrating maps and geolocation.                                  |
+| **date-fns**                  | Library for handling dates and times.                                  |
+| **jsPDF & jsPDF-autotable**   | For generating downloadable PDF reports.                               |
+| **react-hook-form**           | For managing forms and validation.                                     |
+| **@react-oauth/google**       | OAuth integration with Google for secure user authentication.          |
+
 
 ## Installation and Setup
 
@@ -30,8 +45,11 @@ The frontend of Resbox is built with the following core technologies:
 
 Before setting up the project, make sure you have the following software installed:
 
-- **Node.js** (Recommended version: 20.x or higher)
-- **npm** (comes with Node.js) or **yarn** as the package manager
+| Software       | Description                                         |
+| -------------- | --------------------------------------------------- |
+| **Node.js**    | Recommended version: 20.x or higher.               |
+| **npm**        | Comes with Node.js, used for managing packages.    |
+
 
 ### Cloning the Repository
 
