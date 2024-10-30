@@ -3,8 +3,8 @@
 ## Introduction
 
 ### Project Name
-
 **Resbox**
+![Home Page](public/images/img-readme/homePage.png)
 
 ### Objective
 
@@ -404,12 +404,15 @@ export default AuthGoogle;
 ```
 - **This implementation includes handling the login process and managing user authentication states. The useGoogleLogin hook is used to initiate the login process, and the successful login is processed in the handleLoginSuccess function, where user information is stored, and a notification is dispatched.**
 
+
 ## Environment Variables
 
 | Variable          | Description                                                |
 | ------------------| ---------------------------------------------------------- |
 | **VITE_URL_API**  | The API endpoint for secure access to backend services.    |
 | **VITE_URL_PUBLIC**| The public URL for accessing the Resbox frontend application.|
+
+
 
 ## THINGS TO DO 
 
@@ -420,3 +423,23 @@ export default AuthGoogle;
 | **Document and Chart Generation** | Explanation of `chart.js`, `react-chartjs-2`, `jspdf`, and `jspdf-autotable` for creating charts and PDF documents. |
 | **Date Handling**            | Description of `date-fns` for manipulating dates and times in the project.                         |
 | **Maintenance and Best Practices** | Tips for code maintenance, using `ESLint`, and best practices for consistent code quality.   |
+
+## IMAGES
+
+![Chart Info Pay](public/images/img-readme/chartInfoPay.png)
+![Comments](public/images/img-readme/comments.png)
+![Comments Section](public/images/img-readme/commentsSection.png)
+![Dashboard](public/images/img-readme/dashboard.png)
+![Dashboard Partner](public/images/img-readme/dashboardPartner.png)
+![Forgot Form](public/images/img-readme/forgotForm.png)
+![Home Page](public/images/img-readme/homePage.png)
+![Info Partner - My Boxes](public/images/img-readme/infoPartner-myBoxes.png)
+![Info Restaurant](public/images/img-readme/infoRestaurant.png)
+![Login Form](public/images/img-readme/loginForm.png)
+![Menu](public/images/img-readme/menu.png)
+![My Boxes](public/images/img-readme/myBoxes.png)
+![New Partner](public/images/img-readme/newPartner.png)
+![Operations Dashboard](public/images/img-readme/operationsDashboard.png)
+![Promo Boxes](public/images/img-readme/promoBoxes.png)
+![Register Form](public/images/img-readme/registerForm.png)
+![Where Partners](public/images/img-readme/wherePartners.png)
