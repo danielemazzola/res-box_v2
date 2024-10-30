@@ -22,7 +22,7 @@ With a deep passion for the restaurant sector, Resbox aims to streamline operati
 - **Enhanced Customer Engagement**: Facilitates better interaction between restaurants and consumers.
 - **Data-Driven Insights**: Empowers restaurants with analytics to improve service and satisfaction.
 
-Join us in revolutionizing the restaurant experience with **Resbox**! 🌍
+Join us in revolutionizing the restaurant experience with **Resbox**!
 
 ## Main Technologies
 
@@ -94,23 +94,6 @@ git clone https://github.com/danielemazzola/res-box_v2.git
 ## Repository Overview
 
 This repository contains both the backend and frontend code for **Resbox**. Each environment has its own documentation within the respective folders. For the frontend documentation, refer to the `Resbox-frontend` folder, which includes all files and instructions specific to the frontend setup.
-
-### Main Technologies
-
-The Resbox frontend is built with the following key technologies, as specified in `package.json`:
-
-| Technology                     | Version   | Description                                                             |
-| ------------------------------ | --------- | ----------------------------------------------------------------------- |
-| **React**                      | 18.3.1   | Framework for building the user interface.                             |
-| **Vite**                       | 5.4.1    | Development server and module bundler for fast builds.                 |
-| **ESLint**                     | 9.9.0    | Linting tool to enforce code quality and standards.                    |
-| **Chart.js & react-chartjs-2**| N/A       | Libraries for data visualization through charts.                       |
-| **Leaflet & react-leaflet**   | N/A       | Tools for implementing interactive maps and geolocation.               |
-| **date-fns**                  | 4.1.0    | Utility library for managing dates and times.                          |
-| **jsPDF & jsPDF-autotable**   | N/A       | Libraries for creating PDF documents and reports.                     |
-| **react-hook-form**           | 7.53.0   | Library for form management and validation.                            |
-| **@react-oauth/google**       | 0.12.1   | Library for implementing Google OAuth for secure user authentication. |
-
 
 ## Execution and Scripts
 
@@ -335,3 +318,105 @@ The Resbox frontend project is organized into a structured directory layout, whi
     ├───fetch-operation
     └───fetch-partner
 ```
+## Using External APIs and Libraries
+
+### Google OAuth Integration
+
+- **To integrate Google OAuth, start by installing the necessary library. Wrap your application in the `GoogleOAuthProvider` component. In this project, the setup is done in the `main.js` file as follows:**
+
+```javascript
+import { createRoot } from 'react-dom/client';
+import { StrictMode } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { ReducersProvider, ScrollRefProvider, AuthProvider } from './context';
+import App from './App';
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <BrowserRouter>
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_ID_CLIENT_GOOGLE}>
+        <ReducersProvider>
+          <ScrollRefProvider>
+            <AuthProvider>
+              <App />
+            </AuthProvider>
+          </ScrollRefProvider>
+        </ReducersProvider>
+      </GoogleOAuthProvider>
+    </BrowserRouter>
+  </StrictMode>
+);
+
+```
+
+### Authentication Logic
+All the logic for handling Google authentication is managed in the AuthGoogle.jsx component. Below are the most relevant parts of the implementation:
+```javascript
+const AuthGoogle = ({ handleCloseModal }) => {
+
+  const handleLoginSuccess = async (credentialResponse) => {
+    try {
+      dispatchLoader({ type: 'SET_LOAD_TRUE' });
+      const response = await fetch(`${import.meta.env.VITE_URL_API}/${API_URL.login_google}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id_token: credentialResponse }),
+      });
+      const data = await response.json();
+      if (response.status !== 200) {
+        dispatchToast({
+          type: 'ADD_NOTIFICATION',
+          payload: { msg: `Error: ${data.message}`, error: true },
+        });
+      } else {
+        dispatchToast({
+          type: 'ADD_NOTIFICATION',
+          payload: { msg: `Welcome ${data.user.name}`, error: false },
+        });
+        dispatchAuth({ type: 'SET_USER', payload: data.user });
+        dispatchAuth({ type: 'SET_AUTH_TRUE' });
+        localStorage.setItem('SECURE_CODE_RESBOX', data.token);
+        setToken(localStorage.getItem('SECURE_CODE_RESBOX'));
+        setTimeout(() => {
+          navigate('./dashboard');
+        }, 500);
+      }
+      setTimeout(() => {
+        handleCloseModal();
+      }, 500);
+    } catch (error) {
+      dispatchToast({
+        type: 'ADD_NOTIFICATION',
+        payload: { msg: error.message, error: true },
+      });
+    } finally {
+      setTimeout(() => {
+        dispatchLoader({ type: 'SET_LOAD_FALSE' });
+      }, 1500);
+    }
+  };
+};
+
+export default AuthGoogle;
+```
+- **This implementation includes handling the login process and managing user authentication states. The useGoogleLogin hook is used to initiate the login process, and the successful login is processed in the handleLoginSuccess function, where user information is stored, and a notification is dispatched.**
+
+## Environment Variables
+
+| Variable          | Description                                                |
+| ------------------| ---------------------------------------------------------- |
+| **VITE_URL_API**  | The API endpoint for secure access to backend services.    |
+| **VITE_URL_PUBLIC**| The public URL for accessing the Resbox frontend application.|
+
+## THINGS TO DO 
+
+| Feature                      | Description                                                                                          |
+|------------------------------|------------------------------------------------------------------------------------------------------|
+| **Form Handling**            | Brief description of how `react-hook-form` is integrated to manage forms and validations.           |
+| **Maps and Geolocation**     | Explanation of how `leaflet` and `react-leaflet` are integrated for map functionality.             |
+| **Document and Chart Generation** | Explanation of `chart.js`, `react-chartjs-2`, `jspdf`, and `jspdf-autotable` for creating charts and PDF documents. |
+| **Date Handling**            | Description of `date-fns` for manipulating dates and times in the project.                         |
+| **Maintenance and Best Practices** | Tips for code maintenance, using `ESLint`, and best practices for consistent code quality.   |
