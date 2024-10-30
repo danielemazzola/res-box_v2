@@ -142,6 +142,7 @@ The Resbox frontend project is organized into a structured directory layout, whi
 **Resbox-frontend**
 
 ### Directories
+```
 ├───assets
 ├───components
 │   ├───alert
@@ -277,3 +278,4 @@ The Resbox frontend project is organized into a structured directory layout, whi
     ├───fetch-like
     ├───fetch-operation
     └───fetch-partner
+```
