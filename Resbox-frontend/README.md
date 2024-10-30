@@ -38,6 +38,38 @@ Join us in revolutionizing the restaurant experience with **Resbox**! 🌍
 | **react-hook-form**           | For managing forms and validation.                                     |
 | **@react-oauth/google**       | OAuth integration with Google for secure user authentication.          |
 
+### Dependencies
+
+| Dependency                    | Version       | Description                                        |
+| ------------------------------ | ------------- | -------------------------------------------------- |
+| **@react-oauth/google**       | ^0.12.1      | OAuth integration with Google.                     |
+| **canvas-confetti**           | ^1.9.3       | Library for adding confetti animations.            |
+| **chart.js**                  | ^4.4.4       | Library for creating interactive charts.           |
+| **date-fns**                  | ^4.1.0       | Utility library for managing dates and times.     |
+| **jspdf**                     | ^2.5.2       | Library for generating PDF documents.              |
+| **jspdf-autotable**           | ^3.8.3       | Plugin for jsPDF to create tables in PDFs.        |
+| **leaflet**                   | ^1.9.4       | Library for interactive maps.                       |
+| **react**                     | ^18.3.1      | Library for building the user interface.          |
+| **react-chartjs-2**          | ^5.2.0       | Wrapper for Chart.js in React applications.        |
+| **react-dom**                 | ^18.3.1      | Entry point for React DOM rendering.               |
+| **react-hook-form**           | ^7.53.0      | Library for form management and validation.        |
+| **react-leaflet**             | ^4.2.1       | React wrapper for Leaflet.                          |
+| **react-router-dom**          | ^6.26.2      | Declarative routing for React applications.        |
+
+### DevDependencies
+
+| DevDependency                 | Version       | Description                                        |
+| ------------------------------ | ------------- | -------------------------------------------------- |
+| **@eslint/js**                | ^9.9.0       | ESLint core library for JavaScript linting.       |
+| **@types/react**              | ^18.3.3      | TypeScript definitions for React.                 |
+| **@types/react-dom**          | ^18.3.0      | TypeScript definitions for React DOM.             |
+| **@vitejs/plugin-react**      | ^4.3.1       | Vite plugin for React integration.                 |
+| **eslint**                    | ^9.9.0       | Linting utility for JavaScript and JSX.           |
+| **eslint-plugin-react**       | ^7.35.0      | ESLint rules for React applications.               |
+| **eslint-plugin-react-hooks** | ^5.1.0-rc.0  | ESLint rules for React hooks.                      |
+| **eslint-plugin-react-refresh**| ^0.4.9      | ESLint plugin for React Fast Refresh.              |
+| **globals**                   | ^15.9.0      | Provides global variables for linting.             |
+| **vite**                      | ^5.4.1       | Next Generation Frontend Tooling.                  |
 
 ## Installation and Setup
 
@@ -59,20 +91,26 @@ To get started, clone the project repository from GitHub:
 git clone https://github.com/danielemazzola/res-box_v2.git
 ```
 
-This repository contains both the backend and frontend code. Each environment has its own documentation within the respective folders. For the frontend documentation, refer to the Resbox-frontend folder, which includes all files and instructions specific to the frontend setup.
+## Repository Overview
 
-Main Technologies
-The Resbox frontend is built with the following key technologies, as specified in package.json:
+This repository contains both the backend and frontend code for **Resbox**. Each environment has its own documentation within the respective folders. For the frontend documentation, refer to the `Resbox-frontend` folder, which includes all files and instructions specific to the frontend setup.
 
-React (18.3.1): Framework for building the user interface.
-Vite (5.4.1): Development server and module bundler for fast builds.
-ESLint (9.9.0): Linting tool to enforce code quality and standards.
-Chart.js and react-chartjs-2: Libraries for data visualization through charts.
-Leaflet and react-leaflet: Tools for implementing interactive maps and geolocation.
-date-fns (4.1.0): Utility library for managing dates and times.
-jsPDF and jsPDF-autotable: Libraries for creating PDF documents and reports.
-react-hook-form (7.53.0): Library for form management and validation.
-@react-oauth/google (0.12.1): Library for implementing Google OAuth for secure user authentication.
+### Main Technologies
+
+The Resbox frontend is built with the following key technologies, as specified in `package.json`:
+
+| Technology                     | Version   | Description                                                             |
+| ------------------------------ | --------- | ----------------------------------------------------------------------- |
+| **React**                      | 18.3.1   | Framework for building the user interface.                             |
+| **Vite**                       | 5.4.1    | Development server and module bundler for fast builds.                 |
+| **ESLint**                     | 9.9.0    | Linting tool to enforce code quality and standards.                    |
+| **Chart.js & react-chartjs-2**| N/A       | Libraries for data visualization through charts.                       |
+| **Leaflet & react-leaflet**   | N/A       | Tools for implementing interactive maps and geolocation.               |
+| **date-fns**                  | 4.1.0    | Utility library for managing dates and times.                          |
+| **jsPDF & jsPDF-autotable**   | N/A       | Libraries for creating PDF documents and reports.                     |
+| **react-hook-form**           | 7.53.0   | Library for form management and validation.                            |
+| **@react-oauth/google**       | 0.12.1   | Library for implementing Google OAuth for secure user authentication. |
+
 
 ## Execution and Scripts
 
