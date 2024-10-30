@@ -134,3 +134,146 @@ The ESLint configuration also specifies the environment settings:
 
 This structured approach to ESLint ensures that the project adheres to best practices while allowing flexibility where necessary.
 
+## Project Structure
+
+The Resbox frontend project is organized into a structured directory layout, which helps in maintaining and navigating the codebase efficiently. Below is an overview of the main directories and their purpose:
+
+### Root Directory
+**Resbox-frontend**
+
+### Directories
+├───assets
+├───components
+│   ├───alert
+│   ├───auth-google
+│   ├───bar-nav-footer-auth
+│   ├───box-card
+│   ├───button-top-scroll
+│   ├───card-comment
+│   ├───cart
+│   ├───footer
+│   ├───form-group
+│   ├───header
+│   ├───home
+│   │   ├───how-it-works
+│   │   └───information-app
+│   ├───install-app
+│   ├───like
+│   ├───loader
+│   ├───modal
+│   ├───modal-user-partner
+│   ├───nav-bar
+│   ├───operation-card
+│   ├───partner
+│   ├───partner-card
+│   ├───profile-card
+│   ├───promo-box-card
+│   ├───protected-route
+│   └───toast-notification
+├───context
+│   ├───auth
+│   ├───reducers
+│   └───scroll-ref
+├───helpers
+├───hooks
+├───layout
+├───pages
+│   ├───404
+│   ├───Home
+│   ├───isAuth
+│   │   ├───cart-items
+│   │   ├───comments
+│   │   ├───dashboard
+│   │   ├───invoice
+│   │   ├───my-box
+│   │   ├───operations
+│   │   ├───partner
+│   ├───auth
+│   ├───reducers
+│   └───scroll-ref
+├───helpers
+├───hooks
+├───layout
+├───pages
+│   ├───404
+│   ├───Home
+│   ├───isAuth
+│   │   ├───cart-items
+│   │   ├───comments
+│   │   ├───dashboard
+│   │   ├───invoice
+│   │   ├───my-box
+│   │   ├───operations
+│   │   ├───partner
+├───hooks
+├───layout
+├───pages
+│   ├───404
+│   ├───Home
+│   ├───isAuth
+│   │   ├───cart-items
+│   │   ├───comments
+│   │   ├───dashboard
+│   │   ├───invoice
+│   │   ├───my-box
+│   │   ├───operations
+│   │   ├───partner
+│   ├───404
+│   ├───Home
+│   ├───isAuth
+│   │   ├───cart-items
+│   │   ├───comments
+│   │   ├───dashboard
+│   │   ├───invoice
+│   │   ├───my-box
+│   │   ├───operations
+│   │   ├───partner
+│   │   ├───comments
+│   │   ├───dashboard
+│   │   ├───invoice
+│   │   ├───my-box
+│   │   ├───operations
+│   │   ├───partner
+│   │   └───promo-box
+│   │   ├───invoice
+│   │   ├───my-box
+│   │   ├───operations
+│   │   ├───partner
+│   │   └───promo-box
+│   └───Recovery-password
+├───reducer
+│   │   ├───operations
+│   │   ├───partner
+│   │   └───promo-box
+│   └───Recovery-password
+├───reducer
+│   ├───auth-reducer
+│   │   └───promo-box
+│   └───Recovery-password
+├───reducer
+│   ├───auth-reducer
+│   └───Recovery-password
+├───reducer
+│   ├───auth-reducer
+│   ├───comment.reducer
+│   ├───invoice-reducer
+│   ├───loader-reducer
+│   ├───auth-reducer
+│   ├───comment.reducer
+│   ├───invoice-reducer
+│   ├───loader-reducer
+│   ├───comment.reducer
+│   ├───invoice-reducer
+│   ├───loader-reducer
+│   ├───partner-reducer
+│   ├───partner-reducer
+│   ├───promo-box
+│   ├───promo-box
+│   └───toast-notification-reducer
+│   └───toast-notification-reducer
+└───services
+    ├───fetch-auth
+    ├───fetch-comment
+    ├───fetch-like
+    ├───fetch-operation
+    └───fetch-partner
