@@ -12,12 +12,12 @@
   gap: 30px;
   width: 100%;
   transition: all 0.3s;
-  background-image: url('/images/taza-cafe.webp');
+  /* background-image: url('/images/taza-cafe.webp');
   background-color: rgb(209, 209, 209);
   background-position: 120% 90%;
   background-repeat: no-repeat;
   background-size: 350px;
-  border-radius: 10px;
+  border-radius: 10px; */
   padding: 10px;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .promobox__card > div > h3 {
-  color: var(--rb-text-secondary);
+  color: var(--rb-text-primary);
   font-weight: 600;
   font-size: calc(5vw + 5vh);
   padding: 5px 8px;

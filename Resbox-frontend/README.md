@@ -324,6 +324,8 @@ The Resbox frontend project is organized into a structured directory layout, whi
 
 - **To integrate Google OAuth, start by installing the necessary library. Wrap your application in the `GoogleOAuthProvider` component. In this project, the setup is done in the `main.js` file as follows:**
 
+![Login Form](public/images/img-readme/loginForm.png)
+
 ```javascript
 import { createRoot } from 'react-dom/client';
 import { StrictMode } from 'react';
@@ -435,7 +437,6 @@ export default AuthGoogle;
 ![Home Page](public/images/img-readme/homePage.png)
 ![Info Partner - My Boxes](public/images/img-readme/infoPartner-myBoxes.png)
 ![Info Restaurant](public/images/img-readme/infoRestaurant.png)
-![Login Form](public/images/img-readme/loginForm.png)
 ![Menu](public/images/img-readme/menu.png)
 ![My Boxes](public/images/img-readme/myBoxes.png)
 ![New Partner](public/images/img-readme/newPartner.png)

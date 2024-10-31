@@ -134,9 +134,6 @@ const PartnerCard = () => {
           loading='lazy'
         />
       </div>
-      <div className='partner__title'>
-        <p>Perfil de negocio</p>
-      </div>
       <div className='partner__contain-information'>
         {infoPartner?.map((info, index) => (
           <div key={index}>

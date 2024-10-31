@@ -20,6 +20,8 @@
 .partner-header > img {
   transition: all 0.3s;
   overflow: hidden;
+  padding:1px;
+  background-color: rgb(255, 255, 255);
 }
 
 .partner-header:hover img:hover {

@@ -6,32 +6,7 @@ const OperationCard = ({ operation }) => {
   
   return (
     <div className='operation__container-operation'>
-      <div className='operation__content-result'>
-        <p
-          className='operation__get-result-paid'
-          style={{
-            backgroundColor:
-              operation.paid.paid === 'pending'
-                ? 'var(--rb-bg-register)'
-                : operation.paid.paid === 'completed'
-                ? 'var(--rb-bg-green)'
-                : operation.paid.paid === 'cancelled' &&
-                  'var(--rb-bg-secondary)'
-          }}
-        >
-          {operation.paid.paid === 'pending'
-            ? 'Pendiente de pago'
-            : operation.paid.paid === 'completed'
-            ? 'Pagado'
-            : operation.paid.paid === 'cancelled' && 'Anulado'}
-        </p>
-        <p
-          className='operation__get-result-invoice'
-          title='Orden número'
-        >
-          {operation.invoice_number}
-        </p>
-      </div>
+      
       <div className='operation__contain-card'>
         <div>
           <p>Box</p>
@@ -66,6 +41,32 @@ const OperationCard = ({ operation }) => {
             <p className='cancelled' style={{color:'white'}}>KO</p>
           )}
         </div>
+        <div className='operation__content-result'>
+        <p
+          className='operation__get-result-paid'
+          style={{
+            backgroundColor:
+              operation.paid.paid === 'pending'
+                ? 'var(--rb-bg-register)'
+                : operation.paid.paid === 'completed'
+                ? 'var(--rb-bg-green)'
+                : operation.paid.paid === 'cancelled' &&
+                  'var(--rb-text-cancel)'
+          }}
+        >
+          {operation.paid.paid === 'pending'
+            ? 'Pendiente de pago'
+            : operation.paid.paid === 'completed'
+            ? 'Pagado'
+            : operation.paid.paid === 'cancelled' && 'Anulado'}
+        </p>
+        <p
+          className='operation__get-result-invoice'
+          title='Orden número'
+        >
+          Op. {operation.invoice_number}
+        </p>
+      </div>
       </div>
     </div>
   )

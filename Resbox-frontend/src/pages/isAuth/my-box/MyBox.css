@@ -12,12 +12,12 @@
   gap: 30px;
   width: 100%;
   transition: all 0.3s;
-  background-image: url('/images/logo.png');
-  background-color: rgb(243, 243, 243);
-  background-position: 120% 90%;
+  /* background-image: url('/images/logo.png');
+  background-position: 90% 90%;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: contain; 
   border-radius: 10px;
+  */
   justify-content: center;
   align-items: center;
 }
@@ -43,10 +43,9 @@
 }
 
 .mybox__card > div > h3 {
-  background-color: rgba(129, 129, 129, 0.295);
   width: 100%;
   height: 100%;
-  color: var(--rb-text-secondary);
+  color: var(--rb-text-primary);
   border-radius: 10px;;
   font-weight: 600;
   font-size: calc(5vw + 5vh);

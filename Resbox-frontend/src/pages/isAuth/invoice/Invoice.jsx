@@ -96,7 +96,6 @@ const Invoice = () => {
         </Link>
         <button
           className='button'
-          style={{ backgroundColor: 'var(--rb-bg-options)!important' }}
           onClick={() => downloadPDF(refInvoidPDF, invoice, user)}
         >
           Descargar Factura

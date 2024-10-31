@@ -91,6 +91,7 @@ const FormRedeem = () => {
             disabled={codeValue.length !== 4}
             type='submit'
             className='button'
+            style={{backgroundColor:'var(--rb-text-cancel)!important'}}
             onClick={() => setStatus('cancelled')}
           >
             Anular

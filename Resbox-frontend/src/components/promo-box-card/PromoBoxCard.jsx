@@ -154,7 +154,7 @@ const PromoBoxCard = ({ box }) => {
             {btnBuy && (
               <button
                 disabled={!box.status.includes('active')}
-                className={`yellow ${
+                className={`fadeIn ${ 
                   box.status.includes('active') ? 'active' : 'disabled'
                 }`}
                 onClick={handleBuyBoxes}

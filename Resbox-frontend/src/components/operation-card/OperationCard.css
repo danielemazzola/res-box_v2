@@ -18,6 +18,7 @@
   flex-direction: column;
   flex: end;
   align-items: flex-end;
+  border:1px solid black;
 }
 .operation__get-result-paid {
   padding: 2px 4px;
@@ -41,7 +42,7 @@
   gap: 10px;
 }
 .operation__operations-title > p:first-child {
-  background-color: var(--rb-bg-secondary);
+  background-color: var(--rb-bg-cancel);
   padding: 2px 5px;
   border-radius: 5px;
   color: var(--rb-text-primary);
