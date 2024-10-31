@@ -42,8 +42,9 @@
 }
 
 .promobox__contain_title > h2 {
-  background-color: var(--rb-bg-primary);
-  font-size: 1.5rem;
+  background-color: var(--rb-bg-primary-transparent);
+  font-size: 1.3rem;
+  text-transform: uppercase;
   font-weight: bold;
   margin-bottom: 10px;
   color: var(--rb-text-primary);
@@ -54,10 +55,15 @@
 }
 .promobox__contain_title > p {
   color: var(--rb-text-secundary);
-  background-color: var(--rb-bg-light);
+  background-color: var(--rb-bg-secondary-transparent);
   padding: 0 3px;
   align-self: flex-start;
   border-radius: 3px;
+  font-weight: bold;
+}
+
+.promobox__contain_title > p:first-letter {
+  text-transform: uppercase;
 }
 .promobox__information {
   display: flex;
@@ -66,11 +72,11 @@
 }
 
 .promobox__information > p {
-  color: var(--rb-text-primary);
-  background-color: var(--rb-bg-primary-transparent);
+  color: var(--rb-text-secondary);
+  background-color: var(--rb-bg-secondary-transparent);
   border-radius: 5px;
   padding: 0 3px;
-  font-size: var(--rb-font-size-medium);
+  font-size: var(--rb-font-size-small);
 }
 
 .promobox__container-btn {
@@ -107,7 +113,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px!important;
+  font-size: 24px!important;
 }
 .cart-shop {
   background-color: var(--rb-bg-light) !important;
@@ -117,7 +123,7 @@
   border: none;
   padding: 5px 8px;
   color: var(--rb-text-primary);
-  font-size: 14px!important;
+  font-size:14px;
   text-transform: uppercase;
 }
 

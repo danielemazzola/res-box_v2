@@ -1,15 +1,17 @@
 :root {
-  --rb-bg-primary: #141f3d;
-  --rb-bg-primary-transparent: #17303f81;
-  --rb-bg-secondary: #b4dbff;
-  --rb-bg-tertiary: #a1724b;
+  --rb-bg-primary: #1d2930;
+  --rb-bg-primary-transparent: #22344981;
+  --rb-bg-secondary-transparent: #ffffffe5;
+  --rb-bg-tertiary-transparent: #223449c7;
+  --rb-bg-secondary: #ff5e5e;
+  --rb-bg-tertiary: #d2b48c;
   --rb-bg-card: #46050554;
   --rb-bg-card-img: #ffa034;
-  --rb-bg-green: #449e6a;
-  --rb-bg-options: #141f3d;
-  --rb-bg-light: #ffffff;
-  --rb-bg-cancel: #3b5c8f;
-  --rb-bg-register: #a1724b;
+  --rb-bg-green: #559455;
+  --rb-bg-options: #2b9ab6;
+  --rb-bg-light: #ececec;
+  --rb-bg-cancel: #fa4c4c;
+  --rb-bg-register: #f39120;
   --rb-bg-toast: #f6fdffea;
   --rb-bg-toast_error: #ffeeeee5;
 
@@ -19,9 +21,9 @@
   --br-bg-boxes-4: #755c1b;
   --br-bg-boxes-5: #400406;
 
-  --rb-text-primary: #ffffff;
-  --rb-text-secondary: #141f3d;
-  --rb-text-tertiary: #141f3d;
+  --rb-text-primary: #ececec;
+  --rb-text-secondary: #333333;
+  --rb-text-tertiary: #000000;
   --rb-text-green: #0b660b;
   --rb-text-cancel: #fa4c4c;
 
@@ -90,12 +92,12 @@ button {
   transition: all 0.3s;
   border: none;
   border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.384);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.384);
 }
 .button {
   display: inline-block;
   padding: 6px 10px;
-  background-color: var(--rb-bg-primary) !important;
+  background-color: var(--rb-bg-secondary) !important;
   color: var(--rb-text-primary) !important;
   text-align: center;
   text-decoration: none;

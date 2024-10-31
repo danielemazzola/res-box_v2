@@ -104,19 +104,15 @@ const PromoBoxCard = ({ box }) => {
             <strong>Extra:</strong> {box.bonus_items}
           </p>
           <p>
-            <strong>Precio:</strong> {box.price.toFixed(2)}€
-          </p>
-          <p>
             <strong>P/U:</strong>{' '}
             {(box.price / (box.items_included + box.bonus_items)).toFixed(2)}€
           </p>
           <p>
-            <strong>Vendidos:</strong> {box.purchase_count}
+            <strong>Boxes Vendidos:</strong> {box.purchase_count}
           </p>
-          {/* <p>
-            <strong>Estado:</strong>{' '}
-            {box.status.includes('active') ? 'Activo' : 'Inactivo'}
-          </p> */}
+          <p>
+            <strong>Precio:</strong> {box.price.toFixed(2)}€
+          </p>
         </div>
         {Object.keys(user).length > 0 && (
           <div className='promobox__container-btn'>
@@ -154,7 +150,7 @@ const PromoBoxCard = ({ box }) => {
             {btnBuy && (
               <button
                 disabled={!box.status.includes('active')}
-                className={`fadeIn ${ 
+                className={`${
                   box.status.includes('active') ? 'active' : 'disabled'
                 }`}
                 onClick={handleBuyBoxes}

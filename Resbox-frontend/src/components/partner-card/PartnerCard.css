@@ -43,9 +43,12 @@
 .partner__avatar > img:hover {
   transform: scale(1.1);
 }
-
+.partner__title {
+  display: flex;
+  justify-content: center;
+}
 .partner__container > div > p {
-  background-color: var(--rb-bg-secondary);
+  background-color: var(--rb-bg-primary);
   padding: 2px 5px;
   border-radius: 5px;
   text-align: center;
@@ -124,6 +127,7 @@
   font-size: var(--rb-font-size-small);
   border-radius: 5px;
 }
+
 .partner__contain-roles > p {
   display: flex;
   gap: 5px;

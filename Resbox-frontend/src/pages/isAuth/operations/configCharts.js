@@ -35,7 +35,7 @@ export const chartOptions = {
     title: {
       display: true,
       text: 'Mis ventas de la semana',
-      color: '#ececec',
+      color: '#ffffff',
       font: {
         size: 24
       }
@@ -54,12 +54,14 @@ export const chartOptions = {
   },
   scales: {
     x: {
-      stacked: true
+      stacked: true,
+      ticks: { color: '#ffffff' }
     },
     y: {
       stacked: true,
       beginAtZero: true,
       ticks: {
+        color: '#ffffff',
         callback: function (value) {
           return value < 0 ? `€${value}` : `€${value}`
         }

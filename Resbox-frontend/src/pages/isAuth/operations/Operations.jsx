@@ -38,6 +38,8 @@ const Operations = () => {
   const { sectionRefOperations } = useContext(ScrollRefContext)
   const useScroll = useScrollToRef()
 
+  console.log(operations)
+
   const { handleOperations } = useContext(AuthContext)
 
   useEffect(() => {
@@ -79,7 +81,9 @@ const Operations = () => {
       sumByDate(
         operations,
         (op) =>
-          op.status === 'completed' && isSameDay(new Date(op.updatedAt), today)
+          op.status === 'completed' &&
+          op.paid.paid !== 'cancelled' &&
+          isSameDay(new Date(op.updatedAt), today)
       )
     )
     return sales
@@ -90,6 +94,7 @@ const Operations = () => {
         operations,
         (op) =>
           op.status === 'completed' &&
+          op.paid.paid !== 'cancelled' &&
           isSameDay(new Date(op.updatedAt), yesterday)
       )
     )
@@ -102,6 +107,7 @@ const Operations = () => {
         operations,
         (op) =>
           op.status === 'completed' &&
+          op.paid.paid !== 'cancelled' &&
           isThisWeek(new Date(op.updatedAt), { weekStartsOn: 1 })
       )
     )
@@ -115,6 +121,7 @@ const Operations = () => {
         operations,
         (op) =>
           op.status === 'completed' &&
+          op.paid.paid !== 'cancelled' &&
           new Date(op.updatedAt) >= startOfCurrentMonth
       )
     )
@@ -131,6 +138,7 @@ const Operations = () => {
         operations,
         (op) =>
           op.status === 'completed' &&
+          op.paid.paid !== 'cancelled' &&
           isSameDay(new Date(op.updatedAt), currentDay)
       )
       return {
@@ -151,7 +159,7 @@ const Operations = () => {
       const sales = sumByDate(
         operations,
         (op) =>
-          op.status === 'cancelled' &&
+          op.status === 'cancelled' || op.paid.paid !== 'cancelled' &&
           isSameDay(new Date(op.updatedAt), currentDay)
       )
       return {
@@ -181,7 +189,10 @@ const Operations = () => {
   )
 
   return (
-    <div className='operations-component__container fadeIn' ref={sectionRefOperations}>
+    <div
+      className='operations-component__container fadeIn'
+      ref={sectionRefOperations}
+    >
       <div className='operations-component__title'>
         <h2>Mis operaciones</h2>
       </div>

@@ -157,7 +157,7 @@ const BoxCard = ({ box }) => {
                 className='button green'
                 onClick={() => handleRedeem(box)}
               >
-                Canjear
+                CANJEAR
               </button>
             )}
 
@@ -166,10 +166,10 @@ const BoxCard = ({ box }) => {
               className={`button ${
                 box.box.status.includes('active') ? 'active' : 'disabled'
               }`}
-              style={{backgroundColor:'var(--rb-bg-cancel)!important'}}
+              style={{backgroundColor:'var(--rb-bg-options)!important'}}
               onClick={() => handleAddMoreBox(box.box._id)}
             >
-              Añadir más
+              COMPRA RAPIDA
             </button>
           </div>
         </div>

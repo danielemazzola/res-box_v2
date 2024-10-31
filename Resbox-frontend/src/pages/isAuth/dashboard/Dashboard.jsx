@@ -145,7 +145,7 @@ const Dashboard = () => {
                   ))}
               </div>
               <Link to='../operations'>
-                <button className='button'style={{backgroundColor:'var(--rb-bg-cancel)!important'}}>Más detalles</button>
+                <button className='button' style={{backgroundColor:'var(--rb-bg-green)!important'}}>Más detalles</button>
               </Link>
             </div>
           )}

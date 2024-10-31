@@ -1,5 +1,5 @@
 .bar-nav-footer__container {
-  background-color: rgb(255, 255, 255);
+  background-color: var(--rb-bg-primary-transparent);
   position: fixed;
   bottom: 0;
   width: 100%;

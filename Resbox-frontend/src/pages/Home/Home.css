@@ -19,6 +19,4 @@
 
 .home__promo-box-section{
   background-color: var(--rb-bg-primary);
-  min-height: 100svh;
-  padding: 150px 0;
 }

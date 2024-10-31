@@ -64,7 +64,7 @@ const OperationCard = ({ operation }) => {
           className='operation__get-result-invoice'
           title='Orden número'
         >
-          Op. {operation.invoice_number}
+          {operation.invoice_number}
         </p>
       </div>
       </div>
