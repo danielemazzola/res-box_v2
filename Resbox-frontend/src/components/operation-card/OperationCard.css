@@ -8,10 +8,10 @@
   padding: 20px;
   flex: auto;
 }
-.operation__content-result{
+.operation__content-result {
   display: flex;
   flex-direction: row-reverse;
-  gap:5px;
+  gap: 5px;
 }
 .operation__container-operation {
   display: flex;
@@ -22,16 +22,10 @@
 .operation__get-result-paid {
   padding: 2px 4px;
   color: white;
-  font-size: 12px;;
+  font-size: 12px;
   border-radius: 5px 5px 0 0;
 }
-.operation__get-result-invoice{
-  padding: 2px 4px;
-  color: white;
-  font-size: 12px;;
-  border-radius: 5px 5px 0 0;
-  background-color: var(--rb-bg-options);
-}
+
 .operation__operations-title {
   border-radius: 10px;
   display: flex;
@@ -59,7 +53,7 @@
   transition: all 0.3s;
 }
 .operation__contain-card {
-  position:relative;
+  position: relative;
   background-color: white;
   padding: 20px;
   display: flex;
@@ -74,7 +68,7 @@
   display: flex;
   align-items: start;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 2px;
 }
 .operation__contain-card > div > p {
   font-size: 14px;
@@ -87,10 +81,10 @@
 }
 
 .operation__contain-card > div > img {
-  position:absolute;
-  right:10px;
-  bottom:10px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
   object-fit: cover;
-  width:40px;
-  height:40px;
+  width: 40px;
+  height: 40px;
 }

@@ -103,7 +103,8 @@ const updateOperation = async (req, res, next) => {
         {
           id_partner: partner._id,
           secure_token: '',
-          status: 'cancelled'
+          status: 'cancelled',
+          "paid.paid":'cancelled'
         },
         { new: true }
       )

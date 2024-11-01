@@ -38,8 +38,6 @@ const Operations = () => {
   const { sectionRefOperations } = useContext(ScrollRefContext)
   const useScroll = useScrollToRef()
 
-  console.log(operations)
-
   const { handleOperations } = useContext(AuthContext)
 
   useEffect(() => {
@@ -159,7 +157,7 @@ const Operations = () => {
       const sales = sumByDate(
         operations,
         (op) =>
-          op.status === 'cancelled' || op.paid.paid !== 'cancelled' &&
+          op.status === 'cancelled' &&
           isSameDay(new Date(op.updatedAt), currentDay)
       )
       return {
