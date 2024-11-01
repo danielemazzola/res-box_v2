@@ -1,38 +1,40 @@
+import { Link } from 'react-router-dom'
+import { arrInfoFooter, year } from './utils'
 import './Footer.css'
 import logo from '/images/logo.png'
 
 const Footer = () => {
-  const date = new Date()
-  const year = date.getFullYear()
   return (
     <>
       <footer>
         <div className='footer__content-info'>
-          <div>
-            <h5>Colabora con Res-Box</h5>
-            <p>Res-Box para Partners</p>
-            <p>Cómo funciona</p>
-          </div>
-          <div>
-            <h5>Enlaces de interes</h5>
-            <p>Condiciones del servicio Partners</p>
-            <p>Politicas de Privacidad</p>
-            <p>Contacto</p>
-          </div>
-          <div>
-            <h5>Síguenos</h5>
-            <p>Facebook</p>
-            <p>Linkedin</p>
-            <p>Instagram</p>
-          </div>
+          {arrInfoFooter?.map((info, index) => (
+            <div key={index}>
+              <h5>{info.title}</h5>
+              {info.links?.map((link, index) => (
+                <>
+                  {['Facebook', 'LinkedIn', 'Instagram'].includes(link.text) ? (
+                    <a
+                      href={link.path}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      {link.text}
+                    </a>
+                  ) : (
+                    <Link key={index} to={link.path}>
+                      {link.text}
+                    </Link>
+                  )}
+                </>
+              ))}
+            </div>
+          ))}
         </div>
         <div className='footer__content-reserved'>
           <div className='coffee-drop'></div>
           <div className='footer__content-reserved-info'>
-            <span>
-              All Rights Reserved &#174;​{' '}
-              {year}
-            </span>
+            <span>All Rights Reserved &#174;​ {year()}</span>
             <i className='text-gray-300 font-light'>Powered by</i>
             <img alt='Logo Res-Box' src={logo} width='70' loading='lazy' />
             <i className='text-gray-300 font-semibold'>RES-BOX</i>
@@ -42,5 +44,4 @@ const Footer = () => {
     </>
   )
 }
-
 export default Footer

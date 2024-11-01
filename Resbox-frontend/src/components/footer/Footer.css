@@ -1,6 +1,6 @@
 footer {
   background-color: var(--rb-bg-light);
-  min-height:100svh;
+  min-height: 100svh;
   margin-top: -5px;
   padding: 80px 50px 120px 50px;
   display: flex;
@@ -22,12 +22,18 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   gap: 15px;
 }
-.footer__content-info > div > * {
-  text-align: center;
+.footer__content-info > div > a {
+  color: var(--rb-text-secondary);
+  transition: all 0.3s;
 }
+.footer__content-info > div > a:hover {
+  transform: scale(0.9);
+  color: var(--rb-bg-tertiary-transparent);
+}
+
 .footer__content-reserved {
   position: relative;
   width: 100%;
@@ -44,50 +50,26 @@ footer {
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: var(--rb-text-primary);
+  color: var(--rb-text-secondary);
   transition: all 0.3s;
-  gap:10px;
+  gap: 10px;
 }
 .coffee-drop {
   position: relative;
   width: 280px;
   height: 330px;
-  background-color: var(--rb-bg-primary-transparent); /* Color de café */
-  border-radius: 30% 70% 40% 60%; /* Deformación inicial */
-  position: relative;
-  animation: deformDrop 6s ease-in-out infinite;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Sombra para dar volumen */
 }
-
-/* Keyframes for liquid coffee drop effect */
-@keyframes deformDrop {
-  0% {
-    border-radius: 50% 50% 60% 60%; /* Estado inicial */
-    transform: translateY(0px);
-  }
-  25% {
-    border-radius: 60% 50% 55% 65%; /* Deformación hacia un lado */
-    transform: translateY(-5px);
-  }
-  50% {
-    border-radius: 55% 65% 60% 50%; /* Deformación hacia abajo */
-    transform: translateY(5px);
-  }
-  75% {
-    border-radius: 60% 55% 50% 60%; /* Cambios sutiles de lado */
-    transform: translateY(-3px);
-  }
-  100% {
-    border-radius: 50% 50% 60% 60%; /* Vuelve a la forma inicial */
-    transform: translateY(0px);
-  }
+.footer__content-reserved-info > * {
+  font-weight: bold;
 }
-@media (max-width: 293px) {
-  .coffee-drop {
-    display: none;
-  }
-  .footer__content-reserved-info {
-    position: relative;
-    color: var(--rb-text-secondary);
+@media (max-width: 600px) {
+  .footer__content-info {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: start;
+    gap: 50px;
+    transition: all 0.3s;
   }
 }

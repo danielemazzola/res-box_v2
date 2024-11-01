@@ -80,6 +80,15 @@ const App = () => {
           }
         />
 
+        {/*
+         //!ROUTES FOOTER 
+        */}
+        <Route path={`/partners-info`} element={<div />} />
+        <Route path={`/how-it-works`} element={<div />} />
+        <Route path={`/condition-partners`} element={<div />} />
+        <Route path={`/privacy-policies`} element={<div />} />
+        <Route path={`/contact`} element={<div />} />
+
         <Route path='*' element={<NotFound />} />
       </Route>
     </Routes>
